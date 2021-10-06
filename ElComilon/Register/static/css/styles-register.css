@@ -1,0 +1,93 @@
+.title{
+    margin: 2rem;
+}
+
+.contenedor-form{
+    margin: auto;
+    background-color: #ffffff;
+    border-radius: 0.5rem;
+    width: 40%;
+}
+
+.bgColor{
+    background-color: #F7F8F9;
+}
+
+
+.btnRegistro{
+    padding: 6px 8px;
+    width: 60%;
+    font-size: 20px;
+    background:#9c3534;
+    color: #F7F8F9;
+    margin-bottom: 0.8rem;
+}
+
+.btnRegistro:hover{
+    background: white;
+    color: #9c3534;
+    border: 1px solid #9c3534;
+}
+
+
+@media (max-width:891px){
+    .responsive-form{
+       width: 90% !important;
+       flex-direction: column;
+    }
+}
+
+/* Estilo de errores */
+
+.classErrorNomUsuario{
+    visibility: hidden;
+    color: #FF0000;
+    margin-left: 14px;
+}
+
+.classErrorNombres{
+    visibility: hidden;
+    color: #FF0000;
+    margin-left: 14px;
+}
+
+.classErrorApellidos{
+    visibility: hidden;
+    color: #FF0000;
+    margin-left: 14px;
+}
+.classErrorDirreccion{
+    visibility: hidden;
+    color: #FF0000;
+    margin-left: 14px;
+}
+
+.classErrorRut{
+    visibility: hidden;
+    color: #FF0000;
+    margin-left: 14px;
+}
+
+.classErrorNumTelefono{
+    visibility: hidden;
+    color: #FF0000;
+    margin-left: 14px;
+}
+
+.classErrorMailUsuario{
+    visibility: hidden;
+    color: #FF0000;
+    margin-left: 14px;
+}
+
+.classErrorPassUser{
+    visibility: hidden;
+    color: #FF0000;
+    margin-left: 14px;
+}
+
+.classErrorRePassUser{
+    visibility: hidden;
+    color: #FF0000;
+    margin-left: 14px;
+}

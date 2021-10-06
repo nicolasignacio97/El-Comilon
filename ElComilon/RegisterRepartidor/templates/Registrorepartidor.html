@@ -1,0 +1,138 @@
+{% extends "HeaderFooter/base.html"%} 
+{% load static%}
+
+{% block L-izquierda %}
+<a href="#">Inicio</a>
+<a href="#">Sobre nosotros</a>
+
+{% endblock%}
+
+
+{% block L-derecha %}
+<a href="#">Catálogo</a>
+<a href="#">Iniciar sesión</a>
+{% endblock%}
+
+{% block content%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/stylesrepartidor.css'%}">
+    <title>Document</title>
+</head>
+<body>
+<div class="container_login container">
+  
+    <div class="row justify-content-center align-items-center">
+        <div class="col-md-6 container_login">
+           <form action="/regin" class="mt-5 form row" id="Form_login" method="POST" >
+            {% csrf_token %}
+              <div class="form-group">
+                <div class="row">
+                    <h1 class="h1-reg-repartidor">
+                        Registrar Repartidor
+                    </h1>
+                </div>
+                <div class="row ">
+                    <div class="col-md-6 col-sm-12 divinput">
+                        <label for="" class="labelRepartidor">Rut Repartidor</label>
+                        <input type="text" class="form-control input-repartidor" name="RutRepartidor">
+                    </div>
+                    <div class="col-md-6 col-sm-12 ">
+                        <label for="" class="labelRepartidor">Nombres Repartidor</label>
+                        <input type="text" class="form-control input-repartidor" name="NombresRepartido">
+                    </div>
+                    
+                </div>
+                <div class="row ">
+                    <div class="col-md-6 col-sm-12 divinput">
+                        <label for="" class="labelRepartidor">Apellidos Repartidor</label>
+                        <input type="text" class="form-control input-repartidor" name="ApellidosRepartidor">
+                    </div>
+                    <div class="col-md-6 col-sm-12 divinput">
+                        <label for="" class="labelRepartidor">Fecha contrato</label>
+                        <input type="date" class="form-control input-repartidor" name="Fechacontrato">
+                    </div>
+                    
+                </div>
+                <div class="row ">
+                    <div class="col-md-6 col-sm-12 divinput">
+                        <label for="" class="labelRepartidor">Usuario</label>
+                        <input type="text" class="form-control input-repartidor" name="Usuario">
+                    </div>
+                    <div class="col-md-6 col-sm-12 divinput">
+                        <label for="" class="labelRepartidor">Contraseña</label>
+                        <input type="password" class="form-control input-repartidor"  name="contrasena">
+                    </div>
+                    
+                </div>
+                <div class="row ">
+                    <div class="col-md-12 col-sm-12">
+                        <label for="" class="labelRepartidor">Rut empresa</label>
+                        <input type="text" class="form-control input-repartidor" name="rutempresa">
+                    </div>
+                
+                    
+                </div>
+                <br>
+                <div class="row ">
+                    <h1 class="h1-reg-repartidor ">
+                        Datos vehiculo
+                    </h1>
+                </div> 
+                <div class="row " >
+                    <div class="col-md-6 col-sm-12 divinput">
+                        <label for="" class="labelRepartidor">Patente vehiculo</label>
+                        <input type="text" class="form-control input-repartidor" name="Patente">
+                    </div>
+                    <div class="col-md-6 col-sm-12 divinput">
+                        <label for="" class="labelRepartidor">Modelo</label>
+                        <input type="text" class="form-control input-repartidor"name="Modelo">
+                    </div>
+                    
+                    
+                </div>
+                <div class="row ">
+                    <div class="col-md-6 col-sm-12 divinput ">
+                        <label for="" class="labelRepartidor">Año vehiculo</label>
+                        <input type="text" class="form-control input-repartidor" name="Ano">
+                    </div>
+                    <div class="col-md-6 col-sm-12 divinput">
+                        <label for="" class="labelRepartidor">Color</label>
+                        <input type="text" class="form-control input-repartidor" name="Color">
+                    </div>
+                    
+                </div>
+                <div class="row ">
+                    <div class="col-md-6 col-sm-12 divinput">
+                        <label for="" class="labelRepartidor">Tipo vehiculo</label>
+                        <input type="number" name="tipovehiculo">
+                        <!-- <select name="tipovehiculo" id="vehiculo" >
+                            <option value="0">Seleccione Tipo de Vehiculo</option>
+                            {% for vehiculo in vehiculos %}  
+                            <option  value="{{vehiculo.idtipovehiculo}}">{{vehiculo.descripcion}} </option>
+                            {% endfor %}
+                          </select> -->
+                    </div>
+                </div>
+                
+                <div class="row ">
+                    <button id="btn-siguiente" class="Btn_repartidor"> Siguiente </button>
+                </div>
+                
+              </div>
+           </form>
+        </div>
+       </div>
+  
+</div>
+
+
+     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
+</html>
+{% endblock%}

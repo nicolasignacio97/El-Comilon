@@ -1,0 +1,35 @@
+{% extends "HeaderFooter/base.html"%} 
+{% load static %}
+
+{% block content%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/styles-register.css' %}">
+    <title>Seccion Reclamo</title>
+</head>
+<body class="bgColor">
+    <form class="container" method="POST">
+        {% csrf_token %}
+        <section>
+            <div class="container ">
+                <h1>Ingrese su reclamo</h1>
+                <textarea type="text" name="descReclamo" id="descReclamo" rows="10" cols="100"placeholder="Describa su reclamo"></textarea>
+                <p>Por favor, describa detalladamente su reclamo</p>
+                <button type="submit" class="btn">Ingresar reclamo</button>
+            </div>
+        </section>
+    </form>
+
+    <div class="container">
+        {{mensaje}} 
+    </div>
+
+    <script src="{% static 'app/validar-form-reg.js' %}"></script>
+</body>
+</html>
+{%endblock%}

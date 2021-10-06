@@ -1,0 +1,53 @@
+.btn_registrar{
+    width: 100%;
+    margin-top: 15px;
+    padding: 8px 10px;
+    background-color: brown;
+    color: #ffff;
+    font-size: 18px;
+    border-radius: 5px;
+}
+.btn_registrar:hover {
+    background-color: #f7F8F9; 
+    border: brown 5px;
+    color: white;
+    transition: .7s;
+}
+
+.btn_cancelar{
+    width: 100%;
+    margin-top: 15px;
+    padding: 8px 10px;
+    border-color: brown;
+    background-color: white;
+    color: brown;
+    font-size: 18px;
+    border-radius: 5px;
+}
+
+.btn_cancelar:hover {
+    background-color: brown ; 
+    color: #f7F8F9 ;
+    transition: .7s;
+}
+
+.label{
+    font-family: 'Roboto', sans-serif;
+    color: #202020;
+}
+
+.input{
+ padding:8px ;
+ background-color: #f6f7f8;
+}
+
+.input:focus{
+    border: solid brown;
+    box-shadow: none;
+    background-color: #f6f7f8;
+}
+
+.container-input{
+    background-color: #F6F6F6;
+    margin-top: 4%;
+}

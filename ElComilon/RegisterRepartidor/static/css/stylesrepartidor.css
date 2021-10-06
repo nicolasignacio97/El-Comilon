@@ -1,0 +1,22 @@
+.Btn_repartidor{
+    width: 90%;
+    margin-top: 20px !important;
+    margin: auto;
+    padding: 8px 10px;
+    background-color: brown;
+    color: #ffff;
+    font-size: 18px;
+    border-radius: 5px;
+    border: none;
+}
+.h1-reg-repartidor{
+text-align: center;
+margin-bottom: 20px;
+font-family: roboto;
+}
+#divinput{
+margin-bottom: 15px !important;
+}
+.combobox{
+margin-top: 15px;
+}

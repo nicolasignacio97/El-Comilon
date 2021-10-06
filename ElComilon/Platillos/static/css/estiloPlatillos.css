@@ -1,0 +1,71 @@
+*{
+    font-family: 'Roboto', sans-serif;
+}
+
+body{
+    background-color: #F7F8F9;
+    box-sizing: border-box;
+}
+
+.container{
+    max-width: 1740px;
+}
+
+.platillo{
+    padding: 2rem 2rem 0 2rem;
+}
+
+.platillo__imagen{
+    width: 100%;
+    height: 200px;
+}
+
+.platillo__nombre:first-letter{
+    text-transform:capitalize;
+        
+}
+
+.platillo__descripcion{
+    color: rgb(104, 104, 104);
+    margin-top: .5rem;
+}
+
+.platillo__descripcion::first-letter{
+    text-transform:capitalize;
+}
+
+.platillo__precio{
+    color:#9c3534;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.precio-boton{
+    margin-top: 1rem;
+    gap: 1rem;
+}
+
+.btn-danger{
+    background-color: #9c3534;  
+    border: none;
+}
+
+.card {
+    border: none;
+}
+
+.sombra{
+    -webkit-box-shadow: 0px 5px 15px 0px rgba(112,112,112,1);
+    -moz-box-shadow: 0px 5px 15px 0px rgba(112,112,112,1);
+    box-shadow: 0px 5px 15px 0px rgba(112,112,112,1);
+    background-color: #ffffff;
+    margin-bottom: 2rem;
+    border-radius: .4rem;
+}
+
+.platillo__boton{
+    font-weight: bold;
+    font-size: 20px;
+    margin-top: .5rem;
+    padding: .6rem 1rem;
+}
