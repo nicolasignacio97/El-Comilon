@@ -79,11 +79,6 @@ body{
 }
 
 
-img{
-    width:50%;
-    margin:0 auto;
-}
-
 #sidemenu #menu-items .item a:hover{
     background-color: var(--hovercolor);
 }
@@ -96,26 +91,8 @@ img{
     width: var(--width);
     box-shadow: 0 0 10px rgba(0,0,0,0.5);
 }
-.iconos{
-    display: flex;
-    justify-content: center;
-}
-.opciones{
-    width:  100%;
-    height: 3rem;
-    font-size: 25px;
-    padding:0.5rem;
-}
 
-.opciones:hover{
-  color: #c4c4c4;
-}
-.iconos img{
-    transition:width .3s ease;
-}
-.iconos img:hover{
-    width: 70%;
-}
+
 .menu-expanded #header #title{
     display: inline-block;
     width: calc(100% - 50px);
@@ -150,28 +127,7 @@ img{
     visibility: hidden;
 }
 
-.btn-item{
-    COLOR: WHITE;
-    overflow: hidden;
-    border: none;
-    background-color: #9C3435;
-    font-size: 20px;
-    font-family: 'Roboto', sans-serif;
-    display: block;
-    width: 100%;
-    text-align: left;
-    padding-left: 15px;
-}
 
-.btn-item:hover{
-    background-color: var(--hovercolor);
-}
-.item{
-    height:100;
-}
-.item a{
-    margin: 0;
-}
 
 
 /*Visibilidad*/
@@ -194,15 +150,6 @@ img{
     margin: 0;
 }
 
-
-
-
-
-
-
-
-
-
 .menuprueba{
      display: flex;
  }
@@ -224,3 +171,55 @@ img{
     -webkit-animation-fill-mode: both;
     animation-fill-mode: both;
   }
+
+
+
+
+
+.menu-admin .menu {
+    list-style: none;
+    
+}
+  
+.menu-admin .menu > li {
+    padding: .5rem;
+}
+  
+.menu-admin .menu > li:hover ul {
+    display: block;
+}
+  
+.menu-admin .menu > li a {
+    color: #FFFFFF;
+    text-decoration: none;
+    padding: .5rem;
+    transition: padding-left .3s ease;
+    border-radius: .5rem;
+}
+  
+.menu-admin .menu > li a:hover {
+    background-color: #812928c2;
+    padding-left: 2rem;
+}
+  
+.menu-admin .menu > li ul {
+    display: none;
+    margin-top: 1rem;
+    list-style: none;
+    background-color: #812928c2;
+    border-radius: .9rem;
+    padding: 1rem;
+}
+  
+.menu-admin .menu > li ul li {
+    margin-bottom: 1rem;
+}
+  
+.menu-admin .menu > li ul li:last-of-type {
+    margin-bottom: 0;
+}
+
+.icono{
+      width:2rem;
+  }
+  
