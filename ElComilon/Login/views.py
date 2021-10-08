@@ -29,8 +29,8 @@ from Login.models import Cliente
 
 def login (request):
     if request.POST:
-        nombreusuario = request.POST['nombreusuario']
-        contrasena = request.POST['contrasena']
+        nombreusuario = request.POST.get('nombreusuario')
+        contrasena = request.POST.get('contrasena')
         try:
             cliente = Cliente.objects.get(nombreusuario=nombreusuario,contrasena=contrasena)
             return HttpResponseRedirect('perfil')
