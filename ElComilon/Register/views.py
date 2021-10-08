@@ -23,9 +23,9 @@ def register (request):
         idtipoCliente = 2
         salida = agregar_cliente(rutcliente, nomUsuario,nombres, apellidos, direccion, contrasena, telefono, correo, idtipoCliente)
         if salida == 1:
-            data['mensaje'] = 'AGREGADO CORRECTAMENTE'
+            data['mensaje'] = 'CLIENTE AGREGADO CORRECTAMENTE'
         else:
-            data['mensaje'] = 'UPS, NO SE HA PODIDO AGREGAR'
+            data['mensaje'] = 'UPS, NO SE HA PODIDO AGREGAR EL CLIENTE'
 
     return render(request,'registerUser.html', data)
 

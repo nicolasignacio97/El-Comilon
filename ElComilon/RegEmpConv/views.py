@@ -4,13 +4,22 @@ import cx_Oracle
 
 # Create your views here.
 def registroEmpresa(request):
+    data = {
+
+    }
+
     if request.method == 'POST':
         rutEmpresa = request.POST.get('rutEmpresa')
         nombre = request.POST.get('nombreEmpresa')
         razonSocial = request.POST.get('razonSocial')
-        salida = registrarEmpresa(rutEmpresa, nombre, razonSocial)
 
-    return render(request,'regEmpConv.html')
+        salida = registrarEmpresa(rutEmpresa, nombre, razonSocial)
+        if salida == 1:
+            data['mensaje'] = 'EMPRESA CONVENIO REGISTRADA CORRECTAMENTE'
+        else:
+            data['mensaje'] = 'UPS, NO SE HA PODIDO REGISTRAR LA EMPRESA'
+
+    return render(request,'regEmpConv.html',data)
 
 def registrarEmpresa(rutEmpresa, nombre, razonSocial):
     django_cursor = connection.cursor()
