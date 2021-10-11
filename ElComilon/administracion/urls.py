@@ -4,6 +4,13 @@ from registroTrabajador.views import registroTrabajador
 from registroProveedor.views import registroProveedor
 from RegEmpConv.views import registroEmpresa
 from RegisterPlatillo.views import registroPlatillo
+from registroTrabajador.views import listaTrabajador
+from registroTrabajador.views import trabajadorRut
+from registroTrabajador.views import actualizarTrabajador
+from registroTrabajador.views import eliminarTrabajador
+from RegEmpConv.views import listaEmpresa
+from RegEmpConv.views import empresaRut
+from RegEmpConv.views import eliminarEmpresa
 
 url_patterns = [
     path('',administracion),
@@ -11,4 +18,11 @@ url_patterns = [
     path('proveedor',registroProveedor),
     path('empresa',registroEmpresa),
     path('platillo',registroPlatillo),
+    path('listaTrabajador',listaTrabajador),
+    path('trabajadorRut',trabajadorRut),
+    path('actualizarTrabajador', actualizarTrabajador),
+    path('eliminarTrabajador',eliminarTrabajador),
+    path('listaEmpresa', listaEmpresa),
+    path('empresaRut',empresaRut),
+    path('eliminarEmpresa', eliminarEmpresa)
 ]
