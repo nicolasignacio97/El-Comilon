@@ -52,7 +52,8 @@ INSTALLED_APPS = [
     'RegisterRepartidor',
     'Pedido',
     'Platillos',
-    'detallePedido'
+    'detallePedido',
+    'RegCliConv',
 ]
 
 MIDDLEWARE = [
