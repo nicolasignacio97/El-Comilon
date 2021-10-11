@@ -1,6 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect,get_object_or_404
 from django.contrib.auth.forms import UserCreationForm
 from django.db import connection
+from .forms import Repartidorform
 import cx_Oracle
 from core.models import *
 
@@ -70,7 +71,45 @@ def registroRep(request):
         except:
             print("Fallo")    
     return render(request, 'Registrorepartidor.html', data)  
- 
+
+
+def editRepartidor(request,rutrepartidor):
+    repartidor = Repartidor.objects.get(rutrepartidor=rutrepartidor)
+    repartidores = Repartidor.objects.all()
+    if request.method == 'GET':
+        form = Repartidorform(instance=repartidor)
+        contexto = {
+            'form':form
+        }
+    else: 
+        form = Repartidorform(request.POST, instance=repartidor)
+        contexto = {
+            'form':form,
+            'repartidor':repartidores
+        }
+        if form.is_valid():
+           form.save() 
+        return render(request, "listadorepartidores.html", contexto)
+    return render(request, "updaterepartidor.html",contexto)
+
+
+def deleterepartidor(request,rutrepartidor):
+    repartidores = Repartidor.objects.all()
+    repartidor = Repartidor.objects.get(rutrepartidor=rutrepartidor)
+    repartidor.delete()
+    contexto = {
+         'repartidor':repartidores    
+    }
+    return render(request,"listadorepartidores.html",contexto)
+
+
+def listarRep(request):
+    repartidores = Repartidor.objects.all()
+    contexto = {
+        'repartidor':repartidores
+    }
+    return render(request, "listadorepartidores.html", contexto)
+
 def listar_categoria():
     django_cursor = connection.cursor() 
     cursor = django_cursor.connection.cursor()
@@ -80,6 +119,8 @@ def listar_categoria():
     for fila in out_cur:
         lista.append(fila)
     return lista
+
+
 # def agregar_repartidor(RUTREPARTIDOR, NOMBRES, APELLIDOS, FECHACONTRATO, USUARIO, CONTRASENA, RUTRESTAURANTE):
 #      django_cursor = connection.cursor()
 #      cursor = django_cursor.connection.cursor()    

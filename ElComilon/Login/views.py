@@ -2,6 +2,8 @@ from django.shortcuts import render
 from .forms import formlog
 from django.http import HttpResponseRedirect
 from Login.models import Cliente
+from django.contrib.auth import authenticate, login , logout
+from .decoratators import usuarionoautenticado
 
 # Create your views here.
 # def login (request):
@@ -27,11 +29,19 @@ from Login.models import Cliente
 #         nombreusuario = request.POST['nombreusuario']
 #         contrasena = request.POST['contrasena']
 
-def login (request):
-    if request.POST:
+from django.shortcuts import render
+from .forms import formlog
+from django.http import HttpResponseRedirect
+from Login.models import Cliente
+
+# Create your views here.
+def loginauth (request):
+    if request.method == 'POST':
         nombreusuario = request.POST.get('nombreusuario')
         contrasena = request.POST.get('contrasena')
+        print('hola if')
         try:
+            print('hola')
             cliente = Cliente.objects.get(nombreusuario=nombreusuario,contrasena=contrasena)
             return HttpResponseRedirect('perfil')
         except:
