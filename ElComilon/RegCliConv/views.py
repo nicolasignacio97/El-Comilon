@@ -4,7 +4,7 @@ from core.models import Cliente
 import cx_Oracle
 
 # Create your views here.
-
+#AGREGAR CLIENTES CONVENIO
 def RegistroCliConvenio(request):
     data = {
 
@@ -28,7 +28,8 @@ def RegistroCliConvenio(request):
             data['mensaje'] = 'UPS, NO SE HA PODIDO AGREGAR EL CLIENTE CONVENIO'
 
     return render(request,'regCliConv.html', data)
-    
+
+#LISTAR CLIENTES CONVENIO
 def listarCliConv(request):
     # print(listar_clientes_conv())
     dataClientes = {
@@ -36,6 +37,7 @@ def listarCliConv(request):
     }
     return render(request,'listarCliConv.html',dataClientes)
 
+#MODIFICAR CLIENTE CONVENIO
 def modificarCliConv(request,id):
     cliente = get_object_or_404(Cliente,rutcliente=id)
     dataMod = {
@@ -64,13 +66,15 @@ def modificarCliConv(request,id):
 
 
 ## FUNCIONES DE CLIENTES CONVENIO
+
+#FUNCIÓN AGREGAR CLIENTE CONVENIO
 def agregar_cliente_convenio(rutcliente, nomUsuario,nombres, apellidos, direccion, contrasena,telefono,correo,saldocli,idtipoCliente,rutempcli):
     django_cursor = connection.cursor()
     cursor = django_cursor.connection.cursor()
     salida = cursor.var(cx_Oracle.NUMBER)
     cursor.callproc('SP_AGREGAR_CLIENTE_CONVENIO',[rutcliente, nomUsuario , nombres, apellidos, direccion, contrasena,telefono,correo, saldocli,idtipoCliente,rutempcli,salida])
     return salida.getvalue()
-
+#FUNCIÓN MODIFICAR CLIENTE CONVENIO
 def modificar_cliente_convenio(rutcliente, nomUsuario,nombres, apellidos, direccion, contrasena,telefono,correo,saldocli,rutempcli):
     django_cursor = connection.cursor()
     cursor = django_cursor.connection.cursor()
