@@ -30,36 +30,48 @@
 </head>
 
 <body>
+
+
     <section class="container">
         <div class="row">
             <div class="col-lg-12">
                 <div class="card shadow-lg p3 mb-5 mt-5 bg-white">
                     <h3 class="titulo  mt-5 text-center">Registro Proveedor</h3>
                     <div class="card-body">
-                        <form action="" class="needs-validation d-flex flex-column  justify-content-center"
+
+                        <form action="" autocomplete="off" class="needs-validation  d-flex flex-column  justify-content-center"
                             method="POST" novalidate>
                             {% csrf_token %}
                             <div class="form-row">
                                 <div class="row mt-2">
-                                    <div class="col-lg-6 mb-4">
-                                        <input type="text" name="rutRestaurante" class="form-control input_rut" id="Rut"
-                                            placeholder="84.442.987-2" required>
-                                        <div class="valid-feedback"> </div>
-                                        <div class="invalid-feedback">Complete el campo</div>
+                                    <div class="col-lg-6">
+                                        <div class="form-floating mb-3">
+                                            <input type="text" name="rutRestaurante" class="form-control input_rut"
+                                                id="Rut" placeholder="84.442.987-2" required>
+                                            <label for="rut">Rut Empresa</label>
+                                            <div class="valid-feedback"> </div>
+                                            <div class="invalid-feedback">Complete el campo</div>
+                                        </div>
                                     </div>
-                                    <div class="col-lg-6 mb-4">
-                                        <input type="text" name="nombre" class="form-control" id="nombre" minlength="2"
-                                            placeholder="Nombre Restaurante" required>
-                                        <div class="valid-feedback"> </div>
-                                        <div class="invalid-feedback">Complete el campo</div>
+                                    <div class="col-lg-6">
+                                        <div class="form-floating mb-3">
+                                            <input type="text" name="nombre" class="form-control" id="nombre" minlength="2"
+                                                placeholder="Nombre Restaurante" required>
+                                                <label for="nombre">Nombre de restaurante</label>
+                                            <div class="valid-feedback"> </div>
+                                            <div class="invalid-feedback">Complete el campo</div>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="row mb-5">
+                                <div class="row mb-2">
                                     <div class="col-12">
-                                        <input type="text" name="direccion" class="form-control" id="direccion"
-                                            minlength="2" placeholder="Dirección" required>
-                                        <div class="valid-feedback"> </div>
-                                        <div class="invalid-feedback">Complete el campo</div>
+                                        <div class="form-floating mb-3">
+                                            <input type="text" name="direccion" class="form-control" id="direccion"
+                                                minlength="2" placeholder="Dirección" required>
+                                                <label for="direccion">Dirección</label>
+                                            <div class="valid-feedback"> </div>
+                                            <div class="invalid-feedback">Complete el campo</div>
+                                        </div>
                                     </div>
                                 </div>
                                 <!-- <div class="row">
@@ -70,42 +82,57 @@
                                 </div> -->
                                 <hr>
                                 <div class="row">
-                                    <h4 class="titulo text-center mb-5">Registro Representante</h4>
+                                    <h4 class="titulo text-center mb-3">Registro Representante</h4>
                                     <div class="col-lg-6 mb-4">
-                                        <input type="text" name="representante" class="form-control input_rut" id="Rut"
-                                            placeholder="12.452.987-2" required>
-                                        <div class="valid-feedback"> </div>
-                                        <div class="invalid-feedback">Complete el campo</div>
+                                        <div class="form-floating">
+                                            <input type="text" name="representante" class="form-control input_rut" id="Rut"
+                                                placeholder="12.452.987-2" required>
+                                                <label for="Rut">Rut representante</label>
+                                            <div class="valid-feedback"> </div>
+                                            <div class="invalid-feedback">Complete el campo</div>
+                                        </div>
                                     </div>
                                     <div class="col-lg-6 mb-4">
-                                        <input type="text" name="nombresRepresentante" class="form-control"
-                                            minlength="2" id="nombresRepresentante" placeholder="Nombres" required>
-                                        <div class="valid-feedback"> </div>
-                                        <div class="invalid-feedback">Complete el campo</div>
+                                        <div class="form-floating">
+                                            <input type="text" name="nombresRepresentante" class="form-control"
+                                                minlength="2" id="nombresRepresentante" placeholder="Nombres" required>
+                                                <label for="nombresRepresentante">Nombre representante</label>
+                                            <div class="valid-feedback"> </div>
+                                            <div class="invalid-feedback">Complete el campo</div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-lg-6 mb-4">
-                                        <input type="tel" name="telefono" class="form-control" id="teléfono"
-                                            placeholder="Teléfono" pattern="[0-9]{9}" required>
-                                        <div class="valid-feedback"> </div>
-                                        <div class="invalid-feedback">Complete el campo</div>
+                                        <div class="form-floating">
+                                            <input type="tel" name="telefono" class="form-control" id="teléfono"
+                                                placeholder="Teléfono" pattern="[0-9]{9}" required>
+                                                <label for="teléfono">Teléfono</label>
+                                            <div class="valid-feedback"> </div>
+                                            <div class="invalid-feedback">Complete el campo</div>
+                                        </div>
                                     </div>
                                     <div class="col-lg-6 mb-4">
-                                        <input type="text" name="apellidos" class="form-control" minlength="2"
-                                            id="apellidos" placeholder="Apellidos" required>
-                                        <div class="valid-feedback"> </div>
-                                        <div class="invalid-feedback">Complete el campo</div>
+                                        <div class="form-floating">
+                                            <input type="text" name="apellidos" class="form-control" minlength="2"
+                                                id="apellidos" placeholder="Apellidos" required>
+                                                <label for="apellidos">Apellidos</label>
+                                            <div class="valid-feedback"> </div>
+                                            <div class="invalid-feedback">Complete el campo</div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="row mb-5">
                                     <div class="col-12">
-                                        <input type="email" name="email" class="form-control" id="email" minlength="5"
-                                            placeholder="Correo"
-                                            pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}"
-                                            required>
-                                        <div class="valid-feedback"> </div>
-                                        <div class="invalid-feedback">Complete el campo</div>
+                                        <div class="form-floating">
+                                            <input type="email" name="email" class="form-control" id="email" minlength="5"
+                                                placeholder="Correo"
+                                                pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}"
+                                                required>
+                                                <label for="email">Correo</label>
+                                            <div class="valid-feedback"> </div>
+                                            <div class="invalid-feedback">Complete el campo</div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="pieForm">

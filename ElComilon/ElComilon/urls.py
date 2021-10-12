@@ -22,7 +22,8 @@ from Register.views import register
 from registroProveedor.views import registroProveedor   
 from reclamo.views import reclamo
 from Home.views import quienesSomos
-from administracion.urls import url_patterns
+from administracion.urls import url_admin
+
 from PerfilUsuario.views import Usertemplate
 from RegisterRepartidor.views import registroRep,RegisterRepatidor
 from Pedido.views import pedido
@@ -44,6 +45,5 @@ urlpatterns = [
     path('pedido', pedido),
     path('platillos', platillos),
     path('detallePedido', detallePedido),
-    path('administracion/', include(url_patterns))
-
+    path('administracion/', include(url_admin)),
 ]

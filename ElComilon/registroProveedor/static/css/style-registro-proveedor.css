@@ -21,7 +21,7 @@ input[type=number] { -moz-appearance:textfield; }
 }
 .card-body{
     width:80%;
-    margin: 3rem auto;
+    margin: 1rem auto;
 }
 .pieForm{
     display:flex;
