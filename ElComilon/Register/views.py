@@ -37,3 +37,6 @@ def agregar_cliente(rutcliente, nombreusuario,nombres, apellidos, direccion, con
     salida = cursor.var(cx_Oracle.NUMBER)
     cursor.callproc('SP_AGREGAR_CLIENTE',[rutcliente, nombreusuario , nombres, apellidos, direccion, contrasena,telefono,correo, idtipocliente, salida])
     return salida.getvalue()
+
+def perfil (request):
+    return render(request,'perfil-offcanvas.html')
