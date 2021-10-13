@@ -6,7 +6,5 @@ from PerfilUsuario.views import Usertemplate
 app_name = "Login"
 
 urlpatterns = [
-    path('', views.login, name='login'),
-    path('perfil',Usertemplate)
-
+    path('', views.login, name='login')
 ]

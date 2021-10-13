@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from Login.models import Cliente
+from django.http import HttpResponseRedirect
 
 # Create your views here.
 def Usertemplate(request): 
