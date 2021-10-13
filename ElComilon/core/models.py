@@ -30,6 +30,7 @@ class Cliente(models.Model):
     saldocli = models.BigIntegerField(blank=True, null=True)
     idtipocliente = models.ForeignKey('TipoCliente', models.DO_NOTHING, db_column='idtipocliente')
     rutempconv = models.ForeignKey('EmpresaConvenio', models.DO_NOTHING, db_column='rutempconv', blank=True, null=True)
+    
 
     class Meta:
         managed = False
@@ -56,6 +57,8 @@ class EmpresaConvenio(models.Model):
     nombre = models.CharField(max_length=20)
     razonsocial = models.CharField(max_length=30)
     fechaconvenio = models.DateField()
+    def __str__(self):
+        return self.rutempresaconvenio
 
     class Meta:
         managed = False
