@@ -51,3 +51,28 @@
     background-color: #F6F6F6;
     margin-top: 4%;
 }
+
+.titulo{
+    color:#9C3534;
+}
+
+.btnRegistroEmp{
+    padding: 6px 8px;
+    width: 60%;
+    font-size: 20px;
+    background:#9c3534;
+    color: #F7F8F9;
+    margin-bottom: 0.8rem;
+ 
+
+}
+
+.btnRegistroEmp:hover{
+    background: white;
+    color: #9c3534;
+    border: 1px solid #9c3534;
+}
+
+.control-fomr{
+    
+}
