@@ -1,0 +1,69 @@
+{% extends "HeaderFooter/base-sidebar.html"%}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Document</title>
+</head>
+
+{% block content%}
+<link rel="stylesheet" href="{% static 'css/styleListarProveedor.css' %}">
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="card shadow-lg p3 mb-5 mt-5 bg-white">
+                    <h3 class="titulo  mt-5 text-center">Modificar Proveedor</h3>
+                    <div class="card-body">
+                        <form action="" class=" d-flex flex-column  justify-content-center" method="POST" novalidate>
+                            {% csrf_token %}
+                            <div class="form-row">
+                                <div class="row mt-2">
+                                    <div class="col-lg-6 mb-4">
+                                        <div class="form-floating mb-3">
+                                            <input type="text" name="rutRestaurante"
+                                                value="{{seleccion.rutrestaurante}}" class="form-control input_rut"
+                                                id="Rut" placeholder="84.442.987-2" required>
+                                            <label for="rut">Rut Empresa</label>
+                                            <div class="valid-feedback"> </div>
+                                            <div class="invalid-feedback">Complete el campo</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 mb-4">
+                                        <div class="form-floating mb-3">
+                                            <input type="text" name="nombre" class="form-control" id="nombre"
+                                                minlength="2" value="{{seleccion.nombrerestaurante}}" required>
+                                            <label for="nombre">Nombre Restaurante</label>
+                                            <div class="valid-feedback"> </div>
+                                            <div class="invalid-feedback">Complete el campo</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-5">
+                                    <div class="col-12">
+                                        <div class="form-floating mb-3">
+                                            <input type="text" name="direccion" class="form-control" id="direccion"
+                                                minlength="2" value="{{seleccion.direccionrestaurante}}" required>
+                                            <label for="direccion">Dirección</label>
+                                            <div class="valid-feedback"> </div>
+                                            <div class="invalid-feedback">Complete el campo</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="pieForm">
+                                    <button class="btn botonEnviar" id="btn1" type="submit">Modificar</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+{%endblock%}

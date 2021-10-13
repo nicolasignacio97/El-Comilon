@@ -1,0 +1,40 @@
+{% extends "HeaderFooter/base.html"%} 
+{% load static %}
+
+{% block content%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <title>Seccion Reclamo</title>
+    <link rel="stylesheet" href="{ % static 'css/styles-reclamo.css' % }">
+    
+</head>
+<body class="LOQUESEA">
+    <form class="needs-validation container contenedor-form responsive-form mt-5 w-75 h-25 shadow p-3 mb-5 bg-body rounded" method="POST" novalidate>
+        {% csrf_token %}
+        <section>
+            <div class="container text-center mb-3">
+                <h1 class="mb-2">¿Te ayudamos?</h1>
+                <label for="floatingTextarea">Si tienes o tuviste algún inconveniente, ingrese la información para poder ayudarte.</label>
+                <textarea class="form-control mb-3" placeholder="Describa su reclamo:" rows="10" name="descReclamo" minlength="5" id="descReclamo" required></textarea>
+                <div class="valid-feedback"> </div>
+                <div class="invalid-feedback mb-2">Campo obligatorio*</div>
+                <button type="submit" class="btn btn-danger">Ingresar reclamo</button>
+            </div>
+            
+        </section>
+    </form>
+
+    <div class="container text-center">
+        {{mensaje}} 
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+    <script src="{% static 'app/validacion-boos.js' %}"></script>
+</body>
+</html>
+{%endblock%}

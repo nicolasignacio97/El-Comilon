@@ -1,0 +1,71 @@
+{% extends "HeaderFooter/base-sidebar.html"%}
+{% load static %}
+{% block content%}
+<div class="container bg-white shadow-lg">
+    <div class="row">
+        <div class="col m-2">
+            <h1 class="text-center">Lista de proveedores</h1>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Rut Restaurante</th>
+                        <th scope="col">Nombre Restaurante</th>
+                        <th scope="col">Dirección</th>
+                        <th scope="col">Rut Representante</th>
+                        <th scope="col">Acción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for rest in Restaurante %}
+                    <tr>
+                        <th scope="row">{{rest.0}}</th>
+                        <td>{{rest.1}}</td>
+                        <td>{{rest.2}}</td>
+                        <td>{{rest.3}}</td>
+                        <td> <a href="modificarProveedor/{{rest.0}}"><i class="fas fa-user-edit"
+                                    style="color:#02B37F; cursor: pointer;"></i></a>
+                            <a href="eliminarProveedor/{{rest.0}}"><i class="fas fa-trash-alt"
+                                    style="color: brown; cursor: pointer;"> </i> </a>
+                        </td>
+                    </tr>
+                    {%endfor%}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row mt-5">
+        <div class="col m-2">
+            <h1 class="text-center">Lista de Representantes</h1>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Rut</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Apellidos</th>
+                        <th scope="col">Teléfono</th>
+                        <th scope="col">Correo</th>
+                        <th scope="col">Acción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for repre in Representante %}
+                    <tr>
+                        <th scope="row">{{repre.0}}</th>
+                        <td>{{repre.1}}</td>
+                        <td>{{repre.2}}</td>
+                        <td>{{repre.3}}</td>
+                        <td>{{repre.4}}</td>
+                        <td> <a href="modificarRepresentante/{{repre.0}}"><i class="fas fa-user-edit" style="color:#02B37F; cursor: pointer;"></i></a>
+                            <a href="eliminarRepresentante/{{repre.0}}"><i class="fas fa-trash-alt" style="color: brown; cursor: pointer;"> </i></a>
+                        </td>
+                    </tr>
+                    {%endfor%}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+{% endblock %}
+<!-- 
+{% url 'deleterepartidor' r.rutrepartidor %} -->

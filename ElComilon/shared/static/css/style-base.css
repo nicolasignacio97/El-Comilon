@@ -1,0 +1,267 @@
+*{
+  font-family: 'Roboto',sans-serif;
+}
+body{
+  box-sizing: border-box;
+  margin: 0 auto;
+}
+.contenido{
+  display: flex;
+  background-color: #9C3534;
+}
+.menu{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.izquierda{
+  order: 1;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: flex-end;
+    /*margin-right: 15rem; */
+}
+.derecha{
+  order: 3;
+  display: flex;
+  align-items: center; 
+  flex-wrap: wrap;
+  width: 100%;
+}
+.menu a{
+  text-decoration: none;
+  color: #F5F5F5;
+  margin: 2rem;  
+}
+
+a:hover{
+  color: #c4c4c4;
+}
+.logo{
+  order: 2;
+}
+.hamburguesa{
+  display:none
+}
+.logo img{
+  width: 10rem;
+}
+.btn-hamburguesa{
+  display: none;
+}
+.logo-celu{
+  display: none;
+}
+
+/* Cambio de tamaño  */
+
+@media (max-width: 854px) {
+  .contenido{
+    flex-direction: column;
+    align-items:center;
+  }
+  .menu{
+    flex-direction: row;
+  }
+  .logo{
+    display: none;
+  }
+  .logo-celu{
+    display: flex;
+    width: 12rem;
+    margin-right: 50%;
+  }
+  .menu{
+    display: none;
+    background:#9C3534;
+    width: 100%;
+  }
+  .menu a{
+    height: .5rem;
+  }
+  .izquierda{
+    flex-direction: column;
+  }
+  .derecha{
+    flex-direction: column;
+  }
+  .btn-hamburguesa{
+    display: inline-block;
+    position: absolute;
+    padding-left: 36rem;
+    padding-top: 1.5rem;
+  }
+  .btn-hamburguesa img{
+    width: 70px;
+  }
+  .logo img{
+    width: 13rem;
+    position: absolute;
+    padding-left: 80rem;
+  }
+
+  #expandir{
+    display: none;
+  }
+  #expandir:checked ~.menu {
+    display: block;
+  }
+}
+
+@media (max-width: 646px) {
+  .btn-hamburguesa{
+    padding-left: 28rem;
+    padding-top: 1.5rem;
+  }
+  .btn-hamburguesa img{
+    width: 70px;
+  }
+
+}
+@media (max-width: 518px) {
+  .btn-hamburguesa{
+    padding-left: 20rem;
+    padding-top: 1.5rem;
+  }
+  .btn-hamburguesa img{
+    width: 70px;
+  }
+  .logo img{
+    width: 10rem;
+    margin-right: 4rem;
+    
+    margin-right: 3rem;
+  }
+}
+@media (max-width: 390px) {
+ 
+  .btn-hamburguesa{
+    padding-left: 15rem;
+    padding-top: 1.5rem;
+  }
+  .btn-hamburguesa img{
+    width: 70px;
+  }
+  .logo-celu {
+    width: 10rem;
+    margin-left: 1rem
+    ;
+  }
+}
+
+
+
+/* animaciones */
+
+.animated {
+  -webkit-animation-duration: 0.6s;
+  animation-duration: 0.6s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+.fast {
+  -webkit-animation-duration: 0.4s;
+  animation-duration: 0.4s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.fadeIn {
+  animation-name: fadeIn;
+}
+
+
+.body-contenido{
+  min-height: calc(100vh - 20rem );
+}
+
+.footer-contenido{
+  display: flex;
+  justify-content: center;
+  background-color: #202020;
+  height: 100%;
+  margin-top: 5rem;
+  flex-direction: column;
+  align-items: center;
+  color:#F5F5F5 ;
+}
+.info1{
+  display: flex;
+  width: 100%;
+  max-height: 100%;
+  justify-content: space-around;
+  margin-top: 1rem;
+  margin-bottom: 3rem;
+  
+}
+.info1 h3{
+  margin-left: 2.5rem;
+}
+.info1 ul {
+  list-style: none;
+}
+.info1 ul li{
+  margin-bottom: .5rem;
+}
+.info1 ul li a{
+  text-decoration: none;
+  color: #F5F5F5;
+}
+.info1 ul li a:hover{
+  color: #9C3534;
+}
+.redes{
+  display: flex;
+}
+.icon-redes{
+  margin-left: 1rem;
+}
+.copy{
+  display: flex;
+  background-color:#252525;
+  width: 100%;
+  justify-content: center;
+  margin-top: 1rem;
+  height: 100%;
+  align-items: center;
+}
+@media (max-width:640px ) {
+    .info1{
+      flex-direction: column;
+      justify-content: center;
+    }
+}
+
+
+
+
+
+
+
+
+
+.iconPerfil{
+  width: 50%;
+}
+
+.icon{
+  width: 10%;
+  margin: 0;
+}
+
+.iconPerfil:hover{
+  transition: padding-left .3s ease;
+}
