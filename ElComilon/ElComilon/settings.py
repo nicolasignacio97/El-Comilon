@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.humanize',
+    'crispy_forms',
     'core',
     'administracion',
     'registroTrabajador',
@@ -52,9 +54,11 @@ INSTALLED_APPS = [
     'RegisterRepartidor',
     'Pedido',
     'Platillos',
-    'detallePedido'
+    'detallePedido',
+    'PerfilUsuario'
 ]
-
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+LOGIN_REDIRECT_URL = 'perfil'
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -92,7 +96,7 @@ WSGI_APPLICATION = 'ElComilon.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.oracle',
-        'NAME': '127.0.0.1:1521/xe',
+        'NAME': '127.0.0.1:1522/xe',
         'USER': 'COMILONBD',
         'PASSWORD': '1234',
         'TEST': {

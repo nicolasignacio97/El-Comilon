@@ -11,6 +11,7 @@ from registroTrabajador.views import eliminarTrabajador
 from RegEmpConv.views import listaEmpresa
 from RegEmpConv.views import empresaRut
 from RegEmpConv.views import eliminarEmpresa
+from RegisterRepartidor.views import registroVeh,registroRep,editRepartidor,deleterepartidor,listarRep
 
 url_patterns = [
     path('',administracion),
@@ -25,4 +26,7 @@ url_patterns = [
     path('listaEmpresa', listaEmpresa),
     path('empresaRut',empresaRut),
     path('eliminarEmpresa', eliminarEmpresa)
+    path('platillo',registroPlatillo),
+    path('regin',registroRep),
+    path('reginvehiculo',registroVeh)
 ]
