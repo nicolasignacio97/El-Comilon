@@ -32,7 +32,7 @@ url_patterns = [
     path('eliminarTrabajador',eliminarTrabajador),
     path('listaEmpresa', listaEmpresa),
     path('empresaRut',empresaRut),
-    path('eliminarEmpresa', eliminarEmpresa)
+    path('eliminarEmpresa', eliminarEmpresa),
     path('platillo',registroPlatillo),
     path('regin',registroRep),
     path('reginvehiculo',registroVeh)

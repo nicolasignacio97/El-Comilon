@@ -97,7 +97,7 @@ WSGI_APPLICATION = 'ElComilon.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.oracle',
-        'NAME': '127.0.0.1:1522/xe',
+        'NAME': '127.0.0.1:1521/xe',
         'USER': 'COMILONBD',
         'PASSWORD': '1234',
         'TEST': {
