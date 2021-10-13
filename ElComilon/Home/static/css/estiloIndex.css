@@ -72,6 +72,13 @@ h4{
     color: #202020;
 }
 
+h2{
+    font-family: 'Roboto', sans-serif;
+    text-align: center;
+    margin-top: 3%;
+    letter-spacing: 1px;
+    color: rgb(104, 104, 104);
+}
 p{
     font-family: 'Roboto', sans-serif;
     text-align: center;
@@ -85,6 +92,21 @@ p{
 a:hover{
     color: #c4c4c4;
 }
+
+.platillo__descripcion{
+    color: rgb(104, 104, 104);
+    margin-top: .5rem;
+}
+
+.platillo__precio{
+    color:#9c3534;
+    font-weight: bold;
+}
+
+.platillo__nombre{
+    margin-top: 2%;
+}
+
 /*Imagenes*/
 
 .img-carta{
