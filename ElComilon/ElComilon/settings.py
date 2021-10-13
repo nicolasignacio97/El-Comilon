@@ -55,8 +55,11 @@ INSTALLED_APPS = [
     'Pedido',
     'Platillos',
     'detallePedido',
+    'listarPlatillos',
+    'actualizarPlatillo',
     'RegCliConv',
     'PerfilUsuario',
+
 ]
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 LOGIN_REDIRECT_URL = 'perfil'
@@ -99,7 +102,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.oracle',
         'NAME': '127.0.0.1:1522/xe',
         'USER': 'COMILONBD',
-        'PASSWORD': '1234',
+        'PASSWORD': '123',
         'TEST': {
             'USER': 'default_test',
             'TBLSPACE': 'default_test_tbls',
