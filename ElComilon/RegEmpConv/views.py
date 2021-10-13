@@ -29,3 +29,61 @@ def registrarEmpresa(rutEmpresa, nombre, razonSocial):
     cursor.callproc('SP_INSERT_EMP_CONV',[rutEmpresa, nombre, razonSocial, salida])
 
     return salida.getvalue()
+
+def listaEmpresa(request):
+    data = {
+        'empresa': listarEmpresa()
+    }
+    return render(request, 'listaEmpConv.html', data)
+
+
+def listarEmpresa():
+    django_cursor = connection.cursor()
+    cursor = django_cursor.connection.cursor()
+    out_cur = django_cursor.connection.cursor()
+
+    cursor.callproc("SP_LISTAR_EMP", [out_cur])
+    lista = []
+    for fila in out_cur:
+        lista.append(fila)
+
+    return lista
+
+def empresaRut(request):
+    if request.method == 'POST':
+
+        rut = request.POST.get('empresaRut')
+
+        data = {
+        'empresa': listarEmpresaRut(rut)
+        }
+    return render(request, 'listaEmpConv.html', data)
+
+
+def listarEmpresaRut(rut):
+    django_cursor = connection.cursor()
+    cursor = django_cursor.connection.cursor()
+    out_cur = django_cursor.connection.cursor()
+
+    cursor.callproc("SP_LISTAR_EMPRESA_RUT", [rut, out_cur])
+    lista = []
+    for fila in out_cur:
+        lista.append(fila)
+
+    return lista
+
+def eliminarEmpresa(request):
+    if request.method == 'POST':
+        rut = request.POST.get('btnEliminar')
+    
+    eliminar(rut)
+
+    return listaEmpresa(request)
+
+def eliminar(rut):
+    django_cursor = connection.cursor()
+    cursor = django_cursor.connection.cursor()
+
+    cursor.callproc("SP_ELIMINAR_EMPRESA", [rut])
+
+    return 0

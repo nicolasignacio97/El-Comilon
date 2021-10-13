@@ -131,6 +131,8 @@ class Repartidor(models.Model):
     usuario = models.CharField(max_length=15)
     contrasena = models.CharField(max_length=20)
     rutrestaurante = models.ForeignKey('Restaurante', models.DO_NOTHING, db_column='rutrestaurante')
+    def __str__(self):
+        return self.rutrepartidor + ' ' + self.nombres
 
     class Meta:
         managed = False
@@ -172,7 +174,11 @@ class Restaurante(models.Model):
     direccionrestaurante = models.CharField(max_length=30)
     rutrepresentante = models.ForeignKey(Representante, models.DO_NOTHING, db_column='rutrepresentante')
     idtiporest = models.ForeignKey('TipoRestaurante', models.DO_NOTHING, db_column='idtiporest')
+    
+    def __str__(self):
+        return self.rutrestaurante
 
+  
     class Meta:
         managed = False
         db_table = 'restaurante'
@@ -237,6 +243,10 @@ class Vehiculo(models.Model):
     rutrepartidor = models.ForeignKey(Repartidor, models.DO_NOTHING, db_column='rutrepartidor')
     idtipovehiculo = models.ForeignKey(TipoVehiculo, models.DO_NOTHING, db_column='idtipovehiculo')
 
+    def __str__(self):
+        return self.patentevehiculo 
+    
+        
     class Meta:
         managed = False
         db_table = 'vehiculo'
