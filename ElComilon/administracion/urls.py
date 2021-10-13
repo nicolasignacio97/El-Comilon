@@ -8,7 +8,7 @@ from listarPlatillos.views import listarPlatillos, eliminarPlatillo
 from actualizarPlatillo.views import modificarPlatillo
 
 from RegCliConv.views import RegistroCliConvenio, listarCliConv, modificarCliConv, eliminarCliConv
-
+from RegisterRepartidor.views import registroRep,registroVeh,editRepartidor,listarRep,deleterepartidor
 from registroTrabajador.views import listaTrabajador
 from registroTrabajador.views import trabajadorRut
 from registroTrabajador.views import actualizarTrabajador
@@ -39,13 +39,17 @@ url_patterns = [
     path('listaEmpresa', listaEmpresa),
     path('empresaRut', empresaRut),
     path('eliminarEmpresa', eliminarEmpresa),
-    path('platillo', registroPlatillo),
-    path('regin', registroRep),
-    path('reginvehiculo', registroVeh),
-     path('listarProveedores',listarRestaurantes),
+    path('platillo', registroPlatillo),  
+    path('listarProveedores',listarRestaurantes),
     path('modificarProveedor/<id>/', modificarProveedor),
     path('eliminarProveedor/<id>/', EliminarProveedor),
     path('eliminarRepresentante/<id>/', EliminarRepresentante),
-    path('modificarRepresentante/<id>/', ModificarRepresentante),
+    path('modificarRepresentante/<id>/', ModificarRepresentante),    
+    path('regin', registroRep , name="pefil"),
+    path('reginvehiculo', registroVeh),
+    path('listarep', listarRep),
+    path('updaterepartidor/<rutrepartidor>/',editRepartidor, name = 'updrpartidor'),
+    path('deleterepartidor/<rutrepartidor>/',deleterepartidor, name = 'deleterepartidor'), 
+
 ]
 
