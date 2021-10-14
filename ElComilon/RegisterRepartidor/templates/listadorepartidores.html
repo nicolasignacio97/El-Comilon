@@ -49,9 +49,13 @@
                                         <td> <a href="{% url 'updrpartidor' r.rutrepartidor %}"><i
                                                     class="fas fa-user-edit"
                                                     style="color:#02B37F; cursor: pointer;"></i></a>
+                                                    <a href="{% url 'updvehiculo' r.rutrepartidor %}"><i
+                                                        class="fas fa-car-alt"
+                                                        style="color:#02B37F; cursor: pointer;"></i></a>
                                             <a href="{% url 'deleterepartidor' r.rutrepartidor %}"><i
                                                     class="fas fa-trash-alt" style="color: brown; cursor: pointer;">
                                                 </i> </a>
+                                        
                                         </td>
                                     </tr>
                                     {% endfor %}
