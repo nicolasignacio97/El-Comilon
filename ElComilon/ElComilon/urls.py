@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib.auth import views as auth_views
 from django.contrib import admin
 from django.urls import path,include
+# from ElComilon.listarPlatillos.views import modificarPlatillo
 from Home.views import inicio
 from Login.views import login
 from RegisterPlatillo.views import registroPlatillo
@@ -31,6 +32,7 @@ from Login.views import loginauth
 from Platillos.views import platillos
 from detallePedido.views import detallePedido
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',inicio),
@@ -38,18 +40,14 @@ urlpatterns = [
     path('perfil',Usertemplate),
     path('registroPlatillo',registroPlatillo),
     path('registro',register),  
+    path('regin', registroRep),
+    path('reginvehiculo', registroVeh),
     path('registroProveedor',registroProveedor),
     path('reclamo',reclamo),
     path('quienesSomos', quienesSomos),
     path('perfil', Usertemplate),
-    path('regin', registroRep , name="pefil"),
-    path('reginvehiculo', registroVeh),
-    path('listarep', listarRep),
-    path('updaterepartidor/<rutrepartidor>/',editRepartidor, name = 'updrpartidor'),
-    path('deleterepartidor/<rutrepartidor>/',deleterepartidor, name = 'deleterepartidor'), 
     path('pedido', pedido),
     path('platillos', platillos),
     path('detallePedido', detallePedido),
-    path('administracion/', include(url_patterns))
-
+    path('administracion/', include(url_patterns)),
 ]

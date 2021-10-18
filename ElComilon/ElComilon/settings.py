@@ -55,7 +55,12 @@ INSTALLED_APPS = [
     'Pedido',
     'Platillos',
     'detallePedido',
-    'PerfilUsuario'
+    'listarPlatillos',
+    'actualizarPlatillo',
+    'RegCliConv',
+    'PerfilUsuario',
+    'gestionRestaurantes',
+
 ]
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 LOGIN_REDIRECT_URL = 'perfil'

@@ -11,8 +11,29 @@
 
 .input-sizes {
     width: 75%;
+    height: 90%;
     margin: 0 auto;
 }
+
+.msge-size{
+    padding: 4rem;
+}
+
+/* Animaciones */
+
+.animated {
+    -webkit-animation-duration: 0.6s;
+    animation-duration: 0.6s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+  }
+  
+  .fast {
+    -webkit-animation-duration: 0.4s;
+    animation-duration: 0.4s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+  }
 
 
 
@@ -45,57 +66,7 @@
     }
 }
 
-/* Estilo de errores */
 
-.classErrorNomUsuario{
-    visibility: hidden;
-    color: #FF0000;
-    margin-left: 14px;
-}
-
-.classErrorNombres{
-    visibility: hidden;
-    color: #FF0000;
-    margin-left: 14px;
-}
-
-.classErrorApellidos{
-    visibility: hidden;
-    color: #FF0000;
-    margin-left: 14px;
-}
-.classErrorDirreccion{
-    visibility: hidden;
-    color: #FF0000;
-    margin-left: 14px;
-}
-
-.classErrorRut{
-    visibility: hidden;
-    color: #FF0000;
-    margin-left: 14px;
-}
-
-.classErrorNumTelefono{
-    visibility: hidden;
-    color: #FF0000;
-    margin-left: 14px;
-}
-
-.classErrorMailUsuario{
-    visibility: hidden;
-    color: #FF0000;
-    margin-left: 14px;
-}
-
-.classErrorPassUser{
-    visibility: hidden;
-    color: #FF0000;
-    margin-left: 14px;
-}
-
-.classErrorRePassUser{
-    visibility: hidden;
-    color: #FF0000;
-    margin-left: 14px;
+.titulo{
+    color:#9C3534;
 }
