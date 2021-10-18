@@ -110,7 +110,26 @@ def actualizarTrabajador(request):
         }
 
  
-    return render(request, 'registroTrabajador.html', data)
+    return render(request, 'actualizarTrabajador.html', data)
+
+def actTrabajador(request):
+    if request.method =='POST':
+        rutTrabajador = request.POST.get('rutTrabajador').upper()
+        nombres = request.POST.get('nombres').upper()
+        apellidos = request.POST.get('apellidos').upper()
+        usuario = request.POST.get('nombreU')
+        idCargo = request.POST.get('cargo')
+
+        actualizar(rutTrabajador, nombres, apellidos, usuario, idCargo)
+
+    return listaTrabajador(request)
+
+def actualizar(rutTrabajador, nombres, apellidos, usuario, idCargo):
+    django_cursor = connection.cursor()
+    cursor = django_cursor.connection.cursor()
+    cursor.callproc("SP_ACT_TRABAJADOR", [rutTrabajador, nombres, apellidos, usuario, idCargo])
+
+    return 0
 
 def eliminarTrabajador(request):
     if request.method == 'POST':
