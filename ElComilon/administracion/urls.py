@@ -20,6 +20,7 @@ from RegisterRepartidor.views import registroVeh, registroRep, editRepartidor, d
 from gestionRestaurantes.views import listarRestaurantes, modificarProveedor,EliminarProveedor,EliminarRepresentante,ModificarRepresentante
 from RegisterRepartidor.views import registroVeh,registroRep,editRepartidor,deleterepartidor,listarRep
 from registroTrabajador.views import actTrabajador
+from RegEmpConv.views import actualizarEmpresa, actEmpresa
 
 url_patterns = [
     path('', administracion),
@@ -58,6 +59,8 @@ url_patterns = [
     path('platillo',registroPlatillo),
     path('regin',registroRep),
     path('reginvehiculo',registroVeh),
-    path('actTrabajador', actTrabajador)
+    path('actTrabajador', actTrabajador),
+    path('actualizarEmpresa', actualizarEmpresa),
+    path('actEmpresa', actEmpresa)
 ]
 
