@@ -78,3 +78,34 @@ def eliminar(rut):
     cursor.callproc("SP_ELIMINAR_EMPRESA", [rut])
 
     return 0
+
+def actualizarEmpresa(request):
+
+    if request.method == 'POST':
+
+        rut = request.POST.get('btnActualizar')
+
+        data = {
+        'empresa': listarEmpresaRut(rut)
+        }
+
+ 
+    return render(request, 'actEmpConv.html', data)
+
+
+def actEmpresa(request):
+    if request.method =='POST':
+        rutEmpresa = request.POST.get('rutEmpresa')
+        nombre = request.POST.get('nombreEmpresa')
+        razonSocial = request.POST.get('razonSocial')
+
+        actualizar(rutEmpresa, nombre, razonSocial)
+
+    return listaEmpresa(request)
+
+def actualizar(rutEmpresa, nombre, razonSocial):
+    django_cursor = connection.cursor()
+    cursor = django_cursor.connection.cursor()
+    cursor.callproc("SP_ACT_EMPRESA", [rutEmpresa, nombre, razonSocial])
+
+    return 0
