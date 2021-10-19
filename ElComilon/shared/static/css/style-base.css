@@ -244,3 +244,24 @@ a:hover{
       justify-content: center;
     }
 }
+
+
+
+
+
+
+
+
+
+.iconPerfil{
+  width: 50%;
+}
+
+.icon{
+  width: 10%;
+  margin: 0;
+}
+
+.iconPerfil:hover{
+  transition: padding-left .3s ease;
+}

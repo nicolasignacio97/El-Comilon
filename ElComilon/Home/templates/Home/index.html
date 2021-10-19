@@ -11,7 +11,7 @@
 {% block L-derecha %}
 <a href="/platillos">Catálogo</a>
 <a href="/login">Iniciar sesión</a>
-{% endblock%}
+{% endblock%} 
 
 {% block content%}
 <!DOCTYPE html>
@@ -34,6 +34,14 @@
 </head>
 
 <body>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12" style="margin: auto;">
+                <h2>Nuestra Carta</h2>
+                <div class="container-fluid small-border"></div>
+            </div>
+        </div>
+    </div>
     <div clas="container carta" style="width: 90%; margin: auto;">
         <div class="row">
             {% for p in platillos %}
@@ -41,10 +49,10 @@
                 {% if p.imagen %}
                 <img src="data:imagen/png;base64, {{ p.imagen }}" alt="" class="img-carta">
                 {% endif %}
-                <p>{{ p.data.1 }}</p>
+                <h5 class="platillo__nombre">{{ p.data.1 }}</h5>
                 <div class="container-fluid small-border"></div>
-                <p>{{ p.data.2 }}</p>
-                <p>${{ p.data.3 }}</p>
+                <p class="platillo__descripcion">{{ p.data.2 }}</p>
+                <p class="platillo__precio">${{ p.data.3 }}</p>
                 <div class="container btn-comprar">
                         <button class="btn botonComprar" type="submit">Comprar</button>
                 </div>
