@@ -61,6 +61,7 @@ INSTALLED_APPS = [
     'actualizarPlatillo',
     'RegCliConv',
     'PerfilUsuario',
+    'gestionRestaurantes',
 
 ]
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
@@ -102,9 +103,9 @@ WSGI_APPLICATION = 'ElComilon.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.oracle',
-        'NAME': '127.0.0.1:1522/xe',
+        'NAME': '127.0.0.1:1521/xe',
         'USER': 'COMILONBD',
-        'PASSWORD': '123',
+        'PASSWORD': '1234',
         'TEST': {
             'USER': 'default_test',
             'TBLSPACE': 'default_test_tbls',

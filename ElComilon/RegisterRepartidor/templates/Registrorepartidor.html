@@ -16,7 +16,7 @@
 <div class="container_login container">
   
     <div class="row  ">
-        <div class="card shadow-lg p3 mb-5 mt-5 bg-white">
+        <div class="card shadow-lg p3  mt-1 bg-white">
             <h1 class="h1-reg-repartidor mt-3 text-center">
                 Registrar Repartidor
             </h1>
@@ -51,9 +51,37 @@
                             </div>
                             
                         </div>
+                        
                         <div class="row ">
-                            <div class="col-md-12 col-sm-12">
+                            <div class="col-md-6 col-sm-12">
                                 <input type="text" class="form-control input-repartidor" name="rutempresa" placeholder="Rut empresa">
+                            </div>
+                        </div>
+                        </dir>
+                        <div class="row align-items-end" >
+                            <div class="col-md-6 col-sm-12 divinput">
+                                <input type="text" class="form-control input-repartidor" name="Patente" placeholder="Patente vehiculo">
+                            </div>
+                        </div>
+                        <div class="row align-self-center">
+                            <div class="col-md-6 col-sm-12 divinput ">
+                                <input type="text" class="form-control input-repartidor"name="Modelo" placeholder="Modelo">
+                            </div>
+                            <div class="col-md-6 col-sm-12 divinput">
+                                <input type="text" class="form-control input-repartidor" name="Ano" placeholder="Año vehiculo">
+                            </div>
+                        </div>
+                        <div class="row ">
+                            <div class="col-md-6 col-sm-12 divinput">
+                                <input type="text" class="form-control input-repartidor" name="Color" placeholder="Color">
+                            </div>
+                            <div class="col-md-6 col-sm-12  align-self-center">
+                                <select name="tipovehiculo" id="tipovehiculo" class="combobox-tipovehiculo">
+                                    <option value="SELECCIONE">Tipo Vehiculo  </option>
+                                    {% for v in categoria %}  
+                                    <option  value="{{v.0}}">{{v.1}}</option>
+                                    {% endfor %}
+                                  </select>
                             </div>
                         </div>
         
@@ -65,7 +93,7 @@
                    </form>
             </dir>
             <hr>
-       
+<!--        
            <form action="/reginvehiculo"  method="POST">
             {% csrf_token %}
             <div class="row ">
@@ -73,41 +101,11 @@
                     Datos vehiculo
                 </h1>
             </div> 
-            <div class="row " >
-                <div class="col-md-6 col-sm-12 divinput">
-                    <input type="text" class="form-control input-repartidor" name="RutRepartidor" oninput="Rutvalidator(this)" placeholder="Rut Repartidor">
-                </div>
-                <div class="col-md-6 col-sm-12 divinput">
-                    <input type="text" class="form-control input-repartidor" name="Patente" placeholder="Patente vehiculo">
-                </div>
-                
-                
-            </div>
-            <div class="row align-self-center">
-                <div class="col-md-6 col-sm-12 divinput ">
-                    <input type="text" class="form-control input-repartidor"name="Modelo" placeholder="Modelo">
-                </div>
-                <div class="col-md-6 col-sm-12 divinput">
-                    <input type="text" class="form-control input-repartidor" name="Ano" placeholder="Año vehiculo">
-                </div>
-            </div>
-            <div class="row ">
-                <div class="col-md-6 col-sm-12 divinput">
-                    <input type="text" class="form-control input-repartidor" name="Color" placeholder="Color">
-                </div>
-                <div class="col-md-6 col-sm-12  align-self-center">
-                    <select name="tipovehiculo" id="tipovehiculo" class="combobox-tipovehiculo">
-                        <option value="SELECCIONE">Tipo Vehiculo  </option>
-                        {% for v in categoria %}  
-                        <option  value="{{v.0}}">{{v.1}}</option>
-                        {% endfor %}
-                      </select>
-                </div>
-            </div>
+         
             <div class="row ">
                 <button id="btn-siguiente" class="Btn_vehiculo"> Registrar Vehiculo </button>
             </div>
-           </form>
+           </form> -->
         </div>
        </div>
   
