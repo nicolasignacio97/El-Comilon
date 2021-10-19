@@ -1,0 +1,72 @@
+.title{
+    margin: 2rem;
+}
+
+.contenedor-form{
+    margin: auto;
+    background-color: #ffffff;
+    border-radius: 0.5rem;
+    width: 40%;
+}
+
+.input-sizes {
+    width: 75%;
+    height: 90%;
+    margin: 0 auto;
+}
+
+.msge-size{
+    padding: 4rem;
+}
+
+/* Animaciones */
+
+.animated {
+    -webkit-animation-duration: 0.6s;
+    animation-duration: 0.6s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+  }
+  
+  .fast {
+    -webkit-animation-duration: 0.4s;
+    animation-duration: 0.4s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+  }
+
+
+
+
+.bgColor{
+    background-color: #F7F8F9;
+}
+
+
+.btnRegistro{
+    padding: 6px 8px;
+    width: 60%;
+    font-size: 20px;
+    background:#9c3534;
+    color: #F7F8F9;
+    margin-bottom: 0.8rem;
+}
+
+.btnRegistro:hover{
+    background: white;
+    color: #9c3534;
+    border: 1px solid #9c3534;
+}
+
+
+@media (max-width:720px){
+    .responsive-form{
+       width: 90% !important;
+       flex-direction: column;
+    }
+}
+
+
+.titulo{
+    color:#9C3534;
+}
