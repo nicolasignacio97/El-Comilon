@@ -20,7 +20,8 @@
     <div class="contenedor">
         <div id="sidemenu" class="menu-collapsed animated fadeIn">
             <div id="header" class="menuprueba">
-                <div id="title"><span style="font-size: 40px; font-family: 'Roboto', sans-serif;">El Comilón</span></div>
+                <div id="title"><span style="font-size: 40px; font-family: 'Roboto', sans-serif;">El Comilón</span>
+                </div>
                 <div id="menu-btn">
                     <label class="hamburguesa"><img src="{% static 'img/menuH.png' %}" alt="h"></label>
                     <!-- <div class="btn-hamburger"></div>
@@ -49,7 +50,7 @@
                                 <span>Empresa Convenio</span>
                             </div>
                             <div class="iconos">
-                                <img id="icono2"  class="conIcono" src="{% static 'img/i-convenio.png'%}">
+                                <img id="icono2" class="conIcono" src="{% static 'img/i-convenio.png'%}">
                             </div>
                         </div>
                     </a>
@@ -61,7 +62,7 @@
                                 <span>Trabajador</span>
                             </div>
                             <div class="iconos">
-                                <img id="icono3"  class="conIcono" src="{% static 'img/i-trabajador.png'%}">
+                                <img id="icono3" class="conIcono" src="{% static 'img/i-trabajador.png'%}">
                             </div>
                         </div>
                     </a>
@@ -73,7 +74,7 @@
                                 <span>Repartidor</span>
                             </div>
                             <div class="iconos">
-                                <img  id="icono4" class="conIcono"  src="{% static 'img/i-repartidor.png'%}">
+                                <img id="icono4" class="conIcono" src="{% static 'img/i-repartidor.png'%}">
                             </div>
                         </div>
                     </a>
@@ -85,7 +86,7 @@
                                 <span>Agregar Platillo</span>
                             </div>
                             <div class="iconos">
-                                <img id="icono5" class="conIcono"  src="{% static 'img/i-platos.png'%}">
+                                <img id="icono5" class="conIcono" src="{% static 'img/i-platos.png'%}">
                             </div>
                         </div>
                     </a>
@@ -97,7 +98,7 @@
                                 <span>Cliente Convenio</span>
                             </div>
                             <div class="iconos">
-                                <img id="icono6" class="conIcono"  src="{% static 'img/i-cliente.png'%}">
+                                <img id="icono6" class="conIcono" src="{% static 'img/i-cliente.png'%}">
                             </div>
                         </div>
                     </a>
@@ -122,7 +123,7 @@
 
                 {% endblock%}
             </div>
-    </div>
+        </div>
     </div>
 
 
@@ -130,6 +131,21 @@
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
     <script src="{% static 'app/main.js'%}"></script>
+
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    {% if messages %}
+    {% for mens in messages %}
+    <script> 
+        Swal.fire({
+            "title": 'Bien!',
+            "text": '{{mens}}',
+            "icon": 'success'
+        }
+        )
+    </script>
+    {% endfor %}
+    {% endif %}
 </body>
 
 </html>
