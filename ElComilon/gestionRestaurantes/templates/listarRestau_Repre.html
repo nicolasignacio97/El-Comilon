@@ -1,5 +1,40 @@
 {% extends "HeaderFooter/base-sidebar.html"%}
 {% load static %}
+
+{%block js%}
+<script>
+    function eliminarProveedor(id) {
+        Swal.fire({
+            "title": "¿Estás Seguro?",
+            "text": "Esta acción no se puede deshacer",
+            "icon": "question",
+            "showCancelButton": true,
+            "cancelButtonText": "No, Cancelar",
+            "confirmButtonText": "Si, Eliminar",
+            "confirmButtonColor": "#9C3534"
+        }).then(function (result) {
+            if (result.isConfirmed) {
+                window.location.href = "eliminarProveedor/"+id
+            }
+        })
+    }
+    function eliminarRepresentante(id) {
+        Swal.fire({
+            "title": "¿Estás Seguro?",
+            "text": "Esta acción no se puede deshacer",
+            "icon": "question",
+            "showCancelButton": true,
+            "cancelButtonText": "No, Cancelar",
+            "confirmButtonText": "Si, Eliminar",
+            "confirmButtonColor": "#9C3534"
+        }).then(function (result) {
+            if (result.isConfirmed) {
+                window.location.href = "eliminarRepresentante/"+id
+            }
+        })
+    }
+</script>
+{%endblock%}
 {% block content%}
 <div class="container bg-white shadow-lg">
     <div class="row">
@@ -24,7 +59,7 @@
                         <td>{{rest.3}}</td>
                         <td> <a href="modificarProveedor/{{rest.0}}"><i class="fas fa-user-edit"
                                     style="color:#02B37F; cursor: pointer;"></i></a>
-                            <a href="eliminarProveedor/{{rest.0}}"><i class="fas fa-trash-alt"
+                            <a href="#" onClick="eliminarProveedor('{{rest.0}}')"><i class="fas fa-trash-alt"
                                     style="color: brown; cursor: pointer;"> </i> </a>
                         </td>
                     </tr>
@@ -55,8 +90,10 @@
                         <td>{{repre.2}}</td>
                         <td>{{repre.3}}</td>
                         <td>{{repre.4}}</td>
-                        <td> <a href="modificarRepresentante/{{repre.0}}"><i class="fas fa-user-edit" style="color:#02B37F; cursor: pointer;"></i></a>
-                            <a href="eliminarRepresentante/{{repre.0}}"><i class="fas fa-trash-alt" style="color: brown; cursor: pointer;"> </i></a>
+                        <td> <a href="modificarRepresentante/{{repre.0}}"><i class="fas fa-user-edit"
+                                    style="color:#02B37F; cursor: pointer;"></i></a>
+                            <a href="#" onClick="eliminarRepresentante('{{repre.0}}')"><i class="fas fa-trash-alt"
+                                    style="color: brown; cursor: pointer;"> </i></a>
                         </td>
                     </tr>
                     {%endfor%}
@@ -67,5 +104,3 @@
 
 </div>
 {% endblock %}
-<!-- 
-{% url 'deleterepartidor' r.rutrepartidor %} -->
