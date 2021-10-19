@@ -1,0 +1,107 @@
+{% extends "HeaderFooter/base.html"%} 
+{% load static%}
+
+
+{% block L-izquierda %}
+<a href="/">Inicio</a>
+<a href="quienesSomos">Sobre nosotros</a>
+{% endblock%}
+
+
+{% block L-derecha %}
+<a href="#">Catálogo</a>
+<a href="/login">Iniciar sesión</a>
+{% endblock%}
+
+{% block content%}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% load static %}
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+        
+        <link rel="stylesheet" href={% static "css/estiloQS.css" %}>
+    <title>El Comilón</title>
+</head>
+
+<body>
+    <div class="container-fluid info">
+        <div class="row m-0 p-0">
+            <div class="col-lg-4 comida">
+                <h1 class="h1-comida">Variedad</h1>
+                <div class="container-fluid small-border"></div>
+                <p class="p-comida">A Raíz de los convenios que hemos establecido, hemos ampliado nuestros horizontes
+                    culinarios, de esta forma poder entregar más variedad de platillos a nuestros clientes.</p>
+            </div>
+            <div class="col-lg-8">
+                <img src={% static "img/variedad-comida.png" %} alt="" style="max-height: 100%; width: 100%;">
+            </div>
+        </div>
+
+        <div class="row m-0 p-0 emp-padre">
+            <div class="col-lg-4 empresa">
+                <h1>Empresas</h1>
+                <div class="container-fluid small-border"></div>
+                <h3>¿Tienes tu empresa y quieres asociarte con nosotros?</h3>
+                <p>Te invitamos a ponerte en contacto con nosotros para que puedas enterarte de todos
+                    los beneficios a los cuales puedes acceder.</p>
+            </div>
+            <div class="col-lg-8 emp-foto">
+                <img src={% static "img/convenio.jpg" %} alt="" style="max-height: 100%; width: 100%;">
+            </div>
+        </div>
+
+        <div class="row m-0 p-0">
+            <div class="col-lg-4 repartidor">
+                <h1 id="txt-repartidor">Repartidores</h1>
+                <div class="container-fluid small-border"></div>
+                <p>Para darte la seguridad que necesitas, tenemos un equipo apto de repartidores que se encargarán de
+                    llevar tu pedido de la manera más segura y confiable hasta tus manos.</p>
+            </div>
+            <div class="col-lg-8">
+                <img src={% static "img/repartidor.jpg" %} alt="" style="max-height: 100vh; width: 100%;">
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid donde-en">
+        <div class="row m-0 p-0 donde-encontrarnos">
+            <div class="col-xs-12 col-sm-8 col-md-8 col-lg-6">
+                <h1>Donde puedes encontrarnos</h1>
+                <div class="container-fluid small-border"></div>
+                <p id="p-de">Actualmente contamos con una sucursal abierta, la cual está ubicada en Bascuñán Guerrero
+                    329, Santiago Centro</p>
+            </div>
+            <div class="col-xs-12 col-sm-4 col-md-4 col-lg-6">
+                <img id="imgmapa" src={% static "img/mapa.PNG" %}>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid quienes-somos">
+        <div class="container">
+            <h1 name="quienes-somos">Quienes Somos</h1>
+            <div class="container-fluid small-border"></div>
+            <p id="p-qs">Somos parte de la empresa de Alimentos Santiago, la cual ofrece servicios de comida rápida y
+                casera a domicilio, esta lleva más de 10 años en el mercado.</p>
+            <p id="p-qs">Nosotros, como Restaurante El Comilón, nos especializamos en prestar servicios de alimentación
+                de manera presencial y con despacho a domicilio.</p>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
+{%endblock%}

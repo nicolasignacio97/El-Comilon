@@ -1,0 +1,111 @@
+/*General*/
+html{
+    box-sizing: border-box;
+    font-size: 62.5%;
+}
+
+*{
+    font-family: 'Roboto', sans-serif;
+}
+
+*, *::before, *::after{
+    box-sizing: inherit;
+}
+
+body{
+    background-color: #F7F8F9;
+}
+
+h1 {
+    color: #9c3534;
+    font-size: 3.4rem;
+    font-weight:bold;
+}
+h2 {
+    color: #9c3534;
+    font-size: 3rem;
+    font-weight:bold;
+}
+
+label{
+    font-size: 2rem;
+}
+
+/*Id de pedido, fecha y estado*/
+
+.num-pedido{
+    text-align: center;
+}
+
+.fecha-estado{
+    text-align: center;
+    font-size: 2rem;
+    display: flex;
+    justify-content: center;
+    gap: .5rem;
+}
+
+/*Detalles del pedido*/
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+    margin-bottom: 8rem;
+}
+
+.container-precios{
+    background-color: #c4c4c448;
+    padding: 6rem 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 50rem;
+    width: 100rem;
+}
+
+.platillo{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.multiplicador-platillo{
+    font-weight: bold;
+    margin-left:1rem;
+}
+
+.puntos-separacion{
+    color: #c4c4c4;
+    margin: 0 2rem;
+}
+.separaciones{
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+/*Tipo de entrega*/
+.tipo-entrega{
+    text-align: center;
+    padding-right: 67rem;
+    margin-bottom: 3rem;
+}
+.entrega-bold{
+    font-weight: bold;
+}
+
+/*Datos del cliente*/
+.datos-cliente{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    margin-left:45.2rem;
+}
+
+.datos-cliente p{
+    font-size: 2rem;
+    margin: 0;
+}

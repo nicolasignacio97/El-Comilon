@@ -1,0 +1,319 @@
+*{
+    font-family: 'Roboto', sans-serif;
+}
+
+body{
+    background-color: #F7F8F9;
+    box-sizing: border-box;
+}
+
+.cuadrado{
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    max-width: 1200px;
+    margin: 0 auto;
+    margin-top: 100px;
+    align-items: center;
+    height: 750px;
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
+input[type=number] { -moz-appearance:textfield; }
+
+.sombra{
+    -webkit-box-shadow: 0px 5px 15px 0px rgba(112,112,112,1);
+    -moz-box-shadow: 0px 5px 15px 0px rgba(112,112,112,1);
+    box-shadow: 0px 5px 15px 0px rgba(112,112,112,1);
+    background-color: #ffffff;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    border-radius: .4rem;
+}
+
+.formulario{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.itemsIzquierda{
+    display: flex;
+    height: 100%;
+    justify-content: space-around;
+    width: 100%;
+}
+.campos{
+    width: 25rem
+}
+
+.inputs{
+    margin-bottom: 2rem;
+    position:unset;
+}
+
+.form-label{
+    margin: 0;
+}
+
+.itemsDerecha{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: auto;
+    align-items: center;
+}
+
+.imagen-botones{
+    height: 25rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 4rem;
+}
+
+.titulo{
+    margin-bottom: 4rem;
+    margin-top: 1rem;
+}
+.titulo h1{
+    font-size: 30px;    
+    color: #9c3534;
+}
+
+#preview{
+    width: 13rem;
+    height: 14rem;    
+}
+
+#preview img{
+    width: 100%;
+    height: 100%;
+    
+}
+
+.multimedia{
+    height: 19rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.botones{
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items:stretch;
+}
+
+.botones button{
+    width: 20rem;
+    text-align: center;
+}
+
+.btn-aceptar{
+    background: #9c3534;
+    color: #ffffff;
+}
+
+.btn-aceptar:hover{
+    background: #ffffff;
+    color: #9c3534;
+    border: 1px solid #9c3534;
+}
+
+.btn-aceptar:focus{
+    border: 1.5px solid #9c3534;
+    box-shadow: none;
+    background-color: #ffffff;
+}
+
+
+@media (max-width: 1000px) {
+    .itemsIzquierda{
+        flex-direction: column;
+        align-items:center;
+    }
+    .cuadrado{
+        margin-top: 50px;
+        height: 70rem;
+    }
+    #preview{
+        margin-bottom: 1rem;
+    }
+    .multimedia{
+        justify-content:flex-start;
+    }
+  }
+
+  @media (max-width: 500px) {
+      .botones{
+          flex-direction:column;
+          gap: 1rem;
+      }
+      .botones button{
+          width: 100%;
+      }
+      .imagen-botones{
+          padding: 0;
+          height: 21rem;
+      }
+      .campos{
+        width: 100%;
+    }
+  }
+
+  @media (max-width: 300px) {
+      .cuadrado{
+        height: 56rem;
+      }
+  }
+
+  @media (max-width: 375px) {
+      .campos{
+          width: 100%;
+      }
+      .cuadrado{
+        margin-top: 35px;
+      }
+      .formulario{
+          width: 20rem;
+      }
+      .botones{
+          flex-direction: column;
+          justify-content: space-evenly;
+          margin: 0;
+          height: 20%;
+      }
+      .botones button{
+          width: 100%;
+      }
+      .imagen-botones{
+          height: auto;
+      }
+  }
+  @media (max-width: 320px) {
+    .formulario{
+        width: 18rem;
+    }
+}
+@media (max-width: 730px) {
+    .formulario{
+        width: 100%;
+    }
+}
+
+  #wrapper{
+      width: 100%;
+  }
+
+  .preload{
+      padding-top: 20px;
+      text-align: center;
+      display: none;
+  }
+
+  .activate-preload{
+      display: block;
+  }
+
+  #container-input{
+      width: 640px;
+      margin: 0 auto;
+      border: solid 1px #ccc;
+      position: relative;
+      overflow: hidden;
+  }
+  .inputfocus:focus{
+      border: 1.5px solid #9c3534;
+      box-shadow: none;
+      background-color: #ffffff;
+  }
+
+
+
+#container-input .wrap-file #preview-images .thumbnail{
+    width: 120px;
+    height: 120px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.titlulo-vista-previa{
+    color: #9c3534;
+    margin-top: 1rem;
+}
+
+.platillo{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.platillo__imagen{
+    width: 100%;
+    height: 200px;
+}
+
+.platillo__nombre:first-letter{
+    text-transform:capitalize;
+        
+}
+
+.platillo__descripcion{
+    color: rgb(104, 104, 104);
+    margin-top: .5rem;
+    margin-bottom: 0;
+    width: 10rem;
+}
+
+.platillo__descripcion::first-letter{
+    text-transform:capitalize;
+}
+
+.platillo__precio{
+    color:#9c3534;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.precio-signo{
+    margin-top: 1rem;
+    gap: 1rem;
+    display: flex;
+    justify-content: center;
+    gap: .1rem;
+    color:#9c3534;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.btn-danger{
+    background-color: #9c3534;  
+    border: none;
+}
+
+.card {
+    border: none;
+}
+
+.platillo__boton{
+    font-weight: bold;
+    font-size: 20px;
+    margin-top: .5rem;
+    padding: .6rem 1rem;
+}
+
+.separacion{
+    margin: 0;
+    color: #9c3534;  
+    font-weight: bold;
+}

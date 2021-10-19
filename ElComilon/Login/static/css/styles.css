@@ -1,0 +1,130 @@
+body{
+    background-color: #f7f8f9;
+}
+.Iniciar_sesion{
+    animation: bounce;
+  
+}
+.Login{
+    margin-top: 50px;
+}
+.form{
+    background-color: #ffff;
+    padding: 16px;
+    border-radius: 6px;
+}
+.Tittle-h2 { 
+    color: blue;
+    text-align: center;
+}
+.Recuperar_contraseña
+{
+    display: inline;
+    text-align: right;
+    color: brown;
+    margin: 5px;
+    text-decoration: none;
+    font-size: 16px;
+}
+.Recuperar_contraseña:hover
+{
+    display: block;
+    text-align: right;
+    color: brown;
+    margin: 5px;
+    font-size: 19px;
+    transition: .5s;
+    border-bottom: solid 1px;
+
+}
+.mensajeError{
+    text-align: center;
+    margin-top: 5px;
+    font-size: 18px;
+}
+a:hover{
+    color: #c4c4c4;
+}
+.Btn_login{
+    width: 100%;
+    margin-top: 10px;
+    padding: 8px 10px;
+    background-color: brown;
+    color: #ffff;
+    font-size: 18px;
+    border-radius: 5px;
+    border: none;
+}
+.Btn_login:hover {
+    border: 100px;
+    color: #000;
+    border:brown solid 3px;
+
+    transition: .5s;
+    background-color: #f7f8f9;
+
+
+}
+.label{
+    font-weight: bold;
+    font-style: roboto;
+}
+
+.input{
+ padding:8px ;
+ background-color: #f6f7f8;
+}
+.input:focus{
+    border: solid brown;
+    box-shadow: none;
+    background-color: #f6f7f8;
+}
+.Registrarse{
+    text-align: center;
+    font-size: 18px;
+    margin: 5px;
+}
+.RegistrarseV2{
+    color: brown;
+    font-size: 18px;
+    text-decoration: none;
+}
+.RegistrarseV2:hover{
+    color: brown;
+    border-bottom: solid 1px;
+    transition: 1s;
+}
+
+/* validaciones */
+.inputvalido{
+    background-color: #FAE978; 
+    border: green 2px solid;
+    padding: .7rem;
+    color: #000
+
+  }
+  .inputinvalido{
+    background-color: #FAE978;
+    border: red 2px solid;
+    padding: 5PX;
+    color: #000
+
+  }
+  .txtp{
+    display: none;
+}
+.txtexito{
+    display: inline;
+    margin: 0;
+    padding: 0;
+    font-family: 'Times New Roman', Times, serif;
+    color: green;
+}
+
+.TxtERROR{
+      color: red;
+      display: inline;
+      margin: 0;
+      padding: 0;
+      font-family: 'Times New Roman', Times, serif;
+}

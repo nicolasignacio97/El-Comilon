@@ -1,0 +1,65 @@
+.Btn_repartidor{
+    width: 40%;
+    margin: auto;
+    margin-top: 10px;
+    padding: 8px 10px;
+    background-color: brown;
+    color: #ffff;
+    font-size: 18px;
+    border-radius: 5px;
+    border: none;
+    margin-bottom: 10px;
+}
+.Btn_repartidor:hover{
+    border: 100px;
+    color: #000;
+    border:#656C73 solid 1px;
+    transition: 1s;
+    background-color: #F2F2F2;
+}
+.Btn_vehiculo
+{
+    width: 40%;
+    margin: auto;
+    margin-top: 15px;
+    padding: 8px 10px;
+    background-color: brown;
+    color: #ffff;
+    font-size: 18px;
+    border-radius: 5px;
+    border: none;
+    margin-top: 30px;
+}
+.Btn_vehiculo:hover{
+    border: 100px;
+    color: #000;
+    border:#656C73 solid 1px;
+    transition: 1s;
+    background-color: #F2F2F2;
+}
+.div-body{
+    padding: 20px;
+}
+.h1-reg-repartidor{
+color: #9C3534;
+text-align: center;
+font-size: 30px;
+
+}
+.h1-reg-vehiculo{
+    color: #9C3534;
+    text-align: center;
+    font-size: 30px;
+    margin-top: 10px;
+    
+}
+#divinput{
+margin-bottom: 15px !important;
+}
+.combobox-tipovehiculo{
+width: 100%;
+}
+.input-repartidor{
+    margin-bottom: 30px;
+    
+}

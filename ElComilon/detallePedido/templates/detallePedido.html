@@ -1,0 +1,88 @@
+{% extends "HeaderFooter/base.html"%} 
+{% load static %}
+
+{% block L-izquierda %}
+<a href="#">Inicio</a>
+<a href="#">Sobre nosotros</a>
+{% endblock%}
+
+
+{% block L-derecha %}
+<a href="#">Catálogo</a>
+<a href="#">Cerrar sesión</a>
+{% endblock%}
+
+{% block content%}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/estiloDetalleP.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
+    <title>Detalle de Pedido</title>
+</head>
+<body>
+    <main>
+        <h1 class="num-pedido">Pedido #654</h1>
+        <div class="fecha-estado">
+            <p>Tu pedido se realizó el xx/xx/xxxx y se encuentra </p>
+            <p> Finalizado</p>
+        </div>
+        <div class="container">
+            <h2>Detalles del pedido</h2> 
+            <div class="container-precios">
+                <div class="separaciones">
+                    <div class="platillo">
+                        <label for="">Fideos con salsa</label>
+                        <label class="multiplicador-platillo" for="">x1</label>
+                        <label class="puntos-separacion" for="">............................................................................................</label>
+                        <label for="">$5990</label>
+                    </div>
+        
+                    <div class="platillo">
+                        <label for="">Arroz con pollo</label>
+                        <label class="multiplicador-platillo" for="">x1</label>
+                        <label for="" class="puntos-separacion">............................................................................................</label>
+                        <label for="">$4990</label>
+                    </div>
+                </div>
+                <div class="separaciones">
+                    <div>
+                        <label for="">Subtotal:</label>
+                        <label for="" class="puntos-separacion">............................................................................................</label>
+                        <label for="">$10980</label>
+                    </div>
+        
+                    <div>
+                        <label for="">Total:</label>
+                        <label for="" class="puntos-separacion">............................................................................................</label>
+                        <label for="">$10980</label>
+                    </div>
+                </div>
+    
+            </div>
+        </div>
+
+        <div class="tipo-entrega">
+            <label class="entrega-bold" for="">Tipo de entrega: </label>
+            <label for="">Reparto a domicilio</label>
+        </div>
+
+        <div class="datos-cliente">
+            <h2>Datos del cliente</h2>
+            <p>Javier Barrios</p>
+            <p>7 Poniente 564, Viña del Mar, Chile</p>
+            <p>321</p>
+            <p>Valparaíso</p>
+            <p>Viña del Mar</p>
+            <p>3375-5182</p>
+        </div>
+        
+    </main>
+</body>
+</html>
+
+{% endblock%}

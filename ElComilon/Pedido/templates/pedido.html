@@ -1,0 +1,84 @@
+{% extends "HeaderFooter/base.html"%}
+{% load static %}
+{% block L-izquierda %}
+<a href="#">Inicio</a>
+<a href="#">Nosotros</a>
+{% endblock%}
+
+{% block L-derecha %}
+<a href="#">Platos</a>
+<a href="#">Perfil</a>
+{% endblock%}
+
+{% block content%}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/estiloPedido.css' %}">
+    <title>Document</title>
+</head>
+<body>
+    <section>
+        <form method="post" class="formularioPedido sombra">
+            {% csrf_token %}
+            <fieldset>
+                <div class="imagen-campos">
+                    <div class="imagen">
+                        <img src="{% static 'img/imagenPedido.png' %}" alt="">
+                    </div>
+    
+                    <div class="camposPedido">
+                        <legend>Termina de armar tu pedido</legend>
+                        <div class="contenedor-campos">
+                            <div class="campo">
+                                <label>Dirección</label>
+                                <input class="input-text" id="Direccion" name="Direccion" type="text" placeholder="Ingresa tu dirección">
+                            </div>
+        
+                            <div class="campo">
+                                <label for="">Cantidad</label>
+                                <input class="input-text" type="number" placeholder="1">
+                            </div>
+        
+                            <div class="campo">
+                                <label for="">Fecha de entrega</label>
+                                <input class="input-text" id="fechaActual" name="Fecha" type="date" placeholder="Tu Email">
+                            </div>
+        
+                            <div class="campo">
+                                <label for="disabledSelect" class="form-label"></label>
+                                <select id="disabledSelect" name="tipoServicio" class="form-select inputfocus">
+                                    <option>Tipo de Servicio</option>
+                                    {% for c in Tipo_Servicio %}
+                                    <option value="{{ c.0 }}">{{ c.1 }}</option>
+                                    {% endfor %}
+                                </select>
+                                {{ mensaje }}
+                            </div>
+                        </div>
+        
+                        <div class="boton-valor">
+                            <label for="">Valor: $</label>
+                            <button type="submit" id="enviar" class="btn btn-color"">Siguiente</button>
+                        </div>
+                    </div>
+                </div>
+
+            </fieldset>
+        </form>
+    </section>
+
+    <script src="{% static 'app/fecha.js' %}"></script>
+    
+</body>
+</html>
+{%endblock%}
