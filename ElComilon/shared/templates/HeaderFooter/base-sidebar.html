@@ -33,6 +33,93 @@
                 </div>
             </div>
 
+
+            <div id="menu-items">
+                <div class="item">
+                    <a class="a-item" href="proveedor">
+                        <div class="title">
+                            <div class="opciones">
+                                <span>Restaurante Convenio</span>
+                            </div>
+                            <div class="iconos">
+                                <img id="icono1" class="conIcono" src="{% static 'img/i-restaurante.png'%}">
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="item">
+                    <a class="reg-emp" href="empresa">
+                        <div class="title">
+                            <div class="opciones">
+                                <span>Empresa Convenio</span>
+                            </div>
+                            <div class="iconos">
+                                <img id="icono2" class="conIcono" src="{% static 'img/i-convenio.png'%}">
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="item">
+                    <a class="a-item" href="trabajador">
+                        <div class="title">
+                            <div class="opciones">
+                                <span>Trabajador</span>
+                            </div>
+                            <div class="iconos">
+                                <img id="icono3" class="conIcono" src="{% static 'img/i-trabajador.png'%}">
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="item">
+                    <a class="a-item" href="#">
+                        <div class="title">
+                            <div class="opciones">
+                                <span>Repartidor</span>
+                            </div>
+                            <div class="iconos">
+                                <img id="icono4" class="conIcono" src="{% static 'img/i-repartidor.png'%}">
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="item">
+                    <a class="a-item" href="platillo">
+                        <div class="title">
+                            <div class="opciones">
+                                <span>Agregar Platillo</span>
+                            </div>
+                            <div class="iconos">
+                                <img id="icono5" class="conIcono" src="{% static 'img/i-platos.png'%}">
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="item">
+                    <a class="a-item" href="ClienteConvenio">
+                        <div class="title">
+                            <div class="opciones">
+                                <span>Cliente Convenio</span>
+                            </div>
+                            <div class="iconos">
+                                <img id="icono6" class="conIcono" src="{% static 'img/i-cliente.png'%}">
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="item">
+                    <a class="a-item" href="#">
+                        <div class="title">
+                            <div class="opciones">
+                                <span>Actualizar Saldo CC</span>
+                            </div>
+                            <div class="iconos">
+                                <img id="icono7" class="conIcono" src="{% static 'img/i-saldo.png'%}">
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
             <div class="menu-admin">
                 <!-- <h2>Menú de Administración</h2> -->
                 <ul class="menu">
@@ -159,6 +246,7 @@
                         </ul>
                     </li>
                 </ul>
+
             </div>
         </div>
         <div class="container animated fadeIn animate__zoomIn">
@@ -175,6 +263,21 @@
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
     <script src="{% static 'app/main.js'%}"></script>
+
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    {% if messages %}
+    {% for mens in messages %}
+    <script> 
+        Swal.fire({
+            "title": 'Bien!',
+            "text": '{{mens}}',
+            "icon": 'success'
+        }
+        )
+    </script>
+    {% endfor %}
+    {% endif %}
 </body>
 
 </html>

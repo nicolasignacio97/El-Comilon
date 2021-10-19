@@ -3,6 +3,8 @@ from django.db import connection
 import cx_Oracle
 import base64
 from core.models import Platillo
+from django.contrib import messages
+
 
 # Create your views here.
 def actualizarPlatillo(request):
@@ -52,11 +54,11 @@ def modificarPlatillo(request, id):
         ingredientes = request.POST.get('Ingredientes').upper()
         valor = request.POST.get('Valor')
         foto = request.FILES['foto'].read()
-        salida = ModificarPlatillo(id,nombrePlatillo, ingredientes, valor, foto)
-        if salida == 1:
-            return redirect(to="/administracion/listarPlatillos")
-        else:
-            dataMod['mensaje']='Error'
+        ModificarPlatillo(id,nombrePlatillo, ingredientes, valor, foto)
+        messages.success(request, "Se ha modificado correctamente el platillo "+ platillo.nombre)
+        return redirect(to="/administracion/listarPlatillos")
+
+ 
     return render(request, 'actualizarPlatillo.html', dataMod)
 
 def ModificarPlatillo(idPlatillo, nomPlatillo, ingPlatillo,valPlatillo, fotPlatillo):
