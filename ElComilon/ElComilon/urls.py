@@ -40,6 +40,8 @@ urlpatterns = [
     path('perfil',Usertemplate),
     path('registroPlatillo',registroPlatillo),
     path('registro',register),  
+    path('regin', registroRep),
+    path('reginvehiculo', registroVeh),
     path('registroProveedor',registroProveedor),
     path('reclamo',reclamo),
     path('quienesSomos', quienesSomos),
