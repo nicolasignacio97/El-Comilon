@@ -27,8 +27,21 @@
         {% endblock%}
       </div>
       <div class="derecha">
-        {% block L-derecha %}
-        {% endblock%}
+        <div class="navegar">
+          {% block L-derecha %}
+          {% endblock%}
+      
+        </div>
+        <div class="perfil">
+          {% if user.is_authenticated %}
+          <a href="{% url 'logout'%}">cerrar sesión</a>
+          <a href="#">{{user.username}}</a>
+          
+          {% else %}
+          <a href="{% url 'login'%}">iniciar sesión</a>
+          <a href="registroUsuarios">Registro</a>
+          {%endif%} 
+        </div>
       </div>
     </div>
   </header>

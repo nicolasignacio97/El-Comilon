@@ -1,4 +1,5 @@
 from django.urls import path
+from django.urls.conf import include
 from administracion.views import administracion
 from registroTrabajador.views import registroTrabajador
 from registroProveedor.views import registroProveedor
@@ -6,7 +7,7 @@ from RegEmpConv.views import registroEmpresa
 from RegisterPlatillo.views import registroPlatillo
 from listarPlatillos.views import listarPlatillos, eliminarPlatillo
 from actualizarPlatillo.views import modificarPlatillo
-
+from django.contrib.auth.decorators import  login_required
 from RegCliConv.views import RegistroCliConvenio, listarCliConv, modificarCliConv, eliminarCliConv
 from RegisterRepartidor.views import registroRep,registroVeh,editRepartidor,listarRep,deleterepartidor
 from registroTrabajador.views import listaTrabajador
@@ -23,7 +24,8 @@ from registroTrabajador.views import actTrabajador
 
 url_patterns = [
     path('', administracion),
-    path('trabajador', registroTrabajador),
+    
+    path('trabajador',login_required(registroTrabajador)),
     path('proveedor', registroProveedor),
     path('empresa', registroEmpresa),
     path('platillo', registroPlatillo),

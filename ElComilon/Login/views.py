@@ -1,9 +1,8 @@
 from django.shortcuts import render
 from .forms import formlog
 from django.http import HttpResponseRedirect
-from Login.models import Cliente
 from django.contrib.auth import authenticate, login , logout
-from .decoratators import usuarionoautenticado
+
 
 # Create your views here.
 # def login (request):
@@ -32,7 +31,7 @@ from .decoratators import usuarionoautenticado
 from django.shortcuts import render
 from .forms import formlog
 from django.http import HttpResponseRedirect
-from Login.models import Cliente
+from core.models import Cliente
 
 # Create your views here.
 def loginauth (request):
@@ -43,7 +42,11 @@ def loginauth (request):
         try:
             print('hola')
             cliente = Cliente.objects.get(nombreusuario=nombreusuario,contrasena=contrasena)
-            return HttpResponseRedirect('perfil')
+            dato ={
+                'clientes' : cliente
+            }
+            return render(request,'User.html',dato)
+            # return HttpResponseRedirect('perfil',dato)
         except:
             print("No existe el usuario") 
             return render(request,'iniciar_sesion.html', {'mensaje':'Usuario ingresado no es valido'}) 

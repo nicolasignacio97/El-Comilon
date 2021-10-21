@@ -5,9 +5,10 @@
 #   * Make sure each ForeignKey and OneToOneField has `on_delete` set to the desired behavior
 #   * Remove `managed = False` lines if you wish to allow Django to create, modify, and delete the table
 # Feel free to rename the models, but don't rename db_table values or field names.
+from django.contrib.auth.base_user import BaseUserManager 
 from django.db import models
 from django.db.models.fields import related
-
+from django.contrib.auth.models import  AbstractBaseUser, PermissionsMixin 
 
 class Cargo(models.Model):
     idcargo = models.IntegerField(primary_key=True)
@@ -18,9 +19,9 @@ class Cargo(models.Model):
         db_table = 'cargo'
 
 
-class Cliente(models.Model):
+class Cliente(AbstractBaseUser):
     rutcliente = models.CharField(primary_key=True, max_length=12)
-    nombreusuario = models.CharField(max_length=15)
+    nombreusuario = models.CharField(unique=True, max_length=15)
     nombres = models.CharField(max_length=20)
     apellidos = models.CharField(max_length=20)
     direccion = models.CharField(max_length=30)
@@ -30,7 +31,7 @@ class Cliente(models.Model):
     saldocli = models.BigIntegerField(blank=True, null=True)
     idtipocliente = models.ForeignKey('TipoCliente', models.DO_NOTHING, db_column='idtipocliente')
     rutempconv = models.ForeignKey('EmpresaConvenio', models.DO_NOTHING, db_column='rutempconv', blank=True, null=True)
-    
+    USERNAME_FIELD = 'nombreusuario'
 
     class Meta:
         managed = False
@@ -220,15 +221,80 @@ class TipoVehiculo(models.Model):
         db_table = 'tipo_vehiculo'
 
 
-class Trabajador(models.Model):
+class UsuarioManager (BaseUserManager):
+    def create_user (self,email,username,nombres,apellidos,password=None):
+        if not email:
+            raise ValueError('El usuario debe tener un correo electrónico')
+
+        usuario = self.model(
+            username = username,
+            email = self.normalize_email(email),
+            nombres = nombres,
+            apellidos = apellidos,
+        )
+        usuario.set_password(password)
+        usuario.save()
+        return usuario
+
+    def create_superuser (self,email,username,nombres,apellidos,password):
+        usuario = self.model(
+            email = self.normalize_email(email),
+            username = username,
+            nombres = nombres,
+            apellidos = apellidos,
+            password = password,
+        ) 
+        usuario.usuario_administrador = True
+        usuario.save() 
+        return usuario
+
+
+class UsuarioGeneral(AbstractBaseUser):
+    username = models.CharField('Nombre de usuario',unique = True,max_length=20)
+    email = models.CharField('Correo Electronico',unique = True,max_length=50)
+    nombres = models.CharField('Nombres',null=True, blank = True, max_length=50)
+    apellidos = models.CharField('Apellidos',null=True, blank = True, max_length=50)
+    usuario_activo = models.BooleanField(default=True)
+    usuario_administrador = models.BooleanField(default = False)
+    objects = UsuarioManager()
+
+    USERNAME_FIELD = 'username'
+    REQUIRED_FIELDS =['email','nombres','apellidos']
+
+    def __str__(self):
+        return f'{self.nombres},{self.apellidos}'
+
+    def has_perm(self, perm, obj = None):
+        return True
+
+    def has_module_perms(self,app_label):
+        return True
+
+    @property
+    def is_staff(self):
+        return self.usuario_administrador
+
+    class Meta:
+        managed = False
+        db_table = 'UsuarioGeneral'
+
+
+
+
+class Trabajador(AbstractBaseUser):
     ruttrabajador = models.CharField(primary_key=True, max_length=12)
     nombres = models.CharField(max_length=20)
     apellidos = models.CharField(max_length=20)
     fechacontrato = models.DateField()
-    usuario = models.CharField(max_length=15)
+    usuario = models.CharField( unique=True, max_length=15)
     contrasena = models.CharField(max_length=20)
     rutrestaurante = models.ForeignKey(Restaurante, models.DO_NOTHING, db_column='rutrestaurante')
     idcargo = models.ForeignKey(Cargo, models.DO_NOTHING, db_column='idcargo')
+    # object = UsuarioManagerT()
+
+    USERNAME_FIELD = 'usuario'
+    REQUIRED_FIELDS =['nombres','apellidos']
+
 
     class Meta:
         managed = False
