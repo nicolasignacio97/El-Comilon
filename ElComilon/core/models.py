@@ -19,7 +19,7 @@ class Cargo(models.Model):
         db_table = 'cargo'
 
 
-class Cliente(AbstractBaseUser):
+class Cliente(models.Model):
     rutcliente = models.CharField(primary_key=True, max_length=12)
     nombreusuario = models.CharField(unique=True, max_length=15)
     nombres = models.CharField(max_length=20)
@@ -242,16 +242,17 @@ class UsuarioManager (BaseUserManager):
             username = username,
             nombres = nombres,
             apellidos = apellidos,
-            password = password,
+           
         ) 
+        usuario.set_password(password)
         usuario.usuario_administrador = True
         usuario.save() 
         return usuario
 
 
-class UsuarioGeneral(AbstractBaseUser):
+class UsuarioGeneral(AbstractBaseUser,PermissionsMixin):
     username = models.CharField('Nombre de usuario',unique = True,max_length=20)
-    email = models.CharField('Correo Electronico',unique = True,max_length=50)
+    email = models.CharField('Correo Electrónico',unique = True,max_length=50)
     nombres = models.CharField('Nombres',null=True, blank = True, max_length=50)
     apellidos = models.CharField('Apellidos',null=True, blank = True, max_length=50)
     usuario_activo = models.BooleanField(default=True)
@@ -264,11 +265,11 @@ class UsuarioGeneral(AbstractBaseUser):
     def __str__(self):
         return f'{self.nombres},{self.apellidos}'
 
-    def has_perm(self, perm, obj = None):
-        return True
+    def has_perm(self, perm, obj=None):
+        return self.is_superuser
 
-    def has_module_perms(self,app_label):
-        return True
+    def has_module_perms(self, app_label):
+        return self.is_superuser
 
     @property
     def is_staff(self):

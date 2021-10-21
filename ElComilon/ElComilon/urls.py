@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib.auth import views as auth_views
 from django.contrib import admin
 from django.urls import path,include
-from registroDeUsuarios.views import RegistrarUsuario
+from registroDeUsuarios.views import registroUsuario
 # from ElComilon.listarPlatillos.views import modificarPlatillo
 from Home.views import inicio
 from Login.views import login
@@ -50,7 +50,7 @@ urlpatterns = [
     path('pedido', pedido),
     path('platillos', platillos),
     path('detallePedido', detallePedido),
-    path('registroUsuarios', RegistrarUsuario.as_view()),
+    path('registroUsuarios', registroUsuario),
     path('administracion/', include(url_patterns)),
     path('accounts/', include('django.contrib.auth.urls')),
 ]

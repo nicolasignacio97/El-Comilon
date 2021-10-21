@@ -1,8 +1,10 @@
 from django.shortcuts import render
 from django.db import connection
+from django.contrib.auth.decorators import permission_required
 import cx_Oracle
-
 # Create your views here.
+
+@permission_required('core')
 def registroPlatillo (request):
     data = {
     'Restaurante':listarRestaurante()
@@ -21,6 +23,7 @@ def registroPlatillo (request):
             data['mensaje']='Error'
     return render(request,'registrarPlatillo.html', data)
 
+
 def listarRestaurante():
     django_cursor = connection.cursor()
     cursor = django_cursor.connection.cursor()
@@ -32,6 +35,7 @@ def listarRestaurante():
         lista.append(fila)
 
     return lista
+
 
 def registrarPlatillo(nomPlatillo, ingPlatillo, valPlatillo, fotPlatillo, rutRest):
     django_cursor = connection.cursor()
