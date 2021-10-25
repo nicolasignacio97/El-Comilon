@@ -20,7 +20,7 @@ from django.urls import path,include
 from Home.views import inicio
 from Login.views import login
 from RegisterPlatillo.views import registroPlatillo
-from Register.views import register
+from Register.views import register,perfil
 from registroProveedor.views import registroProveedor   
 from reclamo.views import reclamo
 from Home.views import quienesSomos
@@ -45,6 +45,7 @@ urlpatterns = [
     path('quienesSomos', quienesSomos),
     path('perfil', Usertemplate),
     path('pedido', pedido),
+    path('perfil-offcanvas', perfil),
     path('platillos', platillos),
     path('detallePedido', detallePedido),
     path('administracion/', include(url_patterns)),

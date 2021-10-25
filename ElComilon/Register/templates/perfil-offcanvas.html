@@ -30,24 +30,36 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="{% static 'app/jquery.rut.chileno.js' %}"></script>
 
+    <link rel="stylesheet" href="{% static 'css/styles-perfilFlotante.css' %}">
     <link rel="stylesheet" href="{% static 'css/style-registro-proveedor.css' %}">
 
     <title>Document</title>
 </head>
 
 <body>
-    <section class="container">
+    <section class="container ">
         <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
-            <div class="offcanvas-header">
-                <img class="icon" src="{% static 'img/userIconBlack.png' %}" alt=""><h4 id="offcanvasRightLabel">MI CUENTA</h4>
-                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+            <div class="offcanvas-header canvas-header">
+                    <img class="icon" src="{% static 'img/userIconBlack.png' %}" alt="">
+                    <h3 id="offcanvasRightLabel">MI CUENTA</h3>
+                    <label for="">$Saldo</label>
+
+                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
                     aria-label="Close"></button>
             </div>
             <div class="offcanvas-body">
-                <div>
-                    <img class="icon" src="{% static 'img/usuario.png' %}" alt="icono">
-                    <img class="icon" src="{% static 'img/usuario.png' %}" alt="icono">
+                <div class="nom-user">
+                    <img class="icon" src="{% static 'img/userIconBlack.png' %}" alt="">
+                    <h3>Nombreusuario</h3>
                 </div>
+            
+                <div class="nav-canvas">
+                    <ul><img class="icon" src="{% static 'img/userIconBlack.png' %}" alt=""><a href="#">Mis Datos</a></ul>
+                    <ul><img class="icon" src="{% static 'img/userIconBlack.png' %}" alt=""><a href="#">Mis pedidos</a></ul>
+                    <ul><img class="icon" src="{% static 'img/userIconBlack.png' %}" alt=""><a href="#">Mi Menu semanal</a></ul>
+                </div>
+
+                <button type="button" class="btn btn-outline-dark w-75 btn-exit">Cerrar Sesión</button>
             </div>
         </div>
     </section>

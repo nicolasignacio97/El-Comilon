@@ -145,7 +145,7 @@
                         </a>
                         <ul>
                             <li>
-                                <a href="#">
+                                <a href="listarCliConv">
                                     <img class="icono" src="{% static 'img/i-lista.png'%}"></img>
                                     Ver todos
                                 </a>
@@ -169,8 +169,18 @@
             </div>
         </div>
     </div>
-
-
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    {% if messages %}
+    {% for msge in messages %}
+    <script>
+        Swal.fire({
+            "title": "Accion Correcta",
+            "text": "{{msge}}",
+            "icon": 'success'
+        })
+    </script>
+    {% endfor %}
+    {% endif %}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>

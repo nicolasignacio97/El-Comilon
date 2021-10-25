@@ -1,6 +1,7 @@
 from django.shortcuts import get_object_or_404, render, redirect
 from django.db import connection
-from core.models import Cliente, EmpresaConvenio
+from django.contrib import messages
+from core.models import Cliente
 import cx_Oracle
 
 # Create your views here.
@@ -23,7 +24,7 @@ def RegistroCliConvenio(request):
         rutempcli = request.POST.get('rutEmpConv')
         salida = agregar_cliente_convenio(rutcliente, nomUsuario,nombres, apellidos, direccion, contrasena, telefono, correo,saldocli,idtipoCliente,rutempcli)
         if salida == 1:
-            data['mensaje'] = 'CLIENTE CONVENIO AGREGADO CORRECTAMENTE'
+            messages.success(request,"¡Cliente Regitrado Correctamente!")
         else:
             data['mensaje'] = 'UPS, NO SE HA PODIDO AGREGAR EL CLIENTE CONVENIO'
 
@@ -57,6 +58,7 @@ def modificarCliConv(request,id):
         rutempcli = request.POST.get('rutEmpConv')
         salida = modificar_cliente_convenio(rutclienteConv, nomUsuario,nombres, apellidos, direccion, contrasena, telefono, correo,saldocli,rutempcli)
         if salida == 1:
+            messages.success(request, nombres+" Modificado Correctamente")
             return redirect(to="/administracion/listarCliConv")
             # dataMod['mensaje'] = 'CLIENTE CONVENIO MODIFICADO CORRECTAMENTE'
         else:
@@ -101,5 +103,7 @@ def listar_clientes_conv():
 #ELIMINAR CLIENTE CONVENIO
 def eliminarCliConv(request, id):
     cliente = get_object_or_404(Cliente,rutcliente=id)
+    nomCli = Cliente.nombres
     cliente.delete()
+    messages.success(request,"Cliente eliminado correctamente")
     return redirect(to="/administracion/listarCliConv")
