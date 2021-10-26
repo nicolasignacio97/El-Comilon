@@ -26,7 +26,7 @@ from registroProveedor.views import registroProveedor
 from reclamo.views import reclamo
 from Home.views import quienesSomos
 from administracion.urls import url_patterns
-from PerfilUsuario.views import Usertemplate
+from PerfilUsuario.views import PerfilUsuario
 from RegisterRepartidor.views import registroRep,registroVeh,editRepartidor,listarRep,deleterepartidor
 from Pedido.views import pedido
 from Login.views import loginauth
@@ -46,7 +46,7 @@ urlpatterns = [
     path('registroProveedor',registroProveedor),
     path('reclamo',reclamo),
     path('quienesSomos', quienesSomos),
-    # path('perfil', Usertemplate),
+    path('Historial/<id>', PerfilUsuario), #despues id en la ruta para filtro
     path('pedido', pedido),
     path('platillos', platillos),
     path('detallePedido', detallePedido),

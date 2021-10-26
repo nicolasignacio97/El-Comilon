@@ -62,7 +62,7 @@ INSTALLED_APPS = [
     'listarPlatillos',
     'actualizarPlatillo',
     'RegCliConv',
-    # 'PerfilUsuario',
+    'PerfilUsuario',
     'gestionRestaurantes',
     'registroDeUsuarios',
 
@@ -136,7 +136,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-AUTH_USER_MODEL = 'core.UsuarioGeneral'
+AUTH_USER_MODEL = 'core.Usuario'
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/

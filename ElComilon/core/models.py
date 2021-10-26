@@ -33,6 +33,9 @@ class Cliente(models.Model):
     rutempconv = models.ForeignKey('EmpresaConvenio', models.DO_NOTHING, db_column='rutempconv', blank=True, null=True)
     USERNAME_FIELD = 'nombreusuario'
 
+    def __str__(self):
+        return self.rutcliente;
+
     class Meta:
         managed = False
         db_table = 'cliente'
@@ -70,6 +73,8 @@ class EstadoPedido(models.Model):
     idestado = models.IntegerField(primary_key=True)
     descripcion = models.CharField(max_length=30)
 
+    def __str__(self):
+        return self.descripcion
     class Meta:
         managed = False
         db_table = 'estado_pedido'
@@ -92,6 +97,8 @@ class Pedido(models.Model):
     idtiposervicio = models.ForeignKey('TipoServicio', models.DO_NOTHING, db_column='idtiposervicio')
     rutcliente = models.ForeignKey(Cliente, models.DO_NOTHING, db_column='rutcliente')
     idestpedido = models.ForeignKey(EstadoPedido, models.DO_NOTHING, db_column='idestpedido')
+
+
 
     class Meta:
         managed = False
@@ -206,7 +213,9 @@ class TipoRestaurante(models.Model):
 class TipoServicio(models.Model):
     idtiposervicio = models.IntegerField(primary_key=True)
     descripcion = models.CharField(max_length=20)
-
+    
+    def __str__(self):
+        return self.descripcion;
     class Meta:
         managed = False
         db_table = 'tipo_servicio'
@@ -250,7 +259,8 @@ class UsuarioManager (BaseUserManager):
         return usuario
 
 
-class UsuarioGeneral(AbstractBaseUser,PermissionsMixin):
+class Usuario(AbstractBaseUser,PermissionsMixin):
+    rut = models.CharField('Rut',unique=True, max_length=12)
     username = models.CharField('Nombre de usuario',unique = True,max_length=20)
     email = models.CharField('Correo Electrónico',unique = True,max_length=50)
     nombres = models.CharField('Nombres',null=True, blank = True, max_length=50)
@@ -277,7 +287,7 @@ class UsuarioGeneral(AbstractBaseUser,PermissionsMixin):
 
     class Meta:
         managed = False
-        db_table = 'UsuarioGeneral'
+        db_table = 'Usuario'
 
 
 

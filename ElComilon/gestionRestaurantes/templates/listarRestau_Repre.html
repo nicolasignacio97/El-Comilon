@@ -3,7 +3,7 @@
 
 {%block js%}
 <script>
-    function eliminarProveedor(id) {
+    function eliminarProveedor(id,id2) {
         Swal.fire({
             "title": "¿Estás Seguro?",
             "text": "Esta acción no se puede deshacer",
@@ -14,7 +14,7 @@
             "confirmButtonColor": "#9C3534"
         }).then(function (result) {
             if (result.isConfirmed) {
-                window.location.href = "eliminarProveedor/"+id
+                window.location.href = "eliminarProveedor/"+id+"/"+id2
             }
         })
     }
@@ -36,71 +36,53 @@
 </script>
 {%endblock%}
 {% block content%}
-<div class="container bg-white shadow-lg">
+<link rel="stylesheet" href="{% static 'css/styleListarProveedor.css' %}">
+<div class="container bg-white shadow-lg mt-5">
     <div class="row">
         <div class="col m-2">
-            <h1 class="text-center">Lista de proveedores</h1>
+            <h1 class="text-center titulo mb-5">Lista de proveedores</h1>
             <table class="table">
                 <thead>
                     <tr>
                         <th scope="col">Rut Restaurante</th>
                         <th scope="col">Nombre Restaurante</th>
                         <th scope="col">Dirección</th>
+                        <th scope="col">Tipo</th>
                         <th scope="col">Rut Representante</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Apellidos</th>
+                        <th scope="col">Teléfono</th>
                         <th scope="col">Acción</th>
+                        
                     </tr>
                 </thead>
                 <tbody>
-                    {% for rest in Restaurante %}
+                    {% for rest in entity %}
                     <tr>
                         <th scope="row">{{rest.0}}</th>
                         <td>{{rest.1}}</td>
                         <td>{{rest.2}}</td>
-                        <td>{{rest.3}}</td>
-                        <td> <a href="modificarProveedor/{{rest.0}}"><i class="fas fa-user-edit"
+                        {%  if rest.4 == 1%}
+                            <td>Principal</td>
+                            {% else %}
+                            <td>Proveedor</td>
+                        {%endif%}
+                        
+                        <td>{{rest.5}}</td>
+                        <td>{{rest.6}}</td>
+                        <td>{{rest.7}}</td>
+                        <td>{{rest.8}}</td>
+                        <td> <a href="modificarProveedor/{{rest.0}}/{{rest.5}}"><i class="fas fa-user-edit"
                                     style="color:#02B37F; cursor: pointer;"></i></a>
-                            <a href="#" onClick="eliminarProveedor('{{rest.0}}')"><i class="fas fa-trash-alt"
+                            <a href="#" onClick="eliminarProveedor('{{rest.0}}','{{rest.5}}')"><i class="fas fa-trash-alt"
                                     style="color: brown; cursor: pointer;"> </i> </a>
                         </td>
                     </tr>
                     {%endfor%}
                 </tbody>
             </table>
+            {% include 'HeaderFooter/paginator.html'%}
         </div>
     </div>
-    <div class="row mt-5">
-        <div class="col m-2">
-            <h1 class="text-center">Lista de Representantes</h1>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">Rut</th>
-                        <th scope="col">Nombre</th>
-                        <th scope="col">Apellidos</th>
-                        <th scope="col">Teléfono</th>
-                        <th scope="col">Correo</th>
-                        <th scope="col">Acción</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for repre in Representante %}
-                    <tr>
-                        <th scope="row">{{repre.0}}</th>
-                        <td>{{repre.1}}</td>
-                        <td>{{repre.2}}</td>
-                        <td>{{repre.3}}</td>
-                        <td>{{repre.4}}</td>
-                        <td> <a href="modificarRepresentante/{{repre.0}}"><i class="fas fa-user-edit"
-                                    style="color:#02B37F; cursor: pointer;"></i></a>
-                            <a href="#" onClick="eliminarRepresentante('{{repre.0}}')"><i class="fas fa-trash-alt"
-                                    style="color: brown; cursor: pointer;"> </i></a>
-                        </td>
-                    </tr>
-                    {%endfor%}
-                </tbody>
-            </table>
-        </div>
-    </div>
-
 </div>
 {% endblock %}

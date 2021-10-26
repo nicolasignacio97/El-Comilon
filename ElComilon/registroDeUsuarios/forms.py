@@ -1,5 +1,5 @@
 from django import forms
-from core.models import UsuarioGeneral
+from core.models import Usuario
 
 
 
@@ -26,9 +26,12 @@ class FormularioUsuario (forms.ModelForm):
         label=("Apellidos"), widget=forms.TextInput(
             attrs={"minlength": "2"}))
 
+    rut = forms.CharField(
+        label=("Rut"), widget=forms.TextInput(
+            attrs={"class": "input_rut","id":"Rut", "oninput":"checkRut(this)"}))
     class Meta:
-        model = UsuarioGeneral
-        fields = ('email', 'username', 'nombres', 'apellidos')
+        model = Usuario
+        fields = ('rut','email', 'username', 'nombres', 'apellidos')
 
     def clean_password2(self):
         password1 = self.cleaned_data.get('password1')
