@@ -4,13 +4,16 @@ import base64
 import cx_Oracle
 from core.models import Platillo
 from django.contrib import messages
+from django.contrib.auth.decorators import permission_required
 
 # Create your views here.
+@permission_required('core')
 def listarPlatillos(request):
     data = {
         'platillos':listado_platillos()
     }
     return render(request, 'listarPlatillos.html', data)
+
 
 def listado_platillos():
     django_cursor = connection.cursor()
@@ -29,7 +32,7 @@ def listado_platillos():
 
     return lista
 
-
+@permission_required('core')
 def eliminarPlatillo(request, id):
     platillo = get_object_or_404(Platillo, idplatillo=id)
     platillo.delete()

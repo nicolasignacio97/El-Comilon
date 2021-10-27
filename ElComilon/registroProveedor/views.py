@@ -2,9 +2,10 @@ from django.shortcuts import render
 from django.db import connection
 import cx_Oracle
 from django.contrib import messages
+from django.contrib.auth.decorators import permission_required
 
 # Create your views here.
-
+@permission_required('core')
 def registroProveedor (request):
     data = {
         
@@ -25,10 +26,9 @@ def registroProveedor (request):
         nombre = request.POST.get('nombre').upper()
         direccion = request.POST.get('direccion').upper()
         representante =  request.POST.get('representante').upper()
-        tipo = 1
+        tipo = 2
         registrarProve(rutRest,nombre,direccion,representante,tipo)
         messages.success(request, nombre + " Registrado correctamente")
-        messages.error(request, nombre + " error")
 
 
     #SALIDA PAGINA

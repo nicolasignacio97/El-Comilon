@@ -1,0 +1,23 @@
+{% extends "HeaderFooter/base.html"%} 
+{% load static%}
+
+{% block L-izquierda %}
+<a href="#">Inicio</a>
+<a href="#">Sobre nosotros</a>
+{% endblock%}
+
+
+{% block L-derecha %}
+<a href="platillos">Catálogo</a>
+<a href="#">Cerrar sesion</a>
+{% endblock%}
+{% block user %}
+<a href="#">{{clientes.nombres}}</a>      
+{% endblock%}
+{% block content%}
+
+<h1>usuario {{clientes.nombres}}</h1>
+<h1>usuario {{clientes.apellidos}}</h1>
+<h1>usuario {{clientes.correo}}</h1>
+<h1>usuario {{clientes.saldocli}}</h1>
+{% endblock%}

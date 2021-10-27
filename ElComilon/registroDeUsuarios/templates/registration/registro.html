@@ -1,0 +1,96 @@
+{% extends "HeaderFooter/base.html"%} 
+{% load static %}
+
+{% block content%}
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/estiloRegistro.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> 
+    <script src="{% static 'app/jquery.rut.chileno.js' %}"></script>
+
+    <script type="text/javascript">
+        jQuery(document).ready(function ($) {
+            $('.input_rut').rut();
+        });
+    </script>
+    <title>Registro de usuario</title>
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row d-flex justify-content-center">
+            <div class="col-lg-8 col-md-12 ">
+                <div class="card shadow">               
+                    <h3 class="text-center mt-3 titulo">Registro de usuario</h3>
+                    <div class="card-body">
+                        <form method="POST"  class="needs-validation" novalidate>
+                            {% csrf_token %}
+                            <div class="form-floating">
+                                <div class="row d-flex justify-content-center">
+                                    {{form|crispy}}
+                                </div>
+                            </div>
+                            <div class="envio d-flex flex-column justify-content-center mt-3">
+                                <div class="text-center">
+                                    <input type="checkbox" id="checkBox" required <p> Estoy de acuerdo con <a href="" data-bs-toggle="modal"
+                                        data-bs-target="#exampleModal">Terminos y condiciones.</a></p>
+                                    <div class="valid-feedback"> </div>
+                                    <div class="invalid-feedback">Debe estar de acuerdo con los Terminos y Condidiciones*</div>
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Terminos y condiciones</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed voluptate, unde delectus fuga magnam
+                                                    quibusdam quaerat,
+                                                    laborum laudantium ea vitae nulla voluptas quas consectetur aliquam ullam repellat dolorem enim
+                                                    tenetur.
+                                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit placeat omnis, ab quidem repellat
+                                                    nisi. Qui ex provident
+                                                    sunt veritatis voluptas culpa quos consequatur vero natus consequuntur aperiam, repellendus
+                                                    accusamus.
+                                
+                                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed voluptate, unde delectus fuga magnam
+                                                    quibusdam quaerat,
+                                                    laborum laudantium ea vitae nulla voluptas quas consectetur aliquam ullam repellat dolorem enim
+                                                    tenetur.
+                                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit placeat omnis, ab quidem repellat
+                                                    nisi. Qui ex provident
+                                                    sunt veritatis voluptas culpa quos consequatur vero natus consequuntur aperiam, repellendus
+                                                    accusamus.
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+                                                        onclick="aceptarTerminos()">Aceptar</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                                <div class="d-flex justify-content-center">
+                                    <input type="submit" class="btn botonEnviar mt-3" onclick="validarCamposVaciosReg()"  value="Registrar">
+                                </div>
+                            </div>
+                            <p class="mt-2 text-center"><a href="accounts/login/">¿Ya tienes cuenta?</a></p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="{% static 'app/acepta-terminos.js' %}"></script>
+    <script src="{% static 'app/validacion.js' %}"></script>
+    <script src="{% static 'app/validarmodulo.js' %}"></script>
+</body>
+</html>
+{%endblock%}

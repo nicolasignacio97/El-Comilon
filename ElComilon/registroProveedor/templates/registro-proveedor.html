@@ -42,7 +42,7 @@
                             <div class="form-row">
                                 <div class="row mt-2">
                                     <div class="col-lg-6 mb-4">
-                                        <input type="text" name="rutRestaurante" class="form-control input_rut" id="Rut"
+                                        <input type="text" name="rutRestaurante" oninput="checkRut(this)" class="form-control input_rut" id="Rut"
                                             placeholder="84.442.987-2" required>
                                         <div class="valid-feedback"> </div>
                                         <div class="invalid-feedback">Complete el campo</div>
@@ -123,6 +123,7 @@
     </section>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="{% static 'app/validacion.js' %}"></script>
+    <script src="{% static 'app/validarmodulo.js' %}"></script>
 </body>
 
 </html>

@@ -29,6 +29,7 @@
     <title>Document</title>
 </head>
 <body>
+    {% load humanize %}
     <div class="container">
         <div class="row">
             <div class="col d-flex flex-wrap justify-content-center mt-5">
@@ -40,7 +41,7 @@
                       <p class="card-text platillo__descripcion">{{p.data.2}}</p>
                       <p class="separacion">_______________________</p>
                       <div class="precio-boton">
-                          <h6 class="card-subtitle mb-2  platillo__precio">${{ p.data.3}}</h6>
+                          <h6 class="card-subtitle mb-2  platillo__precio">${{ p.data.3 | intcomma }}</h6>
                           <a href="#" class="btn btn-danger platillo__boton">Agregar al Carro</a>
                       </div>
                     </div>
