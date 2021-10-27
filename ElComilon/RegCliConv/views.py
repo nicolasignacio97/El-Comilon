@@ -1,6 +1,6 @@
 from django.shortcuts import get_object_or_404, render, redirect
 from django.db import connection
-from core.models import Cliente, EmpresaConvenio
+from core.models import Cliente
 import cx_Oracle
 
 # Create your views here.
