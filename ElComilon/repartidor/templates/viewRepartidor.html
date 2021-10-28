@@ -21,30 +21,69 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="{% static 'app/jquery.rut.chileno.js' %}"></script>
 
-    <link rel="stylesheet" href="{% static 'css/style-registro-proveedor.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style-view-reparto.css' %}">
 
     <title>Document</title>
 </head> 
 
 <body>
-    <section class="container">
-        <H2>Listado EN REPARTO</H2>
-        <table>
+    <section class="container contenido-reparto">
+        <!-- <table class="contenido-tabla">
             <tr>
-                <th>Id Pedido</th>
-                <th>Direccion</th>
-                <th>Precio Total</th>
-                <th>Rut Cliente</th>
+                <th>ID</th>
+                <th>FECHA</th>
+                <th>DIRECCION</th>
+                <th>TOTAL</th>
+                <th>ESTADO</th>
+                <th>VER</th>
             </tr>
             {% for r in repartos %}
                 <tr>
                     <td>{{r.0}}</td>
+                    <td>{{r.2|date:'d-m-y'}}</td>
                     <td>{{r.3}}</td>
                     <td>{{r.1}}</td>
                     <td>{{r.5}}</td>
+                    <td><a href=""><img src="{% static 'img/visible.png' %}" alt="ojito"></a></td>
                 </tr>
             {% endfor %}
-        </table>
+        </table> -->
+
+        <section class="">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card shadow-lg p3 mb-5 mt-5 bg-white">
+                        <h3 class="titulo text-center mt-5 mb-5">Repartos</h3>
+                        <div class="card-body">
+                            
+                            <div class="table-responsive-md">
+                                <table class="table contenido-tabla">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Fecha</th>
+                                            <th scope="col">Dirección</th>
+                                            <th scope="col">Estado</th>
+                                            <th scope="col">Ver</th>
+                                        </tr>
+                                    </thead>
+                                        {% for r in repartos %}
+                                        <tr>
+                                            <td>{{r.2|date:'d-m-y'}}</td>
+                                            <td>{{ r.3 }}</td>
+                                            <td>{{ r.5 }}</td>
+                                            <td><a href="viewPedido/{{p.0}}"><img src="{% static 'img/visible.png' %}" alt="ojito"></a></td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+    
+                                </table>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
         <a href="">modificar</a>
         
     </section>

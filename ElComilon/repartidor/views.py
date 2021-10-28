@@ -3,6 +3,8 @@ from django.shortcuts import get_object_or_404, render, redirect
 from django.db import connection
 import cx_Oracle
 
+from core.models import Pedido
+
 
 # Create your views here.
 
@@ -12,6 +14,14 @@ def viewRepartidor(request):
         'repartos':listado_pedidos_reparto()
     }
     return render(request,'viewRepartidor.html', dataRep)
+
+
+def viewPedido(request):
+    pedido = get_object_or_404(Pedido,idpedido=id)
+    dataMod = {
+       'pedidoSelect' : pedido
+    }
+    return render(request,'viewPedido.html',dataMod)
 
 
 def listado_pedidos_reparto():
