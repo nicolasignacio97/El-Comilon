@@ -30,7 +30,7 @@ from Pedido.views import pedido
 from Login.views import loginauth
 from Platillos.views import platillos
 from detallePedido.views import detallePedido
-from repartidor.views import viewRepartidor
+from repartidor.views import viewRepartidor, viewPedido
 
 
 urlpatterns = [
@@ -51,7 +51,8 @@ urlpatterns = [
     path('deleterepartidor/<rutrepartidor>/',deleterepartidor, name = 'deleterepartidor'), 
     path('pedido', pedido),
     path('platillos', platillos),
-     path('repartidor', viewRepartidor),
+    path('repartidor', viewRepartidor),
+    path('viewPedido/<id>', viewPedido),
     path('detallePedido', detallePedido),
     path('administracion/', include(url_patterns))
 
