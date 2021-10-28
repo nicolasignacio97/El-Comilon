@@ -175,7 +175,12 @@ body{
 
 
 
-
+.menu-admin {
+    display:flex;
+    flex-direction:column;
+    justify-content: space-between;
+    height:90.8%;
+}
 .menu-admin .menu {
     list-style: none;
     
@@ -219,7 +224,26 @@ body{
     margin-bottom: 0;
 }
 
+
 .icono{
       width:2rem;
   }
   
+.menuUsuario{
+    display:flex;
+    flex-direction: column-reverse;
+    align-items: center;
+}
+.menuUsuario a {
+   display:flex;
+   margin-top:6rem;
+   justify-content: center;
+   align-items: center;
+   height: 5rem;
+   width: 100%;
+   font-size: 1.5rem;
+}
+.menuUsuario a:hover {
+   background-color: #812928c2;
+   
+}
