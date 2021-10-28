@@ -77,5 +77,6 @@ a:hover{
 .separacion{
     margin: 0;
     color: #9c3534;  
+    height: 2.5px;
     font-weight: bold;
 }

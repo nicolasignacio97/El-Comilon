@@ -49,7 +49,7 @@ urlpatterns = [
     path('Historial/<id>', PerfilUsuario), #despues id en la ruta para filtro
     path('pedido', pedido),
     path('platillos', platillos),
-    path('detallePedido', detallePedido),
+    path('detallePedido/<idpedido>', detallePedido),
     path('registroUsuarios', registroUsuario),
     path('administracion/', include(url_patterns)),
     path('accounts/', include('django.contrib.auth.urls')),

@@ -7,27 +7,37 @@ from django.contrib import messages
 
 
 # Create your views here.
-def actualizarPlatillo(request):
+def actualizarPlatillo(request, id):
     data = {
-        'platillos':listado_platillos(),
+        'platillos':listado_platillos(id),
         'Restaurante':listarRestaurante()
     }
     
     return render(request, 'actualizarPlatillo.html', data)
 
-def listado_platillos():
+def listado_platillos(id):
     django_cursor = connection.cursor()
     cursor = django_cursor.connection.cursor()
     out_cur = django_cursor.connection.cursor()
 
-    cursor.callproc("SP_LISTAR_PLATILLOS", [out_cur])    
+    cursor.callproc("VER_PLATILLO", [id, out_cur])    
 
     lista = []
     for fila in out_cur:
-        data = {
-            'data':fila,
-            'imagen':str(base64.b64encode(fila[4].read()), 'utf-8')
-        }
+         lista.append(fila)
+
+    return lista
+
+def listado_fotos(id):
+    django_cursor = connection.cursor()
+    cursor = django_cursor.connection.cursor()
+    out_cur = django_cursor.connection.cursor()
+
+    cursor.callproc("VER_PLATILLO", [id, out_cur])    
+
+    lista = []
+    for fila in out_cur:
+        data = str(base64.b64encode(fila[3].read()), 'utf-8')
         lista.append(data)
 
     return lista
@@ -45,9 +55,9 @@ def listarRestaurante():
     return lista
 
 def modificarPlatillo(request, id):
-    platillo = get_object_or_404(Platillo, idplatillo=id)
     dataMod = {
-        'seleccion': platillo
+        'platillo':listado_platillos(id),
+        'foto':listado_fotos(id)
     }
     if request.method == 'POST':
         nombrePlatillo = request.POST.get('Nombre').upper()
@@ -55,7 +65,7 @@ def modificarPlatillo(request, id):
         valor = request.POST.get('Valor')
         foto = request.FILES['foto'].read()
         ModificarPlatillo(id,nombrePlatillo, ingredientes, valor, foto)
-        messages.success(request, "Se ha modificado correctamente el platillo "+ platillo.nombre)
+        messages.success(request, "Se ha modificado correctamente el platillo ")
         return redirect(to="/administracion/listarPlatillos")
 
  
