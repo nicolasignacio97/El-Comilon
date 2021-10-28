@@ -19,7 +19,7 @@ from django.urls import path,include
 from registroDeUsuarios.views import registroUsuario
 # from ElComilon.listarPlatillos.views import modificarPlatillo
 from Home.views import inicio
-from Login.views import login
+
 from RegisterPlatillo.views import registroPlatillo
 from Register.views import register
 from registroProveedor.views import registroProveedor   
@@ -29,7 +29,7 @@ from administracion.urls import url_patterns
 from PerfilUsuario.views import PerfilUsuario
 from RegisterRepartidor.views import registroRep,registroVeh,editRepartidor,listarRep,deleterepartidor
 from Pedido.views import pedido
-from Login.views import loginauth
+
 from Platillos.views import platillos
 from detallePedido.views import detallePedido
 
@@ -37,8 +37,8 @@ from detallePedido.views import detallePedido
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',inicio),
-    path('login',loginauth, name='login '), 
+    path('',inicio , name="home"),
+   
     path('registroPlatillo',registroPlatillo),
     path('registro',register),  
     path('regin', registroRep),

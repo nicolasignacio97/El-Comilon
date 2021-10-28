@@ -29,9 +29,50 @@
                     <div class="card-body">
                         <form method="POST"  class="needs-validation" novalidate>
                             {% csrf_token %}
-                            <div class="form-floating">
+                            <div class="form">
                                 <div class="row d-flex justify-content-center">
                                     {{form|crispy}}
+                                    <div class="row mt-3 p-0">
+                                        <h4 class="text-center mb-3">Datos del cliente</h4>
+                                        <div class="col-lg-6">
+                                            <div class="form-floating">
+                                                <input type="text" class="form-control  shadow-sm  bg-body rounded input_rut" oninput="checkRut(this)" name="rutCliente" id="Rut" 
+                                                placeholder="19.455.087-3" maxlength="12" required>
+                                                <label for="Rut">Rut</label>
+                                                <div class="valid-feedback"> </div>
+                                                <div class="invalid-feedback">Campo obligatorio*</div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-floating">
+                                                <input type="text" class="form-control shadow-sm bg-body rounded" name="direccionCli" id="direccionCli" 
+                                                placeholder="Dirección:" minlength="4" required>
+                                                <label for="direccionCli">Dirección</label>
+                                                <div class="valid-feedback"> </div>
+                                                <div class="invalid-feedback">Campo obligatorio*</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-3 p-0">
+                                        <div class="col-lg-6">
+                                            <div class="form-floating mb-3">
+                                                <input type="text" class="form-control shadow-sm bg-body rounded" name="nombresCli" id="nombresCli" 
+                                                placeholder="Nombres:" minlength="2" required>
+                                                <label for="nombresCli">Nombres</label>
+                                                <div class="valid-feedback"> </div>
+                                                <div class="invalid-feedback">Campo obligatorio*</div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-floating mb-3">
+                                                <input type="text" class="form-control shadow-sm bg-body rounded" name="apellidosCli" id="apellidosCli" 
+                                                placeholder="Apellidos:" minlength="2" required>
+                                                <label for="apellidosCli">Apellidos</label>
+                                                <div class="valid-feedback"> </div>
+                                                <div class="invalid-feedback">Campo obligatorio*</div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="envio d-flex flex-column justify-content-center mt-3">
