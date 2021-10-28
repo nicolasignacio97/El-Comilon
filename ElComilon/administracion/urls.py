@@ -7,6 +7,7 @@ from RegisterPlatillo.views import registroPlatillo
 from listarPlatillos.views import listarPlatillos, eliminarPlatillo
 from actualizarPlatillo.views import modificarPlatillo
 
+
 from RegCliConv.views import RegistroCliConvenio, listarCliConv, modificarCliConv, eliminarCliConv
 from RegisterRepartidor.views import registroRep,registroVeh,editRepartidor,listarRep,deleterepartidor
 from registroTrabajador.views import listaTrabajador

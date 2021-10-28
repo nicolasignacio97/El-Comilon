@@ -32,42 +32,44 @@
             <div class="itemsIzquierda">
                 <div class="campos">
                     <div class="inputs">
-                        <input type="text" id="Nombre" name="Nombre" value="{{seleccion.nombre}}"
+                        <input type="text" id="Nombre" name="Nombre" value="{{platillo.0.0}}"
                             class="form-control inputfocus" required>
                         <div class="valid-feedback"> </div>
                         <div class="invalid-feedback">Complete los campos</div>
                         <span> </span>
                     </div>
                     <div class="inputs">
-                        <input type="text" id="Ingredientes" name="Ingredientes" value="{{seleccion.ingredientes}}"
+                        <input type="text" id="Ingredientes" name="Ingredientes" value="{{platillo.0.1}}"
                             class="form-control inputfocus" required>
                         <div class="valid-feedback"> </div>
                         <div class="invalid-feedback">Complete los campos</div>
                         <span> </span>
                     </div>
                     <div class="inputs">
-                        <input type="number" min="1" id="Valor" name="Valor" value="{{seleccion.valorunitario}}"
+                        <input type="number" min="1" id="Valor" name="Valor" value="{{platillo.0.2}}"
                             class="form-control inputfocus" required>
                         <div class="valid-feedback"> </div>
                         <div class="invalid-feedback">Complete los campos</div>
                         <span> </span>
                     </div>
-                    <div id="divFileUpload">
-                        <div class="input-group mb-3">
-                            <input type="file" name="foto" class="form-control inputfocus" id="file" accept="image/*"
+                    <div id="divFileUpload" value={{foto.0}}>
+                        <div value="data:imagen/png;base64, {{foto.0}}" class="input-group mb-3">
+                            <input value="{{foto.0}}" type="file" name="foto" class="form-control inputfocus" id="file" accept="image/*"
                                 required>
                             <div class="valid-feedback"> </div>
                             <div class="invalid-feedback">Inserte una imagen</div>
                         </div>
                     </div>
                 </div>
+                
                 <div class="imagen-botones">
                     <h3 class="titlulo-vista-previa">Tu plato se verá así en el menú </h3>
                     <div class="card platillo" style="width: 20rem; height: 20rem;">
-                        <div value="data:imagen/png;base64, {{seleccion.foto}}" id="preview">
+                        <div id="preview">
+                            <img src="data:imagen/png;base64, {{foto.0}}" alt="asd">
                         </div>
                         <div class="card-body d-flex flex-column text-center justify-content-center">
-                            <h5 id="previaNombre" value="{{seleccion.nombre}}" class="card-title platillo__nombre"></h5>
+                            <h5 id="previaNombre" value="{{foto.0.3}}" class="card-title platillo__nombre"></h5>
                             <p id="previaIngredientes" value="{{seleccion.ingredientes}}"
                                 class="card-text platillo__descripcion"></p>
                             <p class="separacion">_______________________</p>
@@ -77,12 +79,14 @@
                             </div>
                         </div>
                     </div>
+                    <!-- <img src="data:imagen/png;base64, {{foto.0}}" alt="asd"> -->
 
                 </div>
+                
             </div>
             <div class="botones">
                 <button type="submit" class="btn btn-aceptar" onClick="alertaExito()">Actualizar datos</button>
-            </div>
+            </div> 
         </form>
     </section>
     <script src="{% static 'app/foto.js'%}"></script>

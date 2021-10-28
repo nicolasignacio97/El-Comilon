@@ -48,6 +48,6 @@ urlpatterns = [
     path('perfil', Usertemplate),
     path('pedido', pedido),
     path('platillos', platillos),
-    path('detallePedido', detallePedido),
+    path('detallePedido/<idpedido>', detallePedido),
     path('administracion/', include(url_patterns)),
 ]

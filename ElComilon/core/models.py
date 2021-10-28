@@ -69,6 +69,9 @@ class EstadoPedido(models.Model):
     idestado = models.IntegerField(primary_key=True)
     descripcion = models.CharField(max_length=30)
 
+    def __str__(self):
+        return self.descripcion
+
     class Meta:
         managed = False
         db_table = 'estado_pedido'
@@ -91,7 +94,7 @@ class Pedido(models.Model):
     idtiposervicio = models.ForeignKey('TipoServicio', models.DO_NOTHING, db_column='idtiposervicio')
     rutcliente = models.ForeignKey(Cliente, models.DO_NOTHING, db_column='rutcliente')
     idestpedido = models.ForeignKey(EstadoPedido, models.DO_NOTHING, db_column='idestpedido')
-
+    
     class Meta:
         managed = False
         db_table = 'pedido'
@@ -105,6 +108,9 @@ class Platillo(models.Model):
     valorunitario = models.IntegerField()
     foto = models.BinaryField(blank=True, null=True)
     rutrestaurante = models.ForeignKey('Restaurante', models.DO_NOTHING, db_column='rutrestaurante')
+
+    def __str__(self):
+        return self.nombre
 
     class Meta:
         managed = False
@@ -205,6 +211,9 @@ class TipoRestaurante(models.Model):
 class TipoServicio(models.Model):
     idtiposervicio = models.IntegerField(primary_key=True)
     descripcion = models.CharField(max_length=20)
+
+    def __str__(self):
+        return self.descripcion
 
     class Meta:
         managed = False
