@@ -28,8 +28,34 @@
 
 <body>
     <section class="container">
-        <H2>INFO PEDIDO</H2>
-        <input value="{{ pedidoSelect.idpedido }}" type="text" name="" id="">
+        <H2>PEDIDO N° {{ pedidoSelect.idpedido }}</H2>
+        <form action="" method="POST">
+            {% csrf_token %}
+            <div>
+                <div>
+                    <label for=""><span>Rut Cliente:</span></label>
+                    <label for="" id="rutPedido" name="rutPedido">{{ pedidoSelect.rutcliente }}</label>
+                </div>
+                
+                <div>
+                    <label for=""><span>Fecha pedido:</span></label>
+                    <label for="">{{ pedidoSelect.fechapedido }}</label>
+                </div>
+        
+                <div>
+                    <label for=""><span>Dirección:</span></label>
+                    <label for="">{{ pedidoSelect.direccionpedido }}</label>
+                </div>
+    
+                <div>
+                    <label for=""><span>Total: $</span></label>
+                    <label for="">{{ pedidoSelect.valortotal }}</label>
+                </div>
+            </div>
+            <button class="btn botonEnviar" id="btn1" type="submit">Finalizar Entrega</button>
+            {{mensaje}}
+        </form>
+        
         
     </section>
 </body>

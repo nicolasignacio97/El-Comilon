@@ -13,14 +13,25 @@ def viewRepartidor(request):
     dataRep = {
         'repartos':listado_pedidos_reparto()
     }
+
+    
     return render(request,'viewRepartidor.html', dataRep)
 
 
-def viewPedido(request):
+def viewPedido(request,id):
     pedido = get_object_or_404(Pedido,idpedido=id)
     dataMod = {
        'pedidoSelect' : pedido
     }
+
+    if request.method == 'POST':
+        idpedido = request.POST.get('rutPedido')
+        idestpedido = 4
+        salida = modificar_estado_pedido(id, idestpedido)
+        if salida == 1:
+            return redirect(to="/repartidor")
+        else:
+            dataMod['mensaje'] = 'UPS, NO SE HA PODIDO FINALIZAR EL PEDIDO'
     return render(request,'viewPedido.html',dataMod)
 
 
@@ -38,9 +49,9 @@ def listado_pedidos_reparto():
 
 
 #MODIFICAR ESTADO REPARTO
-def modificar_cliente_convenio():
+def modificar_estado_pedido(idpedido, idestpedido):
     django_cursor = connection.cursor()
     cursor = django_cursor.connection.cursor()
     salida = cursor.var(cx_Oracle.NUMBER)
-    cursor.callproc('SP_MODIFICAR_CLIENTE_CONVENIO',[rutcliente, nomUsuario , nombres, apellidos, direccion, contrasena,telefono,correo, saldocli,rutempcli,salida])
+    cursor.callproc('SP_MODIFICAR_ESTADO_REPARTO',[idpedido, idestpedido ,salida])
     return salida.getvalue()

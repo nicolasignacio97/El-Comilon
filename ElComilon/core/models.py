@@ -30,6 +30,8 @@ class Cliente(models.Model):
     saldocli = models.BigIntegerField(blank=True, null=True)
     idtipocliente = models.ForeignKey('TipoCliente', models.DO_NOTHING, db_column='idtipocliente')
     rutempconv = models.ForeignKey('EmpresaConvenio', models.DO_NOTHING, db_column='rutempconv', blank=True, null=True)
+    def __str__(self):
+        return self.rutcliente
     
 
     class Meta:
@@ -68,6 +70,8 @@ class EmpresaConvenio(models.Model):
 class EstadoPedido(models.Model):
     idestado = models.IntegerField(primary_key=True)
     descripcion = models.CharField(max_length=30)
+    def __str__(self):
+        return self.idestado 
 
     class Meta:
         managed = False
@@ -91,6 +95,9 @@ class Pedido(models.Model):
     idtiposervicio = models.ForeignKey('TipoServicio', models.DO_NOTHING, db_column='idtiposervicio')
     rutcliente = models.ForeignKey(Cliente, models.DO_NOTHING, db_column='rutcliente')
     idestpedido = models.ForeignKey(EstadoPedido, models.DO_NOTHING, db_column='idestpedido')
+
+    def __str__(self):
+        return self.rutcliente
 
     class Meta:
         managed = False

@@ -71,11 +71,13 @@
                                             <td>{{r.2|date:'d-m-y'}}</td>
                                             <td>{{ r.3 }}</td>
                                             <td>{{ r.5 }}</td>
-                                            <td><a href="viewPedido/{{p.0}}"><img src="{% static 'img/visible.png' %}" alt="ojito"></a></td>
+                                            <td><a href="viewPedido/{{r.0}}"><img src="{% static 'img/visible.png' %}" alt="ojito"></a></td>
                                         </tr>
                                         {% endfor %}
                                     </tbody>
-    
+                                    <div class="progress">
+                                        <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+                                    </div>
                                 </table>
                             </div>
                             
@@ -84,7 +86,6 @@
                 </div>
             </div>
         </section>
-        <a href="">modificar</a>
         
     </section>
 </body>
