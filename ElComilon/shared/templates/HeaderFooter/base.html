@@ -34,17 +34,15 @@
         {% endblock%}
       </div>
       <div class="derecha">
-
-        {% block L-derecha %}
-        {% endblock%}
-        <a href="#"><img class="iconPerfil" src="{% static 'img/userIcon.png' %}" alt="icono Perfil" data-bs-toggle="offcanvas"
-          data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"></a>
-
         <div class="navegar">
           {% block L-derecha %}
           {% endblock%}
-      
         </div>
+        {% if user.is_authenticated %}
+        <a href="#"><img class="iconPerfil" src="{% static 'img/userIcon.png' %}" alt="icono Perfil" data-bs-toggle="offcanvas"
+          data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"></a>
+          
+        {%endif%}
         <div class="perfil">
           {% if user.is_authenticated %}
           <a href="{% url 'logout'%}">cerrar sesión</a>
