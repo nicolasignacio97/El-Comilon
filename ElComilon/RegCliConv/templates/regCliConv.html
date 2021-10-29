@@ -1,5 +1,6 @@
 {% extends "HeaderFooter/base-sidebar.html"%}
 {% load static %}
+{% load crispy_forms_tags %}
 
 {% block content%}
 <!DOCTYPE html>
@@ -19,7 +20,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="{% static 'app/jquery.rut.chileno.js' %}"></script>
 
-    <link rel="stylesheet" href="{% static 'css/style-registro-proveedor.css' %}">
+    <link rel="stylesheet" href="{% static 'css/styles-cli-conv.css' %}">
     <script type="text/javascript">
         jQuery(document).ready(function ($) {
             $('.input_rut').rut();
@@ -33,93 +34,80 @@
     <section class="container">
         <div class="row">
             <div class="col-lg-12">
-                <div class="card shadow-lg p3 mb-5 mt-5 bg-white">
+                <div class="card shadow-lg p3 mt-5 bg-white">
                     <h3 class="titulo  mt-5 text-center">Registro Cliente Convenio</h3>
                     <div class="card-body">
                         <form action="" class="needs-validation d-flex flex-column  justify-content-center"
                             method="POST" novalidate>
                             {% csrf_token %}
-                            <div class="form-row">                           
-                                <div class="row">
-                                    <div class="col-lg-6 mb-4">
-                                        <div>
-                                            <input type="text" name="rutCliConv" class="form-control input_rut" id="Rut" placeholder="12.452.987-2" required>
-                                            <div class="valid-feedback"> </div>
-                                            <div class="invalid-feedback">Complete el campo</div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    {{form|crispy}}
+                                </div>
+                                <div class="col-lg-6 p-4">
+                                    <div class="form-row">
+                                        <div class="row">
+                                            <div class="col-lg-12 mb-3">
+                                                <div>
+                                                    <input type="text" name="rutCliConv" oninput="checkRut(this)" class="form-control input_rut"
+                                                        id="Rut" placeholder="12.452.987-2" required>
+                                                    <div class="valid-feedback"> </div>
+                                                    <div class="invalid-feedback">Complete el campo</div>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-lg-6 mb-4">
-                                        <input type="text" name="nomUsuarioConv" class="form-control"
-                                            minlength="2" id="nomUsuarioConv" placeholder="Nombre Usuario" required>
-                                        <div class="valid-feedback"> </div>
-                                        <div class="invalid-feedback">Complete el campo</div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-lg-6 mb-4">
-                                        <input type="text" name="nomCliConv" class="form-control" id="nomCliConv"
-                                            placeholder="Nombres Cliente" required>
-                                        <div class="valid-feedback"> </div>
-                                        <div class="invalid-feedback">Complete el campo</div>
-                                    </div>
-                                    <div class="col-lg-6 mb-4">
-                                        <input type="text" name="apeCliConv" class="form-control" minlength="2"
-                                            id="apeCliConv" placeholder="Apellidos Cliente" required>
-                                        <div class="valid-feedback"> </div>
-                                        <div class="invalid-feedback">Complete el campo</div>
-                                    </div>
-                                </div>
-                                <div class="row mb-4">
-                                    <div class="col-12">
-                                        <input type="text" name="direcCliConv" class="form-control" id="direcCliConv" minlength="4"
-                                            placeholder="Direccion Cliente"
-                                            required>
-                                        <div class="valid-feedback"> </div>
-                                        <div class="invalid-feedback">Complete el campo</div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-lg-6 mb-4">
-                                        <input type="password" name="passCliConv" class="form-control" id="passCliConv"
-                                            placeholder="Contraseña Cliente" required>
-                                        <div class="valid-feedback"> </div>
-                                        <div class="invalid-feedback">Complete el campo</div>
-                                    </div>
-                                    <div class="col-lg-6 mb-4">
-                                        <input type="tel" name="telCliConv" class="form-control"
-                                            id="telCliConv" placeholder="Teléfono Cliente" pattern="[0-9]{9}" required>
-                                        <div class="valid-feedback"> </div>
-                                        <div class="invalid-feedback">Complete el campo</div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-lg-12 mb-4">
-                                        <input type="email" name="mailCliConv" class="form-control"
-                                            id="mailCliConv" placeholder="Email Cliente" pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}" required>
-                                        <div class="valid-feedback"> </div>
-                                        <div class="invalid-feedback">Complete el campo</div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-lg-6 mb-4">
-                                        <input type="number" name="saldoCli" class="form-control" id="saldoCli"
-                                            placeholder="Saldo Cliente" required>
-                                        <div class="valid-feedback"> </div>
-                                        <div class="invalid-feedback">Complete el campo</div>
-                                    </div>
-                                    <div class="col-lg-6 mb-4">
-                                        <input type="text" name="rutEmpConv" class="form-control input_rut"
-                                            id="rutEmpConv" placeholder="Rut Empresa Convenio" required>
-                                        <div class="valid-feedback"> </div>
-                                        <div class="invalid-feedback">Complete el campo</div>
+                                        <div class="row">
+                                            <div class="col-lg-6 mb-4">
+                                                <input type="text" name="nomCliConv" class="form-control"
+                                                    id="nomCliConv" placeholder="Nombres Cliente" required>
+                                                <div class="valid-feedback"> </div>
+                                                <div class="invalid-feedback">Complete el campo</div>
+                                            </div>
+                                            <div class="col-lg-6 mb-4">
+                                                <input type="text" name="apeCliConv" class="form-control" minlength="2"
+                                                    id="apeCliConv" placeholder="Apellidos Cliente" required>
+                                                <div class="valid-feedback"> </div>
+                                                <div class="invalid-feedback">Complete el campo</div>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-4">
+                                            <div class="col-12">
+                                                <input type="text" name="direcCliConv" class="form-control"
+                                                    id="direcCliConv" minlength="4" placeholder="Direccion Cliente"
+                                                    required>
+                                                <div class="valid-feedback"> </div>
+                                                <div class="invalid-feedback">Complete el campo</div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-lg-12 mb-4">
+                                                <div class="form-floating">
+                                                    <select min="1" id="disabledSelect" name="rutEmpConv" class="form-select inputfocus" required>
+                                                        <option disabled selected value="">Seleccionar </option>
+                                                        {% for c in Seleccion %}
+                                                        <option value="{{ c.0 }}">{{ c.1 }}</option>
+                                                        {% endfor %}
+                                                    </select>
+                                                    <label for="floatingSelect">Empresa</label>
+                                                    <div class="valid-feedback"> </div>
+                                                    <div class="invalid-feedback">Complete el campo</div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-12 mb-4 mt-5">
+                                                <input type="number" name="saldoCli" class="form-control inp" id="saldoCli"
+                                                    placeholder="Saldo Cliente" required>
+                                                <div class="valid-feedback"> </div>
+                                                <div class="invalid-feedback">Complete el campo</div>
+                                            </div>
+                                        </div>
+                                        <div class="row d-flex justify-content-center mt-5">
+                                            {{mensaje}}
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="pieForm">
                                     <button class="btn botonEnviar" id="btn1" type="submit">Registrar</button>
-                                </div>
-
-                                <div class="row d-flex justify-content-center mt-5">
-                                    {{mensaje}}
                                 </div>
                             </div>
                         </form>
@@ -127,9 +115,7 @@
                 </div>
             </div>
     </section>
-    <script src="{% static 'app/validacion.js' %}"></script>
 </body>
 
 </html>
 {% endblock %}
-<!--  -->

@@ -49,7 +49,6 @@ INSTALLED_APPS = [
     'registroTrabajador',
     'shared',
     'Home',
-    'Login',
     'RegisterPlatillo',
     'Register',
     'registroProveedor',
@@ -136,7 +135,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-AUTH_USER_MODEL = 'core.Usuario'
+#AUTH_USER_MODEL = 'core.Usuario'
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
