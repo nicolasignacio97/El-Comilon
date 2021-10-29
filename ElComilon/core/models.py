@@ -31,6 +31,9 @@ class Cliente(models.Model):
     saldocli = models.BigIntegerField(blank=True, null=True)
     idtipocliente = models.ForeignKey('TipoCliente', models.DO_NOTHING, db_column='idtipocliente')
     rutempconv = models.ForeignKey('EmpresaConvenio', models.DO_NOTHING, db_column='rutempconv', blank=True, null=True)
+    def __str__(self):
+        return self.rutcliente
+    
     idcuenta = models.IntegerField()
     USERNAME_FIELD = 'nombreusuario'
 
@@ -73,9 +76,12 @@ class EmpresaConvenio(models.Model):
 class EstadoPedido(models.Model):
     idestado = models.IntegerField(primary_key=True)
     descripcion = models.CharField(max_length=30)
+    def __str__(self):
+        return self.idestado 
 
     def __str__(self):
         return self.descripcion
+
     class Meta:
         managed = False
         db_table = 'estado_pedido'
@@ -99,7 +105,8 @@ class Pedido(models.Model):
     rutcliente = models.ForeignKey(Cliente, models.DO_NOTHING, db_column='rutcliente')
     idestpedido = models.ForeignKey(EstadoPedido, models.DO_NOTHING, db_column='idestpedido')
 
-
+    def __str__(self):
+        return self.rutcliente
 
     class Meta:
         managed = False
@@ -114,6 +121,9 @@ class Platillo(models.Model):
     valorunitario = models.IntegerField()
     foto = models.BinaryField(blank=True, null=True)
     rutrestaurante = models.ForeignKey('Restaurante', models.DO_NOTHING, db_column='rutrestaurante')
+
+    def __str__(self):
+        return self.nombre
 
     class Meta:
         managed = False
@@ -214,9 +224,11 @@ class TipoRestaurante(models.Model):
 class TipoServicio(models.Model):
     idtiposervicio = models.IntegerField(primary_key=True)
     descripcion = models.CharField(max_length=20)
-    
+
     def __str__(self):
-        return self.descripcion;
+        return self.descripcion
+
+
     class Meta:
         managed = False
         db_table = 'tipo_servicio'

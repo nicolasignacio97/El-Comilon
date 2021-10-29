@@ -62,9 +62,9 @@ INSTALLED_APPS = [
     'actualizarPlatillo',
     'RegCliConv',
     'PerfilUsuario',
+    'repartidor',
     'gestionRestaurantes',
     'registroDeUsuarios',
-
 ]
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 

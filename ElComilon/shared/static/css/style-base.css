@@ -255,7 +255,7 @@ a:hover{
 
 
 
-
+/*********OFFCANVAS*********/
 
 
 .iconPerfil{
@@ -270,3 +270,38 @@ a:hover{
 .iconPerfil:hover{
   transition: padding-left .3s ease;
 }
+
+
+
+.canvas-header{
+  background-color:#9C3534 ;
+  color: #Fff;
+}
+
+.nom-user{
+  display: flex;
+  justify-content: center;
+}
+
+.nom-user h3{
+  margin: 1rem;
+}
+
+.nom-user img{
+  width: 20%;
+}
+
+.nav-canvas{
+  margin-top: 2rem;
+}
+
+
+.nav-canvas button{
+  padding-top: 5rem;
+}
+
+.nav-canvas a{
+  color: #202020;
+  text-decoration: none;
+}
+

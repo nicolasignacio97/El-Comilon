@@ -29,3 +29,8 @@ input[type=number] { -moz-appearance:textfield; }
     margin-bottom: 2rem;
     border-radius: .4rem;
 }
+
+.titulos:first-letter{
+    text-transform:capitalize;
+        
+}
