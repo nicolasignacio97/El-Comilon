@@ -20,7 +20,7 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="{% static 'app/jquery.rut.chileno.js' %}"></script>
-
+    <link rel="stylesheet" href="{% static 'css/style-view-reparto.css' %}">
     <link rel="stylesheet" href="{% static 'css/style-registro-proveedor.css' %}">
 
     <title>Document</title>
@@ -28,35 +28,68 @@
 
 <body>
     <section class="container">
-        <H2>PEDIDO N° {{ pedidoSelect.idpedido }}</H2>
-        <form action="" method="POST">
-            {% csrf_token %}
-            <div>
-                <div>
-                    <label for=""><span>Rut Cliente:</span></label>
-                    <label for="" id="rutPedido" name="rutPedido">{{ pedidoSelect.rutcliente }}</label>
-                </div>
-                
-                <div>
-                    <label for=""><span>Fecha pedido:</span></label>
-                    <label for="">{{ pedidoSelect.fechapedido }}</label>
-                </div>
-        
-                <div>
-                    <label for=""><span>Dirección:</span></label>
-                    <label for="">{{ pedidoSelect.direccionpedido }}</label>
-                </div>
-    
-                <div>
-                    <label for=""><span>Total: $</span></label>
-                    <label for="">{{ pedidoSelect.valortotal }}</label>
-                </div>
+        <div class=" tarjeta-general shadow bg-body rounded" style="width: 24rem;">
+            <img src="{% static 'img/ruta.jpg' %}" class="card-img-top" alt="...">
+            <div class="contenido-carta">
+                <form class="contenedor-tarjeta" action="" method="POST">
+                    {% csrf_token %}
+                    <h4 class="card-title">PEDIDO N° {{ pedidoSelect.idpedido }}</h4>
+                    <p class="card-text">
+                    <div>
+                        <label for=""><span>Rut Cliente:</span></label>
+                        <label for="" id="rutPedido" name="rutPedido">{{ pedidoSelect.rutcliente }}</label>
+                    </div>
+            
+                    <div>
+                        <label for=""><span>Fecha:</span></label>
+                        <label for="">{{ pedidoSelect.fechapedido }}</label>
+                    </div>
+            
+                    <div>
+                        <label for=""><span>Dirección:</span></label>
+                        <label for="">{{ pedidoSelect.direccionpedido }}</label>
+                    </div>
+            
+                    <div>
+                        <label for=""><span>Total: $</span></label>
+                        <label for="">{{ pedidoSelect.valortotal }}</label>
+                    </div>
+                    </p>
+                    <button class="btn botonEnviar" id="btn1" type="submit">Finalizar Entrega</button>
+                    {{mensaje}}
+                </form>
             </div>
-            <button class="btn botonEnviar" id="btn1" type="submit">Finalizar Entrega</button>
-            {{mensaje}}
-        </form>
+        </div>
+    
+        <!-- <H2>PEDIDO N° {{ pedidoSelect.idpedido }}</H2>
+            <form action="" method="POST">
+                {% csrf_token %}
+                <div>
+                    <div>
+                        <label for=""><span>Rut Cliente:</span></label>
+                        <label for="" id="rutPedido" name="rutPedido">{{ pedidoSelect.rutcliente }}</label>
+                    </div>
+                    
+                    <div>
+                        <label for=""><span>Fecha pedido:</span></label>
+                        <label for="">{{ pedidoSelect.fechapedido }}</label>
+                    </div>
+            
+                    <div>
+                        <label for=""><span>Dirección:</span></label>
+                        <label for="">{{ pedidoSelect.direccionpedido }}</label>
+                    </div>
         
-        
+                    <div>
+                        <label for=""><span>Total: $</span></label>
+                        <label for="">{{ pedidoSelect.valortotal }}</label>
+                    </div>
+                </div>
+                <button class="btn botonEnviar" id="btn1" type="submit">Finalizar Entrega</button>
+                {{mensaje}}
+            </form>
+             -->
+    
     </section>
 </body>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
