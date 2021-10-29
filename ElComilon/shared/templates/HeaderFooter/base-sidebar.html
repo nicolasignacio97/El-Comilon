@@ -14,7 +14,7 @@
     <link rel="icon" type="image/x-icon" href="../../static/img/alogo.png">
     <link rel="stylesheet" href="{% static 'css/style-admin.css' %}">
 
-    <title>Administración</title>
+    <title>Administración @{{user.username.title}}</title>
 </head>
 
 <!-- animate__fadeInLeft -->
@@ -27,9 +27,6 @@
                 </div>
                 <div id="menu-btn">
                     <label class="hamburguesa"><img src="{% static 'img/menuH.png' %}" alt="h"></label>
-                    <!-- <div class="btn-hamburger"></div>
-                    <div class="btn-hamburger"></div>
-                    <div class="btn-hamburger"></div> -->
                 </div>
             </div>
 
@@ -38,19 +35,19 @@
                 <!-- <h2>Menú de Administración</h2> -->
                 <ul class="menu">
                     <li>
-                        <a href="proveedor">
+                        <a href="{% url 'proveedor'%}">
                             <img class="icono" src="{% static 'img/i-restaurante.png'%}"></img>
                             <span>Restaurante Convenio</span>
                         </a>
                         <ul>
                             <li>
-                                <a href="listarProveedores">
+                                <a href="{% url 'listarProveedores'%}">
                                     <img class="icono" src="{% static 'img/i-lista.png'%}"></img>
                                     Ver todos
                                 </a>
                             </li>
                             <li>
-                                <a href="proveedor">
+                                <a href="{% url 'proveedor'%}">
                                     <img class="icono" src="{% static 'img/i-mas.png'%}"></img>
                                     Agregar Nuevos
                                 </a>
@@ -58,19 +55,19 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="empresa">
+                        <a href="{% url 'empresa'%}">
                             <img class="icono" src="{% static 'img/i-convenio.png'%}"></img>
                             <span>Empresa Convenio</span>
                         </a>
                         <ul>
                             <li>
-                                <a href="listaEmpresa">
+                                <a href="{% url 'listaEmpresa'%}">
                                     <img class="icono" src="{% static 'img/i-lista.png'%}"></img>
                                     Ver todos
                                 </a>
                             </li>
                             <li>
-                                <a href="empresa">
+                                <a  href="{% url 'empresa'%}">
                                     <img class="icono" src="{% static 'img/i-mas.png'%}"></img>
                                     Agregar Nuevos
                                 </a>
@@ -78,19 +75,19 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="trabajador">
+                        <a href="{% url 'trabajador'%}">
                             <img class="icono" src="{% static 'img/i-trabajador.png'%}"></img>
                             <span>Trabajador</span>
                         </a>
                         <ul>
                             <li>
-                                <a href="listaTrabajador">
+                                <a href="{% url 'listaTrabajador'%}">
                                     <img class="icono" src="{% static 'img/i-lista.png'%}"></img>
                                     Ver todos
                                 </a>
                             </li>
                             <li>
-                                <a href="trabajador">
+                                <a href="{% url 'trabajador'%}">
                                     <img class="icono" src="{% static 'img/i-mas.png'%}"></img>
                                     Agregar Nuevos
                                 </a>
@@ -119,19 +116,19 @@
                     </li>
 
                     <li>
-                        <a href="platillo">
+                        <a href="{% url 'platillo'%}">
                             <img class="icono" src="{% static 'img/i-platos.png'%}"></img>
                             <span>Agregar Platillo</span>
                         </a>
                         <ul>
                             <li>
-                                <a href="listarPlatillos">
+                                <a href="{% url 'listarPlatillos'%}">
                                     <img class="icono" src="{% static 'img/i-lista.png'%}"></img>
                                     Ver todos
                                 </a>
                             </li>
                             <li>
-                                <a href="platillo">
+                                <a href="{% url 'platillo'%}">
                                     <img class="icono" src="{% static 'img/i-mas.png'%}"></img>
                                     Agregar Nuevos
                                 </a>
@@ -140,7 +137,7 @@
                     </li>
 
                     <li>
-                        <a href="ClienteConvenio">
+                        <a href="{% url 'ClienteConvenio'%}">
                             <img class="icono" src="{% static 'img/i-cliente.png'%}"></img>
                             <span>Cliente Convenio</span>
                         </a>
@@ -152,7 +149,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="ClienteConvenio">
+                                <a href="{% url 'ClienteConvenio'%}">
                                     <img class="icono" src="{% static 'img/i-mas.png'%}"></img>
                                     Agregar Nuevos
                                 </a>
@@ -160,7 +157,15 @@
                         </ul>
                     </li>
                 </ul>
+                <div class="menuUsuario">
 
+                    {% if user.is_authenticated %}
+                    <a href="{% url 'logout'%}">Cerrar sesión</a>
+                        <h4>Bienvenido @{{user.username.title}}</h4>
+                    {% else %}
+                    <a href="{% url 'login'%}">iniciar sesión</a>
+                    {%endif%}
+                </div>
             </div>
         </div>
         <div class="container animated fadeIn animate__zoomIn">
