@@ -32,6 +32,8 @@ from Pedido.views import pedido
 
 from Platillos.views import platillos
 from detallePedido.views import detallePedido
+from repartidor.views import viewRepartidor, viewPedido
+
 
 
 
@@ -49,6 +51,9 @@ urlpatterns = [
     path('Historial/<id>', PerfilUsuario), #despues id en la ruta para filtro
     path('pedido', pedido),
     path('platillos', platillos),
+    path('repartidor', viewRepartidor),
+    path('viewPedido/<id>', viewPedido),
+    path('detallePedido', detallePedido),
     path('detallePedido/<idpedido>', detallePedido),
     path('registroUsuarios', registroUsuario),
     path('administracion/', include(url_patterns)),
