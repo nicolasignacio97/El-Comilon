@@ -7,6 +7,9 @@ body{
     box-sizing: border-box;
 }
 
+a:hover{
+    color: #c4c4c4;
+}
 .container{
     max-width: 1740px;
 }
@@ -28,6 +31,7 @@ body{
 .platillo__descripcion{
     color: rgb(104, 104, 104);
     margin-top: .5rem;
+    margin-bottom: 0;
 }
 
 .platillo__descripcion::first-letter{
@@ -68,4 +72,11 @@ body{
     font-size: 20px;
     margin-top: .5rem;
     padding: .6rem 1rem;
+}
+
+.separacion{
+    margin: 0;
+    color: #9c3534;  
+    height: 2.5px;
+    font-weight: bold;
 }

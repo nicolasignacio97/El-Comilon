@@ -1,0 +1,88 @@
+{% extends "HeaderFooter/base-sidebar.html"%}
+{% load static %}
+
+{% block content%}
+<link rel="stylesheet" href="{% static 'css/styleListarProveedor.css' %}">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="{% static 'app/jquery.rut.chileno.js' %}"></script>
+<script type="text/javascript">
+    jQuery(document).ready(function ($) {
+        $('.input_rut').rut();
+    });
+</script>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <div class="card shadow-lg p3 mb-5 mt-5 bg-white">
+                <h3 class="titulo  mt-5 text-center">Modificar Representante</h3>
+                <div class="card-body">
+                    <form action="" autocomplete="off"class="needs-validation  d-flex flex-column  justify-content-center" method="POST" novalidate>
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-lg-6 mb-4">
+                                <div class="form-floating">
+                                    <input type="text" name="representante" class="form-control input_rut" id="Rut"
+                                        value="{{representante.rutrepresentante}}" required>
+                                        <label for="Rut">Rut representante</label>
+                                    <div class="valid-feedback"> </div>
+                                    <div class="invalid-feedback">Complete el campo</div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 mb-4">
+                                <div class="form-floating">
+                                    <input type="text" name="nombresRepresentante" class="form-control"
+                                        minlength="2" id="nombresRepresentante"  value="{{representante.nombres}}" required>
+                                        <label for="nombresRepresentante">Nombre representante</label>
+                                    <div class="valid-feedback"> </div>
+                                    <div class="invalid-feedback">Complete el campo</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6 mb-4">
+                                <div class="form-floating">
+                                    <input type="tel" name="telefono" class="form-control" id="teléfono"
+                                    value="{{representante.telefono}}" pattern="[0-9]{9}" required>
+                                        <label for="teléfono">Teléfono</label>
+                                    <div class="valid-feedback"> </div>
+                                    <div class="invalid-feedback">Complete el campo</div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 mb-4">
+                                <div class="form-floating">
+                                    <input type="text" name="apellidos" class="form-control" minlength="2"
+                                        id="apellidos"  value="{{representante.apellidos}}"  required>
+                                        <label for="apellidos">Apellidos</label>
+                                    <div class="valid-feedback"> </div>
+                                    <div class="invalid-feedback">Complete el campo</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-5">
+                            <div class="col-12">
+                                <div class="form-floating">
+                                    <input type="email" name="email" class="form-control" id="email" minlength="5"
+                                        value="{{representante.correo}}" 
+                                        pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}"
+                                        required>
+                                        <label for="email">Correo</label>
+                                    <div class="valid-feedback"> </div>
+                                    <div class="invalid-feedback">Complete el campo</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pieForm">
+                            <button class="btn botonEnviar" id="btn1" type="submit">Modificar</button>
+                        </div>
+                        <div class="row d-flex justify-content-center mt-5">
+                            {{mensaje}}
+                        </div>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="{% static 'app/validacion.js' %}"></script>
+{% endblock %}

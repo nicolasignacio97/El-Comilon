@@ -16,44 +16,46 @@ Including another URLconf
 from django.contrib.auth import views as auth_views
 from django.contrib import admin
 from django.urls import path,include
+from registroDeUsuarios.views import registroUsuario
+# from ElComilon.listarPlatillos.views import modificarPlatillo
 from Home.views import inicio
-from Login.views import login
+
 from RegisterPlatillo.views import registroPlatillo
 from Register.views import register
 from registroProveedor.views import registroProveedor   
 from reclamo.views import reclamo
 from Home.views import quienesSomos
 from administracion.urls import url_patterns
-from PerfilUsuario.views import Usertemplate
+from PerfilUsuario.views import PerfilUsuario
 from RegisterRepartidor.views import registroRep,registroVeh,editRepartidor,listarRep,deleterepartidor
 from Pedido.views import pedido
-from Login.views import loginauth
+
 from Platillos.views import platillos
 from detallePedido.views import detallePedido
 from repartidor.views import viewRepartidor, viewPedido
 
 
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',inicio),
-    path('login',loginauth, name='login '), 
-    path('perfil',Usertemplate),
+    path('',inicio , name="home"),
+   
     path('registroPlatillo',registroPlatillo),
     path('registro',register),  
+    path('regin', registroRep),
+    path('reginvehiculo', registroVeh),
     path('registroProveedor',registroProveedor),
     path('reclamo',reclamo),
     path('quienesSomos', quienesSomos),
-    path('perfil', Usertemplate),
-    path('regin', registroRep , name="pefil"),
-    path('reginvehiculo', registroVeh),
-    path('listarep', listarRep),
-    path('updaterepartidor/<rutrepartidor>/',editRepartidor, name = 'updrpartidor'),
-    path('deleterepartidor/<rutrepartidor>/',deleterepartidor, name = 'deleterepartidor'), 
+    path('Historial/<id>', PerfilUsuario), #despues id en la ruta para filtro
     path('pedido', pedido),
     path('platillos', platillos),
     path('repartidor', viewRepartidor),
     path('viewPedido/<id>', viewPedido),
     path('detallePedido', detallePedido),
-    path('administracion/', include(url_patterns))
-
+    path('detallePedido/<idpedido>', detallePedido),
+    path('registroUsuarios', registroUsuario),
+    path('administracion/', include(url_patterns)),
+    path('accounts/', include('django.contrib.auth.urls')),
 ]
