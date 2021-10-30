@@ -19,7 +19,7 @@ def registroTrabajador(request):
         fechaContrato = request.POST.get('fecha').upper()
         usuario = request.POST.get('nombreU')
         contrasena = request.POST.get('contrasena')
-        rutRestaurante = '77.684.154-9'
+        rutRestaurante = '20.476.148-5'
         idCargo = request.POST.get('cargo')
 
         salida = registrarTrabajador(rutTrabajador, nombres, apellidos,

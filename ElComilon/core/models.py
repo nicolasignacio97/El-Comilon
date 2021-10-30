@@ -82,6 +82,15 @@ class EstadoReclamo(models.Model):
         managed = False
         db_table = 'estado_reclamo'
 
+class MenuSemanal(models.Model):
+    idmenu = models.IntegerField(primary_key=True)
+    dia = models.CharField(max_length=20)
+    idplatillo = models.IntegerField()
+    rutcliente = models.ForeignKey(Cliente, models.DO_NOTHING, db_column='rutcliente')
+
+    class Meta:
+        managed = False
+        db_table = 'menu_semanal'
 
 class Pedido(models.Model):
     idpedido = models.BigIntegerField(primary_key=True)
@@ -103,7 +112,8 @@ class Platillo(models.Model):
     nombre = models.CharField(max_length=30)
     ingredientes = models.CharField(max_length=50)
     valorunitario = models.IntegerField()
-    foto = models.BinaryField(blank=True, null=True)
+    foto = models.BinaryField(blank=True)
+    disponible = models.BooleanField(blank= True)
     rutrestaurante = models.ForeignKey('Restaurante', models.DO_NOTHING, db_column='rutrestaurante')
 
     class Meta:
@@ -162,6 +172,8 @@ class Representante(models.Model):
     apellidos = models.CharField(max_length=20)
     telefono = models.IntegerField()
     correo = models.CharField(max_length=30)
+    nombreusuario = models.CharField(max_length=15)
+    contrasena = models.CharField(max_length=15)
 
     class Meta:
         managed = False

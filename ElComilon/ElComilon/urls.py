@@ -31,6 +31,7 @@ from Pedido.views import pedido
 from Login.views import loginauth
 from Platillos.views import platillos
 from detallePedido.views import detallePedido
+from Menu.views import menu, crearMenu
 
 
 urlpatterns = [
@@ -50,4 +51,6 @@ urlpatterns = [
     path('platillos', platillos),
     path('detallePedido', detallePedido),
     path('administracion/', include(url_patterns)),
+    path('menu', menu),
+    path('crearMenu', crearMenu),
 ]
