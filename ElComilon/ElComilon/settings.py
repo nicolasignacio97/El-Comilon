@@ -64,6 +64,7 @@ INSTALLED_APPS = [
     'PerfilUsuario',
     'repartidor',
     'gestionRestaurantes',
+    'Menu',
     'registroDeUsuarios',
 ]
 CRISPY_TEMPLATE_PACK = 'bootstrap4'

@@ -1,0 +1,77 @@
+{% extends "HeaderFooter/base.html"%}
+{% load static%}
+
+
+{% block L-izquierda %}
+<a href="/">Inicio</a>
+<a href="quienesSomos">Sobre nosotros</a>
+{% endblock%}
+
+
+{% block L-derecha %}
+<a href="#">Catálogo</a>
+<a href="/login">Iniciar sesión</a>
+{% endblock%}
+
+{% block content%}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% load static %}
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+    <link rel="stylesheet" href={% static "css/estilo-menu.css" %}>
+    <title>El Comilón</title>
+</head>
+
+<body>
+    <section class="container card shadow-lg p3 mb-5 mt-5 bg-white card-body">
+        <h3 class="titulo text-center mt-5 mb-5">Menú Semanal</h3>
+        <div class="table-responsive-md">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Día</th>
+                        <th scope="col">Platillo</th>
+                        <th scope="col">Ingredientes</th>
+                        <th scope="col">Valor Unitario</th>
+                        <th scope="col">Disponible</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for m in menu %}
+                    <tr>
+                        <th scope="row" id="rutTrabajador" value="{{ m.data.1 }}">{{ m.data.1}}</th>
+                        <td>{{ m.data.4 }}</td>
+                        <td>{{ m.data.5}}</td>
+                        <td>{{ m.data.6 }}</td>
+                        <td>{{ m.data.7 }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                
+            </table>
+            <div class="pieForm">
+                <a href="crearMenu"><button class="btn botonEnviar" id="btn1" type="submit">Configurar</button></a>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
+{%endblock%}

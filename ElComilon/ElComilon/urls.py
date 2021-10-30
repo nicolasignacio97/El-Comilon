@@ -19,7 +19,6 @@ from django.urls import path,include
 from registroDeUsuarios.views import registroUsuario
 # from ElComilon.listarPlatillos.views import modificarPlatillo
 from Home.views import inicio
-
 from RegisterPlatillo.views import registroPlatillo
 from Register.views import register
 from registroProveedor.views import registroProveedor   
@@ -29,9 +28,9 @@ from administracion.urls import url_patterns
 from PerfilUsuario.views import PerfilUsuario
 from RegisterRepartidor.views import registroRep,registroVeh,editRepartidor,listarRep,deleterepartidor
 from Pedido.views import pedido
-
 from Platillos.views import platillos
 from detallePedido.views import detallePedido
+from Menu.views import menu, crearMenu
 from repartidor.views import viewRepartidor, viewPedido
 
 
@@ -57,5 +56,8 @@ urlpatterns = [
     path('detallePedido/<idpedido>', detallePedido),
     path('registroUsuarios', registroUsuario),
     path('administracion/', include(url_patterns)),
+    path('menu', menu),
+    path('crearMenu', crearMenu),
     path('accounts/', include('django.contrib.auth.urls')),
+
 ]
