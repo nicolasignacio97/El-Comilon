@@ -55,7 +55,7 @@ url_patterns = [
     path('updatevehiculo/<rutrepartidor>/',editvehiculo, name = 'updvehiculo'),
     path('deleterepartidor/<rutrepartidor>/',deleterepartidor, name = 'deleterepartidor'), 
     path('actualizarEmpresa', actualizarEmpresa),
-    path('actEmpresa', actEmpresa)
+    path('actEmpresa', actEmpresa),
 
     path('empresaRut',empresaRut,name = 'empresaRut'),
     path('eliminarEmpresa', eliminarEmpresa,name = 'eliminarEmpresa'),
