@@ -4,7 +4,9 @@ from django.db import connection
 from .forms import Repartidorform,vehiculoform
 import cx_Oracle
 from core.models import *
+from django.contrib.auth.decorators import permission_required
 
+@permission_required('core')
 def registroVeh(request):
     print(listar_categoria())
     data = {
@@ -47,7 +49,7 @@ def registroVeh(request):
     #         data['mensaje'] = 'No se ha podido guardar'
     return render(request, 'Registrorepartidor.html', data)  
 
-
+@permission_required('core')
 def registroRep(request):
     print(listar_categoria())
     data = {
@@ -100,7 +102,7 @@ def registroRep(request):
         
     return render(request, 'Registrorepartidor.html', data)  
 
-
+@permission_required('core')
 def editRepartidor(request,rutrepartidor):
     repartidor = Repartidor.objects.get(rutrepartidor=rutrepartidor)
     repartidores = Repartidor.objects.all()
@@ -120,6 +122,8 @@ def editRepartidor(request,rutrepartidor):
         return render(request, "listadorepartidores.html", contexto)
     return render(request, "updaterepartidor.html",contexto)
 
+
+@permission_required('core')
 def editvehiculo(request,rutrepartidor):
      vehiculo = Vehiculo.objects.get(rutrepartidor=rutrepartidor)
      Vehiculos =  Vehiculo.objects.all()
@@ -139,7 +143,7 @@ def editvehiculo(request,rutrepartidor):
         return render(request, "listadorepartidores.html", contexto)
      return render(request, "updaterepartidor.html",contexto)
 
-
+@permission_required('core')
 def deleterepartidor(request,rutrepartidor):
     repartidores = Repartidor.objects.all()
     vehiculos = Vehiculo.objects.all()
@@ -152,14 +156,14 @@ def deleterepartidor(request,rutrepartidor):
     }
     return render(request,"listadorepartidores.html",contexto)
 
-
+@permission_required('core')
 def listarRep(request):
     repartidores = Repartidor.objects.all()
     contexto = {
         'repartidor':repartidores
     }
     return render(request, "listadorepartidores.html", contexto)
-
+@permission_required('core')
 def listar_categoria():
     django_cursor = connection.cursor() 
     cursor = django_cursor.connection.cursor()
@@ -170,14 +174,15 @@ def listar_categoria():
         lista.append(fila)
     return lista
 
-
+@permission_required('core')
 def agregar_repartidor(RUTREPARTIDOR, NOMBRES, APELLIDOS, FECHACONTRATO, USUARIO, CONTRASENA, RUTRESTAURANTE):
      django_cursor = connection.cursor()
      cursor = django_cursor.connection.cursor()  
      salida = cursor.var(cx_Oracle.NUMBER)  
      cursor.callproc('SP_AGREGAR_REPARTIDOR', [RUTREPARTIDOR,NOMBRES,APELLIDOS,FECHACONTRATO,USUARIO,CONTRASENA,RUTRESTAURANTE, salida])
-     return salida.getvalue()       
-
+     return salida.getvalue()      
+      
+@permission_required('core')
 def agregar_vehiculo(PATENTEVEHICULO, MODELO, ANIO, COLOR, RUTREPARTIDOR, IDTIPOVEHICULO):
      django_cursor = connection.cursor()
      cursor = django_cursor.connection.cursor()   
