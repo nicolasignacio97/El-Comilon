@@ -32,7 +32,7 @@
     {% load humanize %}
     <div class="container">
         <div class="row">
-            <div class="col d-flex flex-wrap justify-content-center mt-5">
+            <div class="col-9 d-flex flex-wrap justify-content-center mt-5">
                 {% for p in platillos %}
                 <div class="card m-5 platillo sombra" style="width: 20rem;">
                     <img src="data:imagen/png;base64, {{p.imagen}}" class="card-img-top platillo__imagen" alt="...">
@@ -47,7 +47,11 @@
                     </div>
                   </div>
                   {% endfor %}                     
-                
+            </div>
+            <div class="col-3">
+                <div class="card">
+                    carro
+                </div>
             </div>
         </div>
     </div>

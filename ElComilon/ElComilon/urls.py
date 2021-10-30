@@ -29,7 +29,6 @@ from administracion.urls import url_patterns
 from PerfilUsuario.views import PerfilUsuario
 from RegisterRepartidor.views import registroRep,registroVeh,editRepartidor,listarRep,deleterepartidor
 from Pedido.views import pedido
-
 from Platillos.views import platillos
 from detallePedido.views import detallePedido
 from repartidor.views import viewRepartidor, viewPedido
