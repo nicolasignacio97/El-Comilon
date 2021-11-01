@@ -1,4 +1,4 @@
-{% extends "HeaderFooter/base.html"%}
+{% extends "HeaderFooter/base-sidebar.html"%}
 {% load static %}
 
 {% block content%}
@@ -22,6 +22,7 @@
     <script src="{% static 'app/jquery.rut.chileno.js' %}"></script>
 
     <link rel="stylesheet" href="{% static 'css/style-view-reparto.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style-recepcionista-view.css' %}">
 
     <title>Document</title>
 </head> 
@@ -53,31 +54,39 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="card shadow-lg p3 mb-5 mt-5 bg-white">
-                        <h3 class="titulo text-center mt-5 mb-5">Repartos</h3>
+                        <h3 class="titulo text-center mt-5 mb-5">Pedidos Listos para entregar</h3>
                         <div class="card-body">
-                            
-                            <div class="table-responsive-md">
-                                <table class="table contenido-tabla">
-                                    <thead>
+                            <form action="" method="POST">
+                                {% csrf_token %}
+                                <div class="table-responsive-md">
+                                    <table class="table contenido-tabla">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Id</th>
+                                                <th scope="col">Dirección</th>
+                                                <th scope="col">Estado Pedido</th>
+                                                <th scope="col">Tipo de Servicio</th>
+                                                <th scope="col">Asignar Repartidor</th>
+                                            </tr>
+                                        </thead>
+                                        {% for l in listos %}
                                         <tr>
-                                            <th scope="col">Fecha</th>
-                                            <th scope="col">Dirección</th>
-                                            <th scope="col">Estado</th>
-                                            <th scope="col">Ver</th>
-                                        </tr>
-                                    </thead>
-                                        {% for r in repartos %}
-                                        <tr>
-                                            <td>{{r.2|date:'d-m-y'}}</td>
-                                            <td>{{ r.3 }}</td>
-                                            <td>{{ r.5 }}</td>
-                                            <td><a href="viewPedido/{{r.0}}"><img src="{% static 'img/visible.png' %}" alt="ojito"></a></td>
+                                            <td name="idPedido">{{l.0}}</td>
+                                            <td>{{l.3}}</td>
+                                            <td>{{l.7}}</td>
+                                            <td>{{l.5}}</td>
+                                            {% if l.5 == 'DOMICILIO' %}
+                                                <td class="check"><a href="asignacion/{{l.0}}" type="submit"><img src="{% static 'img/reparto.png' %}" alt="check"></a></td>
+                                            {% else %}
+                                                <td class="check"><img src="{% static 'img/store.png' %}" alt="check"></td>
+                                            {% endif %}
+
                                         </tr>
                                         {% endfor %}
-                                    </tbody>
-                                </table>
-                            </div>
-                            
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>

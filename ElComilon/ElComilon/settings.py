@@ -58,6 +58,7 @@ INSTALLED_APPS = [
     'RegCliConv',
     'PerfilUsuario',
     'repartidor',
+    'recepcionista',
 ]
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 LOGIN_REDIRECT_URL = 'perfil'

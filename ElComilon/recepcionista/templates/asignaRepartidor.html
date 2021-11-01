@@ -1,11 +1,11 @@
-{% extends "HeaderFooter/base.html"%}
+{% extends "HeaderFooter/base-sidebar.html"%}
 {% load static %}
 
 {% block content%}
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
+<head>  
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -22,24 +22,21 @@
     <script src="{% static 'app/jquery.rut.chileno.js' %}"></script>
     <link rel="stylesheet" href="{% static 'css/style-view-reparto.css' %}">
     <link rel="stylesheet" href="{% static 'css/style-registro-proveedor.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style-recepcionista-view.css' %}">
 
     <title>Document</title>
 </head> 
 
 <body>
-    <section class="container">
-        <div class=" tarjeta-general shadow bg-body rounded" style="width: 24rem;">
-            <img src="{% static 'img/ruta.jpg' %}" class="card-img-top" alt="...">
-            <div class="contenido-carta">
-                <form class="contenedor-tarjeta" action="" method="POST">
-                    {% csrf_token %}
-                    <h4 class="card-title">PEDIDO N° {{ pedidoSelect.idpedido }}</h4>
-                    <p class="card-text">
-                    <div>
-                        <label for=""><span>Rut Cliente:</span></label>
-                        <label for="" id="rutPedido" name="rutPedido">{{ pedidoSelect.rutcliente }}</label>
-                    </div>
-            
+    <section class="container contenido-pedidovich ">
+        <div class="card text-center ">
+            <form action="" method="POST">
+                {% csrf_token %}
+                <div class="card-header" name>
+                    <p name='idPedido'>Pedido N° {{ pedidoSelect.idpedido }}</p>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Datos del pedido</h5>
                     <div>
                         <label for=""><span>Fecha:</span></label>
                         <label for="">{{ pedidoSelect.fechapedido }}</label>
@@ -54,45 +51,32 @@
                         <label for=""><span>Total: $</span></label>
                         <label for="">{{ pedidoSelect.valortotal }}</label>
                     </div>
-                    </p>
-                    <button class="btn botonEnviar" id="btn1" type="submit">Finalizar Entrega</button>
+                    <hr>
+                    <p class="card-text">Seleccione un repartidor disponible para efectuar la entrega a domicilio.</p>
+                    <select class="form-select" aria-label="Default select example" name="repartidor">w
+                        <option selected>Seleccionar repartidor</option>
+                        {% for repa in repartidores %}
+                        <option value="{{repa.0}}">{{repa.1}} {{repa.2}}</option>
+                        {% endfor %}
+                    </select>
+                    <button class="btn botonEnviar bloque-abajo" id="btn1" type="submit">Asignar repartidor</button>
                     {{mensaje}}
-                </form>
-            </div>
-        </div>
-    
-        <!-- <H2>PEDIDO N° {{ pedidoSelect.idpedido }}</H2>
-            <form action="" method="POST">
-                {% csrf_token %}
-                <div>
-                    <div>
-                        <label for=""><span>Rut Cliente:</span></label>
-                        <label for="" id="rutPedido" name="rutPedido">{{ pedidoSelect.rutcliente }}</label>
-                    </div>
-                    
-                    <div>
-                        <label for=""><span>Fecha pedido:</span></label>
-                        <label for="">{{ pedidoSelect.fechapedido }}</label>
-                    </div>
-            
-                    <div>
-                        <label for=""><span>Dirección:</span></label>
-                        <label for="">{{ pedidoSelect.direccionpedido }}</label>
-                    </div>
-        
-                    <div>
-                        <label for=""><span>Total: $</span></label>
-                        <label for="">{{ pedidoSelect.valortotal }}</label>
-                    </div>
                 </div>
-                <button class="btn botonEnviar" id="btn1" type="submit">Finalizar Entrega</button>
-                {{mensaje}}
+                <div class="card-footer text-muted">
+                    {{ pedidoSelect.fechapedido }}
+                </div>
             </form>
-             -->
-    
+        </div>
     </section>
 </body>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </html>
 {% endblock %}
 <!--  -->
+
+<select class="form-select" aria-label="Default select example" name="repartidor">w
+    <option selected>Seleccionar repartidor</option>
+    {% for repa in repartidores %}
+    <option value="{repa.0}">{{repa.1}} {{repa.2}}</option>
+    {% endfor %}
+</select>
