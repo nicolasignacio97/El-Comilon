@@ -1,8 +1,9 @@
 {% extends "HeaderFooter/base-sidebar.html"%}
+{% load crispy_forms_tags %}
 {% load static %}
 {% block content%}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
@@ -31,69 +32,77 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="card shadow-lg p3 mb-5 mt-5 bg-white">
-                        <h3 class="titulo text-center mt-5 mb-5">Registrar un trabajador</h3>
+                    <h3 class="titulo text-center">Registrar un trabajador</h3>
                     <div class="card-body">
-                        <form action="" autocomplete="off" class="needs-validation d-flex flex-column  justify-content-center"
-                            method="POST" novalidate>
+                        <form action="" autocomplete="off"
+                            class="needs-validation d-flex flex-column  justify-content-center" method="POST"
+                            novalidate>
                             {% csrf_token %}
-                            <div class="form-row">
-                                <div class="row">
-                                    <div class="col-lg-6 mb-4">
-                                        <input type="text" name="rutTrabajador" class="form-control input_rut" id="rut"
-                                            placeholder="14.442.987-2" value="" required>
-                                        <div class="valid-feedback"> </div>
-                                        <div class="invalid-feedback">Complete el campo</div>
-                                    </div>
-                                    <div class="col-lg-6 mb-4">
-                                        <input type="text" name="nombres" class="form-control" id="nombres"
-                                            placeholder="Nombres" required>
-                                        <div class="valid-feedback"> </div>
-                                        <div class="invalid-feedback">Complete el campo</div>
+                            <div class="row">
+                                <div class="col-6  p-4">
+                                    {{form|crispy}}
+                                </div>
+                                <div class="col-lg-6  p-4 mt-4">
+                                    <div class="form-row">
+                                        <div class="row">
+                                            <div class="row">
+                                                <div class="col mb-4">
+                                                    <input type="text" name="rutTrabajador"  oninput="checkRut(this)" class="form-control input_rut"
+                                                        id="rut" placeholder="14.442.987-2" value="" required>
+                                                    <div class="valid-feedback"> </div>
+                                                    <div class="invalid-feedback">Complete el campo</div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col mb-4">
+                                                    <input type="text" name="nombres" class="form-control" id="nombres"
+                                                        placeholder="Nombres" required>
+                                                    <div class="valid-feedback"> </div>
+                                                    <div class="invalid-feedback">Complete el campo</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="row">
+                                                <div class="col mb-4">
+                                                    <input type="text" name="apellidos" class="form-control" id="apellidos"
+                                                        placeholder="Apellidos" required>
+                                                    <div class="valid-feedback"> </div>
+                                                    <div class="invalid-feedback">Complete el campo</div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col mb-4">
+                                                    <input type="date" name="fecha" class="form-control" id="fechaActual"
+                                                        required>
+                                                    <div class="valid-feedback"> </div>
+                                                    <div class="invalid-feedback">Complete el campo</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="row d-flex justify-content-center">
+                                                <div class="col mb-4 ">
+                                                    <select name="cargo" id="" class="form-select">
+                                                        <option disabled>Cargo</option>
+                                                        {% for c in cargo %}
+                                                        <option value="{{c.0}}">{{c.1}}</option>
+                                                        {% endfor %}
+                                                    </select>
+                                                    <div class="valid-feedback"> </div>
+                                                    <div class="invalid-feedback">Complete el campo</div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-lg-6 mb-4">
-                                        <input type="text" name="apellidos" class="form-control" id="apellidos"
-                                            placeholder="Apellidos" required>
-                                        <div class="valid-feedback"> </div>
-                                        <div class="invalid-feedback">Complete el campo</div>
-                                    </div>
-                                    <div class="col-lg-6 mb-4">
-                                        <input type="date" name="fecha" class="form-control" id="fechaActual" required>
-                                        <div class="valid-feedback"> </div>
-                                        <div class="invalid-feedback">Complete el campo</div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-lg-6 mb-4">
-                                        <input type="text" name="nombreU" class="form-control" id="nombreU"
-                                            placeholder="Nombre de usuario" required>
-                                        <div class="valid-feedback"> </div>
-                                        <div class="invalid-feedback">Complete el campo</div>
-                                    </div>
-                                    <div class="col-lg-6 mb-4">
-                                        <input type="password" name="contrasena" class="form-control" id="contrasena"
-                                            placeholder="Contraseña" required>
-                                        <div class="valid-feedback"> </div>
-                                        <div class="invalid-feedback">Complete el campo</div>
-                                    </div>
-                                </div>
-                                <div class="row d-flex justify-content-center">
-                                    <div class="col-lg-6 mb-4 ">
-                                      <select name="cargo" id="" class="form-select">
-                                          <option disabled>Cargo</option>
-                                          {% for c in cargo %}
-                                          <option value="{{c.0}}">{{c.1}}</option>
-                                          {% endfor %}
-                                      </select>
-                                        <div class="valid-feedback"> </div>
-                                        <div class="invalid-feedback">Complete el campo</div>
-                                    </div>
-                                </div>
+
+                            </div>
+                            <div class="row">
                                 <div class="pieForm">
                                     <button class="btn botonEnviar" id="btn1" type="submit">Registrar</button>
                                 </div>
-                                <div class="row d-flex justify-content-center mt-5">
+                                <div class="row d-flex justify-content-center">
                                     {{mensaje}}
                                 </div>
                             </div>
