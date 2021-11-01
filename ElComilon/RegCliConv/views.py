@@ -2,31 +2,31 @@ from django.shortcuts import get_object_or_404, render, redirect
 from django.db import connection
 from core.models import Cliente
 import cx_Oracle
+from registroDeUsuarios.forms import FormularioUsuario
+from django.contrib import messages
 
 # Create your views here.
 #AGREGAR CLIENTES CONVENIO
 def RegistroCliConvenio(request):
     data = {
-
+        'form': FormularioUsuario(),
+        'Seleccion':listar_EmpConvenio()
     }
     if request.method == 'POST':
         rutcliente = request.POST.get('rutCliConv')
-        nomUsuario = request.POST.get('nomUsuarioConv')
         nombres = request.POST.get('nomCliConv')
         apellidos = request.POST.get('apeCliConv')
         direccion = request.POST.get('direcCliConv')
-        contrasena = request.POST.get('passCliConv')
-        telefono = request.POST.get('telCliConv')
-        correo = request.POST.get('mailCliConv')
         saldocli = request.POST.get('saldoCli')
         idtipoCliente = 1
         rutempcli = request.POST.get('rutEmpConv')
-        salida = agregar_cliente_convenio(rutcliente, nomUsuario,nombres, apellidos, direccion, contrasena, telefono, correo,saldocli,idtipoCliente,rutempcli)
-        if salida == 1:
-            data['mensaje'] = 'CLIENTE CONVENIO AGREGADO CORRECTAMENTE'
-        else:
-            data['mensaje'] = 'UPS, NO SE HA PODIDO AGREGAR EL CLIENTE CONVENIO'
-
+        forumulario = FormularioUsuario(data=request.POST)
+        if forumulario.is_valid():
+            forumulario.save()
+            agregar_cliente_convenio(rutcliente,nombres, apellidos, direccion,idtipoCliente,rutempcli,saldocli)    
+            messages.success(request, "Usuario Creado")
+            data['form'] = forumulario
+            redirect(to="ClienteConvenio")
     return render(request,'regCliConv.html', data)
 
 #LISTAR CLIENTES CONVENIO
@@ -46,21 +46,16 @@ def modificarCliConv(request,id):
 
     if request.method == 'POST':
         rutclienteConv = request.POST.get('rutCliConv')
-        nomUsuario = request.POST.get('nomUsuarioConv')
+      
         nombres = request.POST.get('nomCliConv')
         apellidos = request.POST.get('apeCliConv')
         direccion = request.POST.get('direcCliConv')
-        contrasena = request.POST.get('passCliConv')
-        telefono = request.POST.get('telCliConv')
-        correo = request.POST.get('mailCliConv')
+      
         saldocli = request.POST.get('saldoCli')
         rutempcli = request.POST.get('rutEmpConv')
-        salida = modificar_cliente_convenio(rutclienteConv, nomUsuario,nombres, apellidos, direccion, contrasena, telefono, correo,saldocli,rutempcli)
-        if salida == 1:
-            return redirect(to="/administracion/listarCliConv")
-            # dataMod['mensaje'] = 'CLIENTE CONVENIO MODIFICADO CORRECTAMENTE'
-        else:
-            dataMod['mensaje'] = 'UPS, NO SE HA PODIDO MODIFICAR EL CLIENTE CONVENIO'
+
+        modificar_cliente_convenio(rutclienteConv,nombres, apellidos, direccion,saldocli,rutempcli)
+     
     return render(request,'modCliConv.html',dataMod)
 
 
@@ -68,12 +63,15 @@ def modificarCliConv(request,id):
 ## FUNCIONES DE CLIENTES CONVENIO
 
 #FUNCIÓN AGREGAR CLIENTE CONVENIO
-def agregar_cliente_convenio(rutcliente, nomUsuario,nombres, apellidos, direccion, contrasena,telefono,correo,saldocli,idtipoCliente,rutempcli):
+def agregar_cliente_convenio(rutcliente,nombres, apellidos, direccion,idtipoCliente,rutempcli,saldocli):
     django_cursor = connection.cursor()
     cursor = django_cursor.connection.cursor()
     salida = cursor.var(cx_Oracle.NUMBER)
-    cursor.callproc('SP_AGREGAR_CLIENTE_CONVENIO',[rutcliente, nomUsuario , nombres, apellidos, direccion, contrasena,telefono,correo, saldocli,idtipoCliente,rutempcli,salida])
+    cursor.callproc('SP_AGREGAR_CLIENTE_CONVENIO',[rutcliente, nombres, apellidos, direccion, idtipoCliente,rutempcli,saldocli,salida])
     return salida.getvalue()
+
+
+
 #FUNCIÓN MODIFICAR CLIENTE CONVENIO
 def modificar_cliente_convenio(rutcliente, nomUsuario,nombres, apellidos, direccion, contrasena,telefono,correo,saldocli,rutempcli):
     django_cursor = connection.cursor()
@@ -96,6 +94,17 @@ def listar_clientes_conv():
     return listaCli
 
 
+def listar_EmpConvenio():
+    django_cursor = connection.cursor()
+    cursor = django_cursor.connection.cursor()
+    out_cur = django_cursor.connection.cursor()
+
+    cursor.callproc('LISTAR_EMPCONVENIO', [out_cur])
+
+    ListaConv = []
+    for fila in out_cur:
+        ListaConv.append(fila)
+    return ListaConv
 
 
 #ELIMINAR CLIENTE CONVENIO

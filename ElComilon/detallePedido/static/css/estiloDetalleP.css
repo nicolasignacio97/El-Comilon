@@ -45,6 +45,13 @@ label{
     gap: .5rem;
 }
 
+
+.fecha-estado .estado{
+    font-weight: bold;
+    color: #9c3534;
+    text-transform:capitalize;
+}
+
 /*Detalles del pedido*/
 .container{
     display: flex;
@@ -52,6 +59,7 @@ label{
     align-items: center;
     margin: 0 auto;
     margin-bottom: 8rem;
+    width: 1100px;
 }
 
 .container-precios{
@@ -60,15 +68,14 @@ label{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    align-items: center;
+    align-items:center;
     height: 50rem;
     width: 100rem;
 }
 
 .platillo{
-    width: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
 }
 
 .multiplicador-platillo{
@@ -81,16 +88,19 @@ label{
     margin: 0 2rem;
 }
 .separaciones{
+    width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 1rem;
 }
 
 /*Tipo de entrega*/
 .tipo-entrega{
-    text-align: center;
+    text-align: start;
     padding-right: 67rem;
-    margin-bottom: 3rem;
+    margin-bottom: 6rem;
+    margin-top: 4rem;
+    width: 100rem;
 }
 .entrega-bold{
     font-weight: bold;
@@ -100,12 +110,17 @@ label{
 .datos-cliente{
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    margin-left:45.2rem;
-}
+    justify-content: flex-start;
+    gap: 1rem;
+    width: 100rem;
+}   
 
 .datos-cliente p{
     font-size: 2rem;
     margin: 0;
+}
+
+.totales{
+    display: flex;
+    justify-content: space-around;
 }

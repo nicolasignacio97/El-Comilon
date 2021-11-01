@@ -15,7 +15,7 @@ body{
     margin: 0 auto;
     margin-top: 100px;
     align-items: center;
-    height: 600px;
+    height: 750px;
 }
 
 input[type=number]::-webkit-inner-spin-button, 
@@ -54,7 +54,8 @@ input[type=number] { -moz-appearance:textfield; }
 }
 
 .inputs{
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
+    position:unset;
 }
 
 .form-label{
@@ -74,11 +75,12 @@ input[type=number] { -moz-appearance:textfield; }
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
     padding-bottom: 4rem;
 }
 
 .titulo{
-    margin-bottom: 2rem;
+    margin-bottom: 4rem;
     margin-top: 1rem;
 }
 .titulo h1{
@@ -87,7 +89,7 @@ input[type=number] { -moz-appearance:textfield; }
 }
 
 #preview{
-    width: 18rem;
+    width: 13rem;
     height: 14rem;    
 }
 
@@ -106,6 +108,7 @@ input[type=number] { -moz-appearance:textfield; }
 }
 
 .botones{
+    margin-top: 2rem;
     display: flex;
     justify-content: center;
     align-items:stretch;
@@ -119,7 +122,6 @@ input[type=number] { -moz-appearance:textfield; }
 .btn-aceptar{
     background: #9c3534;
     color: #ffffff;
-    transition: background .8s ease;
 }
 
 .btn-aceptar:hover{
@@ -135,17 +137,16 @@ input[type=number] { -moz-appearance:textfield; }
 }
 
 
-@media (max-width: 768px) {
+@media (max-width: 1000px) {
     .itemsIzquierda{
         flex-direction: column;
         align-items:center;
     }
     .cuadrado{
         margin-top: 50px;
-        height: 62rem;
+        height: 70rem;
     }
     #preview{
-        display: none;
         margin-bottom: 1rem;
     }
     .multimedia{
@@ -165,6 +166,9 @@ input[type=number] { -moz-appearance:textfield; }
           padding: 0;
           height: 21rem;
       }
+      .campos{
+        width: 100%;
+    }
   }
 
   @media (max-width: 300px) {
@@ -243,3 +247,73 @@ input[type=number] { -moz-appearance:textfield; }
     vertical-align: middle;
 }
 
+.titlulo-vista-previa{
+    color: #9c3534;
+    margin-top: 1rem;
+}
+
+.platillo{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.platillo__imagen{
+    width: 100%;
+    height: 200px;
+}
+
+.platillo__nombre:first-letter{
+    text-transform:capitalize;
+        
+}
+
+.platillo__descripcion{
+    color: rgb(104, 104, 104);
+    margin-top: .5rem;
+    margin-bottom: 0;
+    width: 10rem;
+}
+
+.platillo__descripcion::first-letter{
+    text-transform:capitalize;
+}
+
+.platillo__precio{
+    color:#9c3534;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.precio-signo{
+    margin-top: 1rem;
+    gap: 1rem;
+    display: flex;
+    justify-content: center;
+    gap: .1rem;
+    color:#9c3534;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.btn-danger{
+    background-color: #9c3534;  
+    border: none;
+}
+
+.card {
+    border: none;
+}
+
+.platillo__boton{
+    font-weight: bold;
+    font-size: 20px;
+    margin-top: .5rem;
+    padding: .6rem 1rem;
+}
+
+.separacion{
+    margin: 0;
+    color: #9c3534;  
+    font-weight: bold;
+}

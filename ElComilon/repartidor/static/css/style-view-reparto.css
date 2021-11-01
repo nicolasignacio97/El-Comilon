@@ -25,3 +25,37 @@
     border-radius: 1px;
     padding: 1rem;
 } */
+body{
+    background-color: #f7f7f7;
+}
+
+.contenedor-tarjeta{
+    width: 20rem;
+    margin: 0;
+
+}
+
+.contenedor-tarjeta h4{
+    text-align: center;
+    
+}
+
+.tarjeta-general{
+    margin-top: 3rem;
+    background-color: #fff;
+    border-radius: 1px;
+}
+
+.contenido-carta{
+   margin-top: 3rem;
+   padding-bottom: 3rem;
+    padding-left: 2rem;
+}
+
+.contenido-carta span{
+    font-size: 1.3rem;
+}
+
+.contenido-carta button{
+    width: 20rem;
+}

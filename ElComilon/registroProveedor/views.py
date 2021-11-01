@@ -1,9 +1,11 @@
 from django.shortcuts import render
 from django.db import connection
 import cx_Oracle
+from django.contrib import messages
+from django.contrib.auth.decorators import permission_required
 
 # Create your views here.
-
+@permission_required('core')
 def registroProveedor (request):
     data = {
         
@@ -17,27 +19,17 @@ def registroProveedor (request):
         telefono = request.POST.get('telefono')
         correo = request.POST.get('email')
         
-        salidaRepre = registrarRepre(rutRepre,nombresRepre,apellidosRepre,telefono,correo)
+        registrarRepre(rutRepre,nombresRepre,apellidosRepre,telefono,correo)
 
         # RESTAURANTE PROVEEDOR
         rutRest = request.POST.get('rutRestaurante').upper()
         nombre = request.POST.get('nombre').upper()
         direccion = request.POST.get('direccion').upper()
         representante =  request.POST.get('representante').upper()
-        tipo = 1
-        salidaPrve = registrarProve(rutRest,nombre,direccion,representante,tipo)
+        tipo = 2
+        registrarProve(rutRest,nombre,direccion,representante,tipo)
+        messages.success(request, nombre + " Registrado correctamente")
 
-        # SALIDA REPRESENTANTE
-        if salidaRepre == 1 :
-            data['mensaje'] = 'Agregado correctamente'
-        else:
-            data['mensaje'] = 'No se ha podido guardar'
-
-        # SALIDA RESTAURANTE PROVEEDOR
-        if salidaPrve == 1 :
-            data['mensaje'] = 'Agregado correctamente'
-        else:
-            data['mensaje'] = 'No se ha podido guardar'
 
     #SALIDA PAGINA
     return render (request,'registro-proveedor.html',data)

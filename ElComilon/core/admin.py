@@ -21,4 +21,5 @@ admin.site.register(TipoServicio)
 admin.site.register(TipoVehiculo)
 admin.site.register(Trabajador)
 admin.site.register(Vehiculo)
+# admin.site.register(Usuario)
 

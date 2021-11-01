@@ -1,11 +1,12 @@
 from django.http import request
 from django.shortcuts import render
 from django.db import connection, reset_queries
+from django.contrib.auth.decorators import permission_required
 import cx_Oracle
 
 # Create your views here.
 
-
+@permission_required('core')
 def registroTrabajador(request):
     data = {
         'cargo': listar()
@@ -45,7 +46,7 @@ def listar():
 
     return lista
 
-
+@permission_required('core')
 def registrarTrabajador(rutTrabajador, nombres, apellidos, fechaContrato, usuario, contrasena, rutRestaurante, idCargo):
     django_cursor = connection.cursor()
     cursor = django_cursor.connection.cursor()
@@ -54,7 +55,7 @@ def registrarTrabajador(rutTrabajador, nombres, apellidos, fechaContrato, usuari
                     fechaContrato, usuario, contrasena, rutRestaurante, idCargo, salidaPrve])
     return salidaPrve.getvalue()
 
-
+@permission_required('core')
 def listaTrabajador(request):
     data = {
         'trabajadores': listarTrabajador()
@@ -74,7 +75,7 @@ def listarTrabajador():
 
     return lista
 
-
+@permission_required('core')
 def trabajadorRut(request):
     if request.method == 'POST':
 
@@ -97,7 +98,7 @@ def listarTrabajadorRut(rut):
         lista.append(fila)
 
     return lista
-
+@permission_required('core')
 def actualizarTrabajador(request):
 
     if request.method == 'POST':
@@ -110,7 +111,27 @@ def actualizarTrabajador(request):
         }
 
  
-    return render(request, 'registroTrabajador.html', data)
+    return render(request, 'actualizarTrabajador.html', data)
+    
+@permission_required('core')
+def actTrabajador(request):
+    if request.method =='POST':
+        rutTrabajador = request.POST.get('rutTrabajador').upper()
+        nombres = request.POST.get('nombres').upper()
+        apellidos = request.POST.get('apellidos').upper()
+        usuario = request.POST.get('nombreU')
+        idCargo = request.POST.get('cargo')
+
+        actualizar(rutTrabajador, nombres, apellidos, usuario, idCargo)
+
+    return listaTrabajador(request)
+
+def actualizar(rutTrabajador, nombres, apellidos, usuario, idCargo):
+    django_cursor = connection.cursor()
+    cursor = django_cursor.connection.cursor()
+    cursor.callproc("SP_ACT_TRABAJADOR", [rutTrabajador, nombres, apellidos, usuario, idCargo])
+
+    return 0
 
 def eliminarTrabajador(request):
     if request.method == 'POST':
