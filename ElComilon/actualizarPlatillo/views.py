@@ -63,7 +63,7 @@ def modificarPlatillo(request, id):
         nombrePlatillo = request.POST.get('Nombre').upper()
         ingredientes = request.POST.get('Ingredientes').upper()
         valor = request.POST.get('Valor')
-        foto = request.FILES['foto'].read()
+        foto = request.FILES['foto'].read()            
         ModificarPlatillo(id,nombrePlatillo, ingredientes, valor, foto)
         messages.success(request, "Se ha modificado correctamente el platillo ")
         return redirect(to="/administracion/listarPlatillos")

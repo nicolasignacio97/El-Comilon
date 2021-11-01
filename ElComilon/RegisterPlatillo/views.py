@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.shortcuts import render
 from django.db import connection
 from django.contrib.auth.decorators import permission_required
@@ -15,12 +16,8 @@ def registroPlatillo (request):
         valor = request.POST.get('Valor')
         foto = request.FILES['foto'].read()
         rutRestaurante = request.POST.get('restaurante')
-        salida = registrarPlatillo(nombrePlatillo, ingredientes, valor, foto, rutRestaurante)
-        if salida == 1:
-            data['mensaje']='Se ha registrado el platillo correctamente'
-            salida = 0
-        else:
-            data['mensaje']='Error'
+        registrarPlatillo(nombrePlatillo, ingredientes, valor, foto, rutRestaurante)
+        messages.success(request, "Se ha creado correctamente el platillo ")
     return render(request,'registrarPlatillo.html', data)
 
 

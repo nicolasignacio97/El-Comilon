@@ -32,7 +32,7 @@
     {% load humanize %}
     <div class="container">
         <div class="row">
-            <div class="col d-flex flex-wrap justify-content-center mt-5">
+            <div class="col-9 d-flex flex-wrap justify-content-center mt-5">
                 {% for p in platillos %}
                 <div class="card m-5 platillo sombra" style="width: 20rem;">
                     <img src="data:imagen/png;base64, {{p.imagen}}" class="card-img-top platillo__imagen" alt="...">
@@ -42,12 +42,16 @@
                       <hr class="separacion">
                       <div class="precio-boton">
                           <h6 class="card-subtitle mb-2  platillo__precio">${{ p.data.3 | intcomma}}</h6>
-                          <a href="#" class="btn btn-danger platillo__boton">Agregar al Carro</a>
+                          <a  href="{% url 'agregarProducto' p.data.0 %}"  class="btn btn-danger platillo__boton"><img src="{% static 'img/icons8-agregar-a-carrito-de-compras-24.png' %}" alt=""> Agregar al Carro</a>
                       </div>
                     </div>
                   </div>
                   {% endfor %}                     
-                
+            </div>
+            <div class="col-3 mt-5">
+                <div class="card mt-5">
+                    {% include "carrito.html" %}
+                </div>
             </div>
         </div>
     </div>

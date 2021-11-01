@@ -54,6 +54,23 @@ a:hover{
     border: none;
 }
 
+.btn-outline-danger{
+    background-color: #ffffff; 
+    border: 1px solid #9c3534;
+    color: #9c3534;
+    border-radius: 50%;
+    display: inline-block;
+}
+    
+.btn-outline-danger:hover{
+    background-color: #9c3534;
+    border: 1px solid #9c3534;
+}
+
+.btn-outline-danger-rest{
+    display: flex;
+}
+
 .card {
     border: none;
 }
@@ -75,8 +92,30 @@ a:hover{
 }
 
 .separacion{
-    margin: 0;
     color: #9c3534;  
-    height: 2.5px;
     font-weight: bold;
+}
+
+.agregar-restar{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.total{
+    height: 5rem;
+    text-align: center;
+    padding-top: 2rem;
+    color: #9c3534; 
+}
+
+.botones-carro{
+    height: 5rem;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.productos{
+    display: flex;
+    flex-direction: column;
 }

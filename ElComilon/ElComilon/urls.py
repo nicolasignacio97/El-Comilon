@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib.auth import views as auth_views
 from django.contrib import admin
 from django.urls import path,include
+
 from registroDeUsuarios.views import registroUsuario
 # from ElComilon.listarPlatillos.views import modificarPlatillo
 from Home.views import inicio
@@ -28,18 +29,16 @@ from administracion.urls import url_patterns
 from PerfilUsuario.views import PerfilUsuario
 from RegisterRepartidor.views import registroRep,registroVeh,editRepartidor,listarRep,deleterepartidor
 from Pedido.views import pedido
-from Platillos.views import platillos
+from Platillos.views import platillos,agregar_producto,eliminar_producto, restar_producto, limpiar_carrito
+
 from detallePedido.views import detallePedido
 from Menu.views import menu, crearMenu
 from repartidor.views import viewRepartidor, viewPedido
 
 
-
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',inicio , name="home"),
-   
     path('registroPlatillo',registroPlatillo),
     path('registro',register),  
     path('regin', registroRep),
@@ -49,8 +48,7 @@ urlpatterns = [
     path('quienesSomos', quienesSomos),
     path('Historial/<id>', PerfilUsuario), #despues id en la ruta para filtro
     path('pedido', pedido),
-    path('perfil-offcanvas', perfil),
-    path('platillos', platillos),
+    path('platillos', platillos, name="platillos"),
     path('repartidor', viewRepartidor),
     path('viewPedido/<id>', viewPedido),
     path('detallePedido', detallePedido),
@@ -60,5 +58,12 @@ urlpatterns = [
     path('menu', menu),
     path('crearMenu', crearMenu),
     path('accounts/', include('django.contrib.auth.urls')),
+
+
+    #carro
+    path('agregar/<id>', agregar_producto , name="agregarProducto"),
+    path('eliminar/<id>', eliminar_producto , name="eliminar"),
+    path('restar/<id>', restar_producto , name="restar_producto"),
+    path('limpiarCarro', limpiar_carrito , name="limpiar_carrito"),
 
 ]

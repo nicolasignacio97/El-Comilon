@@ -1,11 +1,6 @@
 /*General*/
-html{
-    box-sizing: border-box;
-    font-size: 62.5%;
-}
-
 *{
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Roboto', sans-serif;  
 }
 
 *, *::before, *::after{
@@ -18,28 +13,29 @@ body{
 
 h1 {
     color: #9c3534;
-    font-size: 3.4rem;
+    font-size: 2.6rem;
     font-weight:bold;
 }
 h2 {
     color: #9c3534;
-    font-size: 3rem;
+    font-size: 2.4rem;
     font-weight:bold;
 }
 
 label{
-    font-size: 2rem;
+    font-size: 1.6rem;
 }
 
 /*Id de pedido, fecha y estado*/
 
 .num-pedido{
+    margin-top: 4rem;
     text-align: center;
 }
 
 .fecha-estado{
     text-align: center;
-    font-size: 2rem;
+    font-size: 1.6rem;
     display: flex;
     justify-content: center;
     gap: .5rem;
@@ -53,13 +49,14 @@ label{
 }
 
 /*Detalles del pedido*/
-.container{
+.cuadrado{
     display: flex;
     flex-direction: column;
     align-items: center;
     margin: 0 auto;
+    margin-top: 5rem;
     margin-bottom: 8rem;
-    width: 1100px;
+    max-width: 90%;
 }
 
 .container-precios{
@@ -70,17 +67,21 @@ label{
     justify-content: space-between;
     align-items:center;
     height: 50rem;
-    width: 100rem;
+    width: 90%;
+}
+.campos{
+    width: 90%;
 }
 
 .platillo{
     display: flex;
     justify-content: space-between;
+    border-bottom: 2px dotted #c4c4c4;
 }
 
 .multiplicador-platillo{
     font-weight: bold;
-    margin-left:1rem;
+    margin-left:.8rem;
 }
 
 .puntos-separacion{
@@ -91,16 +92,16 @@ label{
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 2rem;
 }
 
 /*Tipo de entrega*/
 .tipo-entrega{
-    text-align: start;
-    padding-right: 67rem;
+    display: flex;
+    justify-content: flex-start;
     margin-bottom: 6rem;
     margin-top: 4rem;
-    width: 100rem;
+    width: 90%;
 }
 .entrega-bold{
     font-weight: bold;
@@ -111,16 +112,73 @@ label{
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    gap: 1rem;
-    width: 100rem;
+    gap: .8rem;
+    width: 90%;
 }   
 
 .datos-cliente p{
-    font-size: 2rem;
+    font-size: 1.6rem;
     margin: 0;
 }
 
 .totales{
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
+    border-bottom: 2px dotted #c4c4c4;
 }
+
+.separaciones-totales{
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.separacion{
+    margin: 1rem 1rem;
+}
+
+.small-border {
+    height: 3px;
+    width: 80px;
+    margin: 15px 0;
+    background: #9C3534;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@media (max-width: 768px) {
+    .container-precios{
+        width: 100%;
+    }
+    .campos{
+        width: 100%;
+    }
+    .cuadrado{
+        max-width: 100%;
+        margin: 5 0;
+    }
+    .tipo-entrega{
+        display: block;
+        text-align: center;
+        padding: 0;
+        width: 100%;
+    }
+    .datos-cliente{
+        text-align: center;
+        display: flex;
+        flex: wrap;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: .8rem;
+        width: 100%;
+    }   
+}
+
+@media (max-width: 320px) {
+    .datos-cliente p{
+        font-size:20px;
+    }
+}
+
