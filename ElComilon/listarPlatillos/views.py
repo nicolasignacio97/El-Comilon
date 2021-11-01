@@ -3,13 +3,17 @@ from django.db import connection
 import base64
 import cx_Oracle
 from core.models import Platillo
+from django.contrib import messages
+from django.contrib.auth.decorators import permission_required
 
 # Create your views here.
+@permission_required('core')
 def listarPlatillos(request):
     data = {
         'platillos':listado_platillos()
     }
     return render(request, 'listarPlatillos.html', data)
+
 
 def listado_platillos():
     django_cursor = connection.cursor()
@@ -28,21 +32,10 @@ def listado_platillos():
 
     return lista
 
-# def modificarPlatillo(request, idPlatillo):
-#     platillo = get_object_or_404(Platillo, idPlatillo=id)
-#     dataMod = {
-#         'seleccion': platillo
-#     }
-
-# # def ModificarPlatillo(idPlatillo, nomPlatillo, valPlatillo, fotPlatillo, rutRest):
-# #     django_cursor = connection.cursor()
-# #     cursor = django_cursor.connection.cursor()
-# #     salida = cursor.var(cx_Oracle.NUMBER)
-# #     cursor.callproc("ACTUALIZAR_PLATILLO", [idPlatillo, nomPlatillo, valPlatillo, fotPlatillo, rutRest, salida])
-# #     return salida.getvalue()
-
+@permission_required('core')
 def eliminarPlatillo(request, id):
     platillo = get_object_or_404(Platillo, idplatillo=id)
     platillo.delete()
+    messages.success(request, "Se ha eliminado correctamente el platillo "+ platillo.nombre)
     return redirect(to="/administracion/listarPlatillos")
 

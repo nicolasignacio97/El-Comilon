@@ -30,6 +30,9 @@ ALLOWED_HOSTS = []
 
 MESSAGE_STORAGE = "django.contrib.messages.storage.cookie.CookieStorage"
 
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -46,7 +49,6 @@ INSTALLED_APPS = [
     'registroTrabajador',
     'shared',
     'Home',
-    'Login',
     'RegisterPlatillo',
     'Register',
     'registroProveedor',
@@ -60,11 +62,13 @@ INSTALLED_APPS = [
     'actualizarPlatillo',
     'RegCliConv',
     'PerfilUsuario',
+    'repartidor',
     'gestionRestaurantes',
-
+    'Menu',
+    'registroDeUsuarios',
 ]
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
-LOGIN_REDIRECT_URL = 'perfil'
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -132,11 +136,12 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+#AUTH_USER_MODEL = 'core.Usuario'
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'es'
 
 TIME_ZONE = 'America/Santiago'
 

@@ -25,61 +25,62 @@
     <title>Detalle de Pedido</title>
 </head>
 <body>
+    {% load humanize %}
     <main>
-        <h1 class="num-pedido">Pedido #654</h1>
+        
+            <h1 class="num-pedido">Pedido #<span>{{pedido.0.0}}</span></h1>
+        
         <div class="fecha-estado">
-            <p>Tu pedido se realizó el xx/xx/xxxx y se encuentra </p>
-            <p> Finalizado</p>
+            <p>Tu pedido se realizó el <span>{{pedido.0.1}}</span> y se encuentra </p>
+            <p class="estado">{{pedido.0.2 | title}}</p>
         </div>
+        
         <div class="container">
             <h2>Detalles del pedido</h2> 
             <div class="container-precios">
-                <div class="separaciones">
-                    <div class="platillo">
-                        <label for="">Fideos con salsa</label>
-                        <label class="multiplicador-platillo" for="">x1</label>
-                        <label class="puntos-separacion" for="">............................................................................................</label>
-                        <label for="">$5990</label>
+                <div class="campos">
+                    <div class="separaciones">
+                        {% for p in platillos %}
+                        <div class="platillo">
+                            <label for="">{{p.data.3 | title}} <span class="multiplicador-platillo">x{{p.data.4}}</span></label>
+                            <label class="puntos-separacion" for="">............................................................................................</label>
+                            <label for="">${{p.data.5 | intcomma}}</label>
+                        </div>
+                        {% endfor %}
                     </div>
         
-                    <div class="platillo">
-                        <label for="">Arroz con pollo</label>
-                        <label class="multiplicador-platillo" for="">x1</label>
-                        <label for="" class="puntos-separacion">............................................................................................</label>
-                        <label for="">$4990</label>
+                    </div>
+                    <div class="separaciones">
+                        <div class="totales">
+                            <label for="">Subtotal:</label>
+                            <label for="" class="puntos-separacion">............................................................................................</label>
+                            <label for="">${{pedido.0.6 | intcomma}}</label>
+                        </div>
+            
+                        <div class="totales">
+                            <label for="">Total:</label>
+                            <label for="" class="puntos-separacion">............................................................................................</label>
+                            <label for="">${{pedido.0.7 | intcomma}}</label>
+                        </div>
                     </div>
                 </div>
-                <div class="separaciones">
-                    <div>
-                        <label for="">Subtotal:</label>
-                        <label for="" class="puntos-separacion">............................................................................................</label>
-                        <label for="">$10980</label>
-                    </div>
+                <div class="tipo-entrega">
+                    <label class="entrega-bold" for="">Tipo de entrega: </label>
+                    <label for="">{{pedido.0.8}}</label>
+                </div>
         
-                    <div>
-                        <label for="">Total:</label>
-                        <label for="" class="puntos-separacion">............................................................................................</label>
-                        <label for="">$10980</label>
-                    </div>
+                <div class="datos-cliente">
+                    <h2>Datos del cliente</h2>
+                    <p>{{pedido.0.9 | title}}</p>
+                    <p>{{pedido.0.10 | title}}</p>
+                    <p>{{pedido.0.11}}</p>
+                    <p>{{pedido.0.12}}</p>
                 </div>
     
             </div>
         </div>
+        
 
-        <div class="tipo-entrega">
-            <label class="entrega-bold" for="">Tipo de entrega: </label>
-            <label for="">Reparto a domicilio</label>
-        </div>
-
-        <div class="datos-cliente">
-            <h2>Datos del cliente</h2>
-            <p>Javier Barrios</p>
-            <p>7 Poniente 564, Viña del Mar, Chile</p>
-            <p>321</p>
-            <p>Valparaíso</p>
-            <p>Viña del Mar</p>
-            <p>3375-5182</p>
-        </div>
         
     </main>
 </body>
