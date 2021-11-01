@@ -1,0 +1,101 @@
+{% extends "HeaderFooter/base-sidebar.html"%}
+{% load static %}
+
+{% block content%}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
+        crossorigin="anonymous"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="{% static 'app/jquery.rut.chileno.js' %}"></script>
+
+    <link rel="stylesheet" href="{% static 'css/style-view-reparto.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style-recepcionista-view.css' %}">
+
+    <title>Document</title>
+</head> 
+
+<body>
+    <section class="container contenido-reparto">
+        <!-- <table class="contenido-tabla">
+            <tr>
+                <th>ID</th>
+                <th>FECHA</th>
+                <th>DIRECCION</th>
+                <th>TOTAL</th>
+                <th>ESTADO</th>
+                <th>VER</th>
+            </tr>
+            {% for r in repartos %}
+                <tr>
+                    <td>{{r.0}}</td>
+                    <td>{{r.2|date:'d-m-y'}}</td>
+                    <td>{{r.3}}</td>
+                    <td>{{r.1}}</td>
+                    <td>{{r.5}}</td>
+                    <td><a href=""><img src="{% static 'img/visible.png' %}" alt="ojito"></a></td>
+                </tr>
+            {% endfor %}
+        </table> -->
+
+        <section class="">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card shadow-lg p3 mb-5 mt-5 bg-white">
+                        <h3 class="titulo text-center mt-5 mb-5">Pedidos Listos para entregar</h3>
+                        <div class="card-body">
+                            <form action="" method="POST">
+                                {% csrf_token %}
+                                <div class="table-responsive-md">
+                                    <table class="table contenido-tabla">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Id</th>
+                                                <th scope="col">Dirección</th>
+                                                <th scope="col">Estado Pedido</th>
+                                                <th scope="col">Tipo de Servicio</th>
+                                                <th scope="col">Asignar Repartidor</th>
+                                            </tr>
+                                        </thead>
+                                        {% for l in listos %}
+                                        <tr>
+                                            <td name="idPedido">{{l.0}}</td>
+                                            <td>{{l.3}}</td>
+                                            <td>{{l.7}}</td>
+                                            <td>{{l.5}}</td>
+                                            {% if l.5 == 'DOMICILIO' %}
+                                                <td class="check"><a href="asignacion/{{l.0}}" type="submit"><img src="{% static 'img/reparto.png' %}" alt="check"></a></td>
+                                            {% else %}
+                                                <td class="check"><img src="{% static 'img/store.png' %}" alt="check"></td>
+                                            {% endif %}
+
+                                        </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+    </section>
+</body>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</html>
+{% endblock %}
+<!--  -->

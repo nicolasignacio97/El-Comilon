@@ -1,0 +1,135 @@
+{% extends "HeaderFooter/base-sidebar.html"%}
+{% load static %}
+
+{% block content%}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
+        crossorigin="anonymous"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="{% static 'app/jquery.rut.chileno.js' %}"></script>
+
+    <link rel="stylesheet" href="{% static 'css/style-registro-proveedor.css' %}">
+    <script type="text/javascript">
+        jQuery(document).ready(function ($) {
+            $('.input_rut').rut();
+        });
+    </script>
+
+    <title>Document</title>
+</head>
+
+<body>
+    <section class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card shadow-lg p3 mb-5 mt-5 bg-white">
+                    <h3 class="titulo  mt-5 text-center">Registro Cliente Convenio</h3>
+                    <div class="card-body">
+                        <form action="" class="needs-validation d-flex flex-column  justify-content-center"
+                            method="POST" novalidate>
+                            {% csrf_token %}
+                            <div class="form-row">                           
+                                <div class="row">
+                                    <div class="col-lg-6 mb-4">
+                                        <div>
+                                            <input type="text" name="rutCliConv" class="form-control input_rut" id="Rut" placeholder="12.452.987-2" required>
+                                            <div class="valid-feedback"> </div>
+                                            <div class="invalid-feedback">Complete el campo</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 mb-4">
+                                        <input type="text" name="nomUsuarioConv" class="form-control"
+                                            minlength="2" id="nomUsuarioConv" placeholder="Nombre Usuario" required>
+                                        <div class="valid-feedback"> </div>
+                                        <div class="invalid-feedback">Complete el campo</div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-6 mb-4">
+                                        <input type="text" name="nomCliConv" class="form-control" id="nomCliConv"
+                                            placeholder="Nombres Cliente" required>
+                                        <div class="valid-feedback"> </div>
+                                        <div class="invalid-feedback">Complete el campo</div>
+                                    </div>
+                                    <div class="col-lg-6 mb-4">
+                                        <input type="text" name="apeCliConv" class="form-control" minlength="2"
+                                            id="apeCliConv" placeholder="Apellidos Cliente" required>
+                                        <div class="valid-feedback"> </div>
+                                        <div class="invalid-feedback">Complete el campo</div>
+                                    </div>
+                                </div>
+                                <div class="row mb-4">
+                                    <div class="col-12">
+                                        <input type="text" name="direcCliConv" class="form-control" id="direcCliConv" minlength="4"
+                                            placeholder="Direccion Cliente"
+                                            required>
+                                        <div class="valid-feedback"> </div>
+                                        <div class="invalid-feedback">Complete el campo</div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-6 mb-4">
+                                        <input type="password" name="passCliConv" class="form-control" id="passCliConv"
+                                            placeholder="Contraseña Cliente" required>
+                                        <div class="valid-feedback"> </div>
+                                        <div class="invalid-feedback">Complete el campo</div>
+                                    </div>
+                                    <div class="col-lg-6 mb-4">
+                                        <input type="tel" name="telCliConv" class="form-control"
+                                            id="telCliConv" placeholder="Teléfono Cliente" pattern="[0-9]{9}" required>
+                                        <div class="valid-feedback"> </div>
+                                        <div class="invalid-feedback">Complete el campo</div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12 mb-4">
+                                        <input type="email" name="mailCliConv" class="form-control"
+                                            id="mailCliConv" placeholder="Email Cliente" pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}" required>
+                                        <div class="valid-feedback"> </div>
+                                        <div class="invalid-feedback">Complete el campo</div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-6 mb-4">
+                                        <input type="number" name="saldoCli" class="form-control" id="saldoCli"
+                                            placeholder="Saldo Cliente" required>
+                                        <div class="valid-feedback"> </div>
+                                        <div class="invalid-feedback">Complete el campo</div>
+                                    </div>
+                                    <div class="col-lg-6 mb-4">
+                                        <input type="text" name="rutEmpConv" class="form-control input_rut"
+                                            id="rutEmpConv" placeholder="Rut Empresa Convenio" required>
+                                        <div class="valid-feedback"> </div>
+                                        <div class="invalid-feedback">Complete el campo</div>
+                                    </div>
+                                </div>
+                                <div class="pieForm">
+                                    <button class="btn botonEnviar" id="btn1" type="submit">Registrar</button>
+                                </div>
+
+                                <div class="row d-flex justify-content-center mt-5">
+                                    {{mensaje}}
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+    </section>
+    <script src="{% static 'app/validacion.js' %}"></script>
+</body>
+
+</html>
+{% endblock %}
+<!--  -->
