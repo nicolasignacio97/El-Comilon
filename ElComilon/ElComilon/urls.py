@@ -20,9 +20,8 @@ from django.urls import path,include
 from registroDeUsuarios.views import registroUsuario
 # from ElComilon.listarPlatillos.views import modificarPlatillo
 from Home.views import inicio
-
 from RegisterPlatillo.views import registroPlatillo
-from Register.views import register
+from Register.views import register,perfil
 from registroProveedor.views import registroProveedor   
 from reclamo.views import reclamo
 from Home.views import quienesSomos
@@ -31,7 +30,9 @@ from PerfilUsuario.views import PerfilUsuario
 from RegisterRepartidor.views import registroRep,registroVeh,editRepartidor,listarRep,deleterepartidor
 from Pedido.views import pedido
 from Platillos.views import platillos,agregar_producto,eliminar_producto, restar_producto, limpiar_carrito
+
 from detallePedido.views import detallePedido
+from Menu.views import menu, crearMenu
 from repartidor.views import viewRepartidor, viewPedido
 
 
@@ -54,6 +55,8 @@ urlpatterns = [
     path('detallePedido/<idpedido>', detallePedido),
     path('registroUsuarios', registroUsuario),
     path('administracion/', include(url_patterns)),
+    path('menu', menu),
+    path('crearMenu', crearMenu),
     path('accounts/', include('django.contrib.auth.urls')),
 
 
@@ -62,4 +65,5 @@ urlpatterns = [
     path('eliminar/<id>', eliminar_producto , name="eliminar"),
     path('restar/<id>', restar_producto , name="restar_producto"),
     path('limpiarCarro', limpiar_carrito , name="limpiar_carrito"),
+
 ]

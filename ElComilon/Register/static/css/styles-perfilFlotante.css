@@ -1,0 +1,46 @@
+.canvas-header{
+    background-color: #9C3534;
+    color: #ffff;
+}
+
+.canvas-header img{
+    margin-left: 2rem;
+}
+
+.canvas-header h3{
+    margin-top: 0.5rem;
+}
+
+.nom-user{
+    display: flex;
+    margin: 2rem;
+}
+
+.nom-user img{
+    width: 20%;
+    margin-left: 0rem;
+}
+
+.nom-user h3{
+    padding-left: 1rem;
+    margin-top: 1rem;
+}
+
+
+.nav-canvas a{
+    text-decoration: none;
+    color: #000000;
+    padding-left: 1rem;
+    font-size: 1.2rem;
+}
+
+.nav-canvas img{ 
+    width: 14%;
+}
+
+
+
+.btn-exit{
+    margin-top: 30rem;
+    margin-left: 3rem;
+}

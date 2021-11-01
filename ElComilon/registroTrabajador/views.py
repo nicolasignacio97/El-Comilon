@@ -19,7 +19,9 @@ def registroTrabajador(request):
         nombres = request.POST.get('nombres').upper()
         apellidos = request.POST.get('apellidos').upper()
         fechaContrato = request.POST.get('fecha').upper()
+
         rutRestaurante = '99.365.349-8'
+
         idCargo = request.POST.get('cargo')
         forumulario = FormularioUsuario(data=request.POST)
         if forumulario.is_valid():

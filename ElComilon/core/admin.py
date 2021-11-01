@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Cargo, Cliente, DetallePedido, EmpresaConvenio,EstadoPedido, EstadoReclamo, Pedido, Platillo, Reclamo, Repartidor, Reporte, Representante, Restaurante, TipoCliente, TipoRestaurante, TipoServicio, TipoVehiculo, Trabajador, Vehiculo
+from .models import Cargo, Cliente, DetallePedido, EmpresaConvenio,EstadoPedido, EstadoReclamo, MenuSemanal, Pedido, Platillo, Reclamo, Repartidor, Reporte, Representante, Restaurante, TipoCliente, TipoRestaurante, TipoServicio, TipoVehiculo, Trabajador, Vehiculo
 # Register your models here.
 
 admin.site.register(Cargo)
@@ -8,6 +8,7 @@ admin.site.register(DetallePedido)
 admin.site.register(EmpresaConvenio)
 admin.site.register(EstadoPedido)
 admin.site.register(EstadoReclamo)
+admin.site.register(MenuSemanal)
 admin.site.register(Pedido)
 admin.site.register(Platillo)
 admin.site.register(Reclamo)

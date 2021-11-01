@@ -1,5 +1,6 @@
 from django.shortcuts import get_object_or_404, render, redirect
 from django.db import connection
+from django.contrib import messages
 from core.models import Cliente
 import cx_Oracle
 from registroDeUsuarios.forms import FormularioUsuario
@@ -110,5 +111,7 @@ def listar_EmpConvenio():
 #ELIMINAR CLIENTE CONVENIO
 def eliminarCliConv(request, id):
     cliente = get_object_or_404(Cliente,rutcliente=id)
+    nomCli = Cliente.nombres
     cliente.delete()
+    messages.success(request,"Cliente eliminado correctamente")
     return redirect(to="/administracion/listarCliConv")
