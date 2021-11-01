@@ -42,15 +42,15 @@
                       <hr class="separacion">
                       <div class="precio-boton">
                           <h6 class="card-subtitle mb-2  platillo__precio">${{ p.data.3 | intcomma}}</h6>
-                          <a href="#" class="btn btn-danger platillo__boton">Agregar al Carro</a>
+                          <a  href="{% url 'agregarProducto' p.data.0 %}"  class="btn btn-danger platillo__boton">Agregar al Carro</a>
                       </div>
                     </div>
                   </div>
                   {% endfor %}                     
             </div>
-            <div class="col-3">
-                <div class="card">
-                    carro
+            <div class="col-3 mt-5">
+                <div class="card mt-5">
+                    {% include "carrito.html" %}
                 </div>
             </div>
         </div>
