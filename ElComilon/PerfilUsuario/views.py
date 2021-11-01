@@ -11,4 +11,3 @@ def PerfilUsuario(request,id):
         }
     return render(request,'historialPedidos.html',data)
     
-

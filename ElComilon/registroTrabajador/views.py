@@ -1,7 +1,9 @@
 from django.http import request
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.db import connection, reset_queries
 from django.contrib.auth.decorators import permission_required
+from registroDeUsuarios.forms import FormularioUsuario
+from django.contrib import messages
 import cx_Oracle
 
 # Create your views here.
@@ -9,28 +11,23 @@ import cx_Oracle
 @permission_required('core')
 def registroTrabajador(request):
     data = {
+        'form': FormularioUsuario(),
         'cargo': listar()
     }
     if request.method == 'POST':
-
-        # REPRESENTANTE
         rutTrabajador = request.POST.get('rutTrabajador').upper()
         nombres = request.POST.get('nombres').upper()
         apellidos = request.POST.get('apellidos').upper()
         fechaContrato = request.POST.get('fecha').upper()
-        usuario = request.POST.get('nombreU')
-        contrasena = request.POST.get('contrasena')
-        rutRestaurante = '77.684.154-9'
+        rutRestaurante = '99.365.349-8'
         idCargo = request.POST.get('cargo')
-
-        salida = registrarTrabajador(rutTrabajador, nombres, apellidos,
-                                     fechaContrato, usuario, contrasena, rutRestaurante, idCargo)
-
-        if salida == 1:
-            data['mensaje'] = 'Agregado correctamente'
-        else:
-            data['mensaje'] = 'No se ha podido guardar'
-
+        forumulario = FormularioUsuario(data=request.POST)
+        if forumulario.is_valid():
+            forumulario.save()
+            registrarTrabajador(rutTrabajador, nombres, apellidos,fechaContrato, rutRestaurante, idCargo)
+            messages.success(request, "Usuario Creado")
+            data['form'] = forumulario
+            redirect(to="trabajador")
     return render(request, 'registroTrabajador.html', data)
 
 
@@ -46,16 +43,15 @@ def listar():
 
     return lista
 
-@permission_required('core')
-def registrarTrabajador(rutTrabajador, nombres, apellidos, fechaContrato, usuario, contrasena, rutRestaurante, idCargo):
+
+def registrarTrabajador(rutTrabajador, nombres, apellidos, fechaContrato, rutRestaurante, idCargo):
     django_cursor = connection.cursor()
     cursor = django_cursor.connection.cursor()
     salidaPrve = cursor.var(cx_Oracle.NUMBER)
-    cursor.callproc("REGISTRAR_TRABAJADOR", [rutTrabajador, nombres, apellidos,
-                    fechaContrato, usuario, contrasena, rutRestaurante, idCargo, salidaPrve])
+    cursor.callproc("REGISTRAR_TRABAJADOR", [rutTrabajador, nombres, apellidos,fechaContrato, rutRestaurante, idCargo, salidaPrve])
     return salidaPrve.getvalue()
 
-@permission_required('core')
+
 def listaTrabajador(request):
     data = {
         'trabajadores': listarTrabajador()

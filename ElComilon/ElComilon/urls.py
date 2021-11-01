@@ -17,8 +17,6 @@ from django.contrib.auth import views as auth_views
 from django.contrib import admin
 from django.urls import path,include
 
-
-
 from registroDeUsuarios.views import registroUsuario
 # from ElComilon.listarPlatillos.views import modificarPlatillo
 from Home.views import inicio
@@ -35,8 +33,6 @@ from Pedido.views import pedido
 from Platillos.views import platillos,agregar_producto,eliminar_producto, restar_producto, limpiar_carrito
 from detallePedido.views import detallePedido
 from repartidor.views import viewRepartidor, viewPedido
-
-#{% url 'agregarProducto'/value.idplatillo %}
 
 
 urlpatterns = [
@@ -60,11 +56,10 @@ urlpatterns = [
     path('administracion/', include(url_patterns)),
     path('accounts/', include('django.contrib.auth.urls')),
 
-    #carro
 
+    #carro
     path('agregar/<id>', agregar_producto , name="agregarProducto"),
     path('eliminar/<id>', eliminar_producto , name="eliminar"),
     path('restar/<id>', restar_producto , name="restar_producto"),
     path('limpiarCarro', limpiar_carrito , name="limpiar_carrito"),
-
 ]
