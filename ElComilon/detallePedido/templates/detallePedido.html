@@ -31,35 +31,34 @@
             <h1 class="num-pedido">Pedido #<span>{{pedido.0.0}}</span></h1>
         
         <div class="fecha-estado">
-            <p>Tu pedido se realizó el <span>{{pedido.0.1}}</span> y se encuentra </p>
-            <p class="estado">{{pedido.0.2 | title}}</p>
+            <p>Tu pedido se realizó el <span>{{pedido.0.1}}</span> y se encuentra <span class="estado">{{pedido.0.2 | title}}</span> </p>
         </div>
         
-        <div class="container">
+        <div class="cuadrado">
             <h2>Detalles del pedido</h2> 
             <div class="container-precios">
                 <div class="campos">
                     <div class="separaciones">
                         {% for p in platillos %}
                         <div class="platillo">
-                            <label for="">{{p.data.3 | title}} <span class="multiplicador-platillo">x{{p.data.4}}</span></label>
-                            <label class="puntos-separacion" for="">............................................................................................</label>
+                            <label  for="">{{p.data.3 | title}} <span class="multiplicador-platillo">x{{p.data.4}}</span></label>
+                            <!-- <label class="puntos-separacion" for="">............................................................................................</label> -->
                             <label for="">${{p.data.5 | intcomma}}</label>
                         </div>
                         {% endfor %}
                     </div>
         
                     </div>
-                    <div class="separaciones">
+                    <div class="separaciones-totales">
                         <div class="totales">
                             <label for="">Subtotal:</label>
-                            <label for="" class="puntos-separacion">............................................................................................</label>
+                            <!-- <label for="" class="puntos-separacion">............................................................................................</label> -->
                             <label for="">${{pedido.0.6 | intcomma}}</label>
                         </div>
             
                         <div class="totales">
                             <label for="">Total:</label>
-                            <label for="" class="puntos-separacion">............................................................................................</label>
+                            <!-- <label for="" class="puntos-separacion">............................................................................................</label> -->
                             <label for="">${{pedido.0.7 | intcomma}}</label>
                         </div>
                     </div>

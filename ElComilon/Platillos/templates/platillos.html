@@ -42,7 +42,7 @@
                       <hr class="separacion">
                       <div class="precio-boton">
                           <h6 class="card-subtitle mb-2  platillo__precio">${{ p.data.3 | intcomma}}</h6>
-                          <a  href="{% url 'agregarProducto' p.data.0 %}"  class="btn btn-danger platillo__boton">Agregar al Carro</a>
+                          <a  href="{% url 'agregarProducto' p.data.0 %}"  class="btn btn-danger platillo__boton"><img src="{% static 'img/icons8-agregar-a-carrito-de-compras-24.png' %}" alt=""> Agregar al Carro</a>
                       </div>
                     </div>
                   </div>
