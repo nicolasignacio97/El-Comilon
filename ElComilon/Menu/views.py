@@ -1,32 +1,36 @@
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from django.db import connection
 import base64
+from core.models import Cliente
 import cx_Oracle
 from core.models import Platillo
 # Create your views here.
 
-def menu (request):
+def menu (request,id):
+    cliente =  get_object_or_404(Cliente,idcuenta = id)
     data = {
-        'menu':listado_menu()
+        'menu':listado_menu(cliente.rutcliente),
+        'cliente':cliente
     } 
     return render(request, 'menuSemanal.html', data)
 
-def crearMenu (request):
-
+def crearMenu (request,id):
+    cliente =  get_object_or_404(Cliente,idcuenta = id)
+    
+    data = {
+        'menu':listado_menu(cliente.rutcliente),
+        'platillos':listado_platillos(),
+        'cliente':cliente
+    }
+  
     if request.method == 'POST':
         dia = request.POST.get('dia')
         idplatillo = request.POST.get('platillo')
-        rut = '8.736.863-0'
-
+        rut = cliente.rutcliente
 
         eliminarMenu(dia,rut)
         registrarMenu(dia,idplatillo, rut)
-
-    data = {
-        'menu':listado_menu(),
-        'platillos':listado_platillos()
-    }
-
+   
     return render(request, 'menu.html', data)
 
 def listado_platillos():
@@ -59,12 +63,12 @@ def eliminarMenu(dia, rut):
     return 0
 
 
-def listado_menu():
+def listado_menu(rut):
     django_cursor = connection.cursor()
     cursor = django_cursor.connection.cursor()
     out_cur = django_cursor.connection.cursor()
 
-    cursor.callproc("SP_LISTAR_MENU", [out_cur])    
+    cursor.callproc("SP_LISTAR_MENU", [rut,out_cur])    
 
     lista = []
     for fila in out_cur:

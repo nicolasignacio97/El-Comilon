@@ -46,7 +46,6 @@
                         <th scope="col">Platillo</th>
                         <th scope="col">Ingredientes</th>
                         <th scope="col">Valor Unitario</th>
-                        <th scope="col">Disponible</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -56,14 +55,13 @@
                         <td>{{ m.data.4 }}</td>
                         <td>{{ m.data.5}}</td>
                         <td>{{ m.data.6 }}</td>
-                        <td>{{ m.data.7 }}</td>
                     </tr>
                     {% endfor %}
                 </tbody>
                 
             </table>
             <div class="pieForm">
-                <a href="crearMenu"><button class="btn botonEnviar" id="btn1" type="submit">Configurar</button></a>
+                <a href="/crearMenu/{{cliente.idcuenta}}"><button class="btn botonEnviar" id="btn1" type="submit">Configurar</button></a>
             </div>
         </div>
     </section>

@@ -53,22 +53,21 @@ urlpatterns = [
     path('repartidor', viewRepartidor),
     path('viewPedido/<id>', viewPedido),
     path('detallePedido', detallePedido),
-    path('detallePedido/<idpedido>', detallePedido),
+    path('detallePedido/<idpedido>/<id>', detallePedido),
     path('registroUsuarios', registroUsuario),
     path('administracion/', include(url_patterns)),
-    path('menu', menu),
-    path('crearMenu', crearMenu),
+
+
+    path('menu/<id>', menu),
+    path('crearMenu/<id>', crearMenu),
+
+
     path('accounts/', include('django.contrib.auth.urls')),
-
     path('repartidor', viewRepartidor),
-    path('viewPedido/<id>', viewPedido),    
-
-        
+    path('viewPedido/<id>', viewPedido),     
     path('recepcionista', viewRecepcionista, name='recepcionista'),
     path('estado/<id>', cambiarEstado, name='estado'),
     path('asignacion/<id>', asignarRepartidor, name='asignacionRepartidor'),
-
-
     # carro
     path('agregar/<id>', agregar_producto, name="agregarProducto"),
     path('eliminar/<id>', eliminar_producto, name="eliminar"),

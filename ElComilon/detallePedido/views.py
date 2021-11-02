@@ -1,7 +1,9 @@
 import base64
+
 from django.shortcuts import get_object_or_404, redirect, render
 from django.db import connection
 from core.models import Pedido, DetallePedido, Cliente
+from django.contrib.auth.models import User
 
 # Create your views here.
 # def listadoPedidos(request):
@@ -11,10 +13,12 @@ from core.models import Pedido, DetallePedido, Cliente
     
 #     return render(request, 'detallePedido.html', data)
 
-def detallePedido(request, idpedido):
+def detallePedido(request, idpedido, id):
+    cliente = User.objects.filter(id = id)
     data = {
         'pedido':listarPedidos(idpedido),
-        'platillos':listado_platillos(idpedido)
+        'platillos':listado_platillos(idpedido),
+        'cliente': cliente
     }
     return render(request,'detallePedido.html', data)
     
