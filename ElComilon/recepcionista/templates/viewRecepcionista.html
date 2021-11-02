@@ -29,26 +29,6 @@
 
 <body>
     <section class="container contenido-reparto">
-        <!-- <table class="contenido-tabla">
-            <tr>
-                <th>ID</th>
-                <th>FECHA</th>
-                <th>DIRECCION</th>
-                <th>TOTAL</th>
-                <th>ESTADO</th>
-                <th>VER</th>
-            </tr>
-            {% for r in repartos %}
-                <tr>
-                    <td>{{r.0}}</td>
-                    <td>{{r.2|date:'d-m-y'}}</td>
-                    <td>{{r.3}}</td>
-                    <td>{{r.1}}</td>
-                    <td>{{r.5}}</td>
-                    <td><a href=""><img src="{% static 'img/visible.png' %}" alt="ojito"></a></td>
-                </tr>
-            {% endfor %}
-        </table> -->
 
         <section class="">
             <div class="row">
@@ -71,9 +51,13 @@
                                         </thead>
                                         {% for l in listos %}
                                         <tr>
-                                            <td name="idPedido">{{l.0}}</td>
+                                            <td name="idPedido">#{{l.0}}</td>
                                             <td>{{l.3}}</td>
+                                            {% if l.7 != 'LISTO' %}
+                                            <td>{{l.7}} <a href="estado/{{l.0}}"><img src="{% static 'img/modificar.png' %}" alt="check"></a></td>
+                                            {% else %}
                                             <td>{{l.7}}</td>
+                                            {% endif %}
                                             <td>{{l.5}}</td>
                                             {% if l.5 == 'DOMICILIO' %}
                                                 <td class="check"><a href="asignacion/{{l.0}}" type="submit"><img src="{% static 'img/reparto.png' %}" alt="check"></a></td>

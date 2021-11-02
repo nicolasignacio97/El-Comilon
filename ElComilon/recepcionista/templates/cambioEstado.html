@@ -32,17 +32,17 @@
         <div class="card text-center ">
             <form action="" method="POST">
                 {% csrf_token %}
-                <div class="card-header" name>
-                    <p name='idPedido'>Pedido N° {{ pedidoSelect.idpedido }}</p>
+                <div class="card-header">
+                    <p name='idPedido'>Pedido #{{ pedidoSelect.idpedido }}</p>
                 </div>
                 <div class="card-body">
-                    <h3 class="card-title">Asignar repartidor al pedido</h3>
+                    <h3 class="card-title">Cambiar estado del pedido</h3>
                     <div>
                         <label for=""><span>Fecha:</span></label>
                         <label for="">{{ pedidoSelect.fechapedido }}</label>
                     </div>
                     <div>
-                        <label for=""><span>Rut Cliente: $</span></label>
+                        <label for=""><span>Rut Cliente:</span></label>
                         <label for="">{{ pedidoSelect.rutcliente }}</label>
                     </div>
                     <div>
@@ -55,18 +55,18 @@
                         <label for="">{{ pedidoSelect.valortotal }}</label>
                     </div>
                     <hr>
-                    <p class="card-text">Seleccione un repartidor disponible para efectuar la entrega a domicilio.</p>
-                    <select class="form-select" aria-label="Default select example" name="repartidor">w
-                        <option selected disabled>Seleccionar repartidor</option>
-                        {% for repa in repartidores %}
-                        <option value="{{repa.0}}">{{repa.1}} {{repa.2}}</option>
+                    <p class="card-text">Seleccione un estado del pedido para actualizar su fase.</p>
+                    <select class="form-select" aria-label="Default select example" name="estado_pedido">w
+                        <option selected disabled>Seleccione un estado del pedido</option>
+                        {% for e in estados %}
+                        <option value="{{e.0}}">{{e.1}}</option>
                         {% endfor %}
                     </select>
-                    <button class="btn botonEnviar bloque-abajo" id="btn1" type="submit">Asignar repartidor</button>
+                    <button class="btn botonEnviar bloque-abajo" id="btn1" type="submit">Cambiar estado</button>
                     {{mensaje}}
                 </div>
                 <div class="card-footer text-muted">
-                    {{ pedidoSelect.fechapedido }}
+                    <p>Cambio de estado del pedido</p> 
                 </div>
             </form>
         </div>

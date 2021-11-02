@@ -15,7 +15,7 @@ from RegEmpConv.views import listaEmpresa
 from RegEmpConv.views import empresaRut
 from RegEmpConv.views import eliminarEmpresa
 from RegisterRepartidor.views import registroVeh,registroRep,editRepartidor,deleterepartidor,listarRep
-from recepcionista.views import viewRecepcionista, asignarRepartidor
+from recepcionista.views import viewRecepcionista, asignarRepartidor, cambiarEstado
 
 url_patterns = [
     path('',administracion),
@@ -28,6 +28,7 @@ url_patterns = [
     path('modCliConv/<id>',modificarCliConv),
     path('eliminar/<id>',eliminarCliConv),
     path('recepcionista',viewRecepcionista, name='recepcionista'),
+    path('estado/<id>', cambiarEstado, name='estado'),
     path('asignacion/<id>', asignarRepartidor, name='asignacionRepartidor'),
     path('listaTrabajador',listaTrabajador),
     path('trabajadorRut',trabajadorRut),
