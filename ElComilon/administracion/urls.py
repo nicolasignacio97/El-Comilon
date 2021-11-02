@@ -9,7 +9,6 @@ from listarPlatillos.views import listarPlatillos, eliminarPlatillo
 from actualizarPlatillo.views import modificarPlatillo
 from django.contrib.auth.decorators import  login_required
 from RegCliConv.views import RegistroCliConvenio, listarCliConv, modificarCliConv, eliminarCliConv
-from RegisterRepartidor.views import registroRep,registroVeh,editRepartidor,listarRep,deleterepartidor
 from registroTrabajador.views import listaTrabajador
 from registroTrabajador.views import trabajadorRut
 from registroTrabajador.views import actualizarTrabajador
@@ -17,11 +16,12 @@ from registroTrabajador.views import eliminarTrabajador
 from RegEmpConv.views import listaEmpresa
 from RegEmpConv.views import empresaRut
 from RegEmpConv.views import eliminarEmpresa
-from RegisterRepartidor.views import registroVeh, registroRep, editRepartidor, deleterepartidor, listarRep,editvehiculo
 from gestionRestaurantes.views import listarRestaurantes, modificarRepreResta,EliminarRepreResta
-from RegisterRepartidor.views import registroVeh,registroRep,editRepartidor,deleterepartidor,listarRep
 from registroTrabajador.views import actTrabajador
 from RegEmpConv.views import actualizarEmpresa, actEmpresa
+
+
+from RegisterRepartidor.views import registroVeh, Registrorep, editRepartidor, deleterepartidor, listarRep,editvehiculo
 
 url_patterns = [
     path('', administracion),
@@ -48,7 +48,7 @@ url_patterns = [
     path('listarProveedores',listarRestaurantes,name="listarProveedores"),
     path('modificarProveedor/<id>/<id2>', modificarRepreResta,name = 'modificarProveedor'),
     path('eliminarProveedor/<id>/<id2>/', EliminarRepreResta,name = 'eliminarProveedor'),
-    path('regin', registroRep,name="regin"),
+    path('regin', Registrorep,name="regin"),
     path('reginvehiculo', registroVeh,name="reginvehiculo"),
     path('listarep', listarRep,name="listarep"),
     path('updaterepartidor/<rutrepartidor>/',editRepartidor, name = 'updrpartidor'),
@@ -60,7 +60,6 @@ url_patterns = [
     path('empresaRut',empresaRut,name = 'empresaRut'),
     path('eliminarEmpresa', eliminarEmpresa,name = 'eliminarEmpresa'),
     path('platillo',registroPlatillo,name = 'platillo'),
-    path('regin',registroRep,name = 'regin'),
     path('reginvehiculo',registroVeh,name = 'reginvehiculo'),
     path('actTrabajador', actTrabajador,name = 'actTrabajador')
 

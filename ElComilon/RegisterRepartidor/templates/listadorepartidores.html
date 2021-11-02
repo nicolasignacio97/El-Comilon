@@ -32,7 +32,6 @@
                                         <th scope="col">Nombre</th>
                                         <th scope="col">Apellidos</th>
                                         <th scope="col">Fecha contrato</th>
-                                        <th scope="col">Usuario</th>
                                         <th scope="col">Rut restaurante</th>
                                         <th scope="col">Acción</th>
                                     </tr>
@@ -44,18 +43,17 @@
                                         <td>{{ r.nombres }} </td>
                                         <td>{{ r.apellidos }} </td>
                                         <td>{{ r.fechacontrato }} </td>
-                                        <td>{{ r.usuario }} </td>
+
                                         <td>{{ r.rutrestaurante }} </td>
                                         <td> <a href="{% url 'updrpartidor' r.rutrepartidor %}"><i
                                                     class="fas fa-user-edit"
                                                     style="color:#02B37F; cursor: pointer;"></i></a>
-                                                    <a href="{% url 'updvehiculo' r.rutrepartidor %}"><i
-                                                        class="fas fa-car-alt"
-                                                        style="color:#02B37F; cursor: pointer;"></i></a>
+                                            <a href="{% url 'updvehiculo' r.rutrepartidor %}"><i class="fas fa-car-alt"
+                                                    style="color:#02B37F; cursor: pointer;"></i></a>
                                             <a href="{% url 'deleterepartidor' r.rutrepartidor %}"><i
                                                     class="fas fa-trash-alt" style="color: brown; cursor: pointer;">
                                                 </i> </a>
-                                        
+
                                         </td>
                                     </tr>
                                     {% endfor %}

@@ -25,6 +25,26 @@
             $('.input_rut').rut();
         });
     </script>
+    <!-- aqui mañana qlo vo podi -->
+    {%block js%}
+    <script>
+        function eliminarRepresentante(id) {
+            Swal.fire({
+                "title": "¿Estás Seguro?",
+                "text": "Esta acción no se puede deshacer",
+                "icon": "question",
+                "showCancelButton": true,
+                "cancelButtonText": "No, Cancelar",
+                "confirmButtonText": "Si, Eliminar",
+                "confirmButtonColor": "#9C3534"
+            }).then(function (result) {
+                if (result.isConfirmed) {
+                    window.location.href = "eliminarRepresentante/"+id
+                }
+            })
+        }
+    </script>
+    {%endblock%}
     <title>Empresa</title>
 </head>
 
@@ -93,6 +113,11 @@
         </div>
     </section>
     <script src="{% static 'app/validacion.js' %}"></script>
+    <script>
+        if (window.history.replaceState) {
+            window.history.replaceState(null, null, window.location.href);
+        }
+    </script>
 </body>
 
 </html>

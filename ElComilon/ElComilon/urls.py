@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib.auth import views as auth_views
 from django.contrib import admin
 from django.urls import path,include
+from RegisterRepartidor.views import Registrorep
 
 from registroDeUsuarios.views import registroUsuario
 # from ElComilon.listarPlatillos.views import modificarPlatillo
@@ -27,7 +28,6 @@ from reclamo.views import reclamo
 from Home.views import quienesSomos
 from administracion.urls import url_patterns
 from PerfilUsuario.views import PerfilUsuario
-from RegisterRepartidor.views import registroRep,registroVeh,editRepartidor,listarRep,deleterepartidor
 from Pedido.views import pedido
 from Platillos.views import platillos,agregar_producto,eliminar_producto, restar_producto, limpiar_carrito
 
@@ -41,14 +41,13 @@ urlpatterns = [
     path('',inicio , name="home"),
     path('registroPlatillo',registroPlatillo),
     path('registro',register),  
-    path('regin', registroRep),
-    path('reginvehiculo', registroVeh),
     path('registroProveedor',registroProveedor),
     path('reclamo',reclamo),
     path('quienesSomos', quienesSomos),
     path('Historial/<id>', PerfilUsuario), #despues id en la ruta para filtro
     path('pedido', pedido),
     path('platillos', platillos, name="platillos"),
+    path('regin', Registrorep,name="regin"),
     path('repartidor', viewRepartidor),
     path('viewPedido/<id>', viewPedido),
     path('detallePedido', detallePedido),
