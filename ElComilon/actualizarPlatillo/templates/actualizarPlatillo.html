@@ -33,21 +33,21 @@
             <div class="itemsIzquierda">
                 <div class="campos">
                     <div class="inputs">
-                        <input type="text" id="Nombre" name="Nombre" value="{{platillo.0.0}}"
+                        <input type="text" maxlength="30" id="Nombre" name="Nombre" value="{{platillo.0.0}}"
                             class="form-control inputfocus" required>
                         <div class="valid-feedback"> </div>
                         <div class="invalid-feedback">Complete los campos</div>
                         <span> </span>
                     </div>
                     <div class="inputs">
-                        <input type="text" id="Ingredientes" name="Ingredientes" value="{{platillo.0.1}}"
+                        <input type="text" maxlength="50" id="Ingredientes" name="Ingredientes" value="{{platillo.0.1}}"
                             class="form-control inputfocus" required>
                         <div class="valid-feedback"> </div>
                         <div class="invalid-feedback">Complete los campos</div>
                         <span> </span>
                     </div>
                     <div class="inputs">
-                        <input type="number" min="1" id="Valor" name="Valor" value="{{platillo.0.2}}"
+                        <input type="text" maxlength="6" pattern="[0-9]{6}" min="1" id="Valor" name="Valor" value="{{platillo.0.2}}"
                             class="form-control inputfocus" required>
                         <div class="valid-feedback"> </div>
                         <div class="invalid-feedback">Complete los campos</div>
@@ -55,7 +55,8 @@
                     </div>
                     <div id="divFileUpload" value={{foto.0}}>
                         <div value="data:imagen/png;base64, {{foto.0}}" class="input-group mb-3">
-                            <input src="{{foto.0}}" type="file" name="foto" class="form-control inputfocus" id="file" accept="image/*">
+                            <input src="{{foto.0}}" type="file" name="foto" class="form-control inputfocus" id="file" accept="image/*" required
+                                >
                             <div class="valid-feedback"> </div>
                             <div class="invalid-feedback">Inserte una imagen</div>
                         </div>

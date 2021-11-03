@@ -272,7 +272,6 @@ input[type=number] { -moz-appearance:textfield; }
     color: rgb(104, 104, 104);
     margin-top: .5rem;
     margin-bottom: 0;
-    width: 10rem;
 }
 
 .platillo__descripcion::first-letter{
