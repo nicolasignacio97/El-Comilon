@@ -46,7 +46,7 @@ urlpatterns = [
     path('registroProveedor', registroProveedor),
     path('reclamo', reclamo),
     path('quienesSomos', quienesSomos),
-    path('Historial/<id>', PerfilUsuario),  # despues id en la ruta para filtro
+    path('Historial/<id>', PerfilUsuario, name="historial"),  # despues id en la ruta para filtro
     path('pedido', pedido),
     path('platillos', platillos, name="platillos"),
     path('regin', Registrorep, name="regin"),
@@ -58,8 +58,8 @@ urlpatterns = [
     path('administracion/', include(url_patterns)),
 
 
-    path('menu/<id>', menu),
-    path('crearMenu/<id>', crearMenu),
+    path('menu/<id>', menu, name="menu"),
+    path('crearMenu/<id>', crearMenu, name="crearMenu"),
 
 
     path('accounts/', include('django.contrib.auth.urls')),

@@ -24,7 +24,6 @@
                         <th scope="col">Fecha</th>
                         <th scope="col">Dirección</th>
                         <th scope="col">Servicio</th>
-                        <th scope="col">Saldo</th>
                         <th scope="col">Estado</th>
                         <th scope="col">Acción</th>
                     </tr>
@@ -37,7 +36,6 @@
                         <td>{{pedido.fechapedido}}</td>
                         <td>{{pedido.direccionpedido}}</td>
                         <td>{{pedido.idtiposervicio}}</td>
-                        <td>{{usuario.saldocli| intcomma}}</td>
                         <td><strong><span class="text-danger">{{pedido.idestpedido}}</span></strong></td>
                         <td> <a href="/detallePedido/{{pedido.idpedido}}/{{usuario.idcuenta}}"><i class="fas fa-eye"
                                     style="color:#02B37F; cursor: pointer;"></i></a>

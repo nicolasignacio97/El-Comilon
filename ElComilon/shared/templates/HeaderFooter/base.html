@@ -49,8 +49,8 @@
           <a href="{% url 'logout'%}">cerrar sesión</a>
           <a href="#">{{user.username.title}}</a>
           <a href="#">{{user.nombres.title}}</a>
-          <a href="Historial/{{user.id}}">Historial</a>
-          <a href="crearMenu/{{user.id}}">Crear menú</a>
+          <a href="{% url 'historial' user.id %}">Historial</a>
+          <a href="{% url 'crearMenu' user.id %}">Crear menú</a>
 
           {% if user.is_superuser %}
           <a href="/administracion">Administración</a>

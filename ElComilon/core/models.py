@@ -256,18 +256,16 @@ class TipoVehiculo(models.Model):
 
 
 
-class Trabajador(AbstractBaseUser):
+class Trabajador(models.Model):
     ruttrabajador = models.CharField(primary_key=True, max_length=12)
     nombres = models.CharField(max_length=20)
     apellidos = models.CharField(max_length=20)
     fechacontrato = models.DateField()
-    usuario = models.CharField( unique=True, max_length=15)
-    contrasena = models.CharField(max_length=20)
+    # usuario = models.CharField( unique=True, max_length=15)
+    # contrasena = models.CharField(max_length=20)
     rutrestaurante = models.ForeignKey(Restaurante, models.DO_NOTHING, db_column='rutrestaurante')
     idcargo = models.ForeignKey(Cargo, models.DO_NOTHING, db_column='idcargo')
 
-    USERNAME_FIELD = 'usuario'
-    REQUIRED_FIELDS =['nombres','apellidos']
 
 
     class Meta:

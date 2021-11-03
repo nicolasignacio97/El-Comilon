@@ -14,7 +14,7 @@ from django.contrib.auth.models import User
 #     return render(request, 'detallePedido.html', data)
 
 def detallePedido(request, idpedido, id):
-    cliente = User.objects.filter(id = id)
+    cliente = get_object_or_404( User, id = id)
     data = {
         'pedido':listarPedidos(idpedido),
         'platillos':listado_platillos(idpedido),
