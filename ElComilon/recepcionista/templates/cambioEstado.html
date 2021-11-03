@@ -1,0 +1,78 @@
+{% extends "HeaderFooter/base.html"%}
+{% load static %}
+
+{% block content%}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>  
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
+        crossorigin="anonymous"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="{% static 'app/jquery.rut.chileno.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'css/style-view-reparto.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style-registro-proveedor.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style-recepcionista-view.css' %}">
+
+    <title>Document</title>
+</head> 
+
+<body>
+    <section class="container contenido-pedidovich ">
+        <div class="card text-center ">
+            <form action="" method="POST">
+                {% csrf_token %}
+                <div class="card-header">
+                    <p name='idPedido'>Pedido #{{ pedidoSelect.idpedido }}</p>
+                </div>
+                <div class="card-body">
+                    <h3 class="card-title">Cambiar estado del pedido</h3>
+                    <div>
+                        <label for=""><span>Fecha:</span></label>
+                        <label for="">{{ pedidoSelect.fechapedido }}</label>
+                    </div>
+                    <div>
+                        <label for=""><span>Rut Cliente:</span></label>
+                        <label for="">{{ pedidoSelect.rutcliente }}</label>
+                    </div>
+                    <div>
+                        <label for=""><span>Dirección:</span></label>
+                        <label for="">{{ pedidoSelect.direccionpedido }}</label>
+                    </div>
+            
+                    <div>
+                        <label for=""><span>Total: $</span></label>
+                        <label for="">{{ pedidoSelect.valortotal }}</label>
+                    </div>
+                    <hr>
+                    <p class="card-text">Seleccione un estado del pedido para actualizar su fase.</p>
+                    <select class="form-select" aria-label="Default select example" name="estado_pedido">w
+                        <option selected disabled>Seleccione un estado del pedido</option>
+                        {% for e in estados %}
+                        <option value="{{e.0}}">{{e.1}}</option>
+                        {% endfor %}
+                    </select>
+                    <button class="btn botonEnviar bloque-abajo" id="btn1" type="submit">Cambiar estado</button>
+                    {{mensaje}}
+                </div>
+                <div class="card-footer text-muted">
+                    <p>Cambio de estado del pedido</p> 
+                </div>
+            </form>
+        </div>
+    </section>
+</body>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</html>
+{% endblock %}
+<!--  -->

@@ -1,0 +1,22 @@
+.check img{
+    width: 2rem;
+}
+
+.check{
+    width: 3rem;
+    margin-top: 0%;
+    padding-top: 0%;
+}
+
+.contenido-pedidovich{
+    padding-top: 2rem;
+}
+
+.bloque-abajo{
+    margin-top: 1rem;
+}
+
+.card-body {
+    width: 80%;
+    margin: 1rem auto;
+}

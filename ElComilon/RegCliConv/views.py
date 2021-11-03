@@ -1,9 +1,10 @@
 from django.shortcuts import get_object_or_404, render, redirect
 from django.db import connection
+from django.contrib import messages
 from core.models import Cliente
 import cx_Oracle
 from registroDeUsuarios.forms import FormularioUsuario
-from django.contrib import messages
+
 
 # Create your views here.
 #AGREGAR CLIENTES CONVENIO
@@ -45,17 +46,18 @@ def modificarCliConv(request,id):
     }
 
     if request.method == 'POST':
+
         rutclienteConv = request.POST.get('rutCliConv')
-      
         nombres = request.POST.get('nomCliConv')
         apellidos = request.POST.get('apeCliConv')
         direccion = request.POST.get('direcCliConv')
-      
         saldocli = request.POST.get('saldoCli')
         rutempcli = request.POST.get('rutEmpConv')
 
         modificar_cliente_convenio(rutclienteConv,nombres, apellidos, direccion,saldocli,rutempcli)
-     
+        # messages.success(request,'Modificado con exito')
+        return redirect(to="listarCliConv")
+
     return render(request,'modCliConv.html',dataMod)
 
 
@@ -73,11 +75,11 @@ def agregar_cliente_convenio(rutcliente,nombres, apellidos, direccion,idtipoClie
 
 
 #FUNCIÓN MODIFICAR CLIENTE CONVENIO
-def modificar_cliente_convenio(rutcliente, nomUsuario,nombres, apellidos, direccion, contrasena,telefono,correo,saldocli,rutempcli):
+def modificar_cliente_convenio(rutcliente,nombres, apellidos, direccion,saldocli,rutempcli):
     django_cursor = connection.cursor()
     cursor = django_cursor.connection.cursor()
     salida = cursor.var(cx_Oracle.NUMBER)
-    cursor.callproc('SP_MODIFICAR_CLIENTE_CONVENIO',[rutcliente, nomUsuario , nombres, apellidos, direccion, contrasena,telefono,correo, saldocli,rutempcli,salida])
+    cursor.callproc('SP_MODIFICAR_CLIENTE_CONVENIO',[rutcliente, nombres, apellidos, direccion, saldocli,rutempcli,salida])
     return salida.getvalue()
 
 #FUNCION LISTAR CLIENTE
@@ -110,5 +112,7 @@ def listar_EmpConvenio():
 #ELIMINAR CLIENTE CONVENIO
 def eliminarCliConv(request, id):
     cliente = get_object_or_404(Cliente,rutcliente=id)
+    nomCli = Cliente.nombres
     cliente.delete()
+    messages.success(request,"Cliente eliminado correctamente")
     return redirect(to="/administracion/listarCliConv")

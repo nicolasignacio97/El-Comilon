@@ -29,8 +29,6 @@ def registroProveedor (request):
         tipo = 2
         registrarProve(rutRest,nombre,direccion,representante,tipo)
         messages.success(request, nombre + " Registrado correctamente")
-
-
     #SALIDA PAGINA
     return render (request,'registro-proveedor.html',data)
 

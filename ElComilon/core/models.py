@@ -95,6 +95,15 @@ class EstadoReclamo(models.Model):
         managed = False
         db_table = 'estado_reclamo'
 
+class MenuSemanal(models.Model):
+    idmenu = models.IntegerField(primary_key=True)
+    dia = models.CharField(max_length=20)
+    idplatillo = models.IntegerField()
+    rutcliente = models.ForeignKey(Cliente, models.DO_NOTHING, db_column='rutcliente')
+
+    class Meta:
+        managed = False
+        db_table = 'menu_semanal'
 
 class Pedido(models.Model):
     idpedido = models.BigIntegerField(primary_key=True)
@@ -119,7 +128,8 @@ class Platillo(models.Model):
     nombre = models.CharField(max_length=30)
     ingredientes = models.CharField(max_length=50)
     valorunitario = models.IntegerField()
-    foto = models.BinaryField(blank=True, null=True)
+    foto = models.BinaryField(blank=True)
+    # disponible = models.BooleanField(blank= True)
     rutrestaurante = models.ForeignKey('Restaurante', models.DO_NOTHING, db_column='rutrestaurante')
 
     def __str__(self):
@@ -181,6 +191,8 @@ class Representante(models.Model):
     apellidos = models.CharField(max_length=20)
     telefono = models.IntegerField()
     correo = models.CharField(max_length=30)
+    # nombreusuario = models.CharField(max_length=15)
+    # contrasena = models.CharField(max_length=15)
 
     class Meta:
         managed = False
@@ -243,67 +255,6 @@ class TipoVehiculo(models.Model):
         db_table = 'tipo_vehiculo'
 
 
-# class UsuarioManager (BaseUserManager):
-#     def create_user (self,email,username,nombres,apellidos,password=None):
-#         if not email:
-#             raise ValueError('El usuario debe tener un correo electrónico')
-
-#         usuario = self.model(
-#             username = username,
-#             email = self.normalize_email(email),
-#             nombres = nombres,
-#             apellidos = apellidos,
-#         )
-#         usuario.set_password(password)
-#         usuario.save()
-#         return usuario
-
-#     def create_superuser (self,email,username,nombres,apellidos,password):
-#         usuario = self.model(
-#             email = self.normalize_email(email),
-#             username = username,
-#             nombres = nombres,
-#             apellidos = apellidos,
-           
-#         ) 
-#         usuario.set_password(password)
-#         usuario.usuario_administrador = True
-#         usuario.save() 
-#         return usuario
-
-
-# class Usuario(AbstractBaseUser,PermissionsMixin):
-#     rut = models.CharField('Rut',unique=True, max_length=12)
-#     username = models.CharField('Nombre de usuario',unique = True,max_length=20)
-#     email = models.CharField('Correo Electrónico',unique = True,max_length=50)
-#     nombres = models.CharField('Nombres',null=True, blank = True, max_length=50)
-#     apellidos = models.CharField('Apellidos',null=True, blank = True, max_length=50)
-#     usuario_activo = models.BooleanField(default=True)
-#     usuario_administrador = models.BooleanField(default = False)
-#     objects = UsuarioManager()
-
-#     USERNAME_FIELD = 'username'
-#     REQUIRED_FIELDS =['email','nombres','apellidos']
-
-#     def __str__(self):
-#         return f'{self.nombres},{self.apellidos}'
-
-#     def has_perm(self, perm, obj=None):
-#         return self.is_superuser
-
-#     def has_module_perms(self, app_label):
-#         return self.is_superuser
-
-#     @property
-#     def is_staff(self):
-#         return self.usuario_administrador
-
-#     class Meta:
-#         managed = False
-#         db_table = 'Usuario'
-
-
-
 
 class Trabajador(AbstractBaseUser):
     ruttrabajador = models.CharField(primary_key=True, max_length=12)
@@ -314,7 +265,6 @@ class Trabajador(AbstractBaseUser):
     contrasena = models.CharField(max_length=20)
     rutrestaurante = models.ForeignKey(Restaurante, models.DO_NOTHING, db_column='rutrestaurante')
     idcargo = models.ForeignKey(Cargo, models.DO_NOTHING, db_column='idcargo')
-    # object = UsuarioManagerT()
 
     USERNAME_FIELD = 'usuario'
     REQUIRED_FIELDS =['nombres','apellidos']
@@ -326,7 +276,8 @@ class Trabajador(AbstractBaseUser):
 
 
 class Vehiculo(models.Model):
-    patentevehiculo = models.CharField(primary_key=True, max_length=6)
+    idvehiculo = models.CharField(primary_key=True, max_length=20)
+    patentevehiculo = models.CharField(max_length=6, unique=True)
     modelo = models.CharField(max_length=20)
     anio = models.IntegerField()
     color = models.CharField(max_length=20)

@@ -22,6 +22,7 @@
 </head>
 
 <body>
+    {% load humanize %}
     <section class="cuadrado sombra">
         <div class="titulo">
             <h1>Actualizar Platillo</h1>
@@ -74,8 +75,8 @@
                                 class="card-text platillo__descripcion">{{platillo.0.1}}</p>
                             <hr class="separacion">
                             <div class="precio-signo">
-                                <h6>$</h6>
-                                <h6 id="previaValor" class="card-subtitle mb-2  platillo__precio">{{platillo.0.2}}</h6>
+                                <h6>$ </h6>
+                                <h6 id="previaValor" class="card-subtitle mb-2  platillo__precio">{{platillo.0.2| intcomma}}</h6>
                             </div>
                         </div>
                     </div>
