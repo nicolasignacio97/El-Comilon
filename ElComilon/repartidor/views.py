@@ -25,8 +25,7 @@ def viewPedido(request,id):
     }
 
     if request.method == 'POST':
-        idpedido = request.POST.get('rutPedido')
-        idestpedido = 4
+        idestpedido = 5
         salida = modificar_estado_pedido(id, idestpedido)
         if salida == 1:
             return redirect(to="/repartidor")

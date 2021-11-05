@@ -1,5 +1,5 @@
-{% load static %}
 {% load humanize %}
+{% load static %}
 
 <div class="shadow" role="alert">
     <table class="table carro">
@@ -31,7 +31,7 @@
             </tr>
             {% endif %}
             <tr class="total">
-                <th scope="row" colspan="3" class="text-center pt-5"> Subtotal:  ${{total_carrito | intcomma}}</th>
+                <th scope="row" colspan="3" class="text-center pt-5"> Subtotal: ${{total_carrito | intcomma}}</th>
             </tr>
         </tbody>
     </table>

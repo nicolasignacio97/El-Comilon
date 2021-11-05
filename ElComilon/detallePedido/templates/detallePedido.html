@@ -42,7 +42,6 @@
                         {% for p in platillos %}
                         <div class="platillo">
                             <label  for="">{{p.data.3 | title}} <span class="multiplicador-platillo">x{{p.data.4}}</span></label>
-                            <!-- <label class="puntos-separacion" for="">............................................................................................</label> -->
                             <label for="">${{p.data.5 | intcomma}}</label>
                         </div>
                         {% endfor %}
@@ -52,28 +51,26 @@
                     <div class="separaciones-totales">
                         <div class="totales">
                             <label for="">Subtotal:</label>
-                            <!-- <label for="" class="puntos-separacion">............................................................................................</label> -->
                             <label for="">${{pedido.0.6 | intcomma}}</label>
                         </div>
             
                         <div class="totales">
                             <label for="">Total:</label>
-                            <!-- <label for="" class="puntos-separacion">............................................................................................</label> -->
                             <label for="">${{pedido.0.7 | intcomma}}</label>
                         </div>
                     </div>
                 </div>
                 <div class="tipo-entrega">
-                    <label class="entrega-bold" for="">Tipo de entrega: </label>
-                    <label for="">{{pedido.0.8}}</label>
+                    <label class="entrega-bold p-1"  for="">Tipo de servicio: </label> <br>
+                    <label for="" class="p-1">{{pedido.0.8}}</label>
                 </div>
         
                 <div class="datos-cliente">
                     <h2>Datos del cliente</h2>
                     <p>{{pedido.0.9 | title}}</p>
                     <p>{{pedido.0.10 | title}}</p>
-                    <p>{{pedido.0.11}}</p>
-                    <p>{{pedido.0.12}}</p>
+                    <p>{{pedido.0.11 | title}}</p>
+                    <p>{{pedido.0.12 | title}}</p>
                 </div>
     
             </div>

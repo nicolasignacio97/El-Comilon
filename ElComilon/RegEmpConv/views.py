@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.db import connection
+from django.contrib import messages
 import cx_Oracle
 
 # Create your views here.
@@ -7,18 +8,12 @@ def registroEmpresa(request):
     data = {
 
     }
-
     if request.method == 'POST':
         rutEmpresa = request.POST.get('rutEmpresa')
         nombre = request.POST.get('nombreEmpresa')
         razonSocial = request.POST.get('razonSocial')
-
-        salida = registrarEmpresa(rutEmpresa, nombre, razonSocial)
-        if salida == 1:
-            data['mensaje'] = 'EMPRESA CONVENIO REGISTRADA CORRECTAMENTE'
-        else:
-            data['mensaje'] = 'UPS, NO SE HA PODIDO REGISTRAR LA EMPRESA'
-
+        registrarEmpresa(rutEmpresa, nombre, razonSocial)
+        messages.success(request,'Agregado correctamente')
     return render(request,'regEmpConv.html',data)
 
 def registrarEmpresa(rutEmpresa, nombre, razonSocial):
@@ -76,8 +71,8 @@ def eliminarEmpresa(request):
     if request.method == 'POST':
         rut = request.POST.get('btnEliminar')
     
-    eliminar(rut)
-
+        eliminar(rut)
+        messages.success(request,'Eliminado')
     return listaEmpresa(request)
 
 def eliminar(rut):
@@ -97,8 +92,7 @@ def actualizarEmpresa(request):
         data = {
         'empresa': listarEmpresaRut(rut)
         }
-
- 
+    
     return render(request, 'actEmpConv.html', data)
 
 
@@ -107,7 +101,7 @@ def actEmpresa(request):
         rutEmpresa = request.POST.get('rutEmpresa')
         nombre = request.POST.get('nombreEmpresa')
         razonSocial = request.POST.get('razonSocial')
-
+        messages.success(request,'Actualizado')
         actualizar(rutEmpresa, nombre, razonSocial)
 
     return listaEmpresa(request)

@@ -29,20 +29,20 @@
             <div class="itemsIzquierda">
                 <div class="campos">
                     <div class="inputs">
-                        <input type="text" id="Nombre" name="Nombre" placeholder="Nombre del platillo" class="form-control inputfocus" required>
+                        <input type="text" minlength="4" maxlength="30" pattern="^[a-zA-Z]+$" id="Nombre" name="Nombre" placeholder="Nombre del platillo" class="form-control inputfocus" required>
                         <div class="valid-feedback"> </div>
                         <div class="invalid-feedback">Complete los campos</div>
                         <span> </span>
                     </div>
                     <div class="inputs">
-                        <input type="text" id="Ingredientes" name="Ingredientes" placeholder="Ingredientes"
+                        <input type="text" minlength="4" maxlength="50" id="Ingredientes" name="Ingredientes" placeholder="Ingredientes"
                         class="form-control inputfocus" required>
                     <div class="valid-feedback"> </div>
                     <div class="invalid-feedback">Complete los campos</div>
                     <span> </span>
                     </div>
                     <div class="inputs">
-                        <input type="number" min="1" id="Valor" name="Valor" placeholder="Valor" class="form-control inputfocus" required>
+                        <input type="text" maxlength="6" pattern="[0-9]{3,6}" min="1" id="Valor" name="Valor" placeholder="Valor" class="form-control inputfocus" required>
                         <div class="valid-feedback"> </div>
                         <div class="invalid-feedback">Complete los campos</div>
                         <span> </span>

@@ -50,7 +50,9 @@
             </div>
             <div class="col-3 mt-5">
                 <div class="card mt-5">
+                    {% if user.is_authenticated %}
                     {% include "carrito.html" %}
+                    {%endif%}
                 </div>
             </div>
         </div>

@@ -32,9 +32,15 @@
                             <h3 class="titulo text-center mt-5 mb-5">Actualizar Empresa Convenio</h3>
                             {% for e in empresa %}
                             <div class="row mb-4">
+                                <div class="col-12 d-none">
+                                    <input type="text" class="shadow-sm bg-body  rounded col-12 mt-1 form-control input_rut" name="rutEmpresa" 
+                                    placeholder="Rut empresa:" value="{{ e.0}}">
+                                    <div class="valid-feedback"> </div>
+                                    <div class="invalid-feedback">*Campo obligatorio*</div>
+                                </div>
                                 <div class="col-12">
-                                    <input type="text" class="shadow-sm bg-body rounded col-12 mt-1 form-control input_rut" name="rutEmpresa" 
-                                    placeholder="Rut empresa:" value="{{ e.0}}" required>
+                                    <input type="text" class="shadow-sm bg-body  rounded col-12 mt-1 form-control" 
+                                    placeholder="Rut empresa:" value="{{ e.0}}" disabled>
                                     <div class="valid-feedback"> </div>
                                     <div class="invalid-feedback">*Campo obligatorio*</div>
                                 </div>
