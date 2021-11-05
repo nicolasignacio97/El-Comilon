@@ -33,21 +33,21 @@
             <div class="itemsIzquierda">
                 <div class="campos">
                     <div class="inputs">
-                        <input type="text" maxlength="30" id="Nombre" name="Nombre" value="{{platillo.0.0}}"
+                        <input type="text" minlength="4" maxlength="30" id="Nombre" name="Nombre" value="{{platillo.0.0}}"
                             class="form-control inputfocus" required>
                         <div class="valid-feedback"> </div>
                         <div class="invalid-feedback">Complete los campos</div>
                         <span> </span>
                     </div>
                     <div class="inputs">
-                        <input type="text" maxlength="50" id="Ingredientes" name="Ingredientes" value="{{platillo.0.1}}"
+                        <input type="text" minlength="4" maxlength="50" id="Ingredientes" name="Ingredientes" value="{{platillo.0.1}}"
                             class="form-control inputfocus" required>
                         <div class="valid-feedback"> </div>
                         <div class="invalid-feedback">Complete los campos</div>
                         <span> </span>
                     </div>
                     <div class="inputs">
-                        <input type="text" maxlength="6" pattern="[0-9]{6}" min="1" id="Valor" name="Valor" value="{{platillo.0.2}}"
+                        <input type="text" maxlength="6" pattern="[0-9]{3,6}" min="100" id="Valor" name="Valor" value="{{platillo.0.2}}"
                             class="form-control inputfocus" required>
                         <div class="valid-feedback"> </div>
                         <div class="invalid-feedback">Complete los campos</div>
