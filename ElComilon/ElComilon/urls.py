@@ -16,7 +16,6 @@ Including another URLconf
 from django.contrib.auth import views as auth_views
 from django.contrib import admin
 from django.urls import path, include
-from RegisterRepartidor.views import Registrorep
 from recepcionista.views import viewRecepcionista,asignarRepartidor, cambiarEstado
 from registroDeUsuarios.views import registroUsuario
 # from ElComilon.listarPlatillos.views import modificarPlatillo
@@ -31,11 +30,11 @@ from Home.views import quienesSomos
 from administracion.urls import url_patterns
 from PerfilUsuario.views import PerfilUsuario
 from Pedido.views import pedido
-from Platillos.views import platillos, agregar_producto, eliminar_producto, restar_producto, limpiar_carrito
+from Platillos.views import platillos, agregar_producto, eliminar_producto, restar_producto, limpiar_carrito,guardar
 
 from detallePedido.views import detallePedido
 from Menu.views import menu, crearMenu
-from repartidor.views import viewRepartidor, viewPedido
+
 
 
 urlpatterns = [
@@ -49,8 +48,7 @@ urlpatterns = [
     path('Historial/<id>', PerfilUsuario, name="historial"),  # despues id en la ruta para filtro
     path('pedido', pedido),
     path('platillos', platillos, name="platillos"),
-    path('regin', Registrorep, name="regin"),
-    path('repartidor', viewRepartidor),
+    #path('regin', Registrorep, name="regin"),
     path('viewPedido/<id>', viewPedido),
     path('detallePedido', detallePedido),
     path('detallePedido/<idpedido>/<id>', detallePedido),
@@ -63,7 +61,6 @@ urlpatterns = [
 
 
     path('accounts/', include('django.contrib.auth.urls')),
-    path('repartidor', viewRepartidor),
     path('viewPedido/<id>', viewPedido),     
     path('recepcionista', viewRecepcionista, name='recepcionista'),
     path('estado/<id>', cambiarEstado, name='estado'),
@@ -73,5 +70,8 @@ urlpatterns = [
     path('eliminar/<id>', eliminar_producto, name="eliminar"),
     path('restar/<id>', restar_producto, name="restar_producto"),
     path('limpiarCarro', limpiar_carrito, name="limpiar_carrito"),
+    path('guardar/<nombre>', guardar, name="limpiar_carrito"),
+    
+
 
 ]

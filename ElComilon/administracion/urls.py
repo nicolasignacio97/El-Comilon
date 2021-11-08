@@ -20,8 +20,6 @@ from RegEmpConv.views import eliminarEmpresa
 from gestionRestaurantes.views import listarRestaurantes, modificarRepreResta, EliminarRepreResta
 from registroTrabajador.views import actTrabajador
 from RegEmpConv.views import actualizarEmpresa, actEmpresa
-
-
 from RegisterRepartidor.views import registroVeh, Registrorep, editRepartidor, deleterepartidor, listarRep, editvehiculo
 
 url_patterns = [
