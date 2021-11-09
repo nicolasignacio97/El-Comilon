@@ -83,8 +83,13 @@
                                                 placeholder="Fecha contrato" style="color: gray;" required>
                                         </div>
                                         <div class="col-md-6 col-sm-12">
-                                            <input type="text" class="form-control input-repartidor" name="rutempresa"
-                                                placeholder="Rut empresa" required>
+                                            <select name="rutempresa" id="tipovehiculo"
+                                            class="combobox-tipovehiculo  form-select">
+                                            <option value="SELECCIONE">Rut Restaurante </option>
+                                            {% for v in restaurante %}
+                                            <option value="{{v.0}}">{{v.0}}</option>
+                                            {% endfor %}
+                                        </select>
                                         </div>
                                     </div>
                                     <div class="row ">
@@ -125,7 +130,7 @@
                                 </div>
                             </div>
                             <div class="row ">
-                                <button id="btn-repartidor" type="submit" class="Btn_repartidor"> Registrar Repartidor </button>
+                                <button id="btn-repartidor" type="submit" class="Btn_repartidor btntest"> Registrar Repartidor </button>
                             </div>
                         </div>
                     </form>
@@ -137,8 +142,15 @@
         <script src="{% static 'app/jquery.rut.chileno.js' %}"></script>
         <link rel="stylesheet" href="{% static 'css/style-trabajador.css' %}">
         <script type="text/javascript">
-            jQuery(document).ready(function ($) {
-                $('.input_rut').rut();
+            $(function () {
+                $('.btntest').on('click', function (){
+                    $.ajax({
+                        url: "{% url 'regin'%}",
+                        type: 'POST',
+                        data:{},
+                        dataType: 'json'
+                    })
+                });
             });
         </script>
         <script src="{% static 'app/validacion.js' %}"></script>

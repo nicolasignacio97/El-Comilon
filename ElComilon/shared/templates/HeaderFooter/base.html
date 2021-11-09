@@ -27,7 +27,35 @@
 </head>
 
 <body>
-  <header class="contenido">
+  <div class="container-fluid"> 
+    <nav class=" row   baseline navbar navbar-expand-lg  " style="background-color: brown;">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#"><img class="logo-celu" src="{% static 'img/logo.png' %}" alt=""></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <a href="" class="row"><img src="{% static 'img/logo.png' %}" alt="" class="logo" style="max-width: 180px;"></a>
+        <div class="row  mr-2 ml-2"id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Features</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Pricing</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link disabled">Disabled</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </div>
+
+  <!-- <header class="contenido">
     <input class="btn-hamburguesa" type="checkbox" id="expandir" />
     <label class="btn-hamburguesa" for="expandir"><img src="{% static 'img/menuH.png' %}" alt="h"></label>
     <a href="/"></a><img class="logo-celu" src="{% static 'img/logo.png' %}" alt=""></a>
@@ -64,7 +92,7 @@
 
       </div>
     </div>
-  </header>
+  </header> -->
   <!-- <h1>{% block title %} {% endblock%}</h1> -->
   <section class="body-contenido">
     <section class="container ">
