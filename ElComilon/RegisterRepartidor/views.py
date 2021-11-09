@@ -46,11 +46,11 @@ def Registrorep(request):
         if not Restaurante.objects.filter(rutrestaurante = rutrestaurante).exists():
             print("Rut Empresa existente")
             messages.success(request, 'Rut restaurante no valido')
-            return redirect(to="/regin")
+            #return redirect(to="/regin")
         if Repartidor.objects.filter(rutrepartidor = rutrepartidor).exists():
             print("Usuario existente")
             messages.success(request, 'Repartidor ya existente')
-            return redirect(to="/regin")        
+            #return redirect(to="/regin")        
         else:
             forumulario = FormularioUsuario(data=request.POST)
             if forumulario.is_valid():
@@ -59,7 +59,7 @@ def Registrorep(request):
                 agregar_repartidor(rutrepartidor, nombres, apellido, fechacontrato, rutrestaurante)
                 agregar_vehiculo(patente,modelo,ano,color,vehiculorut,tipovehiculo)
                 messages.success(request, 'Repartidor Registrado con exito')
-                return redirect(to="administracion/regin")        
+                return render(request, 'Registrorepartidor.html', data)        
 
         
     return render(request, 'Registrorepartidor.html', data)  

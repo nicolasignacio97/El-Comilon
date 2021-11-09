@@ -49,3 +49,9 @@ def limpiar_carrito(request):
     Carrito = carrito(request)
     Carrito.limpiar()
     return redirect("platillos")
+
+def guardar(request,nombre):
+    Carrito = carrito(request)
+    print(Carrito)
+    print(nombre)
+    return redirect("platillos")
