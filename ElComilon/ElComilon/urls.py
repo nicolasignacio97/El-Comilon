@@ -48,6 +48,7 @@ urlpatterns = [
     path('Historial/<id>', PerfilUsuario, name="historial"),  # despues id en la ruta para filtro
     path('pedido', pedido),
     path('platillos', platillos, name="platillos"),
+    path('repartidor', viewRepartidor, name="repartidor"),
     #path('regin', Registrorep, name="regin"),
     path('viewPedido/<id>', viewPedido),
     path('detallePedido', detallePedido),
@@ -70,7 +71,7 @@ urlpatterns = [
     path('eliminar/<id>', eliminar_producto, name="eliminar"),
     path('restar/<id>', restar_producto, name="restar_producto"),
     path('limpiarCarro', limpiar_carrito, name="limpiar_carrito"),
-    path('guardar/<nombre>', guardar, name="limpiar_carrito"),
+    path('guardar', guardar, name="guardar"),
     
 
 

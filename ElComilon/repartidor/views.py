@@ -1,13 +1,14 @@
 from typing import List
 from django.shortcuts import get_object_or_404, render, redirect
 from django.db import connection
+from django.contrib.auth.decorators import permission_required
 import cx_Oracle
 
 from core.models import Pedido
 
 
 # Create your views here.
-
+@permission_required('core.view_pedido')
 def viewRepartidor(request):
     # print(listado_pedidos_reparto())
     dataRep = {
@@ -17,7 +18,7 @@ def viewRepartidor(request):
     
     return render(request,'viewRepartidor.html', dataRep)
 
-
+@permission_required('core.view_pedido')
 def viewPedido(request,id):
     pedido = get_object_or_404(Pedido,idpedido=id)
     dataMod = {
