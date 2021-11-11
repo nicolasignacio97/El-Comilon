@@ -47,7 +47,7 @@
         <div class="perfil">
           {% if user.is_authenticated %}
           <a href="{% url 'logout'%}">cerrar sesión</a>
-          <a href="#">{{user.username.title}}</a>
+          <a href="{% url 'perfilMenu' user.id %}">{{user.username.title}}</a>
           <a href="#">{{user.nombres.title}}</a>
           <a href="{% url 'historial' user.id %}">Historial</a>
           <a href="{% url 'crearMenu' user.id %}">Crear menú</a>

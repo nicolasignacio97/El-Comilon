@@ -28,7 +28,7 @@ from repartidor.views import viewPedido, viewRepartidor
 from reclamo.views import reclamo
 from Home.views import quienesSomos
 from administracion.urls import url_patterns
-from PerfilUsuario.views import PerfilUsuario
+from PerfilUsuario.views import PerfilUsuario, perfilMenu
 from Pedido.views import pedido
 from Platillos.views import platillos, agregar_producto, eliminar_producto, restar_producto, limpiar_carrito,guardar
 
@@ -60,6 +60,7 @@ urlpatterns = [
     path('menu/<id>', menu, name="menu"),
     path('crearMenu/<id>', crearMenu, name="crearMenu"),
 
+    path('perfilMenu/<id>', perfilMenu, name="perfilMenu"),
 
     path('accounts/', include('django.contrib.auth.urls')),
     path('viewPedido/<id>', viewPedido),     

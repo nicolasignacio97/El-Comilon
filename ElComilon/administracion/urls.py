@@ -48,6 +48,7 @@ url_patterns = [
     path('modificarProveedor/<id>/<id2>',modificarRepreResta, name='modificarProveedor'),
     path('eliminarProveedor/<id>/<id2>/',EliminarRepreResta, name='eliminarProveedor'),
     path('regin', Registrorep, name="regin"),
+
     path('reginvehiculo', registroVeh, name="reginvehiculo"),
     path('listarep', listarRep, name="listarep"),
     path('updaterepartidor/<rutrepartidor>/',editRepartidor, name='updrpartidor'),
