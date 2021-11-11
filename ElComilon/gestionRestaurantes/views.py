@@ -10,10 +10,12 @@ import cx_Oracle
 
 @permission_required('core')
 def listarRestaurantes(request):
+
     page = request.GET.get('page',1)
-    Lista = listado_restaurantes();
+    Lista = listado_restaurantes()
+    
     try:
-        paginator = Paginator(Lista, 10)
+        paginator = Paginator(Lista,10)
         Lista = paginator.page(page)
     except :
         raise Http404
