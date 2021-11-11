@@ -10,4 +10,11 @@ def PerfilUsuario(request,id):
             'pedidos' :pedido,
         }
     return render(request,'historialPedidos.html',data)
+
+def perfilMenu(request,id):
+    usuario = get_object_or_404(Cliente,idcuenta = id)
+    data = {
+            'usuario' : usuario,
+        }
+    return render(request,'perfilMenu.html',data)
     
