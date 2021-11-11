@@ -13,7 +13,7 @@ h1{
     --padding: 10px;    
     --bgcolor: #9C3534;
     --hovercolor: #B33B3D;
-    --width-collapsed: 6rem;
+    --width-collapsed: 0rem;
 }
 
 body{
@@ -34,6 +34,13 @@ body{
     height: 100vh;
     left: 0;
     top: 0;
+}
+.left{
+    border: none;
+    background-color: var(--bgcolor);
+    padding: 0;
+    margin-left: 4rem;
+    width: 10rem;
 }
 
 
@@ -127,8 +134,13 @@ body{
     visibility: hidden;
 }
 
+.no-menu {
+    margin-left: -20rem;
+}
 
-
+.btnBarra{
+    margin: 1rem;
+}
 
 /*Visibilidad*/
 .off{
