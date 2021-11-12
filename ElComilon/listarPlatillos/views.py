@@ -14,7 +14,7 @@ def listarPlatillos(request):
     page = request.GET.get('page',1)
     Lista = listado_platillos()
     try:
-        paginator = Paginator(Lista, 10)
+        paginator = Paginator(Lista, 1)
         Lista = paginator.page(page)
     except :
         raise Http404
