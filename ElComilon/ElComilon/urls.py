@@ -13,6 +13,7 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.conf.urls import handler404
 from django.contrib.auth import views as auth_views
 from django.contrib import admin
 from django.urls import path, include
@@ -23,6 +24,7 @@ from Home.views import inicio
 from RegisterPlatillo.views import registroPlatillo
 from Register.views import register, perfil
 from registroProveedor.views import registroProveedor
+from django.conf.urls import handler404
 
 from repartidor.views import viewPedido, viewRepartidor
 from reclamo.views import reclamo
@@ -31,9 +33,9 @@ from administracion.urls import url_patterns
 from PerfilUsuario.views import PerfilUsuario
 from Pedido.views import pedido
 from Platillos.views import platillos, agregar_producto, eliminar_producto, restar_producto, limpiar_carrito,guardar
-
 from detallePedido.views import detallePedido
 from Menu.views import menu, crearMenu
+from administracion.views import pag_404
 
 
 
@@ -71,7 +73,7 @@ urlpatterns = [
     path('restar/<id>', restar_producto, name="restar_producto"),
     path('limpiarCarro', limpiar_carrito, name="limpiar_carrito"),
     path('guardar/<nombre>', guardar, name="limpiar_carrito"),
-    
-
-
+    path('prueba/', pag_404)
 ]
+# handler404 = 'administracion.views.pag_404'
+

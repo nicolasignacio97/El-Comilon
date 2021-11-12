@@ -34,9 +34,7 @@
                 <div class="card shadow-lg p3 mb-5 mt-5 bg-white">
                     <h3 class="titulo text-center">Registrar un trabajador</h3>
                     <div class="card-body">
-                        <form action="" autocomplete="off"
-                            class="needs-validation d-flex flex-column  justify-content-center" method="POST"
-                            novalidate>
+                        <form action=""  id="post-form" class="needs-validation d-flex flex-column  justify-content-center" method="POST" novalidate>
                             {% csrf_token %}
                             <div class="row">
                                 <div class="col-6  p-4">
@@ -48,7 +46,7 @@
                                             <div class="row">
                                                 <div class="col mb-4">
                                                     <input type="text" name="rutTrabajador"  oninput="checkRut(this)" class="form-control input_rut"
-                                                        id="rut" placeholder="14.442.987-2" value="" required>
+                                                        id="txt-rut" placeholder="14.442.987-2" value="" required>
                                                     <div class="valid-feedback"> </div>
                                                     <div class="invalid-feedback">Complete el campo</div>
                                                 </div>
@@ -100,7 +98,7 @@
                             </div>
                             <div class="row">
                                 <div class="pieForm">
-                                    <button class="btn botonEnviar" id="btn1" type="submit">Registrar</button>
+                                    <button class="btn botonEnviar"  type="submit">Registrar</button>
                                 </div>
                                 <div class="row d-flex justify-content-center">
                                     {{mensaje}}
@@ -112,8 +110,68 @@
             </div>
         </div>
     </section>
-    <script src="{% static 'app/validacion.js' %}"></script>
-    <script src="{% static 'app/fecha.js' %}"></script>
+    <script type="text/javascript">
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    // Does this cookie string begin with the name we want?
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+            }
+            $('#post-form').on('submit', function (event) {   
+                event.preventDefault();
+                let inputrut = document.getElementById('txt-rut')
+                let rut = document.getElementById('txt-rut').value;
+                let formPost = document.getElementById('post-form')
+                var formData = new FormData(document.getElementById('post-form'));
+                formData.append('rut', rut);
+                if (rut && document.getElementById('post-form').checkValidity()){
+                    document.getElementById('post-form').classList.add('was-validated')
+                    fetch('{% url "cleanruttrabajador" %}', {
+                        method: 'POST',
+                        mode: 'same-origin',
+                        cache: 'no-cache', 
+                        body: formData,
+                        headers: {
+                            'X-CSRFToken': getCookie('csrftoken'),
+                        },
+                }).then(response => response.json())
+                    .then(data => {
+                        console.log(data)
+                        if (data.valid) {
+                            console.log("Usuario registrado con exito")
+                            fetch('{% url "trabajador" %}'),{
+                            method: 'POST',
+                            mode: 'same-origin',
+                            cache: 'no-cache', 
+                            body: formData,
+                            headers: {
+                                'X-CSRFToken': getCookie('csrftoken'),
+                            },
+                        }
+                            formPost.submit();
+                            return
+                        }else {           
+                            console.log("Trabajador existente en la bd")
+                            alert("Trabajador existente en la bd")
+                        }
+                    });
+                }else{       
+                    console.log("Llene todos los campos")
+                    event.preventDefault();
+                }      
+            });
+        </script>
+    <!-- <script src="{% static 'app/fecha.js' %}"></script> -->
+    
 </body>
 
 </html>

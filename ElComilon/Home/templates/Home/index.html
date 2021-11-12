@@ -3,15 +3,21 @@
 
 
 {% block L-izquierda %}
-<a href="/">Inicio</a>
-<a href="quienesSomos">Sobre nosotros</a>
+<li class="nav-item">
+    <a href="/" class="nav-link nav-item-a">Inicio</a>
+</li>
+
+<li class="nav-item">
+    <a href="/platillos" class="nav-link nav-item-a">Catálogo</a>
+</li>
+<li class="nav-item">
+    <a href="quienesSomos" class="nav-link nav-item-a">Sobre nosotros</a>
+</li>
+
 {% endblock%}
 
 
-{% block L-derecha %}
-<a href="/platillos">Catálogo</a>
-<!-- <a href="/login">Iniciar sesión</a> -->
-{% endblock%} 
+
 
 {% block content%}
 <!DOCTYPE html>

@@ -1,3 +1,4 @@
+from django.http.response import HttpResponse, JsonResponse
 from django.shortcuts import render,redirect
 from django.db import connection
 from core.models import Repartidor,Restaurante
@@ -45,27 +46,32 @@ def Registrorep(request):
         ano = request.POST.get('Ano')
         color = request.POST.get('Color') 
         tipovehiculo = request.POST.get('tipovehiculo') 
-        if not Restaurante.objects.filter(rutrestaurante = rutrestaurante).exists():
-            print("Rut Empresa existente")
-            messages.error(request, 'Rut restaurante no valido')
-            #return redirect(to="/regin")
-        if Repartidor.objects.filter(rutrepartidor = rutrepartidor).exists():
-            print("Usuario existente")
-            messages.error(request, 'Repartidor ya existente')
-            #return redirect(to="/regin")        
-        else:
-            forumulario = FormularioUsuario(data=request.POST)
-            if forumulario.is_valid():
-                forumulario.save()
-                data['form'] = forumulario
-                agregar_repartidor(rutrepartidor, nombres, apellido, fechacontrato, rutrestaurante)
-                agregar_vehiculo(patente,modelo,ano,color,vehiculorut,tipovehiculo)
-                messages.success(request, 'Repartidor Registrado con exito')
-                return render(request, 'Registrorepartidor.html', data)        
-
-        
+        # if not Restaurante.objects.filter(rutrestaurante = rutrestaurante).exists():
+        #     print("Rut Empresa existente")
+        #     messages.error(request, 'Rut restaurante no valido')
+        #     #return redirect(to="/regin")
+        # if Repartidor.objects.filter(rutrepartidor = rutrepartidor).exists():
+        #     print("Usuario existente")
+        #     messages.add_message(request, messages.INFO, 'Repartidor YA REGISTRADO .')
+        #     #return redirect(to="/regin")        
+        # else:
+        forumulario = FormularioUsuario(data=request.POST)
+        if forumulario.is_valid():
+            forumulario.save()
+            data['form'] = forumulario
+            agregar_repartidor(rutrepartidor, nombres, apellido, fechacontrato, rutrestaurante)
+            agregar_vehiculo(patente,modelo,ano,color,vehiculorut,tipovehiculo)
+            messages.success(request, 'Repartidor Registrado con exito')
+            return render(request, 'Registrorepartidor.html', data)        
     return render(request, 'Registrorepartidor.html', data)  
 
+def clean_rut(request):
+    rutrepartidor = request.POST.get('rut')
+    print(rutrepartidor)
+    if Repartidor.objects.filter(rutrepartidor=rutrepartidor).exists():
+        print("Repartidor existente")
+        return JsonResponse({'valid': 0})
+    return JsonResponse({'valid': 1 })
 
 def editRepartidor(request,rutrepartidor):
     repartidor = Repartidor.objects.get(rutrepartidor=rutrepartidor)
