@@ -28,7 +28,7 @@ from repartidor.views import viewPedido, viewRepartidor
 from reclamo.views import reclamo
 from Home.views import quienesSomos
 from administracion.urls import url_patterns
-from PerfilUsuario.views import PerfilUsuario, perfilMenu
+from PerfilUsuario.views import PerfilUsuario, perfilMenu,CambiarContra
 from Pedido.views import pedido
 from Platillos.views import platillos, agregar_producto, eliminar_producto, restar_producto, limpiar_carrito,guardar
 
@@ -67,6 +67,7 @@ urlpatterns = [
     path('recepcionista', viewRecepcionista, name='recepcionista'),
     path('estado/<id>', cambiarEstado, name='estado'),
     path('asignacion/<id>', asignarRepartidor, name='asignacionRepartidor'),
+    path('cambioContrasena', CambiarContra, name="cambioContrasena"),
     # carro
     path('agregar/<id>', agregar_producto, name="agregarProducto"),
     path('eliminar/<id>', eliminar_producto, name="eliminar"),
