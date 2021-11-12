@@ -1,3 +1,6 @@
+from operator import index
+
+
 class carrito:
     def __init__(self,request):
         self.request = request
@@ -46,3 +49,10 @@ class carrito:
     def limpiar(self):
         self.session["carrito"] = {}
         self.session.modified = True
+
+    def caja ( self ):
+        lisIndex= []
+        for i in self.carrito.keys():
+            Carro = self.carrito[i]
+            lisIndex.append( Carro )  
+        return lisIndex
