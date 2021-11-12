@@ -1,3 +1,4 @@
+from os import name
 from django.urls import path
 from django.urls.conf import include
 
@@ -11,23 +12,21 @@ from actualizarPlatillo.views import modificarPlatillo
 from django.contrib.auth.decorators import login_required
 from RegCliConv.views import RegistroCliConvenio, listarCliConv, modificarCliConv, eliminarCliConv
 from registroTrabajador.views import listaTrabajador
-from registroTrabajador.views import trabajadorRut
-from registroTrabajador.views import actualizarTrabajador
-from registroTrabajador.views import eliminarTrabajador
 from RegEmpConv.views import listaEmpresa
 from RegEmpConv.views import empresaRut
-from RegEmpConv.views import eliminarEmpresa
+from RegEmpConv.views import eliminarEmpresa,clean_rut_emp_convenio
 from gestionRestaurantes.views import listarRestaurantes, modificarRepreResta, EliminarRepreResta
-from registroTrabajador.views import actTrabajador
+from registroTrabajador.views import pruebatrabajo,actTrabajador,actualizarTrabajador,trabajadorRut,eliminarTrabajador,clean_rut_trabajador
 from RegEmpConv.views import actualizarEmpresa, actEmpresa
-from RegisterRepartidor.views import registroVeh, Registrorep, editRepartidor, deleterepartidor, listarRep, editvehiculo
+from RegisterRepartidor.views import registroVeh, Registrorep, editRepartidor, deleterepartidor, listarRep, editvehiculo, clean_rut
 
 url_patterns = [
     path('', administracion),
-
-    path('trabajador', registroTrabajador, name='trabajador'),
+    path('trabajador/', registroTrabajador, name='trabajador'),
+    path('valruttrabajador', clean_rut_trabajador, name='cleanruttrabajador'),
     path('proveedor', registroProveedor, name='proveedor'),
     path('empresa', registroEmpresa, name='empresa'),
+    path('valrutempresa', clean_rut_emp_convenio, name='cleanrutempresa'),
     path('platillo', registroPlatillo, name='platillo'),
     path('modificarPlatillo/<id>/', modificarPlatillo, name='modificarPlatillo'),
     path('eliminarPlatillo/<id>', eliminarPlatillo, name='eliminarPlatillo'),
@@ -47,18 +46,20 @@ url_patterns = [
     path('listarProveedores', listarRestaurantes, name="listarProveedores"),
     path('modificarProveedor/<id>/<id2>',modificarRepreResta, name='modificarProveedor'),
     path('eliminarProveedor/<id>/<id2>/',EliminarRepreResta, name='eliminarProveedor'),
-    path('regin', Registrorep, name="regin"),
-    path('reginvehiculo', registroVeh, name="reginvehiculo"),
+    path('regin/', Registrorep, name='regin'),
     path('listarep', listarRep, name="listarep"),
     path('updaterepartidor/<rutrepartidor>/',editRepartidor, name='updrpartidor'),
     path('updatevehiculo/<rutrepartidor>/', editvehiculo, name='updvehiculo'),
-    path('deleterepartidor/<rutrepartidor>/',deleterepartidor, name='deleterepartidor'),
+    path('deleterepartidor/<rutrepartidor>/<id>/',deleterepartidor, name='deleterepartidor'),
     path('actualizarEmpresa', actualizarEmpresa),
     path('actEmpresa', actEmpresa),
     path('empresaRut', empresaRut, name='empresaRut'),
     path('eliminarEmpresa', eliminarEmpresa, name='eliminarEmpresa'),
     path('platillo', registroPlatillo, name='platillo'),
     path('reginvehiculo', registroVeh, name='reginvehiculo'),
-    path('actTrabajador', actTrabajador, name='actTrabajador')
+    path('actTrabajador', actTrabajador, name='actTrabajador'),
+    path('valrut', clean_rut, name='validarRut'),
+
+
 
 ]

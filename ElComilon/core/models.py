@@ -6,6 +6,8 @@
 #   * Remove `managed = False` lines if you wish to allow Django to create, modify, and delete the table
 # Feel free to rename the models, but don't rename db_table values or field names.
 from django.contrib.auth.base_user import BaseUserManager 
+from django.conf import settings
+from  django.contrib.auth.models import User
 from django.db import models
 from django.db.models.fields import related
 from django.contrib.auth.models import  AbstractBaseUser, PermissionsMixin 
@@ -157,9 +159,10 @@ class Repartidor(models.Model):
     nombres = models.CharField(max_length=20)
     apellidos = models.CharField(max_length=20)
     fechacontrato = models.DateField()
-    usuario = models.CharField(max_length=15)
-    contrasena = models.CharField(max_length=20)
     rutrestaurante = models.ForeignKey('Restaurante', models.DO_NOTHING, db_column='rutrestaurante')
+    idcuenta = models.ForeignKey(User,models.DO_NOTHING , db_column='idcuenta')
+    
+
     def __str__(self):
         return self.rutrepartidor + ' ' + self.nombres
 

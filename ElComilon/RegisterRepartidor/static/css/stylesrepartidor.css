@@ -63,3 +63,7 @@ width: 100%;
     margin-bottom: 30px;
     
 }
+.was-validated{
+    border-color: #dc3545;
+    padding-right: calc(1.5em + 0.75rem);
+}

@@ -1,6 +1,18 @@
 *{
   font-family: 'Roboto',sans-serif;
 }
+/* Header-links */
+.nav-item-a{
+  font-size: 16px;
+  text-decoration: none;
+  color: #Fff;
+  margin: 0 20px;
+}
+.nav-item-a:hover{
+  font-size: 1.1rem;
+  transition: all .3s;
+  margin-right: 1.5rem;
+}
 body{
   box-sizing: border-box;
   margin: 0 auto;
@@ -20,7 +32,7 @@ body{
   align-items: center;
   flex-wrap: wrap;
   width: 100%;
-  justify-content: flex-end;
+  justify-content: center;
     /*margin-right: 15rem; */
 }
 .derecha{
@@ -28,8 +40,17 @@ body{
   display: flex;
   align-items: center; 
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: flex-end;
   width: 100%;
+}
+.nav-end{
+  padding: 20px;
+}
+.a-item{
+  margin-right: 20px;
+  font-size: 1.1rem;
+  text-decoration: none;
+  color: #Fff;
 }
 .perfil{
   margin-right: 1rem;
@@ -38,20 +59,28 @@ body{
 .menu a{
   text-decoration: none;
   color: #F5F5F5;
-  margin: 2rem;  
+  margin: 0 2.5rem;  
+}
+.menu a:hover{
+  font-size: 20px;
+  transition: all .5s;
+
 }
 
 a:hover{
   color: #c4c4c4;
 }
-.logo{
-  order: 2;
-}
+
 .hamburguesa{
   display:none
 }
-.logo img{
-  width: 10rem;
+.logo{
+  padding: 5px;
+  margin-left: 20px;
+  
+}
+.logo-img{
+  margin-left: 50px;
 }
 .btn-hamburguesa{
   display: none;
@@ -59,8 +88,18 @@ a:hover{
 .logo-celu{
   display: none;
 }
+.icon-menu-header{
+    font-size: 54px;
+    margin-right: 10px;
+    color: #fff;
+}
 
 /* Cambio de tamaño  */
+@media (max-width: 991px){
+  .logo-img{
+    margin-left: 0;
+  }
+}
 
 @media (max-width: 854px) {
   .contenido{
