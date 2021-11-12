@@ -27,23 +27,70 @@
 </head>
 
 <body>
-  <header class="contenido">
-    <input class="btn-hamburguesa" type="checkbox" id="expandir" />
-    <label class="btn-hamburguesa" for="expandir"><img src="{% static 'img/menuH.png' %}" alt="h"></label>
-    <a href="/"></a><img class="logo-celu" src="{% static 'img/logo.png' %}" alt=""></a>
-    <div class="menu animated animate__zoomIn">
-      <div class="logo animated fadeIn">
-        <a href="/"><img src="{% static 'img/logo.png' %}" alt=""></a>
+  <nav class="navbar navbar-expand-lg  " style="background-color: brown;">
+    <div class="container-fluid">
+      <div class=" row  col-3" style="justify-content: center;">
+        <a href="/" class="navbar-brand"><img class="logo-img" src="{% static 'img/logo.png' %}" alt="" style="max-width: 200px;"></a>
       </div>
-      <div class="izquierda">
-        {% block L-izquierda %}
-        {% endblock%}
-      </div>
-      <div class="derecha">
-        <div class="navegar">
-          {% block L-derecha %}
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" style="color: #fff;">
+        <span class="navbar-toggler-icon" style="color: #fff;"></span>
+        <i class="fas fa-bars icon-menu-header" ></i>
+      </button>
+      <div class="collapse navbar-collapse justify-content-center col-6" id="navbarNav">
+        <ul class="navbar-nav">
+          {% block L-izquierda %}
           {% endblock%}
-        </div>
+        </ul>
+      </div>
+      <div class="collapse navbar-collapse justify-content-center col-3 " id="navbarNav">
+        <ul class="navbar-nav">
+          {% if user.is_authenticated %}
+          <li class="nav-item">
+            <a href="{% url 'logout'%}">cerrar sesión</a>
+          </li>
+          <li class="nav-item">
+            <a href="#">{{user.username.title}}</a>
+          </li>
+          <li class="nav-item">
+            <a href="#">{{user.nombres.title}}</a>
+          </li>
+          <li class="nav-item">
+            <a href="{% url 'historial' user.id %}">Historial</a>
+          </li>
+          <li class="nav-item">
+            <a href="{% url 'crearMenu' user.id %}">Crear menú</a>
+          </li>
+          {% if user.is_superuser %}
+          <li class="nav-item">
+            <a href="/administracion">Administración</a>
+          </li>
+          {%endif%}
+          {% else %}
+          <li class="nav-item">
+            <a href="{% url 'login' %}" class="nav-link nav-item-a">iniciar sesión.</a>
+          </li>
+          <li class="nav-item">
+            <a href="/registroUsuarios " class="nav-link nav-item-a">Registro</a>
+          </li>
+          {%endif%}
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <input class="btn-hamburguesa" type="checkbox" id="expandir" />
+  <label class="btn-hamburguesa" for="expandir"><img src="{% static 'img/menuH.png' %}" alt="h"></label>
+  <a href="/"></a><img class="logo-celu" src="{% static 'img/logo.png' %}" alt=""></a>
+  <header class="container-fluid nav" style="background-color: brown ;">
+    <div class="menu animated animate__zoomIn ">
+      <div class="logo animated fadeIn col ">
+        <a href="/"><img class="" src="{% static 'img/logo.png' %}" alt=""></a>
+      </div>
+      <div class="izquierda col">
+    
+      </div>
+      <div class="derecha col">
         <div class="perfil">
           {% if user.is_authenticated %}
           <a href="{% url 'logout'%}">cerrar sesión</a>
@@ -51,21 +98,20 @@
           <a href="#">{{user.nombres.title}}</a>
           <a href="{% url 'historial' user.id %}">Historial</a>
           <a href="{% url 'crearMenu' user.id %}">Crear menú</a>
-
           {% if user.is_superuser %}
           <a href="/administracion">Administración</a>
           {%endif%}
-
           {% else %}
-          <a href="{% url 'login'%}">iniciar sesión</a>
+          <a href="" >iniciar sesión.</a>
           <a href="/registroUsuarios">Registro</a>
           {%endif%}
         </div>
-
       </div>
     </div>
   </header>
-  <!-- <h1>{% block title %} {% endblock%}</h1> -->
+</nav> -->
+
+  <h1>{% block title %} {% endblock%}</h1>
   <section class="body-contenido">
     <section class="container ">
       <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
@@ -145,6 +191,7 @@
     integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
     crossorigin="anonymous"></script>
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   {% if messages %}
   {%for m in messages%}
   <script>
@@ -156,6 +203,14 @@
   </script>
   {%endfor%}
   {%endif%}
+  <script type="text/javascript">
+    function abrir_reg_user() {
+      document.getElementById('a-login').addEventListener('click', function () {
+        alert("Mostrar iniciar sesion")
+        // document.querySelector('.modal-content').style.display = 'flex'
+      })
+    }
+  </script>
 </body>
 
 </html>

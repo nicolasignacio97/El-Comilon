@@ -33,6 +33,8 @@
                                         <th scope="col">Apellidos</th>
                                         <th scope="col">Fecha contrato</th>
                                         <th scope="col">Rut restaurante</th>
+                                        <th scope="col">Rut d</th>
+
                                         <th scope="col">Acción</th>
                                     </tr>
                                 </thead>
@@ -45,12 +47,13 @@
                                         <td>{{ r.fechacontrato }} </td>
 
                                         <td>{{ r.rutrestaurante }} </td>
+                                        <td>{{ r.idcuenta.id }} </td>
                                         <td> <a href="{% url 'updrpartidor' r.rutrepartidor %}"><i
                                                     class="fas fa-user-edit"
                                                     style="color:#02B37F; cursor: pointer;"></i></a>
                                             <a href="{% url 'updvehiculo' r.rutrepartidor %}"><i class="fas fa-car-alt"
                                                     style="color:#02B37F; cursor: pointer;"></i></a>
-                                            <a href="{% url 'deleterepartidor' r.rutrepartidor %}"><i
+                                            <a href="{% url 'deleterepartidor' r.rutrepartidor r.idcuenta.id  %}"><i
                                                     class="fas fa-trash-alt" style="color: brown; cursor: pointer;">
                                                 </i> </a>
 

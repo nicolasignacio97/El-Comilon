@@ -88,8 +88,16 @@ p{
     margin-top: 2%;
     width: auto;
 }
-
-a:hover{
+.nav-item-a{
+    font-size: 16px;
+    text-decoration: none;
+    color: #Fff;
+    margin: 0 20px;
+}
+.nav-item-a:hover{
+    font-size: 1.1rem;
+    transition: all .3s;
+    margin-right: 1.5rem;
     color: #c4c4c4;
 }
 

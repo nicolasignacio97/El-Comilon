@@ -4,14 +4,13 @@
 {% block content%}
 {% load crispy_forms_tags %}
 <link rel="stylesheet" href="{% static 'css/estiloRegistro.css' %}">
-    
-<div class="container">
+<div class="container ">
     <div class="row">
-        <div class="col-12 col-md-6 offset-md-3 mt-5">
+        <div class="col-12 col-md-6 offset-md-3 mt-5 ">
             <div class="card shadow mt-5">
                 <div class="card-body">
                     <h3 class="text-center mt-3 mb-3 titulo">Iniciar Sesión</h3>
-                    <form method="post">
+                    <form method="post"  class="needs-validation" novalidate>
                         {% csrf_token %}
                         {{form|crispy}}
                         <div class="d-flex justify-content-center mb-3">
@@ -23,4 +22,6 @@
         </div>
     </div>
 </div>
+<script src="{% static 'app/validacion.js' %}"></script>
 {%endblock%}
+
