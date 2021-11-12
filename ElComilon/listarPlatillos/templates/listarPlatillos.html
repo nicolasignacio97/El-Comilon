@@ -38,6 +38,7 @@
                                         <th scope="col">Id. Platillo</th>
                                         <th scope="col">Nombre Platillo</th>
                                         <th scope="col">Ingredientes</th>
+                                        <th scope="col">Disponibilidad</th>
                                         <th scope="col">Precio</th>
                                         <th scope="col">Acción</th>
                                 </thead>
@@ -48,6 +49,7 @@
                                         </td>
                                         <td class="titulos">{{ p.data.1 }} </td>
                                         <td class="titulos">{{ p.data.2 }} </td>
+                                        <td>{{p.data.6}}</td>
                                         <td>{{ p.data.3 }} </td>
                                         <td> <a href="modificarPlatillo/{{ p.data.0 }}"><i class="fas fa-user-edit"
                                                     style="color:#02B37F; cursor: pointer;"></i></a>

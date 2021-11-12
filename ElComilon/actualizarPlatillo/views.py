@@ -1,3 +1,5 @@
+from django.db.models.expressions import Subquery
+from django.db.models.fields import NullBooleanField
 from django.shortcuts import get_object_or_404, redirect, render
 from django.db import connection
 import cx_Oracle
@@ -7,14 +9,6 @@ from django.contrib import messages
 
 
 # Create your views here.
-def actualizarPlatillo(request, id):
-    data = {
-        'platillos':listado_platillos(id),
-        'Restaurante':listarRestaurante()
-    }
-    
-    return render(request, 'actualizarPlatillo.html', data)
-
 def listado_platillos(id):
     django_cursor = connection.cursor()
     cursor = django_cursor.connection.cursor()
@@ -63,7 +57,10 @@ def modificarPlatillo(request, id):
         nombrePlatillo = request.POST.get('Nombre').upper()
         ingredientes = request.POST.get('Ingredientes').upper()
         valor = request.POST.get('Valor')
-        foto = request.FILES['foto'].read()           
+        if 'foto' in request.FILES:
+            foto = request.FILES['foto'].read()
+        else:
+            foto = False
         ModificarPlatillo(id,nombrePlatillo, ingredientes, valor, foto)
         messages.success(request, "Se ha modificado correctamente el platillo ")
         return redirect(to="/administracion/listarPlatillos")

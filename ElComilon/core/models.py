@@ -128,8 +128,8 @@ class Platillo(models.Model):
     nombre = models.CharField(max_length=30)
     ingredientes = models.CharField(max_length=50)
     valorunitario = models.IntegerField()
-    foto = models.BinaryField(blank=True)
-    # disponible = models.BooleanField(blank= True)
+    foto = models.ImageField(blank=True, null=True)
+    disponible = models.BooleanField(blank= True)
     rutrestaurante = models.ForeignKey('Restaurante', models.DO_NOTHING, db_column='rutrestaurante')
 
     def __str__(self):
