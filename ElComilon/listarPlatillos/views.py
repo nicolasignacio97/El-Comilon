@@ -1,7 +1,9 @@
+from django.http.response import Http404
 from django.shortcuts import get_object_or_404, redirect, render
 from django.db import connection
 import base64
 import cx_Oracle
+from django.core.paginator import Paginator
 from core.models import Platillo
 from django.contrib import messages
 from django.contrib.auth.decorators import permission_required
@@ -9,8 +11,18 @@ from django.contrib.auth.decorators import permission_required
 # Create your views here.
 @permission_required('core')
 def listarPlatillos(request):
+    page = request.GET.get('page',1)
+    Lista = listado_platillos()
+    try:
+        paginator = Paginator(Lista, 10)
+        Lista = paginator.page(page)
+    except :
+        raise Http404
+
     data = {
-        'platillos':listado_platillos()
+        'platillos':listado_platillos(),
+        'entity': Lista,
+        'paginator' : paginator,
     }
     return render(request, 'listarPlatillos.html', data)
 

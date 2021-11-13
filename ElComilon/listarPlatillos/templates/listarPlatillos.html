@@ -42,7 +42,7 @@
                                         <th scope="col">Acción</th>
                                 </thead>
                                 <tbody >
-                                    {% for p in platillos%}
+                                    {% for p in entity %}
                                     <tr>
                                         <td id="idPlatillo" name="idPlatillo" style="margin-right: 100px;">{{p.data.0 }}
                                         </td>
@@ -60,7 +60,7 @@
                                 </tbody>
                             </table>
                         </div>
-
+                        {% include 'HeaderFooter/paginator.html'%}
                     </div>
                 </div>
             </div>
