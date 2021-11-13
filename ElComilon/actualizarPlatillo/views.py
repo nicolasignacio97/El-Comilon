@@ -1,36 +1,19 @@
-from os import name
 from django.shortcuts import get_object_or_404, redirect, render
 from django.db import connection
 import cx_Oracle
 import base64
+from core.models import Platillo
 from django.contrib import messages
 
 
-
 # Create your views here.
-
-def modificarPlatillo(request, id):
-    dataMod = {
-        'platillo':listado_platillos(id),
-        'foto':listado_fotos(id)
+def actualizarPlatillo(request, id):
+    data = {
+        'platillos':listado_platillos(id),
+        'Restaurante':listarRestaurante()
     }
-    if request.method == 'POST':
-        nombrePlatillo = request.POST.get('Nombre').upper()
-        ingredientes = request.POST.get('Ingredientes').upper()
-        valor = request.POST.get('Valor')
-
-        if 'foto' in request.POST:
-         foto = False
-         ModificarPlatilloSinFoto(id,nombrePlatillo, ingredientes, valor)
-        else:
-         foto = True
-         foto = request.FILES['foto'].read()
-         ModificarPlatillo(id,nombrePlatillo, ingredientes, valor, foto)
-        messages.success(request, "Se ha modificado correctamente el platillo ")
-        return redirect(to="/administracion/listarPlatillos")
-    return render(request, 'actualizarPlatillo.html', dataMod)
-
-
+    
+    return render(request, 'actualizarPlatillo.html', data)
 
 def listado_platillos(id):
     django_cursor = connection.cursor()
@@ -71,6 +54,22 @@ def listarRestaurante():
 
     return lista
 
+def modificarPlatillo(request, id):
+    dataMod = {
+        'platillo':listado_platillos(id),
+        'foto':listado_fotos(id)
+    }
+    if request.method == 'POST':
+        nombrePlatillo = request.POST.get('Nombre').upper()
+        ingredientes = request.POST.get('Ingredientes').upper()
+        valor = request.POST.get('Valor')
+        foto = request.FILES['foto'].read()           
+        ModificarPlatillo(id,nombrePlatillo, ingredientes, valor, foto)
+        messages.success(request, "Se ha modificado correctamente el platillo ")
+        return redirect(to="/administracion/listarPlatillos")
+
+ 
+    return render(request, 'actualizarPlatillo.html', dataMod)
 
 def ModificarPlatillo(idPlatillo, nomPlatillo, ingPlatillo,valPlatillo, fotPlatillo):
     django_cursor = connection.cursor()
@@ -78,12 +77,3 @@ def ModificarPlatillo(idPlatillo, nomPlatillo, ingPlatillo,valPlatillo, fotPlati
     salida = cursor.var(cx_Oracle.NUMBER)
     cursor.callproc("ACTUALIZAR_PLATILLO", [idPlatillo, nomPlatillo,ingPlatillo, valPlatillo, fotPlatillo, salida])
     return salida.getvalue()
-
-def ModificarPlatilloSinFoto(idPlatillo, nomPlatillo, ingPlatillo,valPlatillo):
-    django_cursor = connection.cursor()
-    cursor = django_cursor.connection.cursor()
-    salida = cursor.var(cx_Oracle.NUMBER)
-    cursor.callproc("ACTUALIZAR_PLATILLO_SIN_FOTO", [idPlatillo, nomPlatillo,ingPlatillo, valPlatillo, salida])
-    return salida.getvalue()
-
-     

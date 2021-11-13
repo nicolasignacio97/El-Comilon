@@ -30,7 +30,7 @@ from repartidor.views import viewPedido, viewRepartidor
 from reclamo.views import reclamo
 from Home.views import quienesSomos
 from administracion.urls import url_patterns
-from PerfilUsuario.views import PerfilUsuario, perfilMenu,CambiarContra
+from PerfilUsuario.views import PerfilUsuario
 from Pedido.views import pedido
 from Platillos.views import platillos, agregar_producto, eliminar_producto, restar_producto, limpiar_carrito,guardar
 from detallePedido.views import detallePedido
@@ -50,34 +50,30 @@ urlpatterns = [
     path('Historial/<id>', PerfilUsuario, name="historial"),  # despues id en la ruta para filtro
     path('pedido', pedido),
     path('platillos', platillos, name="platillos"),
-    path('repartidor', viewRepartidor, name="repartidor"),
+    #path('regin', Registrorep, name="regin"),
     path('viewPedido/<id>', viewPedido),
     path('detallePedido', detallePedido),
     path('detallePedido/<idpedido>/<id>', detallePedido),
     path('registroUsuarios', registroUsuario),
     path('administracion/', include(url_patterns)),
+
+
     path('menu/<id>', menu, name="menu"),
     path('crearMenu/<id>', crearMenu, name="crearMenu"),
-    path('perfilMenu/<id>', perfilMenu, name="perfilMenu"),
+
+
     path('accounts/', include('django.contrib.auth.urls')),
     path('viewPedido/<id>', viewPedido),     
     path('recepcionista', viewRecepcionista, name='recepcionista'),
     path('estado/<id>', cambiarEstado, name='estado'),
     path('asignacion/<id>', asignarRepartidor, name='asignacionRepartidor'),
-    path('cambioContrasena', CambiarContra, name="cambioContrasena"),
-  
     # carro
     path('agregar/<id>', agregar_producto, name="agregarProducto"),
     path('eliminar/<id>', eliminar_producto, name="eliminar"),
     path('restar/<id>', restar_producto, name="restar_producto"),
     path('limpiarCarro', limpiar_carrito, name="limpiar_carrito"),
-    path('guardar', guardar, name="guardar"),
-    
-
-
-  
+    path('guardar/<nombre>', guardar, name="limpiar_carrito"),
     path('prueba/', pag_404)
-
 ]
 # handler404 = 'administracion.views.pag_404'
 

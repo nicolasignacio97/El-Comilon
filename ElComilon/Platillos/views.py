@@ -2,7 +2,6 @@ from django.shortcuts import redirect, render
 from django.db import connection
 from Platillos.carrito import carrito
 from core.models import Platillo
-from .context_processors import total_carrito
 import base64
 
 # Create your views here.
@@ -51,16 +50,8 @@ def limpiar_carrito(request):
     Carrito.limpiar()
     return redirect("platillos")
 
-def guardar(request):
-    
+def guardar(request,nombre):
     Carrito = carrito(request)
-    carro = Carrito.caja()
-    
-    print('id ',carro[0]['idplatillo'])
-    print('Plato ',carro[0]['nombre'])
-    print('ingredientes ',carro[0]['ingredientes'])
-    print('valor ',carro[0]['valorunitario'])
-    print('cantidad ',carro[0]['cantidad'])
-    #print('completo',carro)
-    print('TOTAL: ',total_carrito(request)['total_carrito']) 
+    print(Carrito)
+    print(nombre)
     return redirect("platillos")
