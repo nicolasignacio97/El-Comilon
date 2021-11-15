@@ -4,7 +4,7 @@ from django.contrib import admin
 from django.urls import path, include
 from recepcionista.views import viewRecepcionista,asignarRepartidor, cambiarEstado
 from registroDeUsuarios.views import registroUsuario
-# from ElComilon.listarPlatillos.views import modificarPlatillo
+
 from Home.views import inicio
 from RegisterPlatillo.views import registroPlatillo
 from Register.views import register, perfil
@@ -21,8 +21,6 @@ from Platillos.views import platillos, agregar_producto, eliminar_producto, rest
 from detallePedido.views import detallePedido
 from Menu.views import menu, crearMenu
 from administracion.views import pag_404
-
-
 
 urlpatterns = [
     path('admin/', admin.site.urls),

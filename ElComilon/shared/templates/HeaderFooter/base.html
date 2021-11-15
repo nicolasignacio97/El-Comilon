@@ -27,7 +27,7 @@
 </head>
 
 <body>
-  <nav class="navbar navbar-expand-lg  p-0  " style="background-color: brown;">
+  <nav class="navbar navbar-expand-lg  p-0  " style="background-color:#9C3534;">
     <div class="container-fluid">
       <div class=" row  col-3" style="justify-content: center;">
         <a href="/" class="navbar-brand"><img class="logo-img" src="{% static 'img/logo.png' %}" alt="" style="max-width: 200px;"></a>
@@ -39,110 +39,47 @@
       </button>
       <div class="collapse navbar-collapse justify-content-center col-6" id="navbarNav">
         <ul class="navbar-nav">
-          {% block L-izquierda %}
-          {% endblock%}
+          <li class="nav-item">
+            <a href="/" class="nav-link nav-item-a  text-light">Inicio</a>
+        </li>
+        <li class="nav-item">
+            <a href="/platillos" class="nav-link nav-item-a text-light">Catálogo</a>
+        </li>
+        <li class="nav-item">
+            <a href="quienesSomos" class="nav-link nav-item-a  text-light">Sobre nosotros</a>
+        </li>
         </ul>
       </div>
       <div class="collapse navbar-collapse justify-content-center col-3" id="navbarNav">
         <ul class="navbar-nav">
           {% if user.is_authenticated %}
           <li class="nav-item">
-            <a href="{% url 'logout'%}">Cerrar sesión</a>
-          </li>
+            <a href="{% url 'perfilMenu' user.id %}" class="nav-link nav-item-a text-light">{{user.username.title}}</a>
+            </li>
           <li class="nav-item">
-          <a href="{% url 'perfilMenu' user.id %}">{{user.username.title}}</a>
-          </li>
-          <li class="nav-item">
-            <a href="#">{{user.nombres.title}}</a>
-          </li>
-          <li class="nav-item">
-            <a href="{% url 'historial' user.id %}">Historial</a>
-          </li>
-          <li class="nav-item">
-            <a href="{% url 'crearMenu' user.id %}">Crear menú</a>
+            <a href="{% url 'logout'%}" class="nav-link nav-item-a text-light">Cerrar sesión</a>
           </li>
           {% if user.is_superuser %}
           <li class="nav-item">
-            <a href="/administracion">Administración</a>
+            <a href="/administracion" class="nav-link nav-item-a text-light">Administración</a>
           </li>
           {%endif%}
           {% else %}
           <li class="nav-item">
-            <a href="{% url 'login' %}" class="nav-link nav-item-a">Iniciar sesión</a>
+            <a href="{% url 'login' %}"  class="nav-link nav-item-a text-light">Iniciar sesión</a>
           </li>
           <li class="nav-item">
-            <a href="/registroUsuarios " class="nav-link nav-item-a">Registro</a>
+            <a href="/registroUsuarios"  class="nav-link nav-item-a text-light">Registro</a>
           </li>
           {%endif%}
         </ul>
       </div>
     </div>
   </nav>
-  <!-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <input class="btn-hamburguesa" type="checkbox" id="expandir" />
-  <label class="btn-hamburguesa" for="expandir"><img src="{% static 'img/menuH.png' %}" alt="h"></label>
-  <a href="/"></a><img class="logo-celu" src="{% static 'img/logo.png' %}" alt=""></a>
-  <header class="container-fluid nav" style="background-color: brown ;">
-    <div class="menu animated animate__zoomIn ">
-      <div class="logo animated fadeIn col ">
-        <a href="/"><img class="" src="{% static 'img/logo.png' %}" alt=""></a>
-      </div>
-      <div class="izquierda col">
-    
-      </div>
-      <div class="derecha col">
-        <div class="perfil">
-          {% if user.is_authenticated %}
-          <a href="{% url 'logout'%}">cerrar sesión</a>
-          <a href="#">{{user.username.title}}</a>
-          <a href="#">{{user.nombres.title}}</a>
-          <a href="{% url 'historial' user.id %}">Historial</a>
-          <a href="{% url 'crearMenu' user.id %}">Crear menú</a>
-          {% if user.is_superuser %}
-          <a href="/administracion">Administración</a>
-          {%endif%}
-          {% else %}
-          <a href="" >iniciar sesión.</a>
-          <a href="/registroUsuarios">Registro</a>
-          {%endif%}
-        </div>
-      </div>
-    </div>
-  </header>
-</nav> -->
-
-  <h1>{% block title %} {% endblock%}</h1>
   <section class="body-contenido">
-    <section class="container ">
-      <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
-        <div class="offcanvas-header canvas-header">
-          <img class="icon" src="{% static 'img/userIconBlack.png' %}" alt="">
-          <h3 id="offcanvasRightLabel">MI CUENTA</h3>
-          <label for="">$Saldo</label>
-
-          <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-        </div>
-        <div class="offcanvas-body">
-          <div class="nom-user">
-            <img class="icon" src="{% static 'img/userIconBlack.png' %}" alt="">
-            <h3>Nombreusuario</h3>
-          </div>
-
-          <div class="nav-canvas">
-            <ul><img class="icon" src="{% static 'img/userIconBlack.png' %}" alt=""><a href="#">Mis Datos</a></ul>
-            <ul><img class="icon" src="{% static 'img/userIconBlack.png' %}" alt=""><a href="#">Mis pedidos</a></ul>
-            <ul><img class="icon" src="{% static 'img/userIconBlack.png' %}" alt=""><a href="#">Mi Menu semanal</a></ul>
-          </div>
-
-          <button type="button" class="btn btn-outline-dark w-75 btn-exit">Cerrar Sesión</button>
-        </div>
-      </div>
-    </section>
     {% block content%}
-
     <!-- Cambia según página donde se implemente esta plantilla -->
     {% endblock%}
-
   </section>
   <footer class="footer-contenido">
     <div class="info1">
