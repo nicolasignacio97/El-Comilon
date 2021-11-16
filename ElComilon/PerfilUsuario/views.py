@@ -25,7 +25,7 @@ def PerfilUsuario(request, id):
 def perfilMenu(request, id):
     usuario = get_object_or_404(User, id=id)
     cliente = get_object_or_404(Cliente, idcuenta=id)
-
+    
     formCuenta = EditarUsuario(instance=usuario)
     formPersonal = EditarCliente(instance=cliente)
     data = {

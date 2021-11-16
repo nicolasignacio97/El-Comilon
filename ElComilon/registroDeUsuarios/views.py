@@ -17,15 +17,15 @@ def registroUsuario(request):
     }
     if request.method == 'POST':
             rutcliente = request.POST.get('rutCliente')
-            nombres = request.POST.get('nombresCli')
-            apellidos = request.POST.get('apellidosCli')
-            direccion = request.POST.get('direccionCli')
+            # nombres = request.POST.get('nombresCli')
+            # apellidos = request.POST.get('apellidosCli')
+            # direccion = request.POST.get('direccionCli')
             idtipoCliente = 2
             forumulario = FormularioUsuario(data=request.POST)
             if forumulario.is_valid():
                 forumulario.save()
                 user= authenticate(username=forumulario.cleaned_data["username"], password= forumulario.cleaned_data["password1"])
-                agregar_cliente(rutcliente,nombres, apellidos, direccion,   idtipoCliente)
+                agregar_cliente(rutcliente, idtipoCliente)
                 login(request,user)
                 messages.success(request, "Usuario Creado")
                 return redirect(to="home")
@@ -34,11 +34,11 @@ def registroUsuario(request):
 
 
 
-def agregar_cliente(rutcliente,nombres, apellidos, direccion,  idtipocliente):
+def agregar_cliente(rutcliente, idtipocliente):
     django_cursor = connection.cursor()
     cursor = django_cursor.connection.cursor()
     salida = cursor.var(cx_Oracle.NUMBER)
-    cursor.callproc('SP_AGREGAR_CLIENTE',[rutcliente, nombres, apellidos, direccion, idtipocliente, salida])
+    cursor.callproc('SP_AGREGAR_CLIENTE',[rutcliente, idtipocliente, salida])
     return salida.getvalue()
 
 # class  RegistrarUsuario(CreateView):

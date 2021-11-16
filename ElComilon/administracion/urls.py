@@ -4,18 +4,16 @@ from django.urls.conf import include
 
 from administracion.views import administracion
 from registroTrabajador.views import registroTrabajador
-from registroProveedor.views import registroProveedor
 from RegEmpConv.views import registroEmpresa
 from RegisterPlatillo.views import registroPlatillo
 from listarPlatillos.views import listarPlatillos, eliminarPlatillo
 from actualizarPlatillo.views import modificarPlatillo
-from django.contrib.auth.decorators import login_required
 from RegCliConv.views import RegistroCliConvenio, listarCliConv, modificarCliConv, eliminarCliConv
 from registroTrabajador.views import listaTrabajador
 from RegEmpConv.views import listaEmpresa
 from RegEmpConv.views import empresaRut
 from RegEmpConv.views import eliminarEmpresa,clean_rut_emp_convenio
-from gestionRestaurantes.views import listarRestaurantes, modificarRepreResta, EliminarRepreResta
+from gestionRestaurantes.views import listarRestaurantes, modificarRepreResta, EliminarRepreResta,registroProveedor
 from registroTrabajador.views import pruebatrabajo,actTrabajador,actualizarTrabajador,trabajadorRut,eliminarTrabajador,clean_rut_trabajador
 from RegEmpConv.views import actualizarEmpresa, actEmpresa
 from RegisterRepartidor.views import registroVeh, Registrorep, editRepartidor, deleterepartidor, listarRep, editvehiculo, clean_rut

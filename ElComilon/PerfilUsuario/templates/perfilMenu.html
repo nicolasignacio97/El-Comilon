@@ -21,10 +21,10 @@
           <a class="nav-link active" aria-current="page" href="#">Mis Datos</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'historial' user.id %}">Mis pedidos</a>
+          <a class="nav-link text-danger" href="{% url 'historial' user.id %}">Mis pedidos</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'crearMenu' user.id %}">Menú Semanal</a>
+          <a class="nav-link text-danger" href="{% url 'crearMenu' user.id %}">Menú Semanal</a>
         </li>
         <li class="nav-item">
           <a class="nav-link disabled">{{user.username.title}}</a>

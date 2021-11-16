@@ -8,7 +8,6 @@ from registroDeUsuarios.views import registroUsuario
 from Home.views import inicio
 from RegisterPlatillo.views import registroPlatillo
 from Register.views import register, perfil
-from registroProveedor.views import registroProveedor
 from django.conf.urls import handler404
 
 from repartidor.views import viewPedido, viewRepartidor
@@ -27,9 +26,8 @@ urlpatterns = [
     path('', inicio, name="home"),
     path('registroPlatillo', registroPlatillo),
     path('registro', register),
-    path('registroProveedor', registroProveedor),
     path('reclamo', reclamo),
-    path('quienesSomos', quienesSomos),
+    path('quienesSomos', quienesSomos ,name= 'quienesSomos'),
     path('Historial/<id>', PerfilUsuario, name="historial"),  # despues id en la ruta para filtro
     path('pedido', pedido),
     path('platillos', platillos, name="platillos"),
@@ -44,8 +42,7 @@ urlpatterns = [
 
     path('menu/<id>', menu, name="menu"),
     path('crearMenu/<id>', crearMenu, name="crearMenu"),
-
-
+    
     path('accounts/', include('django.contrib.auth.urls')),
     path('viewPedido/<id>', viewPedido),     
     path('recepcionista', viewRecepcionista, name='recepcionista'),

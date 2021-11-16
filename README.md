@@ -15,3 +15,7 @@ entorno virtual:
     pytz==2021.3
     sqlparse==0.4.2
     toml==0.10.2
+
+#from django.http import HttpResponse
+#return HttpResponse(status=404)
+#return HttpResponseNotFound('<h1>Page not found</h1>')

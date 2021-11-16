@@ -9,7 +9,7 @@ class EditarCliente(forms.ModelForm):
     class Meta:
         model = Cliente
         fields = ('nombres','apellidos','direccion','telefono')
-
+        
 class EditarUsuario (UserChangeForm):
     password = None
     class Meta:
