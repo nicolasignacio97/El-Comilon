@@ -33,6 +33,7 @@ class Cliente(models.Model):
     saldocli = models.BigIntegerField(blank=True, null=True)
     idtipocliente = models.ForeignKey('TipoCliente', models.DO_NOTHING, db_column='idtipocliente')
     rutempconv = models.ForeignKey('EmpresaConvenio', models.DO_NOTHING, db_column='rutempconv', blank=True, null=True)
+    idcuenta = models.ForeignKey(User,models.DO_NOTHING , db_column='idcuenta')
     def __str__(self):
         return self.rutcliente
     
@@ -268,6 +269,7 @@ class Trabajador(models.Model):
     # contrasena = models.CharField(max_length=20)
     rutrestaurante = models.ForeignKey(Restaurante, models.DO_NOTHING, db_column='rutrestaurante')
     idcargo = models.ForeignKey(Cargo, models.DO_NOTHING, db_column='idcargo')
+    idcuenta = models.ForeignKey(User,models.DO_NOTHING , db_column='idcuenta')
 
 
 
