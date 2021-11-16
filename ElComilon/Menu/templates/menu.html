@@ -4,12 +4,12 @@
 
 {% block L-izquierda %}
 <a href="/">Inicio</a>
-<a href="quienesSomos">Sobre nosotros</a>
+<a href="/quienesSomos">Sobre nosotros</a>
 {% endblock%}
 
 
 {% block L-derecha %}
-<a href="#">Catálogo</a>
+<a href="/platillos">Catálogo</a>
 <a href="/login">Iniciar sesión</a>
 {% endblock%}
 
@@ -19,7 +19,6 @@
 
 <head>
     {% load static %}
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -29,7 +28,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href={% static "css/estilo-menu.css" %}>
+    <link rel="stylesheet" href="{% static 'css/estilo-menu.css' %}">
     <title>El Comilón</title>
 </head>
 
@@ -38,7 +37,21 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="card shadow-lg p3 mb-5 mt-5 bg-white">
-                    <h3 class="titulo text-center mt-5 mb-5">Crear Menú Semanal</h3>
+                    <h1 class="text-center titulo mb-5">Mi Cuenta</h1>
+                    <ul class="nav nav-tabs">
+                        <li class="nav-item">
+                            <a class="nav-link text-danger" href="{% url 'perfilMenu' user.id %}">Mis Datos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-danger"  href="{% url 'historial' user.id %}">Mis pedidos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="{% url 'crearMenu' user.id %}">Menú Semanal</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link disabled">{{user.username.title}}</a>
+                        </li>
+                    </ul>
                     <div class="card-body">
                         <form action="" autocomplete="off"
                             class="needs-validation d-flex flex-column  justify-content-center" method="POST"

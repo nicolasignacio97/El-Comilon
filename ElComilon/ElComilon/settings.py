@@ -51,7 +51,6 @@ INSTALLED_APPS = [
     'Home',
     'RegisterPlatillo',
     'Register',
-    'registroProveedor',
     'RegEmpConv',
     'reclamo',
     'RegisterRepartidor',
