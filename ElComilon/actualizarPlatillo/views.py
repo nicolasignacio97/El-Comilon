@@ -51,26 +51,29 @@ def listarRestaurante():
 def modificarPlatillo(request, id):
     dataMod = {
         'platillo':listado_platillos(id),
-        'foto':listado_fotos(id)
+        'foto':listado_fotos(id),
+        'platillos':get_object_or_404(Platillo, idplatillo=id)
     }
     if request.method == 'POST':
         nombrePlatillo = request.POST.get('Nombre').upper()
         ingredientes = request.POST.get('Ingredientes').upper()
         valor = request.POST.get('Valor')
-        if 'foto' in request.FILES:
-            foto = request.FILES['foto'].read()
+        foto = request.FILES['foto'].read()
+        check1 = request.POST.get('Disponible')
+        if check1:
+            disponible = 1
         else:
-            foto = False
-        ModificarPlatillo(id,nombrePlatillo, ingredientes, valor, foto)
+            disponible = 0
+        ModificarPlatillo(id,nombrePlatillo, ingredientes, valor, foto, disponible)
         messages.success(request, "Se ha modificado correctamente el platillo ")
         return redirect(to="/administracion/listarPlatillos")
 
  
     return render(request, 'actualizarPlatillo.html', dataMod)
 
-def ModificarPlatillo(idPlatillo, nomPlatillo, ingPlatillo,valPlatillo, fotPlatillo):
+def ModificarPlatillo(idPlatillo, nomPlatillo, ingPlatillo,valPlatillo, fotPlatillo, disponible):
     django_cursor = connection.cursor()
     cursor = django_cursor.connection.cursor()
     salida = cursor.var(cx_Oracle.NUMBER)
-    cursor.callproc("ACTUALIZAR_PLATILLO", [idPlatillo, nomPlatillo,ingPlatillo, valPlatillo, fotPlatillo, salida])
+    cursor.callproc("ACTUALIZAR_PLATILLO", [idPlatillo, nomPlatillo,ingPlatillo, valPlatillo, fotPlatillo, disponible, salida])
     return salida.getvalue()

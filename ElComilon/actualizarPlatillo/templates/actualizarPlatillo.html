@@ -53,7 +53,7 @@
                         <div class="invalid-feedback">Complete los campos</div>
                         <span> </span>
                     </div>
-                    <div id="divFileUpload">
+                    <div class="inputs" id="divFileUpload">
                         <div class="input-group mb-3">
                             <input type="file" name="foto" class="form-control inputfocus" id="file" accept="image/*" 
                                 >
@@ -61,6 +61,15 @@
                             <div class="invalid-feedback">Inserte una imagen</div>
                         </div>
                     </div>
+                    <div class="inputs">
+                        {% if platillos.disponible %}
+                        <input type="checkbox" id="Disponible" name="Disponible"  checked> Disponible
+                        {% else %}
+                        <input type="checkbox" id="Disponible" name="Disponible" disabled> Disponible
+                        {% endif %}
+                        <span> </span>
+                    </div>
+                        
                 </div>
                 
                 <div class="imagen-botones">
