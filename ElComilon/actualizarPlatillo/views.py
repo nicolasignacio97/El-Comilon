@@ -1,3 +1,5 @@
+from django.db.models.expressions import Subquery
+from django.db.models.fields import NullBooleanField
 from django.shortcuts import get_object_or_404, redirect, render
 from django.db import connection
 import cx_Oracle
@@ -7,14 +9,6 @@ from django.contrib import messages
 
 
 # Create your views here.
-def actualizarPlatillo(request, id):
-    data = {
-        'platillos':listado_platillos(id),
-        'Restaurante':listarRestaurante()
-    }
-    
-    return render(request, 'actualizarPlatillo.html', data)
-
 def listado_platillos(id):
     django_cursor = connection.cursor()
     cursor = django_cursor.connection.cursor()
@@ -57,23 +51,29 @@ def listarRestaurante():
 def modificarPlatillo(request, id):
     dataMod = {
         'platillo':listado_platillos(id),
-        'foto':listado_fotos(id)
+        'foto':listado_fotos(id),
+        'platillos':get_object_or_404(Platillo, idplatillo=id)
     }
     if request.method == 'POST':
         nombrePlatillo = request.POST.get('Nombre').upper()
         ingredientes = request.POST.get('Ingredientes').upper()
         valor = request.POST.get('Valor')
-        foto = request.FILES['foto'].read()           
-        ModificarPlatillo(id,nombrePlatillo, ingredientes, valor, foto)
+        foto = request.FILES['foto'].read()
+        check1 = request.POST.get('Disponible')
+        if check1:
+            disponible = 1
+        else:
+            disponible = 0
+        ModificarPlatillo(id,nombrePlatillo, ingredientes, valor, foto, disponible)
         messages.success(request, "Se ha modificado correctamente el platillo ")
         return redirect(to="/administracion/listarPlatillos")
 
  
     return render(request, 'actualizarPlatillo.html', dataMod)
 
-def ModificarPlatillo(idPlatillo, nomPlatillo, ingPlatillo,valPlatillo, fotPlatillo):
+def ModificarPlatillo(idPlatillo, nomPlatillo, ingPlatillo,valPlatillo, fotPlatillo, disponible):
     django_cursor = connection.cursor()
     cursor = django_cursor.connection.cursor()
     salida = cursor.var(cx_Oracle.NUMBER)
-    cursor.callproc("ACTUALIZAR_PLATILLO", [idPlatillo, nomPlatillo,ingPlatillo, valPlatillo, fotPlatillo, salida])
+    cursor.callproc("ACTUALIZAR_PLATILLO", [idPlatillo, nomPlatillo,ingPlatillo, valPlatillo, fotPlatillo, disponible, salida])
     return salida.getvalue()
