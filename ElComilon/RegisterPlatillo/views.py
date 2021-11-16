@@ -16,7 +16,12 @@ def registroPlatillo (request):
         valor = request.POST.get('Valor')
         foto = request.FILES['foto'].read()
         rutRestaurante = request.POST.get('restaurante')
-        registrarPlatillo(nombrePlatillo, ingredientes, valor, foto, rutRestaurante)
+        check1 = request.POST.get('Disponible')
+        if check1:
+            disponible = 1
+        else:
+            disponible = 0
+        registrarPlatillo(nombrePlatillo, ingredientes, valor, foto, rutRestaurante, disponible)
         messages.success(request, "Se ha creado correctamente el platillo ")
     return render(request,'registrarPlatillo.html', data)
 
@@ -34,9 +39,9 @@ def listarRestaurante():
     return lista
 
 
-def registrarPlatillo(nomPlatillo, ingPlatillo, valPlatillo, fotPlatillo, rutRest):
+def registrarPlatillo(nomPlatillo, ingPlatillo, valPlatillo, fotPlatillo, rutRest, dispo):
     django_cursor = connection.cursor()
     cursor = django_cursor.connection.cursor()
     salida = cursor.var(cx_Oracle.NUMBER)
-    cursor.callproc("INSERTAR_PLATILLO", [nomPlatillo, ingPlatillo, valPlatillo, fotPlatillo, rutRest, salida]) 
+    cursor.callproc("INSERTAR_PLATILLO", [nomPlatillo, ingPlatillo, valPlatillo, fotPlatillo, rutRest, dispo, salida]) 
     return salida.getvalue()

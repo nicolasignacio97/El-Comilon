@@ -33,6 +33,7 @@ class Cliente(models.Model):
     saldocli = models.BigIntegerField(blank=True, null=True)
     idtipocliente = models.ForeignKey('TipoCliente', models.DO_NOTHING, db_column='idtipocliente')
     rutempconv = models.ForeignKey('EmpresaConvenio', models.DO_NOTHING, db_column='rutempconv', blank=True, null=True)
+    idcuenta = models.ForeignKey(User,models.DO_NOTHING , db_column='idcuenta')
     def __str__(self):
         return self.rutcliente
     
@@ -130,8 +131,8 @@ class Platillo(models.Model):
     nombre = models.CharField(max_length=30)
     ingredientes = models.CharField(max_length=50)
     valorunitario = models.IntegerField()
-    foto = models.BinaryField(blank=True)
-    # disponible = models.BooleanField(blank= True)
+    foto = models.ImageField(blank=True, null=True)
+    disponible = models.BooleanField(blank= True)
     rutrestaurante = models.ForeignKey('Restaurante', models.DO_NOTHING, db_column='rutrestaurante')
 
     def __str__(self):
@@ -268,6 +269,7 @@ class Trabajador(models.Model):
     # contrasena = models.CharField(max_length=20)
     rutrestaurante = models.ForeignKey(Restaurante, models.DO_NOTHING, db_column='rutrestaurante')
     idcargo = models.ForeignKey(Cargo, models.DO_NOTHING, db_column='idcargo')
+    idcuenta = models.ForeignKey(User,models.DO_NOTHING , db_column='idcuenta')
 
 
 

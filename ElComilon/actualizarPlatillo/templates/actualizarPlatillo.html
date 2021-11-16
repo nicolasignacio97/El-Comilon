@@ -56,17 +56,29 @@
                     <div id="divFileUpload" value={{foto.0}}>
                         <div value="data:imagen/png;base64, {{foto.0}}" class="input-group mb-3">
                             <input src="{{foto.0}}" type="file" name="foto" class="form-control inputfocus" id="file" accept="image/*">
+                    <div class="inputs" id="divFileUpload">
+                        <div class="input-group mb-3">
+                            <input type="file" name="foto" class="form-control inputfocus" id="file" accept="image/*" >
                             <div class="valid-feedback"> </div>
                             <div class="invalid-feedback">Inserte una imagen</div>
                         </div>
                     </div>
+                    <div class="inputs">
+                        {% if platillos.disponible %}
+                        <input type="checkbox" id="Disponible" name="Disponible"  checked> Disponible
+                        {% else %}
+                        <input type="checkbox" id="Disponible" name="Disponible" disabled> Disponible
+                        {% endif %}
+                        <span> </span>
+                    </div>
+                        
                 </div>
                 
                 <div class="imagen-botones">
                     <h3 class="titlulo-vista-previa">Tu plato se verá así en el menú </h3>
                     <div class="card platillo" style="width: 20rem; height: 20rem;">
                         <div id="preview">
-                            <img src="data:imagen/png;base64, {{foto.0}}" alt="asd">
+                            <img src="data:imagen/png;base64, {{foto.0}}" alt="foto-platillo" name="foto-pre">
                         </div>
                         <div class="card-body d-flex flex-column text-center justify-content-center">
                             <h5 id="previaNombre" class="card-title platillo__nombre">{{platillo.0.0}}</h5>

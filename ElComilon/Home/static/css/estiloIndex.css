@@ -1,3 +1,6 @@
+.body-bg{
+    
+}
 .row{
     padding: 0 !important;
     margin: 0 !important;
@@ -32,7 +35,28 @@
     margin-bottom: 0;
     box-shadow: 2px 2px 30px 1px rgba(0, 0, 0, 0.3);
     height: auto;
-    width: 30%;
+    padding: 30px;
+}
+.tittle-card{
+    font-weight: 700;
+    line-height: 25px;
+    color: #7d7d7d;
+    flex-grow: 0;
+    flex-shrink: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.btn-danger:hover{
+    background-color: #7d7d7d;
+    border: 1px solid brown;
+    transition: all .4s;
+}
+.span-home{
+    color: #7d7d7d;
+    font-size: inherit;
+    line-height: inherit;
+    display: block;
 }
 
 .botonComprar{
@@ -51,6 +75,9 @@
     text-align: center; 
     padding: 0;
     margin-top: 7%;
+}
+.card-body-main{
+     padding: 10px 0px;
 }
 
 /*Texto*/
@@ -89,16 +116,34 @@ p{
     width: auto;
 }
 .nav-item-a{
-    font-size: 16px;
     text-decoration: none;
     color: #Fff;
-    margin: 0 20px;
+    padding: 2px;
+    font-size: 15px;
+    font-weight: 600;
+    color: #fff;
+    text-transform: capitalize;
+    line-height: 19px;
+    align-items: center;
+    flex-direction: row;
+    height: auto;
+    padding: 5px 10px
+;
+    background-color: initial;
 }
 .nav-item-a:hover{
-    font-size: 1.1rem;
-    transition: all .3s;
-    margin-right: 1.5rem;
     color: #c4c4c4;
+    background-color: #9b9b9b;
+    border-radius: 6px;
+    
+    
+}
+.container-cards{
+background-color: #fff;
+border-radius: 4px;
+box-shadow: 0 2px 4px 0 rgb(0 0 0 / 15%);
+min-width: 280px;
+padding: 20px 15px 50px;
 }
 
 .platillo__descripcion{

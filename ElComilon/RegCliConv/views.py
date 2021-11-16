@@ -1,7 +1,9 @@
+from django.http.response import JsonResponse
 from django.shortcuts import get_object_or_404, render, redirect
 from django.db import connection
 from django.contrib import messages
 from core.models import Cliente
+from django.contrib.auth.models import User
 import cx_Oracle
 from registroDeUsuarios.forms import FormularioUsuario
 
@@ -24,11 +26,34 @@ def RegistroCliConvenio(request):
         forumulario = FormularioUsuario(data=request.POST)
         if forumulario.is_valid():
             forumulario.save()
+            data['form'] = forumulario
             agregar_cliente_convenio(rutcliente,nombres, apellidos, direccion,idtipoCliente,rutempcli,saldocli)    
             messages.success(request, "Usuario Creado")
-            data['form'] = forumulario
-            redirect(to="ClienteConvenio")
+            return render(request,'regCliConv.html', data)
     return render(request,'regCliConv.html', data)
+#ValrutCliente
+def cleanRutcliente(request):
+    rutcliente = request.POST.get('rut')
+    print(rutcliente)
+    if Cliente.objects.filter(rutcliente=rutcliente).exists():
+        print("Repartidor existente")
+        return JsonResponse({'valid': 0})
+    return JsonResponse({'valid': 1 })
+
+
+#ELIMINAR CLIENTE CONVENIO
+def eliminarCliConv(request,rutcliente, id):
+    u = User.objects.get(pk=id)
+    u.delete()
+    clientes = Cliente.objects.all()
+    cliente = Cliente.objects.get(rutcliente=rutcliente)
+    cliente.delete()
+    messages.success(request, messages.SUCCESS , 'Eliminado con exito')
+    contexto = {
+         'clientes':clientes
+    }
+    return render(request,"listarCliConv.html",contexto)
+    # return redirect(to="/administracion/listarCliConv")
 
 #LISTAR CLIENTES CONVENIO
 def listarCliConv(request):
@@ -109,10 +134,4 @@ def listar_EmpConvenio():
     return ListaConv
 
 
-#ELIMINAR CLIENTE CONVENIO
-def eliminarCliConv(request, id):
-    cliente = get_object_or_404(Cliente,rutcliente=id)
-    nomCli = Cliente.nombres
-    cliente.delete()
-    messages.success(request,"Cliente eliminado correctamente")
-    return redirect(to="/administracion/listarCliConv")
+

@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import permission_required
 from core.models import Trabajador
 from registroDeUsuarios.forms import FormularioUsuario
 from django.contrib import messages
+from django.contrib.auth.models import User
 import cx_Oracle
 
 # Create your views here.
@@ -144,13 +145,24 @@ def actualizar(rutTrabajador, nombres, apellidos, usuario, idCargo):
 
     return 0
 
-def eliminarTrabajador(request):
-    if request.method == 'POST':
-        rut = request.POST.get('btnEliminar')
-    
-    eliminar(rut)
-
+def eliminarTrabajador(request,ruttrabajador, id):
+    u = User.objects.get(pk=id)
+    u.delete()
+    trabajadores = Trabajador.objects.get(ruttrabajador = ruttrabajador)
+    trabajadores.delete()
+    messages.success(request, messages.SUCCESS , 'Eliminado con exito')
+    contexto = {
+         'trabajadores':trabajadores
+    }
     return listaTrabajador(request)
+
+# def eliminarTrabajador(request):
+#     if request.method == 'POST':
+#         rut = request.POST.get('btnEliminar')
+    
+#     eliminar(rut)
+
+#     return listaTrabajador(request)
 
 def eliminar(rut):
     django_cursor = connection.cursor()

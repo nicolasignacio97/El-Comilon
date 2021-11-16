@@ -8,7 +8,9 @@ from RegEmpConv.views import registroEmpresa
 from RegisterPlatillo.views import registroPlatillo
 from listarPlatillos.views import listarPlatillos, eliminarPlatillo
 from actualizarPlatillo.views import modificarPlatillo
-from RegCliConv.views import RegistroCliConvenio, listarCliConv, modificarCliConv, eliminarCliConv
+from django.contrib.auth.decorators import login_required
+from RegCliConv.views import RegistroCliConvenio,cleanRutcliente, listarCliConv, modificarCliConv, eliminarCliConv
+
 from registroTrabajador.views import listaTrabajador
 from RegEmpConv.views import listaEmpresa
 from RegEmpConv.views import empresaRut
@@ -30,13 +32,14 @@ url_patterns = [
     path('eliminarPlatillo/<id>', eliminarPlatillo, name='eliminarPlatillo'),
     path('listarPlatillos', listarPlatillos, name='listarPlatillos'),
     path('ClienteConvenio', RegistroCliConvenio, name='ClienteConvenio'),
+    path('valrutcliente', cleanRutcliente, name='valrutcliente'),
     path('listarCliConv', listarCliConv, name='listarCliConv'),
     path('modCliConv/<id>', modificarCliConv, name='modCliConv'),
-    path('eliminar/<id>', eliminarCliConv),
+    path('eliminar/<rutcliente>/<id>', eliminarCliConv, name='eliminarCliente'),
     path('listaTrabajador', listaTrabajador, name='listaTrabajador'),
     path('trabajadorRut', trabajadorRut, name='trabajadorRut'),
     path('actualizarTrabajador', actualizarTrabajador,name='actualizarTrabajador'),
-    path('eliminarTrabajador', eliminarTrabajador, name='eliminarTrabajador'),
+    path('eliminarTrabajador/<ruttrabajador>/<id>/', eliminarTrabajador, name='eliminarTrabajador'),
     path('listaEmpresa', listaEmpresa, name='listaEmpresa'),
     path('empresaRut', empresaRut, name='empresaRut'),
     path('eliminarEmpresa', eliminarEmpresa, name='eliminarEmpresa'),
@@ -57,7 +60,5 @@ url_patterns = [
     path('reginvehiculo', registroVeh, name='reginvehiculo'),
     path('actTrabajador', actTrabajador, name='actTrabajador'),
     path('valrut', clean_rut, name='validarRut'),
-
-
 
 ]
