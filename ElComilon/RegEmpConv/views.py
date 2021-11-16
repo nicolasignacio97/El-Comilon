@@ -1,12 +1,14 @@
+from django.http.response import JsonResponse
 from django.shortcuts import render
 from django.db import connection
 from django.contrib import messages
+from core.models import EmpresaConvenio
 import cx_Oracle
 
 # Create your views here.
 def registroEmpresa(request):
     data = {
-
+    'restaurante':listar_restaurantes()
     }
     if request.method == 'POST':
         rutEmpresa = request.POST.get('rutEmpresa')
@@ -15,6 +17,13 @@ def registroEmpresa(request):
         registrarEmpresa(rutEmpresa, nombre, razonSocial)
         messages.success(request,'Agregado correctamente')
     return render(request,'regEmpConv.html',data)
+def clean_rut_emp_convenio(request):
+    rutrepartidor = request.POST.get('rut')
+    print(rutrepartidor)
+    if EmpresaConvenio.objects.filter(rutempresaconvenio=rutrepartidor).exists():
+        print("Repartidor existente")
+        return JsonResponse({'valid': 0})
+    return JsonResponse({'valid': 1 })
 
 def registrarEmpresa(rutEmpresa, nombre, razonSocial):
     django_cursor = connection.cursor()
@@ -65,6 +74,16 @@ def listarEmpresaRut(rut):
     for fila in out_cur:
         lista.append(fila)
 
+    return lista
+
+def listar_restaurantes():
+    django_cursor = connection.cursor() 
+    cursor = django_cursor.connection.cursor()
+    out_cur = django_cursor.connection.cursor()
+    cursor.callproc("SP_LISTAR_RESTAURANTE", [out_cur])
+    lista = []
+    for fila in out_cur:
+        lista.append(fila)
     return lista
 
 def eliminarEmpresa(request):

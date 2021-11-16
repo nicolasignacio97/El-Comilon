@@ -2,16 +2,8 @@
 {% load static%}
 
 
-{% block L-izquierda %}
-<a href="/">Inicio</a>
-<a href="quienesSomos">Sobre nosotros</a>
-{% endblock%}
 
 
-{% block L-derecha %}
-<a href="/platillos">Catálogo</a>
-<!-- <a href="/login">Iniciar sesión</a> -->
-{% endblock%} 
 
 {% block content%}
 <!DOCTYPE html>
@@ -33,7 +25,7 @@
     <title>El Comilón</title>
 </head>
 
-<body>
+<body class="body-bg">
     <div class="container">
         <div class="row">
             <div class="col-lg-12" style="margin: auto;">
@@ -42,10 +34,32 @@
             </div>
         </div>
     </div>
-    <div clas="container carta" style="width: 90%; margin: auto;">
+    <div class="container">
+        <div class="row container-cards mb-1">
+            {% for p in platillos %}
+            <div class="col-lg-4 col-sm-12 mb-3" style="padding: 1rem 1rem; align-items: center; background-color: #f5f6f7;">
+                <div >
+                    <img src="data:imagen/png;base64, {{ p.imagen }} "  alt="" class="card-img-top w-100 "style=" max-height:200px; box-shadow: 10px 10px 20px -8px rgb(0 0 0 / 30%); "
+                    style=" max-height: 150px;">
+                </div>
+               
+
+                
+                <div class="card-body card-body-main">
+                    <h5 class="card-title tittle-card" >{{ p.data.1 }}</h5>
+                    <span class="span-home" style=" margin-top: 10px;"> Descripcion:{{ p.data.2 }} </span>
+                    <span class="span-home" style="text-align: center; margin-top: 10px; color: brown; font-size: 22px;" > ${{ p.data.3  }} </span>
+                    <a  href="{% url 'agregarProducto' p.data.0 %} "  class="btn btn-danger "  style="width: 100%; margin-top: 5px; font-size: 18px;"><img src="{% static 'img/icons8-agregar-a-carrito-de-compras-24.png' %}" alt=""> Agregar al Carro</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+    </div>
+    <!-- <div clas="container carta" style="width: 90%; margin: auto;">
         <div class="row">
             {% for p in platillos %}
-            <div class="col-lg-4 col-md-6 item-carta mt-5" style="text-align: center; padding: 0;">
+            <div class="col-lg-4 col-md-6  mt-3  item-carta" style="text-align: center; padding: 0; max-width: 500px; ">
                 {% if p.imagen %}
                 <img src="data:imagen/png;base64, {{ p.imagen }}" alt="" class="img-carta">
                 {% endif %}
@@ -53,14 +67,13 @@
                 <div class="container-fluid small-border"></div>
                 <p class="platillo__descripcion">{{ p.data.2 }}</p>
                 <p class="platillo__precio">${{ p.data.3 }}</p>
-                <div class="container btn-comprar">
+                <div class="row btn-comprar">
                         <button class="btn botonComprar" type="submit">Comprar</button>
                 </div>
-
             </div>
             {% endfor %}
         </div>
-    </div>
+    </div> -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous">
         </script>

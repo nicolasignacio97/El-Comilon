@@ -1,38 +1,52 @@
 from django.http import request
+from django.http.response import JsonResponse
 from django.shortcuts import redirect, render
 from django.db import connection, reset_queries
 from django.contrib.auth.decorators import permission_required
+from core.models import Trabajador
 from registroDeUsuarios.forms import FormularioUsuario
 from django.contrib import messages
+from django.contrib.auth.models import User
 import cx_Oracle
 
 # Create your views here.
-
-@permission_required('core')
 def registroTrabajador(request):
     data = {
         'form': FormularioUsuario(),
         'cargo': listar()
     }
     if request.method == 'POST':
-        rutTrabajador = request.POST.get('rutTrabajador').upper()
-        nombres = request.POST.get('nombres').upper()
-        apellidos = request.POST.get('apellidos').upper()
-        fechaContrato = request.POST.get('fecha').upper()
-
-        rutRestaurante = '99.365.349-8'
-
+        rutTrabajador = request.POST.get('rutTrabajador')
+        nombres = request.POST.get('nombres')
+        apellidos = request.POST.get('apellidos')
+        fechaContrato = request.POST.get('fecha')
+        rutRestaurante = '887454345'
         idCargo = request.POST.get('cargo')
         forumulario = FormularioUsuario(data=request.POST)
+        # if Trabajador.objects.filter(ruttrabajador = rutTrabajador).exists():
+        #     print("Trabajador existente")
+        #     messages.error(request, 'Trabajador ya existente')
+        # else:
         if forumulario.is_valid():
             forumulario.save()
-            registrarTrabajador(rutTrabajador, nombres, apellidos,fechaContrato, rutRestaurante, idCargo)
-            messages.success(request, "Usuario Creado")
             data['form'] = forumulario
-            redirect(to="trabajador")
+            print("Trabajador ingresado")
+            REGISTRAR_TRABAJADOR(rutTrabajador, nombres, apellidos, fechaContrato, rutRestaurante, idCargo) 
+            messages.success(request, 'Trabajador Registrado con exito')
+            return render(request, 'registroTrabajador.html', data)   
     return render(request, 'registroTrabajador.html', data)
 
-
+def pruebatrabajo(request):
+    return render (request, "registroTrabajador.html")
+    
+def clean_rut_trabajador(request):
+    ruttrabajador = request.POST.get('rut')
+    print(ruttrabajador)
+    if Trabajador.objects.filter(ruttrabajador=ruttrabajador).exists():
+        print("Trabajador existente")
+        return JsonResponse({'valid': 0})
+    return JsonResponse({'valid': 1 })
+    
 def listar():
     django_cursor = connection.cursor()
     cursor = django_cursor.connection.cursor()
@@ -46,11 +60,11 @@ def listar():
     return lista
 
 
-def registrarTrabajador(rutTrabajador, nombres, apellidos, fechaContrato, rutRestaurante, idCargo):
+def REGISTRAR_TRABAJADOR(RUTTRABAJADOR, NOMBRES, APELLIDOS, FECHACONTRATO, RUTRESTAURANTE, IDCARGO):
     django_cursor = connection.cursor()
     cursor = django_cursor.connection.cursor()
     salidaPrve = cursor.var(cx_Oracle.NUMBER)
-    cursor.callproc("REGISTRAR_TRABAJADOR", [rutTrabajador, nombres, apellidos,fechaContrato, rutRestaurante, idCargo, salidaPrve])
+    cursor.callproc("REGISTRAR_TRABAJADOR", [RUTTRABAJADOR, NOMBRES, APELLIDOS,FECHACONTRATO, RUTRESTAURANTE, IDCARGO, salidaPrve])
     return salidaPrve.getvalue()
 
 
@@ -131,13 +145,24 @@ def actualizar(rutTrabajador, nombres, apellidos, usuario, idCargo):
 
     return 0
 
-def eliminarTrabajador(request):
-    if request.method == 'POST':
-        rut = request.POST.get('btnEliminar')
-    
-    eliminar(rut)
-
+def eliminarTrabajador(request,ruttrabajador, id):
+    u = User.objects.get(pk=id)
+    u.delete()
+    trabajadores = Trabajador.objects.get(ruttrabajador = ruttrabajador)
+    trabajadores.delete()
+    messages.success(request, messages.SUCCESS , 'Eliminado con exito')
+    contexto = {
+         'trabajadores':trabajadores
+    }
     return listaTrabajador(request)
+
+# def eliminarTrabajador(request):
+#     if request.method == 'POST':
+#         rut = request.POST.get('btnEliminar')
+    
+#     eliminar(rut)
+
+#     return listaTrabajador(request)
 
 def eliminar(rut):
     django_cursor = connection.cursor()

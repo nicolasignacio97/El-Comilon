@@ -3,7 +3,13 @@ input[type=number]::-webkit-outer-spin-button {
   -webkit-appearance: none; 
   margin: 0; 
 }
-
+.valid-feedback{
+    display: block;
+    width: 100%;
+    margin-top: 0.25rem;
+    font-size: .875em;
+    color: #dc3545;
+}
 input[type=number] { -moz-appearance:textfield; }
 .botonEnviar{
     align-items:center;
