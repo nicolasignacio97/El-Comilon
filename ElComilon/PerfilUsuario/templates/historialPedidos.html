@@ -15,7 +15,21 @@
 <div class="container bg-white shadow-lg mt-5">
     <div class="row">
         <div class="col m-2">
-            <h1 class="text-center titulo mb-5">Mis Pedidos</h1>
+            <h1 class="text-center titulo mb-5">Mi Cuenta</h1>
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                  <a class="nav-link text-danger" href="{% url 'perfilMenu' user.id %}">Mis Datos</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="#">Mis pedidos</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link text-danger" href="{% url 'crearMenu' user.id %}">Menú Semanal</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link disabled">{{user.username.title}}</a>
+                </li>
+            </ul>
             <table class="table">
                 <thead>
                     <tr>
