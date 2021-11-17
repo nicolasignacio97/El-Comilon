@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.shortcuts import get_object_or_404, render
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth.decorators import login_required
@@ -40,6 +41,7 @@ def perfilMenu(request, id):
             if formPersonal.is_valid():
                 formCuenta.save()
                 formPersonal.save()
+                messages.success(request, " Modificado correctamente")
                 usuario = get_object_or_404(User, id=id)
                 cliente = get_object_or_404(Cliente, idcuenta=id)
                 formCuenta = EditarUsuario(instance=usuario)
@@ -53,6 +55,7 @@ def perfilMenu(request, id):
     return render(request, 'perfilMenu.html', data)
 
 
+
 @login_required()
 def CambiarContra(request):
     form = PasswordChangeForm(user=request.user)
@@ -61,5 +64,6 @@ def CambiarContra(request):
         form = PasswordChangeForm(data=request.POST, user=request.user)
         if form.is_valid():
             form.save()
+            messages.success(request, " Contraseña Modificada Correctamente. Por favor, ingrese de nuevo")
             return redirect('login')
     return render(request, 'CambioContrasena.html', forumulario)

@@ -10,18 +10,20 @@
       <h1 class="text-center titulo mb-5">Mi Cuenta</h1>
       <ul class="nav nav-tabs">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Mis Datos</a>
+            <a class="nav-link active" aria-current="page" href="{% url 'perfilRepartidor' user.id %}">Mis Datos</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-danger" href="{% url 'historial' user.id %}">Mis pedidos</a>
+            <a class="nav-link text-danger" href="{% url 'MiVehiculo' user.id %}">Vehículo</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-danger" href="{% url 'crearMenu' user.id %}">Menú Semanal</a>
+            <a class="nav-link  text-danger  btn btn-primary position-relative" href="{% url 'repartidor' %}">Lista de Pedidos ss
+                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                   {{TotalPedidos}}
+                    <span class="visually-hidden">unread messages</span>
+                  </span>
+              </a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link disabled">{{user.username.title}}</a>
-        </li>
-      </ul>
+    </ul>
     </div>
   </div>
   <div class="row">
@@ -35,7 +37,7 @@
                   <div class="row">
                     <div class="col-lg-6 col-sm-12">
                       {{formCuenta|crispy}}
-                      <a href="/cambioContrasena" class="btn btn-danger">Cambiar contraseña</a>
+                        <a href="/cambioContrasena" class="btn btn-danger">Cambiar contraseña</a>
                     </div>
                     <div class="col-lg-6 col-sm-12">
                       {{form|crispy}}
@@ -44,7 +46,7 @@
                 </div>
               </div>
               <div class="d-flex justify-content-center mt-4 mb-3">
-                <input type="submit" class="btn btn-danger mt-3" value="Editar">
+                <input type="submit" class="btn btn-danger mt-3" value="Modificar"> 
               </div>
           </form>
         </div>
