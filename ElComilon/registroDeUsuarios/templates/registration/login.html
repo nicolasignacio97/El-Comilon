@@ -1,4 +1,4 @@
-{% extends "HeaderFooter/base.html"%} 
+{% extends "HeaderFooter/base.html"%}
 {% load static %}
 
 {% block content%}
@@ -10,16 +10,24 @@
             <div class="card shadow mt-5">
                 <div class="card-body">
                     <h3 class="text-center mt-3 mb-3 titulo">Iniciar Sesión</h3>
-                    <form method="post"  class="needs-validation" novalidate>
+                    <form method="post" class="needs-validation" novalidate>
                         {% csrf_token %}
                         {% for field in form %}
                         <div class="form-floating mb-3">
-                          <input type="{{field.html_name}}"  name="{{field.html_name}}" class="form-control" id="floatingInput" placeholder="{{field.html_name}}">
-                          <label for="{{field.id_for_label}}">{{field.label}}</label>
+                            <input type="{{field.html_name}}" name="{{field.html_name}}" class="form-control"
+                                id="floatingInput" required placeholder="{{field.html_name}}">
+                            <label for="{{field.id_for_label}}">{{field.label}}</label>
                         </div>
                         {% endfor %}
+                        {% if form.errors%}
+                        <small class="form-text text-muted">{{form.errors}}</small>
+                        {%endif%}
                         <div class="d-flex justify-content-center mb-3">
-                            <input type="submit" class="btn botonEnviar mt-4"  value="Iniciar Sesión">
+                            <input type="submit" class="btn botonEnviar mt-4" value="Iniciar Sesión">
+                        </div>
+                        <div class="row">
+                            <p class="text-center">¿No tienes cuenta?<a href="{% url 'registro' %}"> Regístrate Aquí</a>
+                            </p>
                         </div>
                     </form>
                 </div>
@@ -29,4 +37,3 @@
 </div>
 <script src="{% static 'app/validacion.js' %}"></script>
 {%endblock%}
-

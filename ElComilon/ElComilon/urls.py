@@ -38,7 +38,7 @@ urlpatterns = [
     path('detallePedido/<idpedido>/<id>', detallePedido),
     path('MiVehiculo/<id>', MiVehiculo, name='MiVehiculo'),
     
-    path('registroUsuarios', registroUsuario),
+    path('registroUsuarios', registroUsuario,name='registro'),
     path('cambioContrasena', CambiarContra, name="cambioContrasena"),
 
     path('menu/<id>', menu, name="menu"),

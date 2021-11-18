@@ -47,6 +47,7 @@
                       <div class="form-floating mb-3">
                         <input type="{{field.html_name}}" value="{{field.value}}"  name="{{field.html_name}}" class="form-control" id="floatingInput" placeholder="{{field.html_name}}">
                         <label for="{{field.id_for_label}}">{{field.label}}</label>
+                        <small>{{field.errors}}</small>
                       </div>
                       {% endfor %}
                     </div>
