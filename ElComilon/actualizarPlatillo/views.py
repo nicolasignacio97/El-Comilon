@@ -11,6 +11,7 @@ from django.contrib import messages
 # Create your views here.
 
 def modificarPlatillo(request, id):
+    platillo = get_object_or_404(Platillo, idplatillo=id)
     dataMod = {
         'platillo':listado_platillos(id),
         'foto':listado_fotos(id)
@@ -31,7 +32,7 @@ def modificarPlatillo(request, id):
          foto = True
          foto = request.FILES['foto'].read()
          ModificarPlatillo(id,nombrePlatillo, ingredientes, valor, foto,disponible)
-        messages.success(request, "Se ha modificado correctamente el platillo ")
+        messages.success(request, "Se ha modificado correctamente el platillo "+ platillo.nombre)
         return redirect(to="/administracion/listarPlatillos")
     return render(request, 'actualizarPlatillo.html', dataMod)
 
@@ -81,10 +82,10 @@ def ModificarPlatillo(idPlatillo, nomPlatillo, ingPlatillo,valPlatillo, fotPlati
     cursor.callproc("ACTUALIZAR_PLATILLO", [idPlatillo, nomPlatillo,ingPlatillo, valPlatillo, fotPlatillo, disponible,salida])
     return salida.getvalue()
 
-def ModificarPlatilloSinFoto(idPlatillo, nomPlatillo, ingPlatillo,valPlatillo):
+def ModificarPlatilloSinFoto(idPlatillo, nomPlatillo, ingPlatillo,valPlatillo, disponible):
     django_cursor = connection.cursor()
     cursor = django_cursor.connection.cursor()
     salida = cursor.var(cx_Oracle.NUMBER)
-    cursor.callproc("ACTUALIZAR_PLATILLO_SIN_FOTO", [idPlatillo, nomPlatillo,ingPlatillo, valPlatillo, salida])
+    cursor.callproc("ACTUALIZAR_PLATILLO_SIN_FOTO", [idPlatillo, nomPlatillo,ingPlatillo, valPlatillo, disponible, salida])
 
     return salida.getvalue()

@@ -315,3 +315,17 @@ input[type=number] { -moz-appearance:textfield; }
     color: #9c3534;  
     font-weight: bold;
 }
+
+.form-check-input:checked{
+    background-color: #9c3534;  
+    border: 1.5px solid #9c3534;
+}
+.form-check-input:checked:focus{
+    border: 1.5px solid #9c3534;
+    box-shadow: none;
+}
+
+.form-check-input:focus{
+    border: 1.5px solid #9c3534;
+    box-shadow: none;
+}
