@@ -34,11 +34,21 @@
                 <div class="row d-flex justify-content-center">
                   <div class="row">
                     <div class="col-lg-6 col-sm-12">
-                      {{formCuenta|crispy}}
+                      {% for field in formCuenta %}
+                      <div class="form-floating mb-3">
+                        <input type="{{field.html_name}}" value="{{field.value}}"  name="{{field.html_name}}" class="form-control" id="floatingInput" placeholder="{{field.html_name}}">
+                        <label for="{{field.id_for_label}}">{{field.label}}</label>
+                      </div>
+                      {% endfor %}
                       <a href="/cambioContrasena" class="btn btn-danger">Cambiar contraseña</a>
                     </div>
                     <div class="col-lg-6 col-sm-12">
-                      {{form|crispy}}
+                      {% for field in form %}
+                      <div class="form-floating mb-3">
+                        <input type="{{field.html_name}}" value="{{field.value}}"  name="{{field.html_name}}" class="form-control" id="floatingInput" placeholder="{{field.html_name}}">
+                        <label for="{{field.id_for_label}}">{{field.label}}</label>
+                      </div>
+                      {% endfor %}
                     </div>
                   </div>
                 </div>

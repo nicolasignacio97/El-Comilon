@@ -12,7 +12,12 @@
                     <h3 class="text-center mt-3 mb-3 titulo">Iniciar Sesión</h3>
                     <form method="post"  class="needs-validation" novalidate>
                         {% csrf_token %}
-                        {{form|crispy}}
+                        {% for field in form %}
+                        <div class="form-floating mb-3">
+                          <input type="{{field.html_name}}"  name="{{field.html_name}}" class="form-control" id="floatingInput" placeholder="{{field.html_name}}">
+                          <label for="{{field.id_for_label}}">{{field.label}}</label>
+                        </div>
+                        {% endfor %}
                         <div class="d-flex justify-content-center mb-3">
                             <input type="submit" class="btn botonEnviar mt-4"  value="Iniciar Sesión">
                         </div>
