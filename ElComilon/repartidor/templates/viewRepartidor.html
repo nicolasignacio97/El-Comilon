@@ -28,62 +28,58 @@
 
 <body>
     <section class="container contenido-reparto">
-        <!-- <table class="contenido-tabla">
-            <tr>
-                <th>ID</th>
-                <th>FECHA</th>
-                <th>DIRECCION</th>
-                <th>TOTAL</th>
-                <th>ESTADO</th>
-                <th>VER</th>
-            </tr>
-            {% for r in repartos %}
-                <tr>
-                    <td>{{r.0}}</td>
-                    <td>{{r.2|date:'d-m-y'}}</td>
-                    <td>{{r.3}}</td>
-                    <td>{{r.1}}</td>
-                    <td>{{r.5}}</td>
-                    <td><a href=""><img src="{% static 'img/visible.png' %}" alt="ojito"></a></td>
-                </tr>
-            {% endfor %}
-        </table> -->
-
-        <section class="">
+        <div class="container bg-white shadow-lg mt-5">
             <div class="row">
-                <div class="col-lg-12">
-                    <div class="card shadow-lg p3 mb-5 mt-5 bg-white">
-                        <h3 class="titulo text-center mt-5 mb-5">Repartos</h3>
-                        <div class="card-body">
-                            
-                            <div class="table-responsive-md">
-                                <table class="table contenido-tabla">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">Fecha</th>
-                                            <th scope="col">Dirección</th>
-                                            <th scope="col">Estado</th>
-                                            <th scope="col">Ver</th>
-                                        </tr>
-                                    </thead>
-                                        {% for r in repartos %}
-                                        <tr>
-                                            <td>{{r.2|date:'d-m-y'}}</td>
-                                            <td>{{ r.3 }}</td>
-                                            <td>{{ r.5 }}</td>
-                                            <td><a href="viewPedido/{{r.0}}"><img src="{% static 'img/visible.png' %}" alt="ojito"></a></td>
-                                        </tr>
-                                        {% endfor %}
-                                    </tbody>
-                                </table>
-                            </div>
-                            
+              <div class="col m-2">
+                <h1 class="text-center titulo mb-5">Mi Cuenta</h1>
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <a class="nav-link text-danger" aria-current="page" href="{% url 'perfilRepartidor' user.id %}">Mis Datos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-danger" href="{% url 'MiVehiculo' user.id %}">Vehículo</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link  active  btn btn-primary position-relative" href="{% url 'repartidor' %}">Lista de Pedidos ss
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                               {{TotalPedidos}}
+                                <span class="visually-hidden">unread messages</span>
+                              </span>
+                          </a>
+                    </li>
+                </ul>
+              </div>
+            </div>
+            <div class="row">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class=" p3 mb-5 mt-5 bg-white">
+                            <h3 class="titulo text-center mt-5 mb-5">Repartos</h3>
+                                <div class="table-responsive-md">
+                                    <table class="table contenido-tabla">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Fecha</th>
+                                                <th scope="col">Dirección</th>
+                                                <th scope="col">Estado</th>
+                                                <th scope="col">Ver</th>
+                                            </tr>
+                                        </thead>
+                                            {% for r in repartos %}
+                                            <tr>
+                                                <td>{{r.2|date:'d-m-y'}}</td>
+                                                <td>{{ r.3 }}</td>
+                                                <td>{{ r.5 }}</td>
+                                                <td><a href="viewPedido/{{r.0}}"><img src="{% static 'img/visible.png' %}" alt="ojito"></a></td>
+                                            </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
                         </div>
                     </div>
-                </div>
             </div>
-        </section>
-        
+          </div>
     </section>
 </body>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>

@@ -6,8 +6,6 @@ from django.db.models import fields
 
 
 class FormularioUsuario (UserCreationForm):
-
-
     class Meta: 
         model = User
         # email = forms.EmailField(label=("Correo electrónico"),widget=forms.EmailInput(
