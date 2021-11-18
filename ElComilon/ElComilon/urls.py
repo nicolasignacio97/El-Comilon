@@ -1,16 +1,14 @@
-from django.conf.urls import handler404
-from django.contrib.auth import views as auth_views
+
+from os import name
 from django.contrib import admin
 from django.urls import path, include
-from recepcionista.views import viewRecepcionista,asignarRepartidor, cambiarEstado
+from recepcionista.views import viewRecepcionista,asignarRepartidor, cambiarEstado,menuRecepcion
 from registroDeUsuarios.views import registroUsuario
 
 from Home.views import inicio
 from RegisterPlatillo.views import registroPlatillo
-from Register.views import register, perfil
-from django.conf.urls import handler404
 
-from repartidor.views import viewPedido, viewRepartidor
+from repartidor.views import viewPedido, viewRepartidor,PerfilRepartidor,MiVehiculo
 from reclamo.views import reclamo
 from Home.views import quienesSomos
 from administracion.urls import url_patterns
@@ -22,32 +20,37 @@ from Menu.views import menu, crearMenu
 from administracion.views import pag_404
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
     path('', inicio, name="home"),
+    path('admin/', admin.site.urls),
+    path('administracion/', include(url_patterns)),
     path('registroPlatillo', registroPlatillo),
-    path('registro', register),
     path('reclamo', reclamo),
     path('quienesSomos', quienesSomos ,name= 'quienesSomos'),
     path('Historial/<id>', PerfilUsuario, name="historial"),  # despues id en la ruta para filtro
     path('pedido', pedido),
     path('platillos', platillos, name="platillos"),
     path('perfilMenu/<id>', perfilMenu, name="perfilMenu"),
+
     path('viewPedido/<id>', viewPedido),
     path('repartidor', viewRepartidor, name="repartidor"),
+    path('perfilRepartidor/<id>', PerfilRepartidor, name="perfilRepartidor"),
     path('detallePedido', detallePedido),
     path('detallePedido/<idpedido>/<id>', detallePedido),
-    path('registroUsuarios', registroUsuario),
-    path('administracion/', include(url_patterns)),
+    path('MiVehiculo/<id>', MiVehiculo, name='MiVehiculo'),
+    
+    path('registroUsuarios', registroUsuario,name='registro'),
     path('cambioContrasena', CambiarContra, name="cambioContrasena"),
 
     path('menu/<id>', menu, name="menu"),
     path('crearMenu/<id>', crearMenu, name="crearMenu"),
     
     path('accounts/', include('django.contrib.auth.urls')),
-    path('viewPedido/<id>', viewPedido),     
+    path('viewPedido/<id>', viewPedido),
+         
     path('recepcionista', viewRecepcionista, name='recepcionista'),
     path('estado/<id>', cambiarEstado, name='estado'),
     path('asignacion/<id>', asignarRepartidor, name='asignacionRepartidor'),
+    path('menuRecepcion/<id>', menuRecepcion, name='menuRecepcion'),
     # carro
     path('agregar/<id>', agregar_producto, name="agregarProducto"),
     path('eliminar/<id>', eliminar_producto, name="eliminar"),

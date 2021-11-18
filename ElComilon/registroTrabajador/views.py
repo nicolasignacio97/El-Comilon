@@ -30,7 +30,6 @@ def registroTrabajador(request):
         if forumulario.is_valid():
             forumulario.save()
             data['form'] = forumulario
-            print("Trabajador ingresado")
             REGISTRAR_TRABAJADOR(rutTrabajador, nombres, apellidos, fechaContrato, rutRestaurante, idCargo) 
             messages.success(request, 'Trabajador Registrado con exito')
             return render(request, 'registroTrabajador.html', data)   

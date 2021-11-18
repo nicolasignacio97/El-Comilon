@@ -1,19 +1,18 @@
-from django.shortcuts import render
-from django.contrib import messages
-from typing import List
 from django.shortcuts import get_object_or_404, render, redirect
+from .forms import EditarUsuario, EditarRecepcionista
+from django.contrib.auth.models import User
+from django.contrib import messages
+from core.models import Trabajador,Pedido
 from django.db import connection
 import cx_Oracle
-
-from core.models import Pedido
 
 # Create your views here.
 
 def viewRecepcionista(request):
     dataRep = {
         'listos':listado_pedidos_listos(),
+        'TotalPedidos':len(listado_pedidos_listos())
     }
-
     return render(request,'viewRecepcionista.html',dataRep)
 
 #CAMBIAR ESTADO DE PEDIDOS
@@ -21,7 +20,8 @@ def cambiarEstado(request,id):
     pedido = get_object_or_404(Pedido,idpedido=id)
     dataMod = {
        'pedidoSelect' : pedido,
-       'estados': listado_estados_pedido()     
+       'estados': listado_estados_pedido(), 
+       'TotalPedidos':len(listado_pedidos_listos())
     }
 
     if request.method == 'POST':
@@ -41,7 +41,8 @@ def asignarRepartidor(request,id):
     pedido = get_object_or_404(Pedido,idpedido=id)
     dataMod = {
        'pedidoSelect' : pedido,
-       'repartidores': listado_repartidores_dispo()     
+       'repartidores': listado_repartidores_dispo(),
+       'TotalPedidos':len(listado_pedidos_listos())
     }
 
     if request.method == 'POST':
@@ -56,6 +57,42 @@ def asignarRepartidor(request,id):
             dataMod['mensaje'] = 'UPS, NO SE HA PODIDO ASIGNAR UN REPARTIDOR EL PEDIDO'
     return render(request,'asignaRepartidor.html',dataMod)
 
+
+
+def menuRecepcion(request, id):
+    usuario = get_object_or_404(User, id=id)
+    trabajador = get_object_or_404(Trabajador, idcuenta=id)
+    formCuenta = EditarUsuario(instance=usuario)
+    formPersonal = EditarRecepcionista(instance=trabajador)
+    data= {
+        'usuario': usuario,
+        'formCuenta': formCuenta,
+        'trabajador': trabajador,
+        'form': formPersonal,
+        'TotalPedidos':len(listado_pedidos_listos())
+    }
+    if request.method == 'POST':
+        formCuenta = EditarUsuario(request.POST, instance=request.user)
+        formPersonal = EditarRecepcionista(request.POST, instance=trabajador)
+    if formCuenta.is_valid():
+        if formPersonal.is_valid():
+            formCuenta.save()
+            formPersonal.save()
+            messages.success(request, " Modificado correctamente")
+            usuario = get_object_or_404(User, id=id)
+            trabajador = get_object_or_404(Trabajador, idcuenta=id)
+            formCuenta = EditarUsuario(instance=usuario)
+            formPersonal = EditarRecepcionista(instance=trabajador)
+            data2= {
+                'usuario': usuario,
+                'formCuenta': formCuenta,
+                'trabajador': trabajador,
+                'form': formPersonal,
+                'TotalPedidos':len(listado_pedidos_listos())
+            }
+            return render (request, 'menuRecepcionista.html',data2)
+
+    return render (request, 'menuRecepcionista.html',data)
 
 def listado_pedidos_listos():
     django_cursor = connection.cursor()
