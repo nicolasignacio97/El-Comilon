@@ -1,3 +1,43 @@
+.main-location{
+    display: flex;
+    align-items: center;
+    background: #000 url(/static/img/main_mobile.jpg)  50%/cover no-repeat;
+    padding: 30px 20px;
+    height: calc(100vh - 135px);
+}
+
+.main-location-text{
+    text-shadow: 0 0 10px rgb(0 0 0 / 90%);
+    font-family: 'serif';
+    font-weight: 400;
+    font-size: 3rem;
+    text-transform: uppercase;
+    line-height: 2rem;
+    color: #fff;
+}
+.btncatalogo{
+   
+    padding: 5px 16px;
+    text-shadow: 0 0 10px rgb(0 0 0 / 90%);
+    background-color: brown;
+    font-size: 1.6rem;
+    color: #fff;
+    text-transform: uppercase;
+}
+.btncatalogo:hover{
+    padding: 5px 16px;
+    text-shadow: 0 0 10px rgb(0 0 0 / 90%);
+    font-size: 1.8rem;
+    transition: all .1s;
+    background-color: rgba(0, 0, 0, 0.3); 
+    color: brown;
+    text-transform: uppercase;
+}
+
+
+
+
+
 .body-bg{
     
 }
@@ -127,16 +167,16 @@ p{
     align-items: center;
     flex-direction: row;
     height: auto;
-    padding: 5px 10px
-;
+    border-radius: 6px;
+    padding: 8px 16px !important;
     background-color: initial;
 }
 .nav-item-a:hover{
-    color: #c4c4c4;
-    background-color: #9b9b9b;
+    color: #c4c4c4 !important;
+    background-color: rgba(0, 0, 0, 0.3)  !important;
+    transition: none;
     border-radius: 6px;
-    
-    
+
 }
 .container-cards{
 background-color: #fff;
@@ -167,6 +207,17 @@ padding: 20px 15px 50px;
     height: 35%;
     width: 70%;
 }
+@media (min-width: 1200px) {
+    .main-location{
+        height: calc(100vh - 150px);
+    }
+}
+@media (min-width: 768px)  {
+    .main-location{
+        height: calc(100vh - 135px);
+        background: #000 url(/static/img/main.jpg)  50%/cover no-repeat !important;
+    }
+}
 
 @media (min-width:100px ) {
     .item-carta{
@@ -183,4 +234,28 @@ padding: 20px 15px 50px;
     .item-carta{
       width: 30%;
     }
+}
+@media (max-width: 768px)  {
+    .main-location-text
+        {
+        text-shadow: 0 0 10px rgb(0 0 0 / 90%);
+        font-family: 'serif';
+        font-weight: 400;
+        font-size: 2rem;
+        text-transform: uppercase;
+        line-height: 2rem;
+        color: #fff;
+        text-align: center;
+        }
+    .btncatalogo{
+        padding: 5px 16px;
+        text-shadow: 0 0 10px rgb(0 0 0 / 90%);
+        background-color: brown;
+        font-size: 1.4rem;
+        color: #fff;
+        text-transform: uppercase;
+        display: block;
+        margin: auto;
+        }
+    
 }

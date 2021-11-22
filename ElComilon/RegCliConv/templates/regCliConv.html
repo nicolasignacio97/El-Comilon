@@ -48,40 +48,54 @@
                                     <div class="form-row">
                                         <div class="row">
                                             <div class="col-lg-12 mb-3">
-                                                <div>
+                                                <div class="form-floating">
                                                     <input type="text" name="rutCliConv"  class="form-control input_rut"
-                                                        id="txt-rut" placeholder="12.452.987-2" required>
+                                                    id="txt-rut" placeholder="12.452.987-2" required>
+                                                    <label for="">Rut Cliente</label>
                                                     <div class="valid-feedback"> </div>
-                                                    <div class="invalid-feedback" id="txt-invalid">Complete el campo</div>
+                                                    <div class="invalid-feedback">Complete el campo</div>
                                                 </div>
+              
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-lg-6 mb-4">
-                                                <input type="text" name="nomCliConv" class="form-control"
+                                                <div class="form-floating">
+                                                    <input type="text" name="nomCliConv" class="form-control"
                                                     id="nomCliConv" placeholder="Nombres Cliente" required>
-                                                <div class="valid-feedback"> </div>
-                                                <div class="invalid-feedback">Complete el campo</div>
+                                                    <label for="">Nombre Cliente</label>
+                                                    <div class="valid-feedback"> </div>
+                                                    <div class="invalid-feedback">Complete el campo</div>
+                                                </div>
+                                                
                                             </div>
                                             <div class="col-lg-6 mb-4">
-                                                <input type="text" name="apeCliConv" class="form-control" minlength="2"
+                                                <div class="form-floating">
+                                                    <input type="text" name="apeCliConv" class="form-control" minlength="2"
                                                     id="apeCliConv" placeholder="Apellidos Cliente" required>
-                                                <div class="valid-feedback"> </div>
-                                                <div class="invalid-feedback">Complete el campo</div>
+                                                    <label for="">Apellido Cliente</label>
+                                                    <div class="valid-feedback"> </div>
+                                                    <div class="invalid-feedback">Complete el campo</div>
+                                                </div>
+                                               
                                             </div>
                                         </div>
                                         <div class="row mb-4">
                                             <div class="col-12">
-                                                <input type="text" name="direcCliConv" class="form-control"
+                                                <div class="form-floating">
+                                                    <input type="text" name="direcCliConv" class="form-control"
                                                     id="direcCliConv" minlength="4" placeholder="Direccion Cliente"
                                                     required>
-                                                <div class="valid-feedback"> </div>
-                                                <div class="invalid-feedback">Complete el campo</div>
+                                                    <label for="">Color Vehiculo</label>
+                                                    <div class="valid-feedback"> </div>
+                                                    <div class="invalid-feedback">Complete el campo</div>
+                                                </div>
+                                
                                             </div>
                                         </div>
 
                                         <div class="row">
-                                            <div class="col-lg-12 mb-4">
+                                            <div class="col-lg-12 mb-2">
                                                 <div class="form-floating">
                                                     <select min="1" id="disabledSelect" name="rutEmpConv" class="form-select inputfocus" required>
                                                         <option disabled selected value="">Seleccionar </option>
@@ -94,11 +108,14 @@
                                                     <div class="invalid-feedback">Complete el campo</div>
                                                 </div>
                                             </div>
-                                            <div class="col-lg-12 mb-4 mt-5">
-                                                <input type="number" name="saldoCli" class="form-control inp" id="saldoCli"
+                                            <div class="col-lg-12 mb-2 mt-1">
+                                                <div class="form-floating">
+                                                    <input type="number" name="saldoCli" class="form-control inp" id="saldoCli"
                                                     placeholder="Saldo Cliente" required>
-                                                <div class="valid-feedback"> </div>
-                                                <div class="invalid-feedback">Complete el campo</div>
+                                                    <label for="">Saldo Cliente</label>
+                                                    <div class="valid-feedback"> </div>
+                                                    <div class="invalid-feedback">Complete el campo</div>
+                                                </div>                                 
                                             </div>
                                         </div>
                                         <div class="row d-flex justify-content-center mt-5">
@@ -164,12 +181,11 @@
                                 'X-CSRFToken': getCookie('csrftoken'),
                             },
                         }
-                        txtHtml.classList.replace('valid-feedback','invalid-feedback')
+                        
                         formPost.submit();
                         return
                     } else {
                         console.log("Cliente existente en la bd")
-                        txtHtml.classList.replace('invalid-feedback','valid-feedback')
                         txtHtml.innerHTML = 'Rut registrado'
                         alert("Cliente existente en la bd")
                     }
