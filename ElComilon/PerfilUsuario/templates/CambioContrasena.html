@@ -1,16 +1,9 @@
 {% extends "HeaderFooter/base.html"%}
 {% load static %}
-{% block L-izquierda %}
-<a href="#">Inicio</a>
-<a href="#">Nosotros</a>
-{% endblock%}
 
-{% block L-derecha %}
-<a href="#">Catálogo</a>
-<a href="#">Perfil</a>
-{% endblock%}
 {% load crispy_forms_tags %}
 {% block content %}
+<link rel="stylesheet" href="{% static 'css/estilocambio.css' %}">
 <div class="row">
     <div class="col-12 col-md-6 offset-md-3 mt-4">
         <div class="card mt-5">
@@ -18,13 +11,32 @@
                 <h3 class="text-center mb-4">Formulario Para cambiar contraseña</h3>
                 <form action="" method="post">
                     {% csrf_token %}
-                    {% for field in form %}
                     <div class="form-floating mb-3">
-                      <input type="password"  name="{{field.html_name}}" class="form-control" id="floatingInput" placeholder="{{field.html_name}}">
-                      <label for="{{field.id_for_label}}">{{field.label}}</label>
-                      <small class="form-text text-muted">{{field.help_text}}</small>
+                        <input type="password"  name="{{form.old_password.html_name}}" class="form-control" id="{{form.old_password.id_for_label}}" placeholder="{{form.old_password.label}}">
+                        <label for="{{form.old_password.id_for_label}}">{{form.old_password.label}}</label>
+                        <small class="form-text text-muted sangria">{{form.old_password.help_text}}</small>
                     </div>
+                    <div class="form-floating mb-3">
+                        <input type="password"  name="{{form.new_password1.html_name}}" class="form-control" id="{{form.new_password1.id_for_label}}" placeholder="{{form.new_password1.label}}">
+                        <label for="{{form.new_password1.id_for_label}}">{{form.new_password1.label}}</label>
+                        <small class="form-text text-muted sangria">{{form.new_password1.help_text}}</small>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="password"  name="{{form.new_password2.html_name}}" class="form-control" id="{{form.new_password2.id_for_label}}" placeholder="{{form.new_password2.label}}">
+                        <label for="{{form.new_password2.id_for_label}}">{{form.new_password2.label}}</label>
+                        <small class="form-text text-muted sangria">{{form.new_password2.help_text}}</small>
+                    </div>
+                   {{form.errors}}
+                    {% for field in form %}
+                        {%if error in field.errors%}
+                        <p>{{error}}</p>
+                        {%endif%}
                     {% endfor %}
+                    {{form.errors}}
+                    {%if old_password.errors %} 
+                    <small class="sangria fs-6 text-danger">{{form.error_messages.password_incorrect}}</small>
+                    {%endif%}
+
                     <div class="d-flex justify-content-center mt-4">
                         <button type="submit" class="btn btn-danger">Actualizar</button>
                     </div>

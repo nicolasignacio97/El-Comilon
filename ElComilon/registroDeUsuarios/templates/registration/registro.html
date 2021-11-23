@@ -8,17 +8,9 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'css/estiloRegistro.css' %}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script src="{% static 'app/jquery.rut.chileno.js' %}"></script>
-
-    <script type="text/javascript">
-        jQuery(document).ready(function ($) {
-            $('.input_rut').rut();
-        });
-    </script>
     <title>Registro de usuario</title>
 </head>
 
@@ -29,52 +21,107 @@
                 <div class="card shadow">
                     <h3 class="text-center mt-3 titulo">Registro de usuario</h3>
                     <div class="card-body">
-                        <form method="POST" class="needs-validation" novalidate>
-                            {% csrf_token %}
-                            {{form|crispy}}
-                            <div class="form">
-                                <div class="form-floating mb-3">
-                                    <input type="{{form.username.id_for_label}}" required
-                                        name="{{form.username.html_name}}" class="form-control" id="floatingInput"
-                                        placeholder=" ">
-                                    <label for="{{form.username.id_for_label}}">{{form.username.label}}</label>
-                                    <small class="form-text text-muted">{{field.help_text}}</small>
-                                </div>
-                                <div class="form-floating mb-3">
-                                    <input type="{{form.password1.id_for_label}}" required name="{{field.html_name}}"
-                                        class="form-control" id="floatingInput" placeholder=" ">
-                                    <label for="{{form.password1.id_for_label}}">{{form.password1.label}}</label>
-                                    <small class="form-text text-muted">{{field.help_text}}</small>
-                                </div>
-                                <div class="form-floating mb-3">
-                                    <input type="{{form.password2.id_for_label}}" required name="{{field.html_name}}"
-                                        class="form-control" id="floatingInput" placeholder=" ">
-                                    <label for="{{form.password2.id_for_label}}">{{form.password2.label}}</label>
-                                    <small class="form-text text-muted">{{field.help_text}}</small>
-                                </div>
-                                <div class="form-floating mb-3">
-                                    <input type="{{form.username.id_for_label}}" required name="{{field.html_name}}"
-                                        class="form-control" id="floatingInput" placeholder=" ">
-                                    <label for="{{form.username.id_for_label}}">{{form.username.label}}</label>
-                                    <small class="form-text text-muted">{{field.help_text}}</small>
-                                </div>
-                                <div class="row d-flex justify-content-center">
+                        <form  name="form1" onsubmit="javascript:return Rut(document.form1.rut.value)" method="POST">
+                            {% csrf_token %} 
+                            <div class=" form">
+                                <div class="row d-flex justify-content-center sangria">
                                     <div class="row mt-3 p-0">
                                         <div class="col">
-                                            <label for="Rut">Rut*</label>
-                                            <input type="text"
-                                                class="form-control  shadow-sm  bg-body rounded input_rut"
-                                                oninput="checkRut(this)" name="rutCliente" id="Rut"
-                                                placeholder="19.455.087-3" maxlength="12" required>
-                                            <div class="valid-feedback"> </div>
-                                            <div class="invalid-feedback">Campo obligatorio*</div>
+                                            <div class="form-floating mb-3">
+                                                {%if form.email.value%}
+                                                <input type="email" name="email" class="form-control"
+                                                    id="{{form.email.id_for_label}}" placeholder=" "
+                                                    value="{{form.email.value}}" required>
+                                                <label for="{{form.email.id_for_label}}">{{form.email.label}}</label>
+                                                {%else%}
+                                                <input type="email" name="email" class="form-control"
+                                                    id="{{form.email.id_for_label}}" placeholder=" " required>
+                                                <label for="{{form.email.id_for_label}}">{{form.email.label}}</label>
+                                                {%endif%}
+                                                {% if form.errors%}
+                                                <small class="text-danger">{{form.email.errors}}</small>
+                                                {%endif%}
+                                            </div>
+                                            <div class="form-floating mb-3">
+                                                {%if form.username.value%}
+                                                <input type="text" id="{{form.username.id_for_label}}"
+                                                    name="{{form.username.html_name}}" class="form-control"
+                                                    id="floatingInput" placeholder=" " autocomplete="off"
+                                                    value="{{form.username.value}}">
+                                                <label
+                                                    for="{{form.username.id_for_label}}">{{form.username.label}}</label>
+                                                {%else%}
+                                                <input type="text" id="{{form.username.id_for_label}}"
+                                                    name="{{form.username.html_name}}" class="form-control"
+                                                    id="floatingInput" placeholder=" " autocomplete="off">
+                                                <label
+                                                    for="{{form.username.id_for_label}}">{{form.username.label}}</label>
+                                                {%endif%}
+                                                {% if form.errors%}
+                                                <small id="usernaeError"
+                                                    class="sangria fs-6 text-danger">{{form.username.errors}}</small>
+                                                {%endif%}
+                                            </div>
+                                            <div class="form-floating mb-3">
+                                                {%if form.password1.value%}
+                                                <input type="password" name="{{form.password1.html_name}}"
+                                                    id="id_password1" class="form-control" placeholder=" "
+                                                    autocomplete="off" value="{{form.password1.value}}">
+                                                <label
+                                                    for="{{form.password1.id_for_label}}">{{form.password1.label}}</label>
+                                                <small class="form-text text-muted">{{form.password1.help_text}}</small>
+                                                {%else%}
+                                                <input type="password" name="{{form.password1.html_name}}"
+                                                    id="id_password1" class="form-control" placeholder=" "
+                                                    autocomplete="off">
+                                                <label
+                                                    for="{{form.password1.id_for_label}}">{{form.password1.label}}</label>
+                                                <small class="form-text text-muted">{{form.password1.help_text}}</small>
+                                                {%endif%}
+
+                                            </div>
+                                            <div class="form-floating mb-3">
+                                                {%if form.password2.value%}
+                                                <input type="password" name="{{form.password2.html_name}}"
+                                                    id="id_password2" class="form-control" placeholder=" "
+                                                    value="{{form.password2.value}}">
+                                                <label
+                                                    for="{{form.password2.id_for_label}}">{{form.password2.label}}</label>
+                                                {%else%}
+                                                <input type="password" name="{{form.password2.html_name}}"
+                                                    id="id_password2" class="form-control" placeholder=" "
+                                                    autocomplete="off">
+                                                <label
+                                                    for="{{form.password2.id_for_label}}">{{form.password2.label}}</label>
+                                                <small class="form-text text-muted">{{form.password2.help_text}}</small>
+                                                {%endif%}
+                                                {% if form.errors%}
+                                                <small class="text-danger">{{form.password2.errors}}</small>
+                                                {%endif%}
+                                            </div>
+                                            <div class="form-floating mb-3">
+                                                {%if rut %}
+                                                <input type="text"
+                                                    class="form-control  shadow-sm  bg-body rounded input_rut"
+                                                     name="rut"
+                                                    placeholder="19.455.087-3" maxlength="12" value="{{rut}}" required>
+                                                <label for="Rut">Rut</label>
+                                                {%else%}
+                                                <input type="text"
+                                                    class="form-control  shadow-sm  bg-body rounded input_rut"
+                                                      name="rut"
+                                                    placeholder="19.455.087-3" maxlength="12" required>
+                                                <label for="Rut">Rut</label>
+                                                {%endif%}
+                                                <small  id="Msg" class="text-danger fs-6">{{mensaje}}</small><br>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="envio d-flex flex-column justify-content-center mt-3">
                                 <div class="text-center">
-                                    <input type="checkbox" id="checkBox" required <p> Estoy de acuerdo con <a href=""
+                                    <input type="checkbox" id="checkBox"   required <p> Estoy de acuerdo con <a href=""
                                         data-bs-toggle="modal" data-bs-target="#exampleModal">Terminos y
                                         condiciones.</a></p>
                                     <div class="valid-feedback"> </div>
@@ -131,8 +178,7 @@
 
                                 </div>
                                 <div class="d-flex justify-content-center">
-                                    <input type="submit" class="btn botonEnviar mt-3" onclick="validarCamposVaciosReg()"
-                                        value="Registrar">
+                                    <input type="submit" class="btn botonEnviar mt-3" value="Registrar">
                                 </div>
                             </div>
                             <p class="mt-2 text-center"><a href="accounts/login/">¿Ya tienes cuenta?</a></p>
@@ -143,8 +189,6 @@
         </div>
     </div>
     <script src="{% static 'app/acepta-terminos.js' %}"></script>
-    <script src="{% static 'app/validacion.js' %}"></script>
-    <script src="{% static 'app/validarmodulo.js' %}"></script>
 </body>
 
 </html>

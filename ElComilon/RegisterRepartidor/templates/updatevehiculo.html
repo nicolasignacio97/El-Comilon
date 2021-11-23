@@ -28,28 +28,106 @@
 {% load crispy_forms_tags %}
 
 <body>
-    <div class="row mt-5" >
+    <div class="row mt-5">
         <div class="col-12 col-md-5 offset-md-4">
             <div class="card">
                 <div class="card-body">
-                    <h1 style= "color: brown; text-align: center;">Modificar repartidor</h1>
+                    <h1 style="color: brown; text-align: center;">Modificar repartidor</h1>
                     <hr>
                     <form method="POST">
                         {% csrf_token %}
-                        {{ form | crispy}}
+                        <div class="row">
+                            <h1 style="color: brown; text-align: center;">Vehiculo</h1>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-floating mb-3">
+                                    <input type="text" name="Patente" value="{{vehiculos.patentevehiculo}}"
+                                        class=" form-control  input-repartidor" id="Rut" required>
+                                    <label for="">Patente vehiculo</label>
+                                    <div class="valid-feedback"> </div>
+                                    <div class="invalid-feedback">Complete el campo</div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-floating mb-3">
+                                    <input type="text" name="Modelo" value="{{vehiculos.modelo}}"
+                                        class=" form-control  input-repartidor" id="Rut" required>
+                                    <label for="">Vehiculo Modelo</label>
+                                    <div class="valid-feedback"> </div>
+                                    <div class="invalid-feedback">Complete el campo</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-floating mb-3">
+                                    <input type="text" name="Ano" value="{{vehiculos.anio}}"
+                                        class=" form-control  input-repartidor" id="Rut" required>
+                                    <label for="">Año Vehiculo</label>
+                                    <div class="valid-feedback"> </div>
+                                    <div class="invalid-feedback">Complete el campo</div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-floating mb-3">
+                                    <input type="text" name="Color" value="{{vehiculos.color}}"
+                                        class=" form-control  input-repartidor" id="Rut" required>
+                                    <label for="">Color Vehiculo</label>
+                                    <div class="valid-feedback"> </div>
+                                    <div class="invalid-feedback">Complete el campo</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-floating mb-3">
+                                    <select name="tipovehiculo" id="tipovehiculo"
+                                        class="combobox-tipovehiculo  form-select">
+                                        <option value="SELECCIONE">Tipo Vehiculo</option>
+                                        {% for v in categoria %}
+                                        <option value="{{v.0}}">{{v.1}}</option>
+                                        {% endfor %}
+                                    </select>
+                                    <label for="">tIPO VEHICULO</label>
+                                    <div class="valid-feedback"> </div>
+                                    <div class="invalid-feedback">Complete el campo</div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6">
+                                <div class="form-floating mb-3">
+                                    <input type="text" name="idvehiculo" value="{{vehiculos.idvehiculo}}"
+                                        class=" form-control  input-repartidor" id="Rut" required>
+                                    <label for="">Idvehiculo</label>
+                                    <div class="valid-feedback"> </div>
+                                    <div class="invalid-feedback">Complete el campo</div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 d-none" >
+                                <div class="form-floating mb-3">
+                                    <input type="text" name="rutveh" value="{{vehiculos.rutrepartidor}}"
+                                        class=" form-control  input-repartidor" id="Rut" required>
+                                    <label for="">Rut repartidor</label>
+                                    <div class="valid-feedback"> </div>
+                                    <div class="invalid-feedback">Complete el campo</div>
+                                </div>
+                            </div>
+                        </div>
                         <br>
                         <hr>
                         <div class="d-flex justify-content-end">
                             <a href="{% url 'listarep' %}" class="btn btnA"> Cancelar </a>
                             &nbsp;
-                            <button type="submit" id="BTNENVIAR" class="btn " style="background-color: brown; color: #ffffff;">Modificar Repartidor</button>
+                            <button type="submit" id="BTNENVIAR" class="btn "
+                                style="background-color: brown; color: #ffffff;">Modificar Repartidor</button>
                         </div>
-        
-                    </form> 
+
+                    </form>
                 </div>
 
             </div>
-      
+
         </div>
 
     </div>

@@ -39,51 +39,77 @@
                         <form action="" class="needs-validation d-flex flex-column  justify-content-center"
                             method="POST" novalidate>
                             {% csrf_token %}
-                            <div class="form-row">                           
+                            <div class="form-row">
                                 <div class="row">
                                     <div class="col mb-4">
-                                        <input type="text" name="rutCliConv" class="form-control input_rut" id="Rut"
-                                            value="{{ selection.rutcliente }}" required>
-                                        <div class="valid-feedback"> </div>
-                                        <div class="invalid-feedback">Complete el campo</div>
+                                        <div class="form-floating mb-3">
+                                            <input type="text" name="rutCliConv" class="form-control input_rut" id="Rut"
+                                                value="{{ selection.rutcliente }}" required readonly>
+                                            <label for="">Rut cliente</label>
+                                            <div class="valid-feedback"> </div>
+                                            <div class="invalid-feedback">Complete el campo</div>
+                                        </div>
+
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-lg-6 mb-4">
-                                        <input type="text" name="nomCliConv" class="form-control" id="nomCliConv"
-                                            value="{{ selection.nombres }}" required>
-                                        <div class="valid-feedback"> </div>
-                                        <div class="invalid-feedback">Complete el campo</div>
+                                        <div class="form-floating mb-3">
+                                            <input type="text" name="nomCliConv" class="form-control" id="nomCliConv"
+                                                value="{{ selection.nombres }}" required>
+                                            <label for="">Nombre cliente</label>
+                                            <div class="valid-feedback"> </div>
+                                            <div class="invalid-feedback">Complete el campo</div>
+                                        </div>
+
                                     </div>
                                     <div class="col-lg-6 mb-4">
-                                        <input type="text" name="apeCliConv" class="form-control" minlength="2"
-                                            id="apeCliConv" value="{{ selection.apellidos }}" required>
-                                        <div class="valid-feedback"> </div>
-                                        <div class="invalid-feedback">Complete el campo</div>
+                                        <div class="form-floating mb-3">
+                                            <input type="text" name="apeCliConv" class="form-control" minlength="2"
+                                                id="apeCliConv" value="{{ selection.apellidos }}" required>
+                                            <label for="">Apellido Cliente</label>
+                                            <div class="valid-feedback"> </div>
+                                            <div class="invalid-feedback">Complete el campo</div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="row mb-4">
                                     <div class="col-12">
-                                        <input type="text" name="direcCliConv" class="form-control" id="direcCliConv" minlength="4"
-                                        value="{{ selection.direccion }}"
-                                            required>
+                                        <div class="form-floating mb-3">
+                                            <input type="text" name="direcCliConv" class="form-control"
+                                                id="direcCliConv" minlength="4" value="{{ selection.direccion }}"
+                                                required>
+                                            <label for="">Direccion Cliente</label>
+                                            <div class="valid-feedback"> </div>
+                                            <div class="invalid-feedback">Complete el campo</div>
+                                        </div>
+
                                         <div class="valid-feedback"> </div>
                                         <div class="invalid-feedback">Complete el campo</div>
                                     </div>
                                 </div>
-                               
+
                                 <div class="row">
                                     <div class="col-lg-6 mb-4">
-                                        <input type="number" name="saldoCli" class="form-control" id="saldoCli"
-                                        value="{{ selection.saldocli }}" required>
-                                        <div class="valid-feedback"> </div>
-                                        <div class="invalid-feedback">Complete el campo</div>
+                                        <div class="form-floating mb-3">
+                                            <input type="number" name="saldoCli" class="form-control" id="saldoCli"
+                                                value="{{ selection.saldocli }}" required>
+                                            <label for="">Saldo cliente</label>
+                                            <div class="valid-feedback"> </div>
+                                            <div class="invalid-feedback">Complete el campo</div>
+                                        </div>
+
                                     </div>
                                     <div class="col-lg-6 mb-4">
-                                        <input type="text" name="rutEmpConv" class="form-control input_rut"
-                                            id="rutEmpConv" value="{{ selection.rutempconv }}"required>
-                                        <div class="valid-feedback"> </div>
-                                        <div class="invalid-feedback">Complete el campo</div>
+                                        <div class="form-floating mb-3">
+                                            <input type="text" name="rutEmpConv" class="form-control input_rut"
+                                                id="rutEmpConv" value="{{ selection.rutempconv }}" readonly>
+                                            <label for="">Rut empresa convenio</label>
+                                            <div class="valid-feedback"> </div>
+                                            <div class="invalid-feedback">Complete el campo</div>
+                                        </div>
+
+                                      
                                     </div>
                                 </div>
                                 <div class="pieForm">

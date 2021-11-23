@@ -18,7 +18,7 @@ from RegEmpConv.views import eliminarEmpresa,clean_rut_emp_convenio
 from gestionRestaurantes.views import listarRestaurantes, modificarRepreResta, EliminarRepreResta,registroProveedor
 from registroTrabajador.views import pruebatrabajo,actTrabajador,actualizarTrabajador,trabajadorRut,eliminarTrabajador,clean_rut_trabajador
 from RegEmpConv.views import actualizarEmpresa, actEmpresa
-from RegisterRepartidor.views import registroVeh, Registrorep, editRepartidor, deleterepartidor, listarRep, editvehiculo, clean_rut
+from RegisterRepartidor.views import registroVeh, Registrorep, editRepartidor, deleterepartidor, listarRep, clean_rut,clean_patente
 
 url_patterns = [
     path('', administracion),
@@ -50,7 +50,6 @@ url_patterns = [
     path('regin/', Registrorep, name='regin'),
     path('listarep', listarRep, name="listarep"),
     path('updaterepartidor/<rutrepartidor>/',editRepartidor, name='updrpartidor'),
-    path('updatevehiculo/<rutrepartidor>/', editvehiculo, name='updvehiculo'),
     path('deleterepartidor/<rutrepartidor>/<id>/',deleterepartidor, name='deleterepartidor'),
     path('actualizarEmpresa', actualizarEmpresa),
     path('actEmpresa', actEmpresa),
@@ -60,5 +59,5 @@ url_patterns = [
     path('reginvehiculo', registroVeh, name='reginvehiculo'),
     path('actTrabajador', actTrabajador, name='actTrabajador'),
     path('valrut', clean_rut, name='validarRut'),
-
+    path('cleanpatente', clean_patente, name='Cleanpatente'),
 ]

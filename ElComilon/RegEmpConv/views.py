@@ -14,9 +14,12 @@ def registroEmpresa(request):
         rutEmpresa = request.POST.get('rutEmpresa')
         nombre = request.POST.get('nombreEmpresa')
         razonSocial = request.POST.get('razonSocial')
-        registrarEmpresa(rutEmpresa, nombre, razonSocial)
+        fechaconvenio = request.POST.get('fechaconvenio')
+        print(fechaconvenio)
+        registrarEmpresa(rutEmpresa, nombre, razonSocial,fechaconvenio)
         messages.success(request,'Agregado correctamente')
     return render(request,'regEmpConv.html',data)
+
 def clean_rut_emp_convenio(request):
     rutrepartidor = request.POST.get('rut')
     print(rutrepartidor)
@@ -25,14 +28,6 @@ def clean_rut_emp_convenio(request):
         return JsonResponse({'valid': 0})
     return JsonResponse({'valid': 1 })
 
-def registrarEmpresa(rutEmpresa, nombre, razonSocial):
-    django_cursor = connection.cursor()
-    cursor = django_cursor.connection.cursor()
-    salida = cursor.var(cx_Oracle.NUMBER)
-
-    cursor.callproc('SP_INSERT_EMP_CONV',[rutEmpresa, nombre, razonSocial, salida])
-
-    return salida.getvalue()
 
 def listaEmpresa(request):
     data = {
@@ -41,17 +36,6 @@ def listaEmpresa(request):
     return render(request, 'listaEmpConv.html', data)
 
 
-def listarEmpresa():
-    django_cursor = connection.cursor()
-    cursor = django_cursor.connection.cursor()
-    out_cur = django_cursor.connection.cursor()
-
-    cursor.callproc("SP_LISTAR_EMP", [out_cur])
-    lista = []
-    for fila in out_cur:
-        lista.append(fila)
-
-    return lista
 
 def empresaRut(request):
     if request.method == 'POST':
@@ -64,43 +48,15 @@ def empresaRut(request):
     return render(request, 'listaEmpConv.html', data)
 
 
-def listarEmpresaRut(rut):
-    django_cursor = connection.cursor()
-    cursor = django_cursor.connection.cursor()
-    out_cur = django_cursor.connection.cursor()
-
-    cursor.callproc("SP_LISTAR_EMPRESA_RUT", [rut, out_cur])
-    lista = []
-    for fila in out_cur:
-        lista.append(fila)
-
-    return lista
-
-def listar_restaurantes():
-    django_cursor = connection.cursor() 
-    cursor = django_cursor.connection.cursor()
-    out_cur = django_cursor.connection.cursor()
-    cursor.callproc("SP_LISTAR_RESTAURANTE", [out_cur])
-    lista = []
-    for fila in out_cur:
-        lista.append(fila)
-    return lista
 
 def eliminarEmpresa(request):
     if request.method == 'POST':
         rut = request.POST.get('btnEliminar')
     
         eliminar(rut)
-        messages.success(request,'Eliminado')
+        messages.success(request,'Empresa Eliminada')
     return listaEmpresa(request)
 
-def eliminar(rut):
-    django_cursor = connection.cursor()
-    cursor = django_cursor.connection.cursor()
-
-    cursor.callproc("SP_ELIMINAR_EMPRESA", [rut])
-
-    return 0
 
 def actualizarEmpresa(request):
 
@@ -114,20 +70,68 @@ def actualizarEmpresa(request):
     
     return render(request, 'actEmpConv.html', data)
 
-
 def actEmpresa(request):
     if request.method =='POST':
         rutEmpresa = request.POST.get('rutEmpresa')
         nombre = request.POST.get('nombreEmpresa')
         razonSocial = request.POST.get('razonSocial')
+        fechacontrato = request.POST.get('fechacontrato')
         messages.success(request,'Actualizado')
-        actualizar(rutEmpresa, nombre, razonSocial)
+        actualizar(rutEmpresa, nombre, razonSocial,fechacontrato)
 
     return listaEmpresa(request)
 
-def actualizar(rutEmpresa, nombre, razonSocial):
+
+def eliminar(rut):
     django_cursor = connection.cursor()
     cursor = django_cursor.connection.cursor()
-    cursor.callproc("SP_ACT_EMPRESA", [rutEmpresa, nombre, razonSocial])
+
+    cursor.callproc("SP_ELIMINAR_EMPRESA", [rut])
 
     return 0
+def registrarEmpresa(rutEmpresa, nombre, razonSocial,FECHACONVENIO):
+    django_cursor = connection.cursor()
+    cursor = django_cursor.connection.cursor()
+    salida = cursor.var(cx_Oracle.NUMBER)
+
+    cursor.callproc('sp_insert_emp_convenio',[rutEmpresa, nombre, razonSocial,FECHACONVENIO, salida])
+
+    return salida.getvalue()
+
+def actualizar(rutEmpresa, nombre, razonSocial,FECHACONVENIO):
+    django_cursor = connection.cursor()
+    cursor = django_cursor.connection.cursor()
+    cursor.callproc("SP_ACT_EMPRESA", [rutEmpresa, nombre, razonSocial,FECHACONVENIO])
+def listar_restaurantes():
+    django_cursor = connection.cursor() 
+    cursor = django_cursor.connection.cursor()
+    out_cur = django_cursor.connection.cursor()
+    cursor.callproc("SP_LISTAR_RESTAURANTE", [out_cur])
+    lista = []
+    for fila in out_cur:
+        lista.append(fila)
+    return lista
+
+def listarEmpresaRut(rut):
+    django_cursor = connection.cursor()
+    cursor = django_cursor.connection.cursor()
+    out_cur = django_cursor.connection.cursor()
+
+    cursor.callproc("SP_LISTAR_EMPRESA_RUT", [rut, out_cur])
+    lista = []
+    for fila in out_cur:
+        lista.append(fila)
+
+    return lista
+
+def listarEmpresa():
+    django_cursor = connection.cursor()
+    cursor = django_cursor.connection.cursor()
+    out_cur = django_cursor.connection.cursor()
+
+    cursor.callproc("SP_LISTAR_EMP", [out_cur])
+    lista = []
+    for fila in out_cur:
+        lista.append(fila)
+
+    return lista
