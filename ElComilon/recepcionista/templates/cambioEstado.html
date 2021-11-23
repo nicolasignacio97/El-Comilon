@@ -6,7 +6,7 @@
 {% block content %}
 
 
-<link rel="stylesheet" href="{% static 'css/style-registro-proveedor.css' %}">
+<link rel="stylesheet" href="{% static 'css/style-recepcionista-view.css' %}">
 <div class="container bg-white shadow-lg mt-5 mb-3">
   <div class="row">
     <div class="col m-2">
@@ -32,16 +32,21 @@
       </ul>
     </div>
   </div>
-  <div class="row mt-2">
+  <div class="col mt-2">
     <section class="container contenido-pedidovich ">
      
             <section class="container contenido-pedidovich ">
                 <div class="text-center ">
                     <form action="" method="POST">
                         {% csrf_token %}
-                        <p name='idPedido' class="mt-4">Pedido #{{ pedidoSelect.idpedido }}</p>
-                        <div class="card-body">
-                            <h3 class="card-title">Cambiar estado del pedido</h3>
+                        <h2 name='idPedido' class="mb-4">Pedido #{{ pedidoSelect.idpedido }}</h2>
+                        <div class="card-body info-botones">
+                          <div class="info">
+                            <h3 class="card-title">Detalles del pedido</h3>
+                            <div>
+                                <label for=""><span>Dirección:</span></label>
+                                <label for="">{{ pedidoSelect.direccionpedido | title }}</label>
+                            </div>
                             <div>
                                 <label for=""><span>Fecha:</span></label>
                                 <label for="">{{ pedidoSelect.fechapedido }}</label>
@@ -51,15 +56,31 @@
                                 <label for="">{{ pedidoSelect.rutcliente }}</label>
                             </div>
                             <div>
-                                <label for=""><span>Dirección:</span></label>
-                                <label for="">{{ pedidoSelect.direccionpedido }}</label>
-                            </div>
-                    
+                              <label for=""><span>Telefono:</span></label>
+                              <label for="">{{ cliente.telefono }}</label>
+                          </div>
+                          <div class="platillos">
+                            <h4>Platillos</h4>
+  
+                            {% for det in detallePedido %}
                             <div>
-                                <label for=""><span>Total: $</span></label>
-                                <label for="">{{ pedidoSelect.valortotal }}</label>
+                              <label for="">{{ det.idplatillo | title }} <span> X </span> <label for="">{{det.cantidad}}</label></label>
                             </div>
-                            <hr>
+                            {% endfor %}
+                          </div>    
+                            
+                          
+                            
+
+                            <div class="total">
+                              
+                              <label for=""><span>Total: $</span></label>
+                              <label for="">{{ pedidoSelect.valortotal }}</label>
+                          </div>
+                            
+                          </div>
+                          <div class="vl"></div>
+                          <div class="info">
                             <p class="card-text">Seleccione un estado del pedido para actualizar su fase.</p>
                             <select class="form-select" aria-label="Default select example" name="estado_pedido">w
                                 <option selected disabled>Seleccione un estado del pedido</option>
@@ -69,6 +90,7 @@
                             </select>
                             <button class="btn botonEnviar bloque-abajo mt-5" id="btn1" type="submit">Cambiar estado</button>
                             {{mensaje}}
+                          </div>
                         </div>
                     </form>
                 </div>
