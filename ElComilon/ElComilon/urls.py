@@ -4,7 +4,6 @@ from django.contrib import admin
 from django.urls import path, include
 from recepcionista.views import viewRecepcionista,asignarRepartidor, cambiarEstado,menuRecepcion
 from registroDeUsuarios.views import registroUsuario
-
 from Home.views import inicio
 from RegisterPlatillo.views import registroPlatillo
 
@@ -40,6 +39,7 @@ urlpatterns = [
     
     path('registroUsuarios', registroUsuario,name='registro'),
     path('cambioContrasena', CambiarContra, name="cambioContrasena"),
+ 
 
     path('menu/<id>', menu, name="menu"),
     path('crearMenu/<id>', crearMenu, name="crearMenu"),

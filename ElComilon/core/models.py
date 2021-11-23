@@ -94,6 +94,7 @@ class EstadoReclamo(models.Model):
     idestreclamo = models.IntegerField(primary_key=True)
     descestreclamo = models.CharField(max_length=1000)
 
+
     class Meta:
         managed = False
         db_table = 'estado_reclamo'
