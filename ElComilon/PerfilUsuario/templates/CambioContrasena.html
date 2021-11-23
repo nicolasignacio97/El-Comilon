@@ -13,13 +13,24 @@
 {% block content %}
 <div class="row">
     <div class="col-12 col-md-6 offset-md-3 mt-4">
-        <form action="" method="post">
-            {% csrf_token %}
-            {{form|crispy}}
-            <div class="d-flex justify-content-center mt-4">
-                <button type="submit" class="btn btn-danger">Actualizar</button>
+        <div class="card mt-5">
+            <div class="card-body shadow">
+                <h3 class="text-center mb-4">Formulario Para cambiar contraseña</h3>
+                <form action="" method="post">
+                    {% csrf_token %}
+                    {% for field in form %}
+                    <div class="form-floating mb-3">
+                      <input type="password"  name="{{field.html_name}}" class="form-control" id="floatingInput" placeholder="{{field.html_name}}">
+                      <label for="{{field.id_for_label}}">{{field.label}}</label>
+                      <small class="form-text text-muted">{{field.help_text}}</small>
+                    </div>
+                    {% endfor %}
+                    <div class="d-flex justify-content-center mt-4">
+                        <button type="submit" class="btn btn-danger">Actualizar</button>
+                    </div>
+                </form>
             </div>
-        </form>
+        </div>
     </div>
 </div>
 {% endblock %}

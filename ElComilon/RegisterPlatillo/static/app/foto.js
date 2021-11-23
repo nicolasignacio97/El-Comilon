@@ -10,4 +10,18 @@ document.getElementById('file').onchange=function(e){
         /*let url = document.getElementById('file').value;
         console.log(url);*/
     }
+
+    var formData = new FormData();
+    var file = document.getElementById('file').files[0];
+    formData.append("Filedata", file);
+    var t = file.type.split('/').pop().toLowerCase();
+    if (t != "jpeg" && t != "jpg" && t != "png" && t != "bmp" && t != "gif") {
+        Swal.fire({
+            icon: 'error',
+            title: 'Formato inválido',
+            text: 'Por favor selecciona un formato de imagen válido'
+          })
+        document.getElementById('file').value = '';
+        return false;
+    }
 }
