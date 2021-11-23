@@ -20,7 +20,7 @@ def registroTrabajador(request):
         nombres = request.POST.get('nombres')
         apellidos = request.POST.get('apellidos')
         fechaContrato = request.POST.get('fecha')
-        rutRestaurante = '887454345'
+        rutRestaurante = '77.684.154-9'
         idCargo = request.POST.get('cargo')
         forumulario = FormularioUsuario(data=request.POST)
         # if Trabajador.objects.filter(ruttrabajador = rutTrabajador).exists():
