@@ -17,7 +17,7 @@ def listado_platillos():
     cursor = django_cursor.connection.cursor()
     out_cur = django_cursor.connection.cursor()
 
-    cursor.callproc("SP_LISTAR_PLATILLOS", [out_cur])    
+    cursor.callproc("SP_LISTAR_PLATILLOS_DISPO", [out_cur])    
 
     lista = []
     for fila in out_cur:

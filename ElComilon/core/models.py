@@ -166,7 +166,7 @@ class Repartidor(models.Model):
     
 
     def __str__(self):
-        return self.rutrepartidor + ' ' + self.nombres
+        return self.rutrepartidor 
 
     class Meta:
         managed = False
@@ -254,6 +254,9 @@ class TipoServicio(models.Model):
 class TipoVehiculo(models.Model):
     idtipovehiculo = models.IntegerField(primary_key=True)
     descripcion = models.CharField(max_length=30)
+    
+    def __str__(self):
+        return str(self.idtipovehiculo) 
 
     class Meta:
         managed = False
@@ -281,7 +284,7 @@ class Trabajador(models.Model):
 
 class Vehiculo(models.Model):
     idvehiculo = models.CharField(primary_key=True, max_length=20)
-    patentevehiculo = models.CharField(max_length=6, unique=True)
+    patentevehiculo = models.CharField(max_length=6)
     modelo = models.CharField(max_length=20)
     anio = models.IntegerField()
     color = models.CharField(max_length=20)

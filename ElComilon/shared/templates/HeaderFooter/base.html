@@ -39,8 +39,9 @@
   <nav class="navbar navbar-expand-lg  p-0  " style="background-color:#9C3534;">
     <div class="container-fluid">
       <div class=" row  col-3" style="justify-content: center;">
-        <a href="/" class="navbar-brand"><img class="logo-img" src="{% static 'img/logo.png' %}" alt=""
-            style="max-width: 200px;"></a>
+
+        <a href="/" class="navbar-brand"><img class="logo-img" src="{% static 'img/logo.png' %}" alt="" style="max-width: 200px; max-height: 80px;"></a>
+
       </div>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" style="color: #fff;">
@@ -92,7 +93,9 @@
           {%endif%}
           {% else %}
           <li class="nav-item">
-            <a href="{% url 'login' %}" class="nav-link nav-item-a text-light">Iniciar sesión</a>
+
+
+            <a href="{% url 'login' %}"  class="nav-link nav-item-a text-light">Iniciar sesión</a>
           </li>
           <li class="nav-item">
             <a href="/registroUsuarios" class="nav-link nav-item-a text-light">Registro</a>

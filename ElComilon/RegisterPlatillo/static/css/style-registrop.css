@@ -15,7 +15,7 @@ body{
     margin: 0 auto;
     margin-top: 100px;
     align-items: center;
-    height: 750px;
+    height: 800px;
 }
 
 input[type=number]::-webkit-inner-spin-button, 
@@ -53,10 +53,6 @@ input[type=number] { -moz-appearance:textfield; }
     width: 25rem
 }
 
-.inputs{
-    margin-bottom: 2rem;
-    position:unset;
-}
 
 .form-label{
     margin: 0;
@@ -80,7 +76,7 @@ input[type=number] { -moz-appearance:textfield; }
 }
 
 .titulo{
-    margin-bottom: 4rem;
+    margin-bottom: 3rem;
     margin-top: 1rem;
 }
 .titulo h1{
@@ -315,4 +311,18 @@ input[type=number] { -moz-appearance:textfield; }
     margin: 0;
     color: #9c3534;  
     font-weight: bold;
+}
+
+.form-check-input:checked{
+    background-color: #9c3534;  
+    border: 1.5px solid #9c3534;
+}
+.form-check-input:checked:focus{
+    border: 1.5px solid #9c3534;
+    box-shadow: none;
+}
+
+.form-check-input:focus{
+    border: 1.5px solid #9c3534;
+    box-shadow: none;
 }

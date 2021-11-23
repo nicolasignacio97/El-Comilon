@@ -50,9 +50,9 @@ def eliminarCliConv(request,rutcliente, id):
     cliente.delete()
     messages.success(request, messages.SUCCESS , 'Eliminado con exito')
     contexto = {
-         'clientes':clientes
+         'cliente':clientes
     }
-    return render(request,"listarCliConv.html",contexto)
+    return listarCliConv(request)
     # return redirect(to="/administracion/listarCliConv")
 
 #LISTAR CLIENTES CONVENIO
@@ -78,9 +78,10 @@ def modificarCliConv(request,id):
         direccion = request.POST.get('direcCliConv')
         saldocli = request.POST.get('saldoCli')
         rutempcli = request.POST.get('rutEmpConv')
+        idtipo = 1
 
-        modificar_cliente_convenio(rutclienteConv,nombres, apellidos, direccion,saldocli,rutempcli)
-        # messages.success(request,'Modificado con exito')
+        modificar_cliente_convenio(rutclienteConv,nombres, apellidos, direccion,saldocli,idtipo,rutempcli)
+        messages.success(request,'Modificado con exito')
         return redirect(to="listarCliConv")
 
     return render(request,'modCliConv.html',dataMod)
@@ -100,11 +101,11 @@ def agregar_cliente_convenio(rutcliente,nombres, apellidos, direccion,idtipoClie
 
 
 #FUNCIÓN MODIFICAR CLIENTE CONVENIO
-def modificar_cliente_convenio(rutcliente,nombres, apellidos, direccion,saldocli,rutempcli):
+def modificar_cliente_convenio(rutcliente,nombres, apellidos, direccion,saldocli,idtipocliente,rutempcli):
     django_cursor = connection.cursor()
     cursor = django_cursor.connection.cursor()
     salida = cursor.var(cx_Oracle.NUMBER)
-    cursor.callproc('SP_MODIFICAR_CLIENTE_CONVENIO',[rutcliente, nombres, apellidos, direccion, saldocli,rutempcli,salida])
+    cursor.callproc('SP_MODIFICAR_CLIENTE_CONVENIO',[rutcliente, nombres, apellidos, direccion, saldocli,idtipocliente,rutempcli,salida])
     return salida.getvalue()
 
 #FUNCION LISTAR CLIENTE

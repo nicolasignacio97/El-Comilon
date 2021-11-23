@@ -29,7 +29,7 @@ label{
 /*Id de pedido, fecha y estado*/
 
 .num-pedido{
-    margin-top: 4rem;
+    margin: 4rem 0;
     text-align: center;
 }
 
