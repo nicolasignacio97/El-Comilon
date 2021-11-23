@@ -22,40 +22,273 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/stylesrepartidor.css' %}">
     <title>Document</title>
 </head>
 {% load crispy_forms_tags %}
 
 <body>
-    <div class="row mt-5" >
-        <div class="col-12 col-md-5 offset-md-4">
+    <div class="row mt-5">
+        <div class=" col-md-10 m-auto ">
             <div class="card">
                 <div class="card-body">
-                    <h1 style= "color: brown; text-align: center;">Modificar repartidor</h1>
-                    <hr>
-                    <form method="POST">
+                    <h1 class="mb-4" style="color: brown; text-align: center;">Repartidor</h1>
+
+                    <form method="POST"  id="post-form" class="needs-validation" novalidate>
                         {% csrf_token %}
-                        {{ form | crispy}}
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-floating mb-3">
+                                    <input type="text" name="RutRepartidor" value="{{selection.rutrepartidor}}"
+                                        class="form-control input_rut input-repartidor" id="" required readonly>
+                                    <label for="">Rut Repartidor</label>
+                                    <div class="valid-feedback"> </div>
+                                    <div class="invalid-feedback">Complete el campo</div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-floating mb-3">
+                                    <input type="text" name="NombresRepartido" value="{{selection.nombres}}"
+                                        class=" form-control  input-repartidor" id="" required>
+                                    <label for="">Nombre Repartidor</label>
+                                    <div class="valid-feedback"> </div>
+                                    <div class="invalid-feedback">Complete el campo</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-floating mb-3">
+                                    <input type="text" name="ApellidosRepartidor" value="{{selection.apellidos}}"
+                                        class=" form-control  input-repartidor" id="" required>
+                                    <label for="">Apellido Repartidor</label>
+                                    <div class="valid-feedback"> </div>
+                                    <div class="invalid-feedback">Complete el campo</div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-floating mb-3">
+                                    <input type="date" name="Fechacontrato"
+                                        value="{{selection.fechacontrato|date:'Y-m-d'}}"
+                                        class=" form-control  input-repartidor" id="datefield" required>
+                                    <label for="">Fecha contrato</label>
+                                    <div class="valid-feedback"> </div>
+                                    <div class="invalid-feedback">Complete el campo</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-floating mb-3">
+                                    <input type="text" name="rutempresa" value="{{selection.rutrestaurante}}"
+                                        class="  form-control  input-repartidor" id="Rut" required readonly>
+                                    <label for="">Rut Restaurante</label>
+                                    <div class="valid-feedback"> </div>
+                                    <div class="invalid-feedback">Complete el campo</div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <div class="row">
+                            <h1 style="color: brown; text-align: center;" class="mb-4">Vehiculo</h1>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-floating mb-3">
+                                    <input type="text" name="Patente" value="{{vehiculos.patentevehiculo}}"
+                                        class=" form-control  input-repartidor" id="txt-patente"
+                                        pattern="^[A-z]{4}[0-9]{2}$" required readonly>
+                                    <label for="">Patente vehiculo</label>
+                                    <div class="valid-feedback"> </div>
+                                    <div class="invalid-feedback">Complete el campo</div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-floating mb-3">
+                                    <input type="text" name="Patentenew" value="{{vehiculos.patentevehiculo}}"
+                                        pattern="^[A-z]{4}[0-9]{2}$" class=" input-repartidor form-control"
+                                        id="txt-patentenew">
+                                    <label for="">Nueva patente vehiculo</label>
+                                    <div class="valid-feedback"> </div>
+                                    <div class="invalid-feedback " id="div-patente">Complete el campo</div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <div class="form-floating mb-3">
+                                    <input type="text" name="Modelo" value="{{vehiculos.modelo}}"
+                                        pattern="[a-zA-Z ]{3,8}*[ 0-9]" class=" form-control  input-repartidor" id="Rut"
+                                        required>
+                                    <label for="">Vehiculo Modelo</label>
+                                    <div class="valid-feedback"> </div>
+                                    <div class="invalid-feedback">Complete el campo</div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-floating mb-3">
+                                    <input type="text" name="Ano" value="{{vehiculos.anio}}"
+                                        class=" form-control  input-repartidor" id="Rut" pattern="[0-9]{4}$" required>
+                                    <label for="">Año Vehiculo</label>
+                                    <div class="valid-feedback"> </div>
+                                    <div class="invalid-feedback">Complete el campo</div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-floating mb-3">
+                                    <input type="text" name="Color" value="{{vehiculos.color}}"
+                                        class=" form-control  input-repartidor" pattern="[a-zA-Z]{3,8}" required>
+                                    <label for="">Color Vehiculo</label>
+                                    <div class="valid-feedback"> </div>
+                                    <div class="invalid-feedback" id="invalid-feedback">Complete el campo</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <div class="form-floating mb-3">
+                                    <select name="tipovehiculo" id="tipovehiculo"
+                                        class="combobox-tipovehiculo  form-select">
+                                        <option value="{{vehiculos.idtipovehiculo}}">{{vehiculos.idtipovehiculo.descripcion}}
+                                        </option> -->
+                                        <option value="">----</option>
+                                        {% for v in categoria %}
+                                        <option value="{{v.0}}">{{v.1}}</option>
+                                        {% endfor %}
+                                    </select>
+                                    <label for="">Tipo vehiculo</label>
+                                    <div class="valid-feedback"> </div>
+                                    <div class="invalid-feedback">Complete el campo</div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6 d-none">
+                                <div class="form-floating mb-3">
+                                    <input type="text" name="idvehiculo" value="{{vehiculos.idvehiculo}}"
+                                        class=" form-control  input-repartidor" id="Rut" required>
+                                    <label for="">Idvehiculo</label>
+                                    <div class="valid-feedback"> </div>
+                                    <div class="invalid-feedback">Complete el campo</div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 d-none">
+                                <div class="form-floating mb-3">
+                                    <input type="text" name="rutveh" value="{{vehiculos.rutrepartidor}}"
+                                        class=" form-control  input-repartidor" id="Rut" required>
+                                    <label for="">Rut repartidor</label>
+                                    <div class="valid-feedback"> </div>
+                                    <div class="invalid-feedback">Complete el campo</div>
+                                </div>
+                            </div>
+                        </div>
+
                         <br>
                         <hr>
                         <div class="d-flex justify-content-end">
-                            <input type="reset" value="Cancelar" class="btn btn-secondary">
+                            <a href="{% url 'listarep'%}">
+                                <input type="button" value="Cancelar" class="btn btn-secondary">
+                            </a>
+
                             &nbsp;
-                            <button type="submit" id="BTNENVIAR" class="btn " style="background-color: brown; color: #ffffff;">Modificar Repartidor</button>
+                            <button type="submit" id="BTNENVIAR" class="btn "
+                                style="background-color: brown; color: #ffffff;">Modificar Repartidor</button>
                         </div>
-        
-                    </form> 
+
+                    </form>
                 </div>
 
             </div>
-      
+
         </div>
 
     </div>
+    <script type="text/javascript">
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth() + 1; //January is 0!
+        var yyyy = today.getFullYear();
+
+        if (dd < 10) {
+            dd = '0' + dd;
+        }
+
+        if (mm < 10) {
+            mm = '0' + mm;
+        }
+
+        today = yyyy + '-' + mm + '-' + dd;
+        document.getElementById("datefield").setAttribute("max", today);
+
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    // Does this cookie string begin with the name we want?
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+        $('#post-form').on('submit', function (event) {
+            event.preventDefault();
+            let txterror = document.getElementById('invalid-feedback')
+            let patentenew = document.getElementById('txt-patentenew').value
+            let divpatente = document.getElementById('txt-patentenew')
+            let form = document.getElementById('post-form')
+            let patente = document.getElementById('txt-patente').value;
+            let txtpatente = document.getElementById('div-patente')
+            var formData = new FormData(document.getElementById('post-form'));
+            formData.append('patentenew', patentenew)
+            formData.append('patente', patente);
+            if ( patentenew && document.getElementById('post-form').checkValidity()) {
+                document.getElementById('post-form').classList.add('was-validated')
+                fetch('{% url "Cleanpatente" %}', {
+                    method: 'POST',
+                    mode: 'same-origin',
+                    cache: 'no-cache',
+                    body: formData,
+                    headers: {
+                        'X-CSRFToken': getCookie('csrftoken'),
+                    },
+                }).then(response => response.json())
+                    .then(data => {
+                        console.log(data)
+                        if (data.val_patenteiguales === false) {
+                            console.log('Patente igual a la definida')
+                            form.submit()
+                        }
+                        else if (data.val_patente === false) {
+                            console.log('patente no disponible')
+                            divpatente.classList.add('inputype')
+                            form.classList.add('.was-validated')
+                            txtpatente.classList.add('d-block')
+                            txtpatente.innerHTML = 'Patente ya utilizada'
+                        }
+                        else {
+                            console.log('patente valida ')
+                            form.submit();
+                        }
+                    });
+            } else {
+                txterror.innerHTML = 'Formato Incorrecto'
+                txtpatente.innerHTML = 'Formato Esparado = FDFD'
+                console.log("Llene todos los campos")
+                event.preventDefault();
+            }
+        });
+    </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
+    <script src="{% static 'app/'%}"></script>
 </body>
 
 </html>
