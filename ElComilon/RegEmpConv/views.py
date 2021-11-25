@@ -15,16 +15,13 @@ def registroEmpresa(request):
         nombre = request.POST.get('nombreEmpresa')
         razonSocial = request.POST.get('razonSocial')
         fechaconvenio = request.POST.get('fechaconvenio')
-        print(fechaconvenio)
         registrarEmpresa(rutEmpresa, nombre, razonSocial,fechaconvenio)
         messages.success(request,'Agregado correctamente')
     return render(request,'regEmpConv.html',data)
 
 def clean_rut_emp_convenio(request):
-    rutrepartidor = request.POST.get('rut')
-    print(rutrepartidor)
-    if EmpresaConvenio.objects.filter(rutempresaconvenio=rutrepartidor).exists():
-        print("Repartidor existente")
+    rutrempresa = request.POST.get('rut')
+    if EmpresaConvenio.objects.filter(rutempresaconvenio=rutrempresa).exists():
         return JsonResponse({'valid': 0})
     return JsonResponse({'valid': 1 })
 
@@ -39,7 +36,6 @@ def listaEmpresa(request):
 
 def empresaRut(request):
     if request.method == 'POST':
-
         rut = request.POST.get('empresaRut')
 
         data = {
