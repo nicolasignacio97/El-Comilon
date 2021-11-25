@@ -6,7 +6,7 @@ from recepcionista.views import viewRecepcionista,asignarRepartidor, cambiarEsta
 from registroDeUsuarios.views import registroUsuario
 from Home.views import inicio
 from RegisterPlatillo.views import registroPlatillo
-
+from proveedorMenu.views import menuProveedor
 from repartidor.views import viewPedido, viewRepartidor,PerfilRepartidor,MiVehiculo
 from reclamo.views import reclamo
 from Home.views import quienesSomos
@@ -29,6 +29,7 @@ urlpatterns = [
     path('pedido', pedido),
     path('platillos', platillos, name="platillos"),
     path('perfilMenu/<id>', perfilMenu, name="perfilMenu"),
+    path('menuProveedor/<id>', menuProveedor, name="menuProveedor"),
 
     path('viewPedido/<id>', viewPedido),
     path('repartidor', viewRepartidor, name="repartidor"),

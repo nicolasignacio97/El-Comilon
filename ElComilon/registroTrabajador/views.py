@@ -1,12 +1,12 @@
-from django.http import request
-from django.http.response import JsonResponse
 from django.shortcuts import redirect, render
 from django.db import connection, reset_queries
 from django.contrib.auth.decorators import permission_required
+from django.http import request
+from django.contrib.auth.models import User,Group
+from django.http.response import JsonResponse
 from core.models import Trabajador
 from registroDeUsuarios.forms import FormularioUsuario
 from django.contrib import messages
-from django.contrib.auth.models import User
 import cx_Oracle
 
 # Create your views here.
@@ -20,23 +20,24 @@ def registroTrabajador(request):
         nombres = request.POST.get('nombres')
         apellidos = request.POST.get('apellidos')
         fechaContrato = request.POST.get('fecha')
-        rutRestaurante = '887454345'
+        rutRestaurante = '99.365.349-8' #CAMBIAR ESTO SEGUN SU BASE DE DATOS
         idCargo = request.POST.get('cargo')
         forumulario = FormularioUsuario(data=request.POST)
-        # if Trabajador.objects.filter(ruttrabajador = rutTrabajador).exists():
-        #     print("Trabajador existente")
-        #     messages.error(request, 'Trabajador ya existente')
-        # else:
         if forumulario.is_valid():
-            forumulario.save()
-            data['form'] = forumulario
+            user = forumulario.save()
+            groupAdministrador = Group.objects.get(name='Administrador')
+            groupRecepcionista = Group.objects.get(name='Recepcionista')
+            if idCargo == '1':
+                user.groups.add(groupAdministrador)
+            if idCargo == '2':
+                user.groups.add(groupRecepcionista)
             REGISTRAR_TRABAJADOR(rutTrabajador, nombres, apellidos, fechaContrato, rutRestaurante, idCargo) 
             messages.success(request, 'Trabajador Registrado con exito')
-            return render(request, 'registroTrabajador.html', data)   
+            return render(request, 'registroTrabajador.html', data)
+        data = {'form':forumulario,'campos':[rutTrabajador,nombres,apellidos,fechaContrato,rutRestaurante,idCargo],'cargo': listar()}
+     
     return render(request, 'registroTrabajador.html', data)
 
-def pruebatrabajo(request):
-    return render (request, "registroTrabajador.html")
     
 def clean_rut_trabajador(request):
     ruttrabajador = request.POST.get('rut')
@@ -150,18 +151,9 @@ def eliminarTrabajador(request,ruttrabajador, id):
     trabajadores = Trabajador.objects.get(ruttrabajador = ruttrabajador)
     trabajadores.delete()
     messages.success(request, messages.SUCCESS , 'Eliminado con exito')
-    contexto = {
-         'trabajadores':trabajadores
-    }
+
     return listaTrabajador(request)
 
-# def eliminarTrabajador(request):
-#     if request.method == 'POST':
-#         rut = request.POST.get('btnEliminar')
-    
-#     eliminar(rut)
-
-#     return listaTrabajador(request)
 
 def eliminar(rut):
     django_cursor = connection.cursor()

@@ -10,7 +10,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'css/estiloRegistro.css' %}">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <title>Registro de usuario</title>
 </head>
 
@@ -96,7 +95,7 @@
                                                 <small class="form-text text-muted">{{form.password2.help_text}}</small>
                                                 {%endif%}
                                                 {% if form.errors%}
-                                                <small class="text-danger">{{form.password2.errors}}</small>
+                                                <small class="text-danger fs-6">{{form.password2.errors}}</small>
                                                 {%endif%}
                                             </div>
                                             <div class="form-floating mb-3">
@@ -104,16 +103,16 @@
                                                 <input type="text"
                                                     class="form-control  shadow-sm  bg-body rounded input_rut"
                                                      name="rut"
-                                                    placeholder="19.455.087-3" maxlength="12" value="{{rut}}" required>
+                                                    placeholder="19.455.087-3" oninput="checkRut(this)" maxlength="12" value="{{rut}}" required>
                                                 <label for="Rut">Rut</label>
+                                                
                                                 {%else%}
                                                 <input type="text"
-                                                    class="form-control  shadow-sm  bg-body rounded input_rut"
-                                                      name="rut"
-                                                    placeholder="19.455.087-3" maxlength="12" required>
+                                                    class="form-control  shadow-sm  bg-body rounded input_rut" name="rut"
+                                                    placeholder="19.455.087-3"  oninput="checkRut(this)" maxlength="12" required>
                                                 <label for="Rut">Rut</label>
                                                 {%endif%}
-                                                <small  id="Msg" class="text-danger fs-6">{{mensaje}}</small><br>
+                                                <small id="Msg" class="text-danger fs-6 mt-1">{{mensaje}}</small>
                                             </div>
                                         </div>
                                     </div>

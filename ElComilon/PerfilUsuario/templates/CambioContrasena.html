@@ -3,6 +3,7 @@
 
 {% load crispy_forms_tags %}
 {% block content %}
+<html lang="es">
 <link rel="stylesheet" href="{% static 'css/estilocambio.css' %}">
 <div class="row">
     <div class="col-12 col-md-6 offset-md-3 mt-4">
@@ -14,29 +15,26 @@
                     <div class="form-floating mb-3">
                         <input type="password"  name="{{form.old_password.html_name}}" class="form-control" id="{{form.old_password.id_for_label}}" placeholder="{{form.old_password.label}}">
                         <label for="{{form.old_password.id_for_label}}">{{form.old_password.label}}</label>
-                        <small class="form-text text-muted sangria">{{form.old_password.help_text}}</small>
+                        {%if form.errors %} 
+                        <small class="sangria fs-6 text-danger">{{form.errors.old_password}}</small>
+                        {%endif%}
                     </div>
                     <div class="form-floating mb-3">
                         <input type="password"  name="{{form.new_password1.html_name}}" class="form-control" id="{{form.new_password1.id_for_label}}" placeholder="{{form.new_password1.label}}">
                         <label for="{{form.new_password1.id_for_label}}">{{form.new_password1.label}}</label>
+                        {%if form.errors %} 
+                        <small class="sangria fs-6 text-danger">{{form.errors.new_password1}}</small>
+                        {%endif%}
                         <small class="form-text text-muted sangria">{{form.new_password1.help_text}}</small>
                     </div>
                     <div class="form-floating mb-3">
                         <input type="password"  name="{{form.new_password2.html_name}}" class="form-control" id="{{form.new_password2.id_for_label}}" placeholder="{{form.new_password2.label}}">
                         <label for="{{form.new_password2.id_for_label}}">{{form.new_password2.label}}</label>
                         <small class="form-text text-muted sangria">{{form.new_password2.help_text}}</small>
-                    </div>
-                   {{form.errors}}
-                    {% for field in form %}
-                        {%if error in field.errors%}
-                        <p>{{error}}</p>
+                        {%if form.errors %} 
+                        <small class="sangria fs-6 text-danger">{{form.errors.new_password2}}</small>
                         {%endif%}
-                    {% endfor %}
-                    {{form.errors}}
-                    {%if old_password.errors %} 
-                    <small class="sangria fs-6 text-danger">{{form.error_messages.password_incorrect}}</small>
-                    {%endif%}
-
+                    </div>
                     <div class="d-flex justify-content-center mt-4">
                         <button type="submit" class="btn btn-danger">Actualizar</button>
                     </div>
@@ -45,4 +43,5 @@
         </div>
     </div>
 </div>
+</html>
 {% endblock %}

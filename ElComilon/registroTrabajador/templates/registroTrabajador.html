@@ -21,64 +21,90 @@
                 <div class="card shadow-lg p3 mb-5 mt-5 bg-white">
                     <h3 class="titulo text-center">Registrar un trabajador</h3>
                     <div class="card-body">
-                        <form action="" id="post-form"
-                            class="needs-validation d-flex flex-column  justify-content-center" method="POST"
-                            novalidate>
+                        <form action="" id="post-form" class="d-flex flex-column  justify-content-center" method="POST">
                             {% csrf_token %}
                             <div class="row">
                                 <div class="col-6  p-4">
-                                    {{form|crispy}}
+                                    {% include "HeaderFooter/formularioRegistro.html"%}
                                 </div>
                                 <div class="col-lg-6  p-4 mt-4">
                                     <div class="form-row">
                                         <div class="row">
                                             <div class="row">
                                                 <div class="col mb-4">
-                                                    <input type="text" name="rutTrabajador" oninput="checkRut(this)"
-                                                        class="form-control input_rut" id="txt-rut"
-                                                        placeholder="14.442.987-2" value="" required>
-                                                    <div class="valid-feedback"> </div>
-                                                    <div class="invalid-feedback" id="txt-invalid">Complete el campo</div>
+                                                    <div class="form-floating">
+                                                        {%if campos.0 %}
+                                                        <input type="text" name="rutTrabajador" oninput="checkRut(this)"
+                                                        class="form-control input_rut" id="txt-rut" maxlength="10"
+                                                        placeholder="14.442.987-2" value="{{campos.0}}" required>
+                                                        {%else%}
+                                                        <input type="text" name="rutTrabajador" oninput="checkRut(this)"
+                                                        class="form-control input_rut" id="txt-rut" maxlength="10"
+                                                        placeholder="14.442.987-2" required>
+                                                        {%endif%}
+                                                        <label for="">Rut Trabajador</label>
+                                                        <small id="Msg" class="text-danger fs-6 mt-1">{{mensajeRut}}</small>
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col mb-4">
-                                                    <input type="text" name="nombres" class="form-control" id="nombres"
+                                                    <div class="form-floating">      
+                                                        {%if campos.1 %}
+                                                        <input type="text" name="nombres" class="form-control" id="nombres"
+                                                            placeholder="Nombres" value="{{campos.1}}" required>
+                                                        {%else%}
+                                                        <input type="text" name="nombres" class="form-control" id="nombres"
                                                         placeholder="Nombres" required>
-                                                    <div class="valid-feedback"> </div>
-                                                    <div class="invalid-feedback">Complete el campo</div>
+                                                        {%endif%}        
+                                                        <label for="">Nombres</label>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="row">
                                                 <div class="col mb-4">
-                                                    <input type="text" name="apellidos" class="form-control"
+                                                    <div class="form-floating">
+                                                        {%if campos.2 %}
+                                                        <input type="text" name="apellidos" class="form-control"
+                                                        id="apellidos" placeholder="Apellidos" value="{{campos.2}}" required>
+                                                        {%else%}
+                                                        <input type="text" name="apellidos" class="form-control"
                                                         id="apellidos" placeholder="Apellidos" required>
-                                                    <div class="valid-feedback"> </div>
-                                                    <div class="invalid-feedback">Complete el campo</div>
+                                                        {%endif%}
+
+                                                        <label for="">Apellidos</label>
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col mb-4">
-                                                    <input type="date" name="fecha" class="form-control"
+                                                    <div class="form-floating">
+                                                        {%if campos.3 %}
+                                                        <input type="date" name="fecha" class="form-control"
+                                                        id="fechaActual" value="{{campos.3}}" required>
+                                                        {%else%}
+                                                        <input type="date" name="fecha" class="form-control"
                                                         id="fechaActual" required>
-                                                    <div class="valid-feedback"> </div>
-                                                    <div class="invalid-feedback">Complete el campo</div>
+                                                        {%endif%}
+                                                        <label for="">Fecha</label>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="row d-flex justify-content-center">
                                                 <div class="col mb-4 ">
-                                                    <select name="cargo" id="" class="form-select">
-                                                        <option disabled>Cargo</option>
-                                                        {% for c in cargo %}
-                                                        <option value="{{c.0}}">{{c.1}}</option>
-                                                        {% endfor %}
-                                                    </select>
-                                                    <div class="valid-feedback"> </div>
-                                                    <div class="invalid-feedback">Complete el campo</div>
+                                                    <div class="form-floating">
+                                                        <select name="cargo" id="" class="form-select">
+                                                            <option disabled>Cargo</option>
+                                                            {% for c in cargo %}
+                                                            <option value="{{c.0}}">{{c.1}}</option>
+                                                            {% endfor %}
+                                                        </select>
+                                                        <label for="">Cargo</label>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -90,9 +116,6 @@
                                 <div class="pieForm">
                                     <button class="btn botonEnviar" type="submit">Registrar</button>
                                 </div>
-                                <div class="row d-flex justify-content-center">
-                                    {{mensaje}}
-                                </div>
                             </div>
                         </form>
                     </div>
@@ -100,7 +123,6 @@
             </div>
         </div>
     </section>
-    <script src="{% static 'app/jquery.rut.chileno.js' %}"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script type="text/javascript">
         function getCookie(name) {
@@ -127,7 +149,7 @@
             var formData = new FormData(document.getElementById('post-form'));
             formData.append('rut', rut);
             if (rut && document.getElementById('post-form').checkValidity()) {
-                document.getElementById('post-form').classList.add('was-validated')
+                document.getElementById('post-form')
                 fetch('{% url "cleanruttrabajador" %}', {
                     method: 'POST',
                     mode: 'same-origin',
@@ -150,14 +172,11 @@
                                     'X-CSRFToken': getCookie('csrftoken'),
                                 },
                             }
-                            txtHtml.classList.replace('valid-feedback','invalid-feedback')
+                      
                             formPost.submit();
                             return
                         } else {
-                            txtHtml.classList.replace('invalid-feedback','valid-feedback')
-                            txtHtml.innerHTML = 'Rut existente en el sistema'
-                            console.log("Trabajador existente en la bd")
-                            alert("Trabajador existente en la bd")
+                            document.getElementById("Msg").innerHTML ="Trabajador existente en la bd";
                         }
                     });
             } else {
@@ -166,12 +185,8 @@
             }
         });
     </script>
-    <script
-        type="text/javascript">jQuery(document).ready(function ($) { $('.input_rut').rut(); });</script>
-        <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-
-    <!-- <script src="{% static 'app/fecha.js' %}"></script> -->
-
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="{% static 'app/fecha.js' %}"></script> 
 </body>
 
 </html>

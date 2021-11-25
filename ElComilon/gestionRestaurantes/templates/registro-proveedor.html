@@ -18,46 +18,58 @@
         <div class="row">
             <div class="col-lg-12 m-0">
                 <div class="card shadow-lg p3 mb-5 mt-5 bg-white h-75">
-                    <div class="card-body w-100 d-flex justify-content-center p-25">
-                        <form action="" class="needs-validation w-75 h-50" method="POST" novalidate>
+                    <div class="card-body w-100 d-flex justify-content-center">
+                        <form name="form1" action="" method="POST">
                             {% csrf_token %}
                             <div class="form-row">
                                 <div class="row">
                                     <h3 class="titulo mt-5 mb-4 text-center">Registro Proveedor</h3>
-                                    <div class="col-6 ">
-                                        {{form|crispy}}
+                                    <div class="col-lg-6 col-md-12 p-4">
+                                        {% include "HeaderFooter/formularioRegistro.html"%}
                                     </div>
-                                    <div class="col-6">
+                                    <div class="col-lg-6 col-md-12 p-4">
                                         <div class="row mt-2">
                                             <div class="col-lg-6 mb-4">
                                                 <div class="form-floating">
-                                                    <input type="text" name="rutRestaurante" oninput="checkRut(this)"
-                                                        class="form-control input_rut" id="Rut"
+                                                    {%if campos.0 %}
+                                                    <input type="text" name="rutRetaurante" oninput="checkRut(this)"
+                                                        class="form-control input_rut"  value="{{ campos.0 }}"
                                                         placeholder="84.442.987-2" required autocomplete="off">
+                                                    {%else%}
+                                                    <input type="text" name="rutRetaurante"  oninput="checkRut(this)"
+                                                        class="form-control input_rut" 
+                                                        placeholder="84.442.987-2" required autocomplete="off">
+                                                    {%endif%}
                                                     <label for="">Rut Restaurante</label>
-                                                    <div class="valid-feedback"> </div>
-                                                    <div class="invalid-feedback"></div>
+                                                    <small id="Msg" class="text-danger fs-6">{{mensajeRut1}}</small>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 mb-4">
                                                 <div class="form-floating">
-                                                    <input type="text" name="nombre" class="form-control" id="nombre"
+                                                    {%if campos.1 %}
+                                                    <input type="text" name="nombre" class="form-control"
+                                                        minlength="2" placeholder="Nombre Restaurante"
+                                                        value="{{ campos.1 }}" autocomplete="off" required>
+                                                    {%else%}
+                                                    <input type="text" name="nombre" class="form-control"
                                                         minlength="2" placeholder="Nombre Restaurante"
                                                         autocomplete="off" required>
+                                                    {%endif%}
                                                     <label for="floatingInput">Nombre Restaurante</label>
-                                                    <div class="valid-feedback"> </div>
-                                                    <div class="invalid-feedback">Complete el campo</div>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row mb-5">
                                             <div class="col-12">
                                                 <div class="form-floating">
+                                                    {%if campos.2 %}
                                                     <input type="text" name="direccion" class="form-control"
-                                                        id="direccion" minlength="2" placeholder="Dirección" required>
+                                                    minlength="2" placeholder="Dirección" value="{{campos.2}}" required>
+                                                    {%else%}
+                                                    <input type="text" name="direccion" class="form-control"
+                                                    minlength="2" placeholder="Dirección" required>
+                                                    {%endif%}
                                                     <label>Dirección</label>
-                                                    <div class="valid-feedback"> </div>
-                                                    <div class="invalid-feedback">Complete el campo</div>
                                                 </div>
                                             </div>
                                         </div>
@@ -66,46 +78,61 @@
                                             <h4 class="titulo text-center mb-3">Registro Representante</h4>
                                             <div class="col-lg-6 mb-4">
                                                 <div class="form-floating">
-                                                    <input type="text" name="representante" oninput="checkRut(this)"
-                                                        class="form-control input_rut" id="Rut"
+                                                    {%if campos.4 %}
+                                                    <input type="text" name="rutRepre"  oninput="Rut(this)"
+                                                        class="form-control input_rut" value="{{campos.4}}"
                                                         placeholder="12.452.987-2" required>
+                                                    {%else%}
+                                                    <input type="text" name="rutRepre"  oninput="Rut(this)"
+                                                    class="form-control input_rut" 
+                                                    placeholder="12.452.987-2" required>
+                                                    {%endif%}
                                                     <label>Rut Representante</label>
-                                                    <div class="valid-feedback"> </div>
-                                                    <div class="invalid-feedback">Complete el campo</div>
+                                                    <small id="Msg2" class="text-danger fs-6">{{mensajeRut2}}</small>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 mb-4">
                                                 <div class="form-floating">
+                                                    {%if campos.5 %}
                                                     <input type="text" name="nombresRepresentante" class="form-control"
-                                                        minlength="2" id="nombresRepresentante" placeholder="Nombres"
+                                                        minlength="2" value="{{campos.5}}" placeholder="Nombres"
                                                         required>
+                                                    {%else%}
+                                                    <input type="text" name="nombresRepresentante" class="form-control"
+                                                    minlength="2"  placeholder="Nombres"
+                                                    required>
+                                                    {%endif%}
                                                     <label>Nombres</label>
-                                                    <div class="valid-feedback"> </div>
-                                                    <div class="invalid-feedback">Complete el campo</div>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-lg-6 mb-4">
                                                 <div class="form-floating">
-                                                    <input type="tel" name="telefono" class="form-control" id="teléfono"
+                                                    {%if campos.3 %}
+                                                    <input type="tel" name="telefono" class="form-control" value="{{campos.3}}"
                                                         placeholder="Teléfono" pattern="[0-9]{9}" required>
+                                                    {%else%}
+                                                    <input type="tel" name="telefono" class="form-control" 
+                                                        placeholder="Teléfono" pattern="[0-9]{9}" required>
+                                                    {%endif%}
                                                     <label>Telefóno</label>
-                                                    <div class="valid-feedback"> </div>
-                                                    <div class="invalid-feedback">Complete el campo</div>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 mb-4">
                                                 <div class="form-floating">
+                                                    {%if campos.6 %}
                                                     <input type="text" name="apellidos" class="form-control"
-                                                        minlength="2" id="apellidos" placeholder="Apellidos" required>
+                                                        minlength="2" value="{{campos.6}}" placeholder="Apellidos" required>
+                                                    {%else%}
+                                                    <input type="text" name="apellidos" class="form-control"
+                                                        minlength="2"  placeholder="Apellidos" required>
+                                                    {%endif%}
                                                     <label>Apellidos</label>
-                                                    <div class="valid-feedback"> </div>
-                                                    <div class="invalid-feedback">Complete el campo</div>
                                                 </div>
                                             </div>
                                         </div>
-                                       
+
                                     </div>
                                 </div>
                                 <div class="row p-3 mb-4">

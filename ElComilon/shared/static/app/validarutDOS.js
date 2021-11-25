@@ -1,4 +1,4 @@
-function checkRut(rut) {
+function Rut(rut) {
 	// Despejar Puntos
 	var valor = rut.value.replace('.', '');
 	// Despejar Guión
@@ -12,7 +12,7 @@ function checkRut(rut) {
 	rut.value = cuerpo + '-' + dv
 
 	// Si no cumple con el mínimo ej. (n.nnn.nnn)
-	if (cuerpo.length < 7) { document.getElementById("Msg").innerHTML ="RUT Incompleto";return false; } else{document.getElementById("Msg").innerHTML ="";}
+	if (cuerpo.length < 7) { document.getElementById("Msg2").innerHTML ="RUT Incompleto";return false; } else{document.getElementById("Msg2").innerHTML ="";}
 
 	// Calcular Dígito Verificador
 	suma = 0;
@@ -40,7 +40,7 @@ function checkRut(rut) {
 	dv = (dv == 0) ? 11 : dv;
 
 	// Validar que el Cuerpo coincide con su Dígito Verificador
-	if (dvEsperado != dv) { document.getElementById("Msg").innerHTML ="RUT Inválido";return false;  }else{document.getElementById("Msg").innerHTML ="";}
+	if (dvEsperado != dv) { document.getElementById("Msg2").innerHTML ="RUT Inválido";return false;  }else{document.getElementById("Msg2").innerHTML ="";}
 	
 	// Si todo sale bien, eliminar errores (decretar que es válido)
 	rut.setCustomValidity('');

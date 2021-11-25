@@ -33,11 +33,12 @@
                             <div class="row mb-4">
                                 <div class="col-12">
                                     <div class="form-floating">
-                                        <input type="text"  class="shadow-sm bg-body rounded col-12 mt-1 form-control" name="rutEmpresa" id="txt-rut"
+                                        <input type="text"  class="shadow-sm bg-body rounded col-12 mt-1 form-control" oninput="checkRut(this)" name="rutEmpresa" id="txt-rut"
                                     placeholder="Rut Empresa:" minlength="2" required>
                                         <label for="">Rut empresa</label>
                                         <div class="valid-feedback"> </div>
                                         <div class="invalid-feedback">Complete el campo</div>
+                                        <small id="Msg" class="text-danger fs-6"></small>
                                     </div>
                                 
                                 </select>
