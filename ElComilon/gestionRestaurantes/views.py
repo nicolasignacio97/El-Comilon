@@ -157,3 +157,27 @@ def modificarRepre(rutRepre,nombres,apellidos,telefono):
     cursor.callproc("MODIFICAR_REPRESENTANTE",[rutRepre,nombres,apellidos,telefono,salidaPrve])
     return salidaPrve.getvalue()
 
+@permission_required('core')
+def restauranteRut(request):
+    if request.method == 'POST':
+
+        rut = request.POST.get('rutRestaurante')
+
+        data = {
+        'entity': listarRestauranteRut(rut)   
+        }
+    return render(request, 'listarRestau_Repre.html', data)
+
+
+def listarRestauranteRut(rut):
+    django_cursor = connection.cursor()
+    cursor = django_cursor.connection.cursor()
+    out_cur = django_cursor.connection.cursor()
+
+    cursor.callproc("SP_LISTAR_RESTAURANTE_RUT", [rut, out_cur])
+    lista = []
+    for fila in out_cur:
+        lista.append(fila)
+
+    return lista
+

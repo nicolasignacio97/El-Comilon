@@ -42,6 +42,20 @@
         <div class="col m-2">
             <h1 class="text-center titulo mb-5">Lista de proveedores</h1>
             <table class="table">
+                <div class="container">
+                    <form action="restauranteRut" method="POST">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-lg-8 col-md-8">
+                                <input type="text" class="input_rut" placeholder="Buscar por Rut"
+                                    name="rutRestaurante" id="rutRestaurante">
+                            </div>
+                            <div class="col-lg-4 col-md-4">
+                                <button class="btn botonEnviar" type="submit">Buscar</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
                 <thead>
                     <tr>
                         <th scope="col">Rut Restaurante</th>

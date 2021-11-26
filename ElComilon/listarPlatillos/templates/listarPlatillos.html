@@ -30,6 +30,20 @@
             <div class="col-m-2">
                     <h3 class=" text-center mt-4  mb-5" style="color: brown;">Lista Platillos</h3>
                             <table class="table">
+                                <div class="container">
+                                    <form action="platilloNombre" method="POST">
+                                        {% csrf_token %}
+                                        <div class="row">
+                                            <div class="col-lg-8 col-md-8">
+                                                <input type="text" class="" placeholder="Buscar por Nombre"
+                                                    name="nombrePlatillo" id="nombrePlatillo">
+                                            </div>
+                                            <div class="col-lg-4 col-md-4">
+                                                <button class="btn botonEnviar" type="submit">Buscar</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
                                 <thead>
                                     <tr>
                                         <th scope="col">Id. Platillo</th>

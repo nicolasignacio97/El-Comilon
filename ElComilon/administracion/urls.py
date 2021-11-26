@@ -6,7 +6,7 @@ from administracion.views import administracion
 from registroTrabajador.views import registroTrabajador
 from RegEmpConv.views import registroEmpresa
 from RegisterPlatillo.views import registroPlatillo
-from listarPlatillos.views import listarPlatillos, eliminarPlatillo
+from listarPlatillos.views import listarPlatillos, eliminarPlatillo, platilloNombre
 from actualizarPlatillo.views import modificarPlatillo
 from django.contrib.auth.decorators import login_required
 from RegCliConv.views import RegistroCliConvenio,cleanRutcliente, listarCliConv, modificarCliConv, eliminarCliConv
@@ -31,6 +31,7 @@ url_patterns = [
     path('modificarPlatillo/<id>/', modificarPlatillo, name='modificarPlatillo'),
     path('eliminarPlatillo/<id>', eliminarPlatillo, name='eliminarPlatillo'),
     path('listarPlatillos', listarPlatillos, name='listarPlatillos'),
+    path('platilloNombre', platilloNombre, name='platilloNombre'),
     path('ClienteConvenio', RegistroCliConvenio, name='ClienteConvenio'),
     path('valrutcliente', cleanRutcliente, name='valrutcliente'),
     path('listarCliConv', listarCliConv, name='listarCliConv'),
@@ -47,6 +48,7 @@ url_patterns = [
     path('listarProveedores', listarRestaurantes, name="listarProveedores"),
     path('modificarProveedor/<id>/<id2>',modificarRepreResta, name='modificarProveedor'),
     path('eliminarProveedor/<id>/<id2>/',EliminarRepreResta, name='eliminarProveedor'),
+    path('restauranteRut', restauranteRut, name='restauranteRut'),
     path('regin/', Registrorep, name='regin'),
     path('listarep', listarRep, name="listarep"),
     path('updaterepartidor/<rutrepartidor>/',editRepartidor, name='updrpartidor'),
