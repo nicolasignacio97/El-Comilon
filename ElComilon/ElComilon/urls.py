@@ -13,7 +13,7 @@ from Home.views import quienesSomos
 from administracion.urls import url_patterns
 from PerfilUsuario.views import PerfilUsuario,perfilMenu,CambiarContra
 from Pedido.views import pedido
-from Platillos.views import platillos, agregar_producto, eliminar_producto, restar_producto, limpiar_carrito,guardar
+from Platillos.views import platillos, agregar_producto, eliminar_producto, restar_producto, limpiar_carrito,guardar,FinalizarCompra
 from detallePedido.views import detallePedido
 from Menu.views import menu, crearMenu
 from administracion.views import pag_404
@@ -58,6 +58,7 @@ urlpatterns = [
     path('restar/<id>', restar_producto, name="restar_producto"),
     path('limpiarCarro', limpiar_carrito, name="limpiar_carrito"),
     path('guardar', guardar, name="guardar"),
+    path('FinalizarCompra', FinalizarCompra, name="FinalizarCompra"),
     path('prueba/', pag_404)
 ]
 # handler404 = 'administracion.views.pag_404'

@@ -39,6 +39,6 @@
     <div class="row text-center botones-carro">
         
         <div class="col-6"> <a href="{% url 'limpiar_carrito' %}" class="btn btn-danger"><img src="{% static 'img/icons8-cesta-de-compra-eliminar-24.png' %}" alt=""> Limpiar</a></div>
-        <div class="col-6"> <a href="guardar" class="btn btn-success"> <img src="{% static 'img/icons8-comprar-24.png' %}" alt="">Finalizar Pedido</a></div>       
+        <div class="col-6"> <a href="{% url 'FinalizarCompra' %}" class="btn btn-success"> <img src="{% static 'img/icons8-comprar-24.png' %}" alt="">Finalizar Pedido</a></div>       
     </div>
 </div>
