@@ -23,10 +23,10 @@ def RegistroCliConvenio(request):
         saldocli = request.POST.get('saldoCli')
         idtipoCliente = 1
         rutempcli = request.POST.get('rutEmpConv')
-        forumulario = FormularioUsuario(data=request.POST)
-        if forumulario.is_valid():
-            forumulario.save()
-            data['form'] = forumulario
+        formulario = FormularioUsuario(data=request.POST)
+        if formulario.is_valid():
+            formulario.save()
+            data['form'] = formulario
             agregar_cliente_convenio(rutcliente,nombres, apellidos, direccion,idtipoCliente,rutempcli,saldocli)    
             messages.success(request, "Usuario Creado")
             return render(request,'regCliConv.html', data)

@@ -51,3 +51,30 @@ def eliminarPlatillo(request, id):
     messages.success(request, "Se ha eliminado correctamente el platillo "+ platillo.nombre)
     return redirect(to="/administracion/listarPlatillos")
 
+
+@permission_required('core')
+def platilloNombre(request):
+    if request.method == 'POST':
+
+        nombre = request.POST.get('nombrePlatillo').upper()
+
+        data = {
+        'entity': listarPlatillosNombre(nombre)   
+        }
+    return render(request, 'listarPlatillos.html', data)
+
+
+def listarPlatillosNombre(nombre):
+    django_cursor = connection.cursor()
+    cursor = django_cursor.connection.cursor()
+    out_cur = django_cursor.connection.cursor()
+
+    cursor.callproc("SP_LISTAR_PLATILLOS_NOMBRE", [nombre, out_cur])
+    lista = []
+    for fila in out_cur:
+        data = {
+            'data':fila,
+            'imagen':str(base64.b64encode(fila[4].read()), 'utf-8')
+        }
+        lista.append(data)
+    return lista
