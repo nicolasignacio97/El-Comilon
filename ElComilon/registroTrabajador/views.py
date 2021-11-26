@@ -20,7 +20,9 @@ def registroTrabajador(request):
         nombres = request.POST.get('nombres')
         apellidos = request.POST.get('apellidos')
         fechaContrato = request.POST.get('fecha')
+       
         rutRestaurante = '99.365.349-8' #CAMBIAR ESTO SEGUN SU BASE DE DATOS
+
         idCargo = request.POST.get('cargo')
         forumulario = FormularioUsuario(data=request.POST)
         if forumulario.is_valid():

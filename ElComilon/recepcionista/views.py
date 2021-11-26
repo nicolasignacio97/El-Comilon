@@ -1,8 +1,9 @@
 from django.shortcuts import get_object_or_404, render, redirect
+
 from .forms import EditarUsuario, EditarRecepcionista
 from django.contrib.auth.models import User
 from django.contrib import messages
-from core.models import Trabajador,Pedido
+from core.models import Trabajador,Pedido, DetallePedido, Cliente
 from django.db import connection
 import cx_Oracle
 
@@ -18,8 +19,13 @@ def viewRecepcionista(request):
 #CAMBIAR ESTADO DE PEDIDOS
 def cambiarEstado(request,id):
     pedido = get_object_or_404(Pedido,idpedido=id)
+    detallePedido = DetallePedido.objects.filter(idpedido=pedido.idpedido)
+    cliente = get_object_or_404(Cliente, rutcliente=pedido.rutcliente)
+    print(cliente.telefono)
     dataMod = {
+       'detallePedido' : detallePedido, 
        'pedidoSelect' : pedido,
+       'cliente' : cliente,
        'estados': listado_estados_pedido(), 
        'TotalPedidos':len(listado_pedidos_listos())
     }
