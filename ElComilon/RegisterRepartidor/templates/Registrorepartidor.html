@@ -30,137 +30,152 @@
                     Registrar Repartidor
                 </h1>
                 <div class="card-body div-body">
-                    <form action="" class="mt-1 form row needs-validation" id="post-form" method="POST" novalidate>
+                    <form action="" class="mt-1 form row" id="post-form" method="POST">
                         {% csrf_token %}
                         <div class="row">
                             <div class="col-6">
-                                {{form|crispy}}
+                                {% include "HeaderFooter/formularioRegistro.html"%}
                             </div>
-                            <div class="col-6">
+                            <div class="col-6 mt-3">
                                 <div class="form-group">
                                     <div class="row ">
                                         <div class="col divinput">
                                             <div class="form-floating">
+                                                {% if campos.0 %}
                                                 <input type="text" id="txt-rut"
-                                                    class="form-control input-repartidor input_rut" maxlength="10"
-                                                    oninput="checkRut(this)" name="RutRepartidor"
-                                                    placeholder="20.321.105-4" required>
+                                                class="form-control  input_rut" maxlength="10"
+                                                oninput="checkRut(this)"  value="{{campos.0}}" name="RutRepartidor"
+                                                placeholder="20.321.105-4" required>
+                                                {% else %}
+                                                <input type="text" id="txt-rut"
+                                                class="form-control  input_rut" maxlength="10"
+                                                oninput="checkRut(this)" name="RutRepartidor"
+                                                placeholder="20.321.105-4" required>
+                                                {% endif %}
                                                 <label for="" class="label-input">Rut Repartidor</label>
-                                                <div class="valid-feedback"> </div>
-                                                <div class="invalid-feedback">Complete el campo</div>
+                                                <small id="Msg" class="text-danger fs-6 mt-1">{{mensajeRut}}</small>
                                             </div>
-
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-6 col-sm-12 ">
                                             <div class="form-floating">
-                                                <input type="text" class="form-control input-repartidor" minlength="2"
+                                                {% if campos.1 %}
+                                                <input type="text" class="form-control " minlength="2"
+                                                    name="NombresRepartido" value="{{campos.1}}" placeholder="Nombres Repartidor" required>
+                                                {% else %}
+                                                <input type="text" class="form-control " minlength="2"
                                                     name="NombresRepartido" placeholder="Nombres Repartidor" required>
+                                                {% endif %}
                                                 <label for="">Nombre Repartidor</label>
-                                                <div class="valid-feedback"> </div>
-                                                <div class="invalid-feedback">Complete el campo</div>
                                             </div>
 
                                         </div>
                                         <div class="col-md-6 col-sm-12 divinput">
                                             <div class="form-floating">
-                                                <input type="text" class="form-control input-repartidor" minlength="2"
+                                                {% if campos.2 %}
+                                                <input type="text" class="form-control " minlength="2"
+                                                    name="ApellidosRepartidor" value="{{campos.2}}" placeholder="Apellidos Repartidor"
+                                                    required>
+                                                {% else %}
+                                                <input type="text" class="form-control " minlength="2"
                                                     name="ApellidosRepartidor" placeholder="Apellidos Repartidor"
                                                     required>
+                                                {% endif %}
                                                 <label for="">Apellido Repartidor</label>
-                                                <div class="valid-feedback"> </div>
-                                                <div class="invalid-feedback">Complete el campo</div>
                                             </div>
 
                                         </div>
                                     </div>
                                     <div class="row ">
-                                        <div class="col-md-6 col-sm-12 divinput">
+                                        <div class="col-6 ">
                                             <div class="form-floating">
-                                                <input type="date" class="form-control input-repartidor"
-                                                    name="Fechacontrato" placeholder="Fecha contrato" id="datefield"
-                                                    style="color: gray;" required>
+                                                {% if campos.3 %}
+                                                <input type="date" class="form-control "
+                                                name="Fechacontrato" value="{{campos.3}}" placeholder="Fecha contrato" id="datefield"
+                                                style="color: gray;" required>
+                                                {% else %}
+                                                <input type="date" class="form-control "
+                                                name="Fechacontrato" placeholder="Fecha contrato" id="datefield"
+                                                style="color: gray;" required>
+                                                {% endif %}
                                                 <label for="">Fecha contrato</label>
-                                                <div class="valid-feedback"> </div>
-                                                <div class="invalid-feedback">Complete el campo</div>
                                             </div>
-
                                         </div>
-                                        <div class="col-md-6 col-sm-12">
+                                        <div class=" col-6 col-md-6 col-sm-12 divinput">
                                             <div class="form-floating">
-                                                <select name="rutempresa" id=""
-                                                    class="combobox-tipovehiculo  form-select">
-                                                    <option value="SELECCIONE">Rut restaurante</option>
-                                                    {% for v in restaurante %}
-                                                    <option value="{{v.0}}">{{v.0}}</option>
-                                                    {% endfor %}
-                                                </select>
-                                                <label for="">Rut Restaurante</label>
-                                                <div class="valid-feedback"> </div>
-                                                <div class="invalid-feedback">Complete el campo</div>
+                                                {% if campos.5 %}
+                                                <input type="text" class="form-control " name="Patente"
+                                                id="txt-patente" maxlength="6" value="{{campos.5}}" pattern="^[A-z]{4}[0-9]{2}$"
+                                                placeholder="Patente vehiculo" required>
+                                                {% else %}
+                                                <input type="text" class="form-control " name="Patente"
+                                                id="txt-patente" maxlength="6" pattern="^[A-z]{4}[0-9]{2}$"
+                                                placeholder="Patente vehiculo" required>
+                                                {% endif %}
+                                                <label for="">Patente vehiculo</label>
                                             </div>
-
                                         </div>
                                     </div>
                                     <div class="row ">
-                                        <div class="col-md-6 col-sm-12 divinput">
-                                            <div class="form-floating">
-                                                <input type="text" class="form-control input-repartidor" name="Patente"
-                                                    id="txt-patente" maxlength="6" pattern="^[A-z]{4}[0-9]{2}$"
-                                                    placeholder="Patente vehiculo" required>
-                                                <label for="">Patente vehiculo</label>
-                                                <div class="valid-feedback"> </div>
-                                                <div class="invalid-feedback">Complete el campo</div>
-                                            </div>
-
-                                        </div>
                                         <div class="col-md-6 col-sm-12 divinput ">
                                             <div class="form-floating">
-                                                <input type="text" class="form-control input-repartidor" name="Modelo"
+                                                {% if campos.6 %}
+                                                <input type="text" class="form-control " name="Modelo"
+                                                    pattern="[a-zA-Z ]{3,8}*[ 0-9]" value="{{campos.6}}" placeholder="Modelo" required>
+                                                {% else %}
+                                                <input type="text" class="form-control " name="Modelo"
                                                     pattern="[a-zA-Z ]{3,8}*[ 0-9]" placeholder="Modelo" required>
+                                                {% endif %}
+                                                
                                                 <label for="">Modelo Vehiculo</label>
                                                 <div class="valid-feedback"> </div>
                                                 <div class="invalid-feedback">Complete el campo</div>
                                             </div>
-
                                         </div>
-                                    </div>
-
-                                    <div class="row">
                                         <div class="col-md-6 col-sm-12 divinput">
                                             <div class="form-floating">
-                                                <input type="text" class="form-control input-repartidor" name="Ano"
+                                                {% if campos.7 %}
+                                                <input type="text" class="form-control " name="Ano"
+                                                    maxlength="4" value="{{campos.7}}" pattern="[0-9]{4}$" placeholder="Año vehiculo"
+                                                    required>
+                                                {% else %}
+                                                <input type="text" class="form-control " name="Ano"
                                                     maxlength="4" pattern="[0-9]{4}$" placeholder="Año vehiculo"
                                                     required>
+                                                {% endif %}
                                                 <label for="">Año vehiculo</label>
-                                                <div class="valid-feedback"> </div>
-                                                <div class="invalid-feedback">Complete el campo</div>
                                             </div>
 
                                         </div>
-                                        <div class="col-md-6 col-sm-12 divinput">
+                                    </div>
+                                    <div class="row mt-3">
+                                        <div class="col-6  divinput">
                                             <div class="form-floating">
-                                                <input type="text" class="form-control input-repartidor m-0"
+                                                {% if campos.8 %}
+                                                <input type="text" class="form-control"
+                                                    name="Color" pattern="[a-zA-Z]{3,8}" value="{{campos.8}}" placeholder="Color" required>
+                                                {% else %}
+                                                <input type="text" class="form-control"
                                                     name="Color" pattern="[a-zA-Z]{3,8}" placeholder="Color" required>
+                                                {% endif %}
                                                 <label for="">Color Vehiculo</label>
-                                                <div class="valid-feedback"> </div>
-                                                <div class="invalid-feedback">Complete el campo</div>
                                             </div>
-
                                         </div>
-                                    </div>
-                                    <div class="row align-self-center">
-                                    </div>
-                                    <div class="row  mb-4">
-                                        <div class="col  align-self-center">
-                                            <select name="tipovehiculo" id="tipovehiculo"
-                                                class="combobox-tipovehiculo  form-select">
-                                                <option value="SELECCIONE">Tipo Vehiculo</option>
-                                                {% for v in categoria %}
-                                                <option value="{{v.0}}">{{v.1}}</option>
-                                                {% endfor %}
-                                            </select>
+                                        <div class="col-6  divinput">
+                                            {% if campos.0 %}
+                                            {% else %}
+                                            {% endif %}
+                                            <div class="form-floating">
+                                                <select name="tipovehiculo" id="tipovehiculo"
+                                                    class="combobox-tipovehiculo  form-select">
+                                                    <option value="SELECCIONE">Tipo Vehiculo</option>
+                                                    {% for v in categoria %}
+                                                    <option value="{{v.0}}">{{v.1}}</option>
+                                                    {% endfor %}
+                                                </select>
+                                                <label>Seleccione</label>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -219,7 +234,7 @@
                 formData.append('rut', rut);
                 formData.append('patente', patente);
                 if (rut && document.getElementById('post-form').checkValidity()) {
-                    document.getElementById('post-form').classList.add('was-validated')
+                    document.getElementById('post-form')
                     fetch('{% url "validarRut" %}', {
                         method: 'POST',
                         mode: 'same-origin',

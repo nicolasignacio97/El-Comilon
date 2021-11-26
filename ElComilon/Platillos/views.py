@@ -6,6 +6,10 @@ from core.models import Platillo
 import base64
 
 # Create your views here.
+
+def FinalizarCompra(request):
+    return render(request,'finalizarCompra.html')
+
 def platillos(request):
     data = {
         'platillos':listado_platillos()

@@ -30,5 +30,5 @@ class EditarContrasena(PasswordChangeForm):
     def clean_new_password1(self):
         data = self.cleaned_data['new_password1']
         if len(data) < 8 or len(data) > 64:
-          raise forms.ValidationError("New password should have minimum 8 characters and maximum 64 characters")
+          raise forms.ValidationError("La nueva contraseña debe tener un mínimo de 8 caracteres y un máximo de 64 caracteres")
         return data

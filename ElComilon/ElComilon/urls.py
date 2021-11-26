@@ -6,14 +6,14 @@ from recepcionista.views import viewRecepcionista,asignarRepartidor, cambiarEsta
 from registroDeUsuarios.views import registroUsuario
 from Home.views import inicio
 from RegisterPlatillo.views import registroPlatillo
-
+from proveedorMenu.views import menuProveedor
 from repartidor.views import viewPedido, viewRepartidor,PerfilRepartidor,MiVehiculo
 from reclamo.views import reclamo
 from Home.views import quienesSomos
 from administracion.urls import url_patterns
 from PerfilUsuario.views import PerfilUsuario,perfilMenu,CambiarContra
 from Pedido.views import pedido
-from Platillos.views import platillos, agregar_producto, eliminar_producto, restar_producto, limpiar_carrito,guardar
+from Platillos.views import platillos, agregar_producto, eliminar_producto, restar_producto, limpiar_carrito,guardar,FinalizarCompra
 from detallePedido.views import detallePedido
 from Menu.views import menu, crearMenu
 from administracion.views import pag_404
@@ -29,6 +29,7 @@ urlpatterns = [
     path('pedido', pedido),
     path('platillos', platillos, name="platillos"),
     path('perfilMenu/<id>', perfilMenu, name="perfilMenu"),
+    path('menuProveedor/<id>', menuProveedor, name="menuProveedor"),
 
     path('viewPedido/<id>', viewPedido),
     path('repartidor', viewRepartidor, name="repartidor"),
@@ -57,6 +58,7 @@ urlpatterns = [
     path('restar/<id>', restar_producto, name="restar_producto"),
     path('limpiarCarro', limpiar_carrito, name="limpiar_carrito"),
     path('guardar', guardar, name="guardar"),
+    path('FinalizarCompra', FinalizarCompra, name="FinalizarCompra"),
     path('prueba/', pag_404)
 ]
 # handler404 = 'administracion.views.pag_404'

@@ -15,6 +15,7 @@ def RegistroCliConvenio(request):
         'form': FormularioUsuario(),
         'Seleccion':listar_EmpConvenio()
     }
+    
     if request.method == 'POST':
         rutcliente = request.POST.get('rutCliConv')
         nombres = request.POST.get('nomCliConv')
@@ -23,13 +24,18 @@ def RegistroCliConvenio(request):
         saldocli = request.POST.get('saldoCli')
         idtipoCliente = 1
         rutempcli = request.POST.get('rutEmpConv')
-        formulario = FormularioUsuario(data=request.POST)
-        if formulario.is_valid():
-            formulario.save()
-            data['form'] = formulario
+        forumulario = FormularioUsuario(data=request.POST)
+        if forumulario.is_valid():
+            forumulario.save()
             agregar_cliente_convenio(rutcliente,nombres, apellidos, direccion,idtipoCliente,rutempcli,saldocli)    
             messages.success(request, "Usuario Creado")
             return render(request,'regCliConv.html', data)
+        data = {
+            'form': forumulario,
+            'campos':[rutcliente,nombres,apellidos,direccion,rutempcli,saldocli,rutempcli],
+            'Seleccion':listar_EmpConvenio()
+        }
+        
     return render(request,'regCliConv.html', data)
 #ValrutCliente
 def cleanRutcliente(request):
@@ -61,6 +67,7 @@ def listarCliConv(request):
     dataClientes = {
         'clientesConv':listar_clientes_conv()
     }
+
     return render(request,'listarCliConv.html',dataClientes)
 
 #MODIFICAR CLIENTE CONVENIO

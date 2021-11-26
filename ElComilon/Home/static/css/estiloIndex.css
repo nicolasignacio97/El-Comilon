@@ -8,7 +8,7 @@
 
 .main-location-text{
     text-shadow: 0 0 10px rgb(0 0 0 / 90%);
-    font-family: 'serif';
+    font-family: 'Roboto', sans-serif;
     font-weight: 400;
     font-size: 3rem;
     text-transform: uppercase;
@@ -16,7 +16,6 @@
     color: #fff;
 }
 .btncatalogo{
-   
     padding: 5px 16px;
     text-shadow: 0 0 10px rgb(0 0 0 / 90%);
     background-color: brown;
@@ -33,10 +32,6 @@
     color: brown;
     text-transform: uppercase;
 }
-
-
-
-
 
 .body-bg{
     
@@ -157,33 +152,20 @@ p{
 }
 .nav-item-a{
     text-decoration: none;
-    color: #Fff;
-    padding: 2px;
-    font-size: 15px;
-    font-weight: 600;
+    font-family: 'Roboto', sans-serif;
     color: #fff;
     text-transform: capitalize;
-    line-height: 19px;
-    align-items: center;
-    flex-direction: row;
-    height: auto;
     border-radius: 6px;
     padding: 8px 16px !important;
     background-color: initial;
 }
-.nav-item-a:hover{
-    color: #c4c4c4 !important;
-    background-color: rgba(0, 0, 0, 0.3)  !important;
-    transition: none;
-    border-radius: 6px;
 
-}
 .container-cards{
-background-color: #fff;
-border-radius: 4px;
-box-shadow: 0 2px 4px 0 rgb(0 0 0 / 15%);
-min-width: 280px;
-padding: 20px 15px 50px;
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px 0 rgb(0 0 0 / 15%);
+    min-width: 280px;
+    padding: 20px 15px 50px;
 }
 
 .platillo__descripcion{

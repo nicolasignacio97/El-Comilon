@@ -15,8 +15,8 @@ from registroTrabajador.views import listaTrabajador
 from RegEmpConv.views import listaEmpresa
 from RegEmpConv.views import empresaRut
 from RegEmpConv.views import eliminarEmpresa,clean_rut_emp_convenio
-from gestionRestaurantes.views import listarRestaurantes, modificarRepreResta, EliminarRepreResta,registroProveedor, restauranteRut
-from registroTrabajador.views import pruebatrabajo,actTrabajador,actualizarTrabajador,trabajadorRut,eliminarTrabajador,clean_rut_trabajador
+from gestionRestaurantes.views import listarRestaurantes, modificarRepreResta, EliminarRepreResta,registroProveedor
+from registroTrabajador.views import actTrabajador,actualizarTrabajador,trabajadorRut,eliminarTrabajador,clean_rut_trabajador
 from RegEmpConv.views import actualizarEmpresa, actEmpresa
 from RegisterRepartidor.views import registroVeh, Registrorep, editRepartidor, deleterepartidor, listarRep, clean_rut,clean_patente
 

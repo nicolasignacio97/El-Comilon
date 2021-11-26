@@ -1,0 +1,19 @@
+<h1>fin de compra</h1>
+{% load humanize %}
+{% if request.session.carrito.items %}
+{% for key ,value in request.session.carrito.items %}
+
+    IDPLATO {{value.idplatillo }} <br>
+    plato:{{value.nombre | title}}    <br>
+    valor: ${{value.valorunitario | intcomma}}<br>
+    cantidad: {{ value.cantidad}}  <br> <br><br>
+
+{% endfor %}
+{% else %}
+
+    <td colspan="3">
+        <div class="alert alert-danger text-center"> Sin Productos</div>
+    
+
+{% endif %}
+<th scope="row" colspan="3" class="text-center pt-5"> Subtotal: ${{total_carrito | intcomma}}</th>

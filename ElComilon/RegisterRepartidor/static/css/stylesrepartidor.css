@@ -21,6 +21,11 @@
 .d-block{
     display: block;
 }
+.sangria ul{
+    list-style-type: none;
+    padding: 0;
+}
+
 .Btn_repartidor{
     width: 40%;
     margin: auto;

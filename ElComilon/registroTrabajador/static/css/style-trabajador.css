@@ -22,3 +22,7 @@
 .card{
     padding: 2rem;
 }
+.sangria ul{
+    list-style-type: none;
+    padding: 0;
+}
