@@ -54,16 +54,16 @@ def perfilMenu(request, id):
 
 @login_required()
 def CambiarContra(request):
-    form = EditarContrasena(user=request.user)
     data = {
-        'form': form
+        'form': EditarContrasena(user=request.user)
     }
     if request.method == 'POST':
         form = EditarContrasena(data=request.POST, user=request.user)
+        print(form.errors)
         if form.is_valid():
             form.save()
             messages.success(request, "Contraseña Modificada Correctamente. Por favor, ingrese de nuevo")
-            data = {'form': form}
             return redirect('login')
+        data = {'form': form}
     return render(request, 'CambioContrasena.html', data)
 

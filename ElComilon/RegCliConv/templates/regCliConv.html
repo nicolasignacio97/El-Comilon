@@ -11,22 +11,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
-        crossorigin="anonymous"></script>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script src="{% static 'app/jquery.rut.chileno.js' %}"></script>
-
     <link rel="stylesheet" href="{% static 'css/styles-cli-conv.css' %}">
-    <script type="text/javascript">
-        jQuery(document).ready(function ($) {
-            $('.input_rut').rut();
-        });
-    </script>
-
     <title>Document</title>
 </head>
 
@@ -37,23 +22,27 @@
                 <div class="card shadow-lg p3 mt-5 bg-white">
                     <h3 class="titulo  mt-5 text-center">Registro Cliente Convenio</h3>
                     <div class="card-body">
-                        <form action="" id="post-form" class="needs-validation d-flex flex-column  justify-content-center"
-                            method="POST" novalidate>
+                        <form action="" id="post-form" class="d-flex flex-column  justify-content-center"
+                            method="POST">
                             {% csrf_token %}
                             <div class="row">
                                 <div class="col-lg-6">
-                                    {{form|crispy}}
+                                    {% include "HeaderFooter/formularioRegistro.html"%}
                                 </div>
                                 <div class="col-lg-6 p-4">
                                     <div class="form-row">
                                         <div class="row">
                                             <div class="col-lg-12 mb-3">
                                                 <div class="form-floating">
-                                                    <input type="text" name="rutCliConv"  class="form-control input_rut"
+                                                    {% if campos.0 %}
+                                                    <input type="text" name="rutCliConv" oninput="checkRut(this)"  class="form-control input_rut"
+                                                    id="txt-rut" placeholder="12.452.987-2" value="{{campos.0}}" required>
+                                                    {% else %}
+                                                    <input type="text" name="rutCliConv" oninput="checkRut(this)"  class="form-control input_rut"
                                                     id="txt-rut" placeholder="12.452.987-2" required>
+                                                    {% endif %}
                                                     <label for="">Rut Cliente</label>
-                                                    <div class="valid-feedback"> </div>
-                                                    <div class="invalid-feedback">Complete el campo</div>
+                                                    <small id="Msg" class="text-danger fs-6 mt-1">{{mensajeRut}}</small>
                                                 </div>
               
                                             </div>
@@ -61,65 +50,70 @@
                                         <div class="row">
                                             <div class="col-lg-6 mb-4">
                                                 <div class="form-floating">
+                                                    {% if campos.1 %}
                                                     <input type="text" name="nomCliConv" class="form-control"
-                                                    id="nomCliConv" placeholder="Nombres Cliente" required>
+                                                    id="nomCliConv" placeholder="Nombres Cliente" value="{{campos.1}}" required>
+                                                    {% else %}
+                                                    <input type="text" name="nomCliConv" class="form-control"
+                                                    id="nomCliConv" placeholder="Nombres Cliente"  required>
+                                                    {% endif %}
                                                     <label for="">Nombre Cliente</label>
-                                                    <div class="valid-feedback"> </div>
-                                                    <div class="invalid-feedback">Complete el campo</div>
                                                 </div>
                                                 
                                             </div>
                                             <div class="col-lg-6 mb-4">
                                                 <div class="form-floating">
+                                                    {% if campos.2 %}
+                                                    <input type="text" name="apeCliConv" class="form-control" minlength="2"
+                                                    id="apeCliConv" placeholder="Apellidos Cliente" value="{{campos.2}}" required>
+                                                    {% else %}
                                                     <input type="text" name="apeCliConv" class="form-control" minlength="2"
                                                     id="apeCliConv" placeholder="Apellidos Cliente" required>
+                                                    {% endif %}
                                                     <label for="">Apellido Cliente</label>
-                                                    <div class="valid-feedback"> </div>
-                                                    <div class="invalid-feedback">Complete el campo</div>
                                                 </div>
-                                               
                                             </div>
                                         </div>
                                         <div class="row mb-4">
                                             <div class="col-12">
                                                 <div class="form-floating">
+                                                    {% if campos.3 %}
+                                                    <input type="text" name="direcCliConv" class="form-control"
+                                                    id="direcCliConv" minlength="4" value="{{campos.3}}" placeholder="Direccion Cliente"
+                                                    required>
+                                                    {% else %}
                                                     <input type="text" name="direcCliConv" class="form-control"
                                                     id="direcCliConv" minlength="4" placeholder="Direccion Cliente"
                                                     required>
-                                                    <label for="">Color Vehiculo</label>
-                                                    <div class="valid-feedback"> </div>
-                                                    <div class="invalid-feedback">Complete el campo</div>
+                                                    {% endif %}
+                                                    <label for="">Direccion</label>
                                                 </div>
-                                
                                             </div>
                                         </div>
-
                                         <div class="row">
                                             <div class="col-lg-12 mb-2">
                                                 <div class="form-floating">
                                                     <select min="1" id="disabledSelect" name="rutEmpConv" class="form-select inputfocus" required>
-                                                        <option disabled selected value="">Seleccionar </option>
+                                                        <option disabled selected value="">Seleccionar</option>
                                                         {% for c in Seleccion %}
                                                         <option value="{{ c.0 }}">{{ c.1 }}</option>
                                                         {% endfor %}
                                                     </select>
                                                     <label for="floatingSelect">Empresa</label>
-                                                    <div class="valid-feedback"> </div>
-                                                    <div class="invalid-feedback">Complete el campo</div>
                                                 </div>
                                             </div>
                                             <div class="col-lg-12 mb-2 mt-1">
                                                 <div class="form-floating">
+                                                    {% if campos.5 %}
+                                                    <input type="number" name="saldoCli" class="form-control inp" id="saldoCli"
+                                                    placeholder="Saldo Cliente" value="{{campos.5}}" required>
+                                                    {% else %}
                                                     <input type="number" name="saldoCli" class="form-control inp" id="saldoCli"
                                                     placeholder="Saldo Cliente" required>
+                                                    {% endif %}
                                                     <label for="">Saldo Cliente</label>
-                                                    <div class="valid-feedback"> </div>
-                                                    <div class="invalid-feedback">Complete el campo</div>
                                                 </div>                                 
                                             </div>
-                                        </div>
-                                        <div class="row d-flex justify-content-center mt-5">
-                                            {{mensaje}}
                                         </div>
                                     </div>
                                 </div>
@@ -158,7 +152,7 @@
         var formData = new FormData(document.getElementById('post-form'));
         formData.append('rut', rut);
         if (rut && document.getElementById('post-form').checkValidity()) {
-            document.getElementById('post-form').classList.add('was-validated')
+            document.getElementById('post-form')
             fetch('{% url "valrutcliente" %}', {
                 method: 'POST',
                 mode: 'same-origin',
@@ -185,9 +179,7 @@
                         formPost.submit();
                         return
                     } else {
-                        console.log("Cliente existente en la bd")
-                        txtHtml.innerHTML = 'Rut registrado'
-                        alert("Cliente existente en la bd")
+                        document.getElementById("Msg").innerHTML ="Cliente existente en la Base de datos";
                     }
                 });
         } else {

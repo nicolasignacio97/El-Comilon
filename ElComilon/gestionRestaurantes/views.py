@@ -6,7 +6,7 @@ from registroDeUsuarios.forms import FormularioUsuario
 from core.models import Restaurante, Representante
 from django.contrib import messages
 from django.db import connection
-
+from django.contrib.auth.models import Group
 import cx_Oracle
 
 @permission_required('core')
@@ -66,27 +66,40 @@ def registroProveedor (request):
     }
     if request.method == 'POST':
         # REPRESENTANTE
-        rutRepre = request.POST.get('representante').upper()
+        rutRepre = request.POST.get('rutRepre')
         nombresRepre = request.POST.get('nombresRepresentante').upper()
         apellidosRepre = request.POST.get('apellidos').upper()
         telefono = request.POST.get('telefono')
      
         # RESTAURANTE PROVEEDOR
-        rutRest = request.POST.get('rutRestaurante').upper()
+        rutRest = request.POST.get('rutRetaurante')
         nombre = request.POST.get('nombre').upper()
         direccion = request.POST.get('direccion').upper()
-        representante =  request.POST.get('representante').upper()
-        tipo = 2
-
+        representante =  request.POST.get('rutRepre')
+        tipo = 2    
         forumulario = FormularioUsuario(data=request.POST)
-
-        if forumulario.is_valid():
-            forumulario.save()
-            data['form'] = forumulario
-            registrarRepre(rutRepre,nombresRepre,apellidosRepre,telefono)
-            registrarProve(rutRest,nombre,direccion,representante,tipo)
-            messages.success(request, nombre + " Registrado correctamente")
-            
+        if Restaurante.objects.filter(rutrestaurante=rutRest).exists():
+                mensaje = 'Ya existe un Restaurante con este RUT.'
+        if Representante.objects.filter(rutrepresentante=rutRepre).exists():
+                mensaje2 = 'Ya existe un Representante con este RUT.'
+        else:
+            mensaje=''
+            mensaje2 ='' 
+            if forumulario.is_valid():
+                user = forumulario.save()
+                group = Group.objects.get(name='Proveedor')
+                user.groups.add(group)
+                registrarRepre(rutRepre,nombresRepre,apellidosRepre,telefono)
+                registrarProve(rutRest,nombre,direccion,representante,tipo)
+                messages.success(request, nombre + " Registrado correctamente")
+                return render (request,'registro-proveedor.html',data)
+        data = {
+            'form': forumulario,
+            'campos': [rutRest,nombre,direccion,telefono,rutRepre,nombresRepre,apellidosRepre,representante],
+            'mensajeRut1':mensaje,
+            'mensajeRut2':mensaje2,
+        }
+   
     return render (request,'registro-proveedor.html',data)
     
 # REPRESENTANTE

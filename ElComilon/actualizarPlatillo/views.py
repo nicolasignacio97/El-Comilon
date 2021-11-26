@@ -1,5 +1,3 @@
-from django.db.models.expressions import Subquery
-from django.db.models.fields import NullBooleanField
 from django.shortcuts import get_object_or_404, redirect, render
 from django.db import connection
 import cx_Oracle
