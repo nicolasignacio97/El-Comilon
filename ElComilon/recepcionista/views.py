@@ -8,6 +8,9 @@ from django.db import connection
 import cx_Oracle
 
 # Create your views here.
+def cambiarEstadoTienda(request, id):
+    cambiar_estado(id, 5)
+    return redirect(to='recepcionista')
 
 def viewRecepcionista(request):
     dataRep = {

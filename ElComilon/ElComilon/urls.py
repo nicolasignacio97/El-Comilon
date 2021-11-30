@@ -2,7 +2,7 @@
 from os import name
 from django.contrib import admin
 from django.urls import path, include
-from recepcionista.views import viewRecepcionista,asignarRepartidor, cambiarEstado,menuRecepcion
+from recepcionista.views import viewRecepcionista,asignarRepartidor, cambiarEstado,menuRecepcion,cambiarEstadoTienda
 from registroDeUsuarios.views import registroUsuario
 from Home.views import inicio
 from RegisterPlatillo.views import registroPlatillo
@@ -15,7 +15,7 @@ from PerfilUsuario.views import PerfilUsuario,perfilMenu,CambiarContra
 from Pedido.views import pedido
 from Platillos.views import platillos, agregar_producto, eliminar_producto, restar_producto, limpiar_carrito,guardar,FinalizarCompra
 from detallePedido.views import detallePedido
-from Menu.views import menu, crearMenu
+from Menu.views import crearMenu
 from administracion.views import pag_404
 
 urlpatterns = [
@@ -42,9 +42,9 @@ urlpatterns = [
     path('cambioContrasena', CambiarContra, name="cambioContrasena"),
  
 
-    path('menu/<id>', menu, name="menu"),
     path('crearMenu/<id>', crearMenu, name="crearMenu"),
     
+ 
     path('accounts/', include('django.contrib.auth.urls')),
     path('viewPedido/<id>', viewPedido),
          
@@ -52,6 +52,7 @@ urlpatterns = [
     path('estado/<id>', cambiarEstado, name='estado'),
     path('asignacion/<id>', asignarRepartidor, name='asignacionRepartidor'),
     path('menuRecepcion/<id>', menuRecepcion, name='menuRecepcion'),
+    path('cambiarEstadoTienda/<id>', cambiarEstadoTienda, name='cambiarEstadoTienda'),
     # carro
     path('agregar/<id>', agregar_producto, name="agregarProducto"),
     path('eliminar/<id>', eliminar_producto, name="eliminar"),
