@@ -53,7 +53,7 @@ class carrito:
                 Carro = self.carrito[i]
                 lisIndex.append( Carro )  
             return lisIndex    
-    def getLargo(self):
+
+    def getProductos(self):
         largo =len( self.carrito.keys())
-        
         return largo

@@ -1,5 +1,6 @@
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth.decorators import login_required
+from django.db import connection
 from django.contrib.auth.models import User
 from .forms import EditarUsuario, EditarCliente,EditarContrasena
 from core.models import Cliente, Pedido
@@ -67,3 +68,21 @@ def CambiarContra(request):
         data = {'form': form}
     return render(request, 'CambioContrasena.html', data)
 
+def estadoPedido(request, id):
+    cliente = get_object_or_404(Cliente, idcuenta = id)
+    rut = cliente.rutcliente
+    data= {
+        'pedidos':listado_pedidos(rut)
+    }
+    return render(request, 'estadoPedido.html', data)
+
+def listado_pedidos(rut):
+    django_cursor = connection.cursor()
+    cursor = django_cursor.connection.cursor()
+    out_cur = django_cursor.connection.cursor()
+
+    cursor.callproc("SP_LISTAR_PEDIDOS_PEND", [rut, out_cur])
+    lista = []
+    for fila in out_cur:
+        lista.append(fila)
+    return lista

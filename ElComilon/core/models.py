@@ -34,11 +34,6 @@ class Cliente(models.Model):
     idtipocliente = models.ForeignKey('TipoCliente', models.DO_NOTHING, db_column='idtipocliente')
     rutempconv = models.ForeignKey('EmpresaConvenio', models.DO_NOTHING, db_column='rutempconv', blank=True, null=True)
     idcuenta = models.ForeignKey(User,models.DO_NOTHING , db_column='idcuenta')
-    def __str__(self):
-        return self.rutcliente
-    
-    idcuenta = models.IntegerField()
-    USERNAME_FIELD = 'nombreusuario'
 
     def __str__(self):
         return self.rutcliente;

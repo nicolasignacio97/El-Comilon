@@ -10,6 +10,9 @@ from django.contrib import messages
 import cx_Oracle
 
 # Create your views here.
+
+data = {}
+
 def registroTrabajador(request):
     data = {
         'form': FormularioUsuario(),
@@ -71,6 +74,7 @@ def REGISTRAR_TRABAJADOR(RUTTRABAJADOR, NOMBRES, APELLIDOS, FECHACONTRATO, RUTRE
 
 
 def listaTrabajador(request):
+    global data
     data = {
         'trabajadores': listarTrabajador()
     }
@@ -91,6 +95,7 @@ def listarTrabajador():
 
 @permission_required('core')
 def trabajadorRut(request):
+    global data
     if request.method == 'POST':
 
         rut = request.POST.get('trabajadorRut')
@@ -112,6 +117,7 @@ def listarTrabajadorRut(rut):
         lista.append(fila)
 
     return lista
+    
 @permission_required('core')
 def actualizarTrabajador(request):
 

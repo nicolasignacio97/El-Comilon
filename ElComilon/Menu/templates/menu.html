@@ -54,6 +54,9 @@
                                 Semanal</a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link text-danger" href="{% url 'estadoPedido' user.id %} ">Estado de mi pedido</a>
+                          </li>
+                        <li class="nav-item">
                             <a class="nav-link disabled">{{user.username.title}}</a>
                         </li>
                     </ul>
@@ -95,6 +98,7 @@
                                     <div class="pieForm">
                                         <button class="btn botonEnviar" id="btn1" type="submit">Guardar</button>
                                     </div>
+                                    <a href="{% url 'menu' user.id %}" class="a-volver">Regresar al Menú Semanal</a>
                                     <div class="row d-flex justify-content-center mt-5">
                                     </div>
                                 </div>

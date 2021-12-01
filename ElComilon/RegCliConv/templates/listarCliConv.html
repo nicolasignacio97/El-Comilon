@@ -21,9 +21,9 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="{% static 'app/jquery.rut.chileno.js' %}"></script>
 
-    <link rel="stylesheet" href="{% static 'css/style-registro-proveedor.css' %}">
+    <link rel="stylesheet" href="{% static 'css/styles-cli-conv.css' %}">
 
-    <title>Document</title>
+    <title>Lista de Clientes Convenio</title>
 </head>
 
 <body>
@@ -33,8 +33,22 @@
                 <div class="card shadow-lg p3 mb-5 mt-5 bg-white">
                     <h3 class="titulo text-center mt-5 mb-2">Lista Clientes Convenio</h3>
                     <div class="card-body">
-
                         <div class="table-responsive-md">
+                            <table class="table">
+                                <div class="container">
+                                    <form action="cliConvRut" method="POST">
+                                        {% csrf_token %}
+                                        <div class="row">
+                                            <div class="col-lg-8 col-md-8">
+                                                <input type="text" class="input_rut" placeholder="Buscar por Rut"
+                                                    name="cliConvRut" id="cliConvRut">
+                                            </div>
+                                            <div class="col-lg-4 col-md-4">
+                                                <button class="btn botonEnviar" type="submit">Buscar</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
                             <table class="table   table-hover">
                                 <thead>
                                     <tr>
