@@ -8,6 +8,9 @@ import base64
 # Create your views here.
 
 def FinalizarCompra(request):
+    Carrito = carrito(request)
+    largo = Carrito.getLargo()
+    print(largo-1)
     return render(request,'finalizarCompra.html')
 
 def platillos(request):

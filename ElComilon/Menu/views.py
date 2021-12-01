@@ -1,18 +1,12 @@
-from django.shortcuts import get_object_or_404, render
+from django.http.response import HttpResponse
+from django.shortcuts import get_object_or_404, redirect, render
 from django.db import connection
 import base64
-from core.models import Cliente
+from core.models import Cliente,MenuSemanal
 import cx_Oracle
-from core.models import Platillo
+
 # Create your views here.
 
-def menu (request,id):
-    cliente =  get_object_or_404(Cliente,idcuenta = id)
-    data = {
-        'menu':listado_menu(cliente.rutcliente),
-        'cliente':cliente
-    } 
-    return render(request, 'menuSemanal.html', data)
 
 def crearMenu (request,id):
     cliente =  get_object_or_404(Cliente,idcuenta = id)
@@ -30,7 +24,12 @@ def crearMenu (request,id):
 
         eliminarMenu(dia,rut)
         registrarMenu(dia,idplatillo, rut)
-   
+        data = {
+            'menu':listado_menu(cliente.rutcliente),
+            'platillos':listado_platillos(),
+            'cliente':cliente
+        }
+        return render(request, 'menu.html', data)
     return render(request, 'menu.html', data)
 
 def listado_platillos():

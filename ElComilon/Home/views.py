@@ -9,7 +9,8 @@ import base64
 
 def inicio(request):
     data = {
-        'platillos': listarPlatillos()
+        'platillos': listarPlatillos(),
+        'numero':100
     }
     return render(request, 'Home/index.html', data)
 

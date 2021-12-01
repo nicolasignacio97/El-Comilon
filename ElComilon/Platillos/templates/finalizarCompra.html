@@ -2,7 +2,6 @@
 {% load humanize %}
 {% if request.session.carrito.items %}
 {% for key ,value in request.session.carrito.items %}
-
     IDPLATO {{value.idplatillo }} <br>
     plato:{{value.nombre | title}}    <br>
     valor: ${{value.valorunitario | intcomma}}<br>
