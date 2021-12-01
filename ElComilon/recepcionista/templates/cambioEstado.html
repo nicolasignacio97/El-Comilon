@@ -40,41 +40,45 @@
                         {% csrf_token %}
                         <div class="card-body info-botones m-0 w-100">
                           <div class="info">
-                            <h3 class="card-title">Detalles del pedido</h3>
-                            <div>
-                                <label for=""><span>Dirección:</span></label>
-                                <label for="">{{ pedidoSelect.direccionpedido | title }}</label>
+                            <div class="card" style="width: 22rem;">
+                              <div class="card-body">
+                                <h5 class="card-title">Detalles del pedido</h5>
+                                <p class="card-text"><div>
+                                  <label for=""><span>Dirección:</span></label>
+                                  <label for="">{{ pedidoSelect.direccionpedido | title }}</label>
+                              </div>
+                              <div>
+                                  <label for=""><span>Fecha:</span></label>
+                                  <label for="">{{ pedidoSelect.fechapedido }}</label>
+                              </div>
+                              <div>
+                                  <label for=""><span>Rut Cliente:</span></label>
+                                  <label for="">{{ pedidoSelect.rutcliente }}</label>
+                              </div>
+                              <div>
+                                <label for=""><span>Telefono:</span></label>
+                                <label for="">{{ cliente.telefono }}</label>
+                            </div></p>
+                              </div>
+                              <ul class="list-group list-group-flush">
+                                {% for det in detallePedido %}
+                                <li class="list-group-item">{{ det.idplatillo | title }} <span class="por-cantidad">x {{det.cantidad}}</span> </li>
+                                {% endfor %}
+                              </ul>
+                              <div class="card-body">
+                                <div class="total">                              
+                                  <label for=""><span>Total: $</span></label>
+                                  <label for="">{{ pedidoSelect.valortotal }}</label>
+                                </div>
+                              </div>
                             </div>
-                            <div>
-                                <label for=""><span>Fecha:</span></label>
-                                <label for="">{{ pedidoSelect.fechapedido }}</label>
-                            </div>
-                            <div>
-                                <label for=""><span>Rut Cliente:</span></label>
-                                <label for="">{{ pedidoSelect.rutcliente }}</label>
-                            </div>
-                            <div>
-                              <label for=""><span>Telefono:</span></label>
-                              <label for="">{{ cliente.telefono }}</label>
-                          </div>
-                          <div class="platillos">
-                            <h4>Platillos</h4>
-  
-                            {% for det in detallePedido %}
-                            <div>
-                              <label for="">{{ det.idplatillo | title }} <span> X </span> <label for="">{{det.cantidad}}</label></label>
-                            </div>
-                            {% endfor %}
-                          </div>    
+                            
+                          
                             
                           
                             
 
-                            <div class="total">
-                              
-                              <label for=""><span>Total: $</span></label>
-                              <label for="">{{ pedidoSelect.valortotal }}</label>
-                          </div>
+                            
                             
                           </div>
                           <div class="vl"></div>
