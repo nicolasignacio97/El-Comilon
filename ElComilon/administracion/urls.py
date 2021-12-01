@@ -9,7 +9,7 @@ from RegisterPlatillo.views import registroPlatillo
 from listarPlatillos.views import listarPlatillos, eliminarPlatillo, platilloNombre
 from actualizarPlatillo.views import modificarPlatillo
 from django.contrib.auth.decorators import login_required
-from RegCliConv.views import RegistroCliConvenio,cleanRutcliente, listarCliConv, modificarCliConv, eliminarCliConv
+from RegCliConv.views import RegistroCliConvenio,cleanRutcliente, listarCliConv, modificarCliConv, eliminarCliConv, cliConvRut
 
 from registroTrabajador.views import listaTrabajador
 from RegEmpConv.views import listaEmpresa
@@ -18,7 +18,7 @@ from RegEmpConv.views import eliminarEmpresa,clean_rut_emp_convenio
 from gestionRestaurantes.views import listarRestaurantes, modificarRepreResta, EliminarRepreResta,registroProveedor, restauranteRut
 from registroTrabajador.views import actTrabajador,actualizarTrabajador,trabajadorRut,eliminarTrabajador,clean_rut_trabajador
 from RegEmpConv.views import actualizarEmpresa, actEmpresa
-from RegisterRepartidor.views import registroVeh, Registrorep, editRepartidor, deleterepartidor, listarRep, clean_rut,clean_patente
+from RegisterRepartidor.views import registroVeh, Registrorep, editRepartidor, deleterepartidor, listarRep, clean_rut,clean_patente, repartidorRut
 
 url_patterns = [
     path('', administracion),
@@ -35,6 +35,7 @@ url_patterns = [
     path('ClienteConvenio', RegistroCliConvenio, name='ClienteConvenio'),
     path('valrutcliente', cleanRutcliente, name='valrutcliente'),
     path('listarCliConv', listarCliConv, name='listarCliConv'),
+    path('cliConvRut', cliConvRut, name='cliConvRut'),
     path('modCliConv/<id>', modificarCliConv, name='modCliConv'),
     path('eliminar/<rutcliente>/<id>', eliminarCliConv, name='eliminarCliente'),
     path('listaTrabajador', listaTrabajador, name='listaTrabajador'),
@@ -51,6 +52,7 @@ url_patterns = [
     path('restauranteRut', restauranteRut, name='restauranteRut'),
     path('regin/', Registrorep, name='regin'),
     path('listarep', listarRep, name="listarep"),
+    path('repartidorRut', repartidorRut, name='repartidorRut'),
     path('updaterepartidor/<rutrepartidor>/',editRepartidor, name='updrpartidor'),
     path('deleterepartidor/<rutrepartidor>/<id>/',deleterepartidor, name='deleterepartidor'),
     path('actualizarEmpresa', actualizarEmpresa),

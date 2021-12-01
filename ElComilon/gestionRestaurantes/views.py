@@ -9,8 +9,11 @@ from django.db import connection
 from django.contrib.auth.models import Group
 import cx_Oracle
 
+data = {}
+
 @permission_required('core')
 def listarRestaurantes(request):
+    global data
     page = request.GET.get('page',1)
     Lista = listado_restaurantes();
     try:
@@ -159,6 +162,7 @@ def modificarRepre(rutRepre,nombres,apellidos,telefono):
 
 @permission_required('core')
 def restauranteRut(request):
+    global data
     if request.method == 'POST':
 
         rut = request.POST.get('rutRestaurante')

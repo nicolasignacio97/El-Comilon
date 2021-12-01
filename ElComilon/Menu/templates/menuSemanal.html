@@ -36,6 +36,7 @@
 </head>
 
 <body>
+    {% load humanize %}
     <section class="container card shadow-lg p3 mb-5 mt-5 bg-white card-body">
         <h3 class="titulo text-center mt-5 mb-5">Menú Semanal</h3>
         <div class="table-responsive-md">
@@ -54,7 +55,7 @@
                         <th scope="row" id="rutTrabajador" value="{{ m.data.1 }}">{{ m.data.1}}</th>
                         <td>{{ m.data.4 }}</td>
                         <td>{{ m.data.5}}</td>
-                        <td>{{ m.data.6 }}</td>
+                        <td>$ {{ m.data.6 | intcomma }}</td>
                     </tr>
                     {% endfor %}
                 </tbody>

@@ -97,3 +97,38 @@ width: 100%;
     border-color: #dc3545;
     padding-right: calc(1.5em + 0.75rem);
 }
+
+
+.botonEnviar{
+    align-items:center;
+    background-color:#9C3534;
+    color:#fff;
+    padding:.7rem;
+    width:100%;
+}
+.botonEnviar:hover{
+    background-color:#fff;
+    color:#9C3534;
+    border:1px solid #9C3534;
+}
+.titulo{
+    color:#9C3534;
+}
+
+input{
+    padding: .6rem;
+    border-radius: 7px;
+    border-color: rgb(red, green, blue, 0.98%);
+    width: 100%;
+}
+
+.form-icon{
+    white-space: nowrap;
+    width: max-content;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.td-btn{
+    margin: 0;
+}

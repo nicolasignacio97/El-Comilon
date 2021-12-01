@@ -19,6 +19,9 @@
           <a class="nav-link text-danger" href="{% url 'crearMenu' user.id %}">Menú Semanal</a>
         </li>
         <li class="nav-item">
+          <a class="nav-link text-danger" href="{% url 'estadoPedido' user.id %} ">Estado de mi pedido</a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link disabled">{{user.username.title}}</a>
         </li>
       </ul>

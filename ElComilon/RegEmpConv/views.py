@@ -6,6 +6,9 @@ from core.models import EmpresaConvenio
 import cx_Oracle
 
 # Create your views here.
+
+data = {}
+
 def registroEmpresa(request):
     data = {
     'restaurante':listar_restaurantes()
@@ -27,6 +30,7 @@ def clean_rut_emp_convenio(request):
 
 
 def listaEmpresa(request):
+    global data
     data = {
         'empresa': listarEmpresa()
     }
@@ -35,6 +39,7 @@ def listaEmpresa(request):
 
 
 def empresaRut(request):
+    global data
     if request.method == 'POST':
         rut = request.POST.get('empresaRut')
 
