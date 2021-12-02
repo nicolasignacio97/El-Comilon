@@ -190,9 +190,7 @@ class Representante(models.Model):
     nombres = models.CharField(max_length=20)
     apellidos = models.CharField(max_length=20)
     telefono = models.IntegerField()
-    #correo = models.CharField(max_length=30)
-    # nombreusuario = models.CharField(max_length=15)
-    # contrasena = models.CharField(max_length=15)
+    idcuenta = models.ForeignKey(User,models.DO_NOTHING , db_column='idcuenta')
 
     class Meta:
         managed = False

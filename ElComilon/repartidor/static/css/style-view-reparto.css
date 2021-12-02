@@ -5,6 +5,10 @@
  .table{
      margin: 0;
  }
+ .titulo{
+    color: #9c3534;
+}
+
  /* 
  .contenido-reparto h2{
      margin-top: 2rem;
@@ -35,6 +39,21 @@
  
  }
  
+.botonEnviar{
+    align-items:center;
+    background-color:#9C3534;
+    color:#fff;
+    padding:.7rem;
+    width:100%;
+}
+.botonEnviar:hover{
+    background-color:#fff;
+    color:#9C3534;
+    border:1px solid #9C3534;
+}
+.titulo{
+    color:#9C3534;
+}
  .contenedor-tarjeta h4{
      text-align: center;
      

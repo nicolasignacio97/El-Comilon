@@ -6,8 +6,8 @@ from recepcionista.views import viewRecepcionista,asignarRepartidor, cambiarEsta
 from registroDeUsuarios.views import registroUsuario
 from Home.views import inicio
 from RegisterPlatillo.views import registroPlatillo
-from proveedorMenu.views import menuProveedor
-from repartidor.views import viewPedido, viewRepartidor,PerfilRepartidor,MiVehiculo
+from proveedorMenu.views import menuProveedor,subirPlatilloProveedor,listarPlatilloProveedor
+from repartidor.views import viewPedido, viewRepartidor,PerfilRepartidor,MiVehiculo,cambiarEstadoTiendaRepartidor
 from reclamo.views import reclamo
 from Home.views import quienesSomos
 from administracion.urls import url_patterns
@@ -29,9 +29,16 @@ urlpatterns = [
     path('pedido', pedido),
     path('platillos', platillos, name="platillos"),
     path('perfilMenu/<id>', perfilMenu, name="perfilMenu"),
-    path('menuProveedor/<id>', menuProveedor, name="menuProveedor"),
 
-    path('viewPedido/<id>', viewPedido),
+    path('menuProveedor/<id>', menuProveedor, name="menuProveedor"),
+    path('SubirMisPlatillos', subirPlatilloProveedor, name="SubirMisPlatillos"),
+    path('listarPlatilloProveedor', listarPlatilloProveedor, name="listarPlatilloProveedor"),
+
+    path('viewPedido/<id>', viewPedido,name="viewPedido"),
+    path('FinalizarRepartidor/<id>', cambiarEstadoTiendaRepartidor,name="FinalizarRepartidor"),
+
+
+
     path('estadoPedido/<id>', estadoPedido, name="estadoPedido"),
     path('repartidor', viewRepartidor, name="repartidor"),
     path('perfilRepartidor/<id>', PerfilRepartidor, name="perfilRepartidor"),

@@ -10,19 +10,54 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
-        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
-        crossorigin="anonymous"></script>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script src="{% static 'app/jquery.rut.chileno.js' %}"></script>
     <link rel="stylesheet" href="{% static 'css/style-view-reparto.css' %}">
-    <link rel="stylesheet" href="{% static 'css/style-registro-proveedor.css' %}">
-
+    <script>
+        function modificarEstado(id) {
+          Swal.fire({
+            "title": "¿Desea Finalizar El Pedido?",
+            "icon": "question",
+            "showCancelButton": true,
+            "cancelButtonText": "No, Cancelar",
+            "confirmButtonText": "Si, Finalizar",
+            "confirmButtonColor": "#9C3534"
+          }).then(function (result) {
+            if (result.isConfirmed) {
+              let timerInterval
+              Swal.fire({
+                title: 'Finalizando Pedido',
+                html: 'Por Favor Espere...',
+                timer: 1000,
+                timerProgressBar: true,
+                didOpen: () => {
+                  Swal.showLoading()
+                  const b = Swal.getHtmlContainer().querySelector('b')
+                  timerInterval = setInterval(() => {
+                    b.textContent = Swal.getTimerLeft()
+                  }, 100)
+                },
+                willClose: () => {
+                  clearInterval(timerInterval)
+                }
+              }).then((result) => {
+                Swal.fire({
+                  position: 'center',
+                  icon: 'success',
+                  title: 'Pedido Finalizado',
+                  showConfirmButton: false,
+                  timer: 1000
+                })
+                setTimeout(() => {
+                  if (result.dismiss === Swal.DismissReason.timer) {
+                    window.location.href = "/FinalizarRepartidor/" + id
+                  }
+                }, 1000);
+              })
+      
+            }
+          })
+        }
+      </script>
     <title>Document</title>
 </head> 
 
@@ -49,47 +84,17 @@
                         <label for=""><span>Dirección:</span></label>
                         <label for="">{{ pedidoSelect.direccionpedido }}</label>
                     </div>
-            
                     <div>
                         <label for=""><span>Total: $</span></label>
                         <label for="">{{ pedidoSelect.valortotal }}</label>
                     </div>
                     </p>
-                    <button class="btn botonEnviar" id="btn1" type="submit">Finalizar Entrega</button>
+                    <a href="#" class="btn botonEnviar" onclick="modificarEstado('{{pedidoSelect.idpedido}}')">Finalizar Entrega</a>
+                    
                     {{mensaje}}
                 </form>
             </div>
         </div>
-    
-        <!-- <H2>PEDIDO N° {{ pedidoSelect.idpedido }}</H2>
-            <form action="" method="POST">
-                {% csrf_token %}
-                <div>
-                    <div>
-                        <label for=""><span>Rut Cliente:</span></label>
-                        <label for="" id="rutPedido" name="rutPedido">{{ pedidoSelect.rutcliente }}</label>
-                    </div>
-                    
-                    <div>
-                        <label for=""><span>Fecha pedido:</span></label>
-                        <label for="">{{ pedidoSelect.fechapedido }}</label>
-                    </div>
-            
-                    <div>
-                        <label for=""><span>Dirección:</span></label>
-                        <label for="">{{ pedidoSelect.direccionpedido }}</label>
-                    </div>
-        
-                    <div>
-                        <label for=""><span>Total: $</span></label>
-                        <label for="">{{ pedidoSelect.valortotal }}</label>
-                    </div>
-                </div>
-                <button class="btn botonEnviar" id="btn1" type="submit">Finalizar Entrega</button>
-                {{mensaje}}
-            </form>
-             -->
-    
     </section>
 </body>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>

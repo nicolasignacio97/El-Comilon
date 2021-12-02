@@ -9,7 +9,7 @@
 <div class="container bg-white shadow-lg mt-5 mb-3">
   <div class="row">
     <div class="col m-2">
-      <h1 class="text-center mt-1 mb-5">Cambiar Estado Del Pedido #{{ pedidoSelect.idpedido }}</h1>
+      <h1 class="text-center mt-1 mb-5 titulo">Cambiar Estado Del Pedido <span class="titulo"> #{{ pedidoSelect.idpedido }}</span></h1>
       <ul class="nav nav-tabs">
         <li class="nav-item">
           <a class="nav-link   text-danger" aria-current="page" href="{% url 'menuRecepcion' user.id %}">Mis Datos</a>
@@ -39,7 +39,7 @@
                     <form action="" method="POST">
                         {% csrf_token %}
                         <div class="card-body info-botones m-0 w-100">
-                          <div class="info">
+                          <div class="info d-flex justify-content-center">
                             <div class="card" style="width: 22rem;">
                               <div class="card-body">
                                 <h5 class="card-title">Detalles del pedido</h5>
@@ -73,18 +73,12 @@
                               </div>
                             </div>
                             
-                          
-                            
-                          
-                            
-
-                            
-                            
                           </div>
                           <div class="vl"></div>
                           <div class="info">
-                            <p class="card-text">Seleccione un estado del pedido para actualizar su fase.</p>
-                            <select class="form-select" aria-label="Default select example" name="estado_pedido">w
+                            <h2 class="text-dark">Estado Actual <span class="titulo">{{pedidoSelect.idestpedido | title}}</span></h2>
+                            <p class="card-text mt-5">Seleccione un estado del pedido para actualizar su fase.</p>
+                            <select class="form-select" aria-label="Default select example" name="estado_pedido">
                                 <option selected disabled>Seleccione un estado del pedido</option>
                                 {% for e in estados %}
                                 <option value="{{e.0}}">{{e.1}}</option>

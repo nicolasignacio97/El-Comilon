@@ -1,16 +1,16 @@
 from django.shortcuts import get_object_or_404, render, redirect
-
 from .forms import EditarUsuario, EditarRecepcionista
 from django.contrib.auth.models import User
 from django.contrib import messages
-from core.models import Trabajador,Pedido, DetallePedido, Cliente
+from core.models import Trabajador,Pedido, DetallePedido, Cliente,Repartidor
+
 from django.db import connection
 import cx_Oracle
 
 # Create your views here.
 def cambiarEstadoTienda(request, id):
     cambiar_estado(id, 5)
-    return redirect(to='recepcionista')
+    return redirect(to='/recepcionista')
 
 def viewRecepcionista(request):
     dataRep = {
@@ -55,15 +55,13 @@ def asignarRepartidor(request,id):
     }
 
     if request.method == 'POST':
-      
         idestpedido = 4
         rutrepartidor = request.POST.get('repartidor')
-        salida = asignar_repartidor(id, idestpedido, rutrepartidor)
-        
-        if salida == 1:
-            return redirect(to="recepcionista")
-        else:
-            dataMod['mensaje'] = 'UPS, NO SE HA PODIDO ASIGNAR UN REPARTIDOR EL PEDIDO'
+        repartidor = get_object_or_404(Repartidor, rutrepartidor = rutrepartidor )
+        asignar_repartidor(id, idestpedido, rutrepartidor)
+        messages.success(request,"Pedido Asignado A "+ repartidor.nombres)
+        return redirect(to="recepcionista")
+
     return render(request,'asignaRepartidor.html',dataMod)
 
 
