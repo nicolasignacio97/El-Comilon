@@ -1,27 +1,32 @@
 {% load humanize %}
 {% load static %}
 
-<div class="shadow" role="alert">
-    <table class="table carro">
+<div class="shadow div-detalle-pedido" role="alert" style="padding: 10px;">
+    <div class="row section-title">
+        <h2 class="style-section-tittle">Tu pedido</h2>
+        <hr>
+    </div>
+
+    <table class="table table-borderless carro" style="text-align: center;">
         <thead>
             <tr>
-                <th scope="col">Plato</th>
+                <!-- <th scope="col">Plato</th>
                 <th scope="col">Precio</th>
-                <th scope="col">Cantidad</th>
+                <th scope="col">Cantidad</th> -->
             </tr>
         </thead>
         <tbody class="elementos">
             {% if request.session.carrito.items %}
             {% for key ,value in request.session.carrito.items %}
             <tr>
-                <td>{{value.nombre | title}}</td>    
+                <td>{{value.nombre | title}}</td>
                 <td>${{value.valorunitario | intcomma}}</td>
                 <td class="agregar-restar">
                     <a href="{% url 'restar_producto' value.idplatillo %}" class="badge btn btn-outline-danger">-</a>
                     {{ value.cantidad}}
-                    <a href="{% url 'agregarProducto' value.idplatillo %}" class="badge btn btn-outline-danger">+</a>                
+                    <a href="{% url 'agregarProducto' value.idplatillo %}" class="badge btn btn-outline-danger">+</a>
                 </td>
-                
+
             </tr>
             {% endfor %}
             {% else %}
@@ -32,13 +37,15 @@
             </tr>
             {% endif %}
             <tr class="total">
-                <th scope="row" colspan="3" class="text-center pt-5"> Subtotal: ${{total_carrito | intcomma}}</th>
+                <th scope="row" colspan="3" class=" pt-5"> Subtotal: ${{total_carrito | intcomma}}</th>
             </tr>
         </tbody>
     </table>
     <div class="row text-center botones-carro">
-        
-        <div class="col-6"> <a href="{% url 'limpiar_carrito' %}" class="btn btn-danger"><img src="{% static 'img/icons8-cesta-de-compra-eliminar-24.png' %}" alt=""> Limpiar</a></div>
-        <div class="col-6"> <a href="guardar" class="btn btn-success"> <img src="{% static 'img/icons8-comprar-24.png' %}" alt="">Finalizar Pedido</a></div>       
+
+        <div class="col-6"> <a href="{% url 'limpiar_carrito' %}" class="btn btn-danger"><img
+                    src="{% static 'img/icons8-cesta-de-compra-eliminar-24.png' %}" alt=""> Limpiar</a></div>
+        <div class="col-6"> <a href="guardar" class="btn btn-success"> <img
+                    src="{% static 'img/icons8-comprar-24.png' %}" alt="">Finalizar Pedido</a></div>
     </div>
 </div>

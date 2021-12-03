@@ -29,26 +29,40 @@
 </head>
 <body>
     {% load humanize %}
-    <div class="container">
+
+       
+      
+       
+
+    <div class="container mt-2">
         <div class="row">
-            <div class="col-9 d-flex flex-wrap justify-content-center mt-5">
+            <h1 style="text-align: center;">Catalogo</h1>
+        </div>
+    </div>
+    
+    <div class="container-fluid " >
+        <div class="row container-cards mb-1">
+            <div class="col-sm-12  col-lg-8 d-flex flex-wrap  mt-5 mr-5" style="background-color: #fff; margin-right: 25px;">
                 {% for p in platillos %}
-                <div class="card m-5 platillo sombra" style="width: 20rem;">
-                    <img src="data:imagen/png;base64, {{p.imagen}}" class="card-img-top platillo__imagen" alt="...">
-                    <div class="card-body d-flex flex-column text-center justify-content-center">
-                      <h5 class="card-title platillo__nombre">{{ p.data.1 }}</h5>
-                      <p class="card-text platillo__descripcion">{{p.data.2}}</p>
-                      <hr class="separacion">
-                      <div class="precio-boton">
-                          <h6 class="card-subtitle mb-2  platillo__precio">${{ p.data.3 | intcomma}}</h6>
-                          <a  href="{% url 'agregarProducto' p.data.0 %}"  class="btn btn-danger platillo__boton"><img src="{% static 'img/icons8-agregar-a-carrito-de-compras-24.png' %}" alt=""> Agregar al Carro</a>
-                      </div>
+                <div class="col-lg-4 col-sm-12 mb-3" style="padding: 1rem 1rem; align-items: center;">
+                    <div >
+                        <img src="data:imagen/png;base64, {{ p.imagen }} "  alt="" class="card-img-top w-100 "style=" max-height:200px; box-shadow: 10px 10px 20px -8px rgb(0 0 0 / 30%); "
+                        style=" max-height: 150px;">
                     </div>
-                  </div>
-                  {% endfor %}                     
+                   
+    
+                    
+                    <div class="card-body card-body-main">
+                        <h5 class="card-title tittle-card" >{{ p.data.1 }}</h5>
+                        <span class="span-home" style=" margin-top: 10px; display: block;"> Descripcion:{{ p.data.2 }} </span>
+                        <span class="span-home" style="text-align: center; margin-top: 10px; color: brown; font-size: 22px; display: inline-block; margin: auto;" > ${{ p.data.3  }} </span>
+                        <a  href="{% url 'agregarProducto' p.data.0 %} "  class="btn btn-danger "  style="width: 100%; margin-top: 5px; font-size: 18px;"><img src="{% static 'img/icons8-agregar-a-carrito-de-compras-24.png' %}" alt=""> Agregar al Carro</a>
+                    </div>
+                </div>
+                {% endfor %}                   
             </div>
-            <div class="col-3 mt-5">
-                <div class="card mt-5">
+            <div class="col-lg-3 mt-2  d-none d-lg-block ">
+                <div class=" mt-5 colum-detalle-pedido">
                     {% if user.is_authenticated %}
                     {% include "carrito.html" %}
                     {%endif%}
