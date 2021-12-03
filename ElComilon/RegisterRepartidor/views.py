@@ -1,14 +1,17 @@
-from datetime import date, datetime
-from django.http.response import HttpResponse, JsonResponse
+from django.http.response import JsonResponse
 from django.shortcuts import get_object_or_404, render,redirect
+from django.contrib.auth.decorators import permission_required
 from django.db import connection
-from core.models import Repartidor,Restaurante,TipoVehiculo
+from core.models import Repartidor
 from registroDeUsuarios.forms import FormularioUsuario
-from .forms import Repartidorform,vehiculoform,registerRepartidor
+from .forms import registerRepartidor
 from django.contrib import messages
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User,Group
 import cx_Oracle
 from core.models import *
+
+
+contexto = {}
 
 def pruebaform(request):
     form = registerRepartidor(request.POST or None)
@@ -38,7 +41,7 @@ def Registrorep(request):
         apellido = request.POST.get('ApellidosRepartidor')
         fechacontrato = request.POST.get('Fechacontrato')
         # user = nombres[:2] + "." + apellido[0:]
-        rutrestaurante = request.POST.get('rutempresa')
+        rutrestaurante = '99.365.349-8'
         
         #Vehiculo
         vehiculorut = request.POST.get('RutRepartidor')
@@ -47,23 +50,20 @@ def Registrorep(request):
         ano = request.POST.get('Ano')
         color = request.POST.get('Color') 
         tipovehiculo = request.POST.get('tipovehiculo') 
-        # if not Restaurante.objects.filter(rutrestaurante = rutrestaurante).exists():
-        #     print("Rut Empresa existente")
-        #     messages.error(request, 'Rut restaurante no valido')
-        #     #return redirect(to="/regin")
-        # if Repartidor.objects.filter(rutrepartidor = rutrepartidor).exists():
-        #     print("Usuario existente")
-        #     messages.add_message(request, messages.INFO, 'Repartidor YA REGISTRADO .')
-        #     #return redirect(to="/regin")        
-        # else:
         forumulario = FormularioUsuario(data=request.POST)
         if forumulario.is_valid():
-            forumulario.save()
-            data['form'] = forumulario
+            user = forumulario.save()
+            group = Group.objects.get(name='Repartidor')
+            user.groups.add(group)
             agregar_repartidor(rutrepartidor, nombres, apellido, fechacontrato, rutrestaurante)
             agregar_vehiculo(patente,modelo,ano,color,vehiculorut,tipovehiculo)
             messages.success(request, 'Repartidor Registrado con exito')
-            return render(request, 'Registrorepartidor.html', data)        
+            return render(request, 'Registrorepartidor.html', data)     
+        data = {
+            'categoria':listar_categoria(),
+            'form' : forumulario,
+            'campos':[rutrepartidor,nombres,apellido,fechacontrato,vehiculorut,patente,modelo,ano,color,tipovehiculo]
+        }
     return render(request, 'Registrorepartidor.html', data)  
 
 def clean_rut(request):
@@ -153,6 +153,7 @@ def deleterepartidor(request,rutrepartidor, id):
 
 #Listar
 def listarRep(request):
+    global contexto
     Vehiculos = Vehiculo.objects.all()
     contexto = {
         'repartidor':listarRepartidor(),
@@ -215,6 +216,33 @@ def listarRepartidor():
     out_cur = django_cursor.connection.cursor()
 
     cursor.callproc("SP_LISTAR_REPARTIDORES", [out_cur])
+    lista = []
+    for fila in out_cur:
+        lista.append(fila)
+
+    return lista
+
+@permission_required('core')
+def repartidorRut(request):
+    global contexto
+    if request.method == 'POST':
+
+        rut = request.POST.get('repartidorRut')
+
+        Vehiculos = Vehiculo.objects.all()
+        contexto = {
+        'repartidor':listarRepartidorRut(rut),
+        'vehiculo':Vehiculos
+    }
+    return render(request, 'listadorepartidores.html', contexto)
+
+
+def listarRepartidorRut(rut):
+    django_cursor = connection.cursor()
+    cursor = django_cursor.connection.cursor()
+    out_cur = django_cursor.connection.cursor()
+
+    cursor.callproc("SP_LISTAR_REPARTIDORES_RUT", [rut, out_cur])
     lista = []
     for fila in out_cur:
         lista.append(fila)

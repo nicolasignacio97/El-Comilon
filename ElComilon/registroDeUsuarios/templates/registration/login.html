@@ -1,6 +1,5 @@
 {% extends "HeaderFooter/base.html"%}
 {% load static %}
-
 {% block content%}
 {% load crispy_forms_tags %}
 <link rel="stylesheet" href="{% static 'css/estiloRegistro.css' %}">
@@ -17,10 +16,14 @@
                             <input type="{{field.html_name}}" name="{{field.html_name}}" class="form-control"
                                 id="floatingInput" required placeholder="{{field.html_name}}">
                             <label for="{{field.id_for_label}}">{{field.label}}</label>
+                            <div class="valid-feedback"> </div>
+                            <div class="invalid-feedback">Campo obligatorio*</div>
                         </div>
                         {% endfor %}
                         {% if form.errors%}
-                        <small class="form-text text-muted">{{form.errors}}</small>
+                        <div class="alert alert-danger" role="alert">
+                            <small class="sangria fs-6">{{form.non_field_errors}}</small>
+                          </div>
                         {%endif%}
                         <div class="d-flex justify-content-center mb-3">
                             <input type="submit" class="btn botonEnviar mt-4" value="Iniciar Sesión">
@@ -35,5 +38,4 @@
         </div>
     </div>
 </div>
-<script src="{% static 'app/validacion.js' %}"></script>
 {%endblock%}

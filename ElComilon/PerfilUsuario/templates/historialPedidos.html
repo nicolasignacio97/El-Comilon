@@ -1,14 +1,5 @@
 {% extends "HeaderFooter/base.html"%}
 {% load static %}
-{% block L-izquierda %}
-<a href="/">Inicio</a>
-<a href="/quienesSomos">Nosotros</a>
-{% endblock%}
-
-{% block L-derecha %}
-<a href="/platillos">Catálogo</a>
-<a href="#">Perfil</a>
-{% endblock%}
 
 {% block content %}
 {% load humanize %}
@@ -27,10 +18,13 @@
                   <a class="nav-link text-danger" href="{% url 'crearMenu' user.id %}">Menú Semanal</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link text-danger" href="{% url 'estadoPedido' user.id %} ">Estado de mi pedido</a>
+                  </li>
+                <li class="nav-item">
                   <a class="nav-link disabled">{{user.username.title}}</a>
                 </li>
             </ul>
-            <table class="table">
+            <table class="table table-borderless table-hover">
                 <thead>
                     <tr>
                         <th scope="col">#ID</th>
@@ -51,7 +45,7 @@
                         <td>{{pedido.direccionpedido}}</td>
                         <td>{{pedido.idtiposervicio}}</td>
                         <td><strong><span class="text-danger">{{pedido.idestpedido}}</span></strong></td>
-                        <td> <a href="/detallePedido/{{pedido.idpedido}}/{{usuario.idcuenta}}"><i class="fas fa-eye"
+                        <td> <a href="/detallePedido/{{pedido.idpedido}}/{{user.id}}"><i class="fas fa-eye"
                                     style="color:#02B37F; cursor: pointer;"></i></a>
                         </td>
                     </tr>

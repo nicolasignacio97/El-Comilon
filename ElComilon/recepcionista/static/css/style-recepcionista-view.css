@@ -1,3 +1,7 @@
+h2{
+    color: #9c3534;
+}
+
 .check img{
     width: 2rem;
 }
@@ -9,7 +13,7 @@
 }
 
 .contenido-pedidovich{
-    padding-top: 2rem;
+    padding-top: 1rem;
 }
 
 .bloque-abajo{
@@ -20,3 +24,38 @@
     width: 80%;
     margin: 1rem auto;
 }
+
+.info-botones{
+    display:flex;
+    justify-content:space-between;
+    margin-top: 4rem;
+    gap: 8.5rem;
+}
+
+.botonEnviar{
+    background-color: #9c3534;  
+    color: #fff;
+}
+
+.vl {
+    border-left: 2px solid #9c36348e;
+    height: auto;
+}
+
+.info{
+    width: 40%;
+}
+
+.platillos{
+    margin: 1rem 0;
+}
+
+.total{
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.por-cantidad{
+    font-weight: bold;
+}
+

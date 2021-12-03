@@ -6,11 +6,14 @@ from registroDeUsuarios.forms import FormularioUsuario
 from core.models import Restaurante, Representante
 from django.contrib import messages
 from django.db import connection
-
+from django.contrib.auth.models import Group
 import cx_Oracle
+
+data = {}
 
 @permission_required('core')
 def listarRestaurantes(request):
+    global data
     page = request.GET.get('page',1)
     Lista = listado_restaurantes();
     try:
@@ -66,27 +69,40 @@ def registroProveedor (request):
     }
     if request.method == 'POST':
         # REPRESENTANTE
-        rutRepre = request.POST.get('representante').upper()
+        rutRepre = request.POST.get('rutRepre')
         nombresRepre = request.POST.get('nombresRepresentante').upper()
         apellidosRepre = request.POST.get('apellidos').upper()
         telefono = request.POST.get('telefono')
      
         # RESTAURANTE PROVEEDOR
-        rutRest = request.POST.get('rutRestaurante').upper()
+        rutRest = request.POST.get('rutRetaurante')
         nombre = request.POST.get('nombre').upper()
         direccion = request.POST.get('direccion').upper()
-        representante =  request.POST.get('representante').upper()
-        tipo = 2
-
+        representante =  request.POST.get('rutRepre')
+        tipo = 2    
         forumulario = FormularioUsuario(data=request.POST)
-
-        if forumulario.is_valid():
-            forumulario.save()
-            data['form'] = forumulario
-            registrarRepre(rutRepre,nombresRepre,apellidosRepre,telefono)
-            registrarProve(rutRest,nombre,direccion,representante,tipo)
-            messages.success(request, nombre + " Registrado correctamente")
-            
+        if Restaurante.objects.filter(rutrestaurante=rutRest).exists():
+                mensaje = 'Ya existe un Restaurante con este RUT.'
+        if Representante.objects.filter(rutrepresentante=rutRepre).exists():
+                mensaje2 = 'Ya existe un Representante con este RUT.'
+        else:
+            mensaje=''
+            mensaje2 ='' 
+            if forumulario.is_valid():
+                user = forumulario.save()
+                group = Group.objects.get(name='Proveedor')
+                user.groups.add(group)
+                registrarRepre(rutRepre,nombresRepre,apellidosRepre,telefono)
+                registrarProve(rutRest,nombre,direccion,representante,tipo)
+                messages.success(request, nombre + " Registrado correctamente")
+                return render (request,'registro-proveedor.html',data)
+        data = {
+            'form': forumulario,
+            'campos': [rutRest,nombre,direccion,telefono,rutRepre,nombresRepre,apellidosRepre,representante],
+            'mensajeRut1':mensaje,
+            'mensajeRut2':mensaje2,
+        }
+   
     return render (request,'registro-proveedor.html',data)
     
 # REPRESENTANTE
@@ -143,4 +159,29 @@ def modificarRepre(rutRepre,nombres,apellidos,telefono):
     salidaPrve = cursor.var(cx_Oracle.NUMBER)
     cursor.callproc("MODIFICAR_REPRESENTANTE",[rutRepre,nombres,apellidos,telefono,salidaPrve])
     return salidaPrve.getvalue()
+
+@permission_required('core')
+def restauranteRut(request):
+    global data
+    if request.method == 'POST':
+
+        rut = request.POST.get('rutRestaurante')
+
+        data = {
+        'entity': listarRestauranteRut(rut)   
+        }
+    return render(request, 'listarRestau_Repre.html', data)
+
+
+def listarRestauranteRut(rut):
+    django_cursor = connection.cursor()
+    cursor = django_cursor.connection.cursor()
+    out_cur = django_cursor.connection.cursor()
+
+    cursor.callproc("SP_LISTAR_RESTAURANTE_RUT", [rut, out_cur])
+    lista = []
+    for fila in out_cur:
+        lista.append(fila)
+
+    return lista
 

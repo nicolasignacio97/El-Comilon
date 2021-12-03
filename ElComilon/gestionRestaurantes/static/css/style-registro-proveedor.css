@@ -8,6 +8,10 @@ input[type=number] { -moz-appearance:textfield; }
     box-shadow: none;
     background-color: #ffffff;
 }
+.sangria ul{
+    list-style-type: none;
+    padding: 0;
+}
 
 .card{
    

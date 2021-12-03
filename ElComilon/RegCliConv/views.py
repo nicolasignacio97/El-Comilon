@@ -1,5 +1,6 @@
 from django.http.response import JsonResponse
 from django.shortcuts import get_object_or_404, render, redirect
+from django.contrib.auth.decorators import permission_required
 from django.db import connection
 from django.contrib import messages
 from core.models import Cliente
@@ -9,12 +10,16 @@ from registroDeUsuarios.forms import FormularioUsuario
 
 
 # Create your views here.
+
+dataClientes = {}
+
 #AGREGAR CLIENTES CONVENIO
 def RegistroCliConvenio(request):
     data = {
         'form': FormularioUsuario(),
         'Seleccion':listar_EmpConvenio()
     }
+    
     if request.method == 'POST':
         rutcliente = request.POST.get('rutCliConv')
         nombres = request.POST.get('nomCliConv')
@@ -26,10 +31,15 @@ def RegistroCliConvenio(request):
         forumulario = FormularioUsuario(data=request.POST)
         if forumulario.is_valid():
             forumulario.save()
-            data['form'] = forumulario
             agregar_cliente_convenio(rutcliente,nombres, apellidos, direccion,idtipoCliente,rutempcli,saldocli)    
             messages.success(request, "Usuario Creado")
             return render(request,'regCliConv.html', data)
+        data = {
+            'form': forumulario,
+            'campos':[rutcliente,nombres,apellidos,direccion,rutempcli,saldocli,rutempcli],
+            'Seleccion':listar_EmpConvenio()
+        }
+        
     return render(request,'regCliConv.html', data)
 #ValrutCliente
 def cleanRutcliente(request):
@@ -57,10 +67,11 @@ def eliminarCliConv(request,rutcliente, id):
 
 #LISTAR CLIENTES CONVENIO
 def listarCliConv(request):
-    # print(listar_clientes_conv())
+    global dataClientes
     dataClientes = {
         'clientesConv':listar_clientes_conv()
     }
+
     return render(request,'listarCliConv.html',dataClientes)
 
 #MODIFICAR CLIENTE CONVENIO
@@ -134,5 +145,29 @@ def listar_EmpConvenio():
         ListaConv.append(fila)
     return ListaConv
 
+@permission_required('core')
+def cliConvRut(request):
+    global dataClientes
+    if request.method == 'POST':
+
+        rut = request.POST.get('cliConvRut')
+
+        dataClientes = {
+        'clientesConv':listarCliConvRut(rut)
+    }
+    return render(request, 'listarCliConv.html', dataClientes)
+
+
+def listarCliConvRut(rut):
+    django_cursor = connection.cursor()
+    cursor = django_cursor.connection.cursor()
+    out_cur = django_cursor.connection.cursor()
+
+    cursor.callproc("SP_LISTAR_CLIENTES_CONV_RUT", [rut, out_cur])
+    lista = []
+    for fila in out_cur:
+        lista.append(fila)
+
+    return lista
 
 

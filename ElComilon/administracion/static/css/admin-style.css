@@ -1,0 +1,13 @@
+h1{
+    color: #9c3534;
+    margin-top: 4rem;
+    font-weight: bold;  
+    text-decoration: underline;
+}
+
+.imagen{
+    margin: 5rem 9.9rem;
+}
+.container{
+    max-width: 1320px;
+}

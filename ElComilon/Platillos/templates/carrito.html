@@ -1,6 +1,7 @@
 {% load humanize %}
 {% load static %}
 
+
 <div class="shadow div-detalle-pedido" role="alert" style="padding: 10px;">
     <div class="row section-title">
         <h2 class="style-section-tittle">Tu pedido</h2>
@@ -8,6 +9,7 @@
     </div>
 
     <table class="table table-borderless carro" style="text-align: center;">
+
         <thead>
             <tr>
                 <!-- <th scope="col">Plato</th>
@@ -43,9 +45,11 @@
     </table>
     <div class="row text-center botones-carro">
 
+
         <div class="col-6"> <a href="{% url 'limpiar_carrito' %}" class="btn btn-danger"><img
                     src="{% static 'img/icons8-cesta-de-compra-eliminar-24.png' %}" alt=""> Limpiar</a></div>
         <div class="col-6"> <a href="guardar" class="btn btn-success"> <img
                     src="{% static 'img/icons8-comprar-24.png' %}" alt="">Finalizar Pedido</a></div>
+
     </div>
 </div>

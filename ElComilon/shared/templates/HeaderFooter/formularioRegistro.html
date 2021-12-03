@@ -1,0 +1,85 @@
+<div class="form">
+    <div class="row d-flex justify-content-center sangria">
+        <div class="row mt-3 p-0">
+            <div class="col">
+                <div class="form-floating mb-3">
+                    {%if form.email.value%}
+                    <input type="email" name="email" class="form-control"
+                        id="{{form.email.id_for_label}}" placeholder=" "
+                        value="{{form.email.value}}" required>
+                    <label
+                        for="{{form.email.id_for_label}}">{{form.email.label}}</label>
+                    {%else%}
+                    <input type="email" name="email" class="form-control"
+                        id="{{form.email.id_for_label}}" placeholder=" " required>
+                    <label
+                        for="{{form.email.id_for_label}}">{{form.email.label}}</label>
+                    {%endif%}
+                    {% if form.errors%}
+                    <small class="text-danger">{{form.email.errors}}</small>
+                    {%endif%}
+                </div>
+                <div class="form-floating mb-3">
+                    {%if form.username.value%}
+                    <input type="text" id="{{form.username.id_for_label}}"
+                        name="{{form.username.html_name}}" class="form-control"
+                        id="floatingInput" placeholder=" "
+                        value="{{form.username.value}}">
+                    <label
+                        for="{{form.username.id_for_label}}">{{form.username.label}}</label>
+                    {%else%}
+                    <input type="text" id="{{form.username.id_for_label}}"
+                        name="{{form.username.html_name}}" class="form-control"
+                        id="floatingInput" placeholder=" " autocomplete="off">
+                    <label
+                        for="{{form.username.id_for_label}}">{{form.username.label}}</label>
+                    {%endif%}
+                    {% if form.errors%}
+                    <small id="usernaeError"
+                        class="sangria fs-6 text-danger">{{form.username.errors}}</small>
+                    {%endif%}
+                </div>
+                <div class="form-floating mb-3">
+                    {%if form.password1.value%}
+                    <input type="password" name="{{form.password1.html_name}}"
+                        id="id_password1" class="form-control" placeholder=" "
+                        autocomplete="off" value="{{form.password1.value}}">
+                    <label
+                        for="{{form.password1.id_for_label}}">{{form.password1.label}}</label>
+                    <small
+                        class="form-text text-muted sangria">{{form.password1.help_text}}</small>
+                    {%else%}
+                    <input type="password" name="{{form.password1.html_name}}"
+                        id="id_password1" class="form-control" placeholder=" "
+                        autocomplete="off">
+                    <label
+                        for="{{form.password1.id_for_label}}">{{form.password1.label}}</label>
+                    <small
+                        class="form-text text-muted sangria">{{form.password1.help_text}}</small>
+                    {%endif%}
+
+                </div>
+                <div class="form-floating mb-3">
+                    {%if form.password2.value%}
+                    <input type="password" name="{{form.password2.html_name}}"
+                        id="id_password2" class="form-control" placeholder=" "
+                        value="{{form.password2.value}}">
+                    <label
+                        for="{{form.password2.id_for_label}}">{{form.password2.label}}</label>
+                    {%else%}
+                    <input type="password" name="{{form.password2.html_name}}"
+                        id="id_password2" class="form-control" placeholder=" "
+                        autocomplete="off">
+                    <label
+                        for="{{form.password2.id_for_label}}">{{form.password2.label}}</label>
+                    <small
+                        class="form-text text-muted sangria">{{form.password2.help_text}}</small>
+                    {%endif%}
+                    {% if form.errors%}
+                    <small class="text-danger">{{form.password2.errors}}</small>
+                    {%endif%}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

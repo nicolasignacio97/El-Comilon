@@ -1,18 +1,5 @@
 {% extends "HeaderFooter/base.html"%}
 {% load static%}
-
-
-{% block L-izquierda %}
-<a href="/">Inicio</a>
-<a href="/quienesSomos">Sobre nosotros</a>
-{% endblock%}
-
-
-{% block L-derecha %}
-<a href="/platillos">Catálogo</a>
-<a href="/login">Iniciar sesión</a>
-{% endblock%}
-
 {% block content%}
 <!DOCTYPE html>
 <html lang="en">
@@ -28,6 +15,23 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
 
+    <script>
+        function eliminarMenu(id,id2) {
+            Swal.fire({
+                "title": "¿Estás Seguro?",
+                "text": "Esta acción no se puede deshacer",
+                "icon": "question",
+                "showCancelButton": true,
+                "cancelButtonText": "No, Cancelar",
+                "confirmButtonText": "Si, Eliminar",
+                "confirmButtonColor": "#9C3534"
+            }).then(function (result) {
+                if (result.isConfirmed) {
+                    window.location.href = "eliminarMenu/"+id
+                }
+            })
+        }
+    </script>
     <link rel="stylesheet" href="{% static 'css/estilo-menu.css' %}">
     <title>El Comilón</title>
 </head>
@@ -43,11 +47,15 @@
                             <a class="nav-link text-danger" href="{% url 'perfilMenu' user.id %}">Mis Datos</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-danger"  href="{% url 'historial' user.id %}">Mis pedidos</a>
+                            <a class="nav-link text-danger" href="{% url 'historial' user.id %}">Mis pedidos</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="{% url 'crearMenu' user.id %}">Menú Semanal</a>
+                            <a class="nav-link active" aria-current="page" href="{% url 'crearMenu' user.id %}">Menú
+                                Semanal</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-danger" href="{% url 'estadoPedido' user.id %} ">Estado de mi pedido</a>
+                          </li>
                         <li class="nav-item">
                             <a class="nav-link disabled">{{user.username.title}}</a>
                         </li>
@@ -63,13 +71,13 @@
                                         <div class="col-lg-4 mb-4 ">
                                             <h5>Día</h5>
                                             <select name="dia" id="" class="form-select" autofocus>
-                                                <option value="1 - LUNES">Lunes</option>
-                                                <option value="2 - MARTES">Martes</option>
-                                                <option value="3 - MIÉRCOLES">Miércoles</option>
-                                                <option value="4 - JUEVES">Jueves</option>
-                                                <option value="5 - VIERNES">Viernes</option>
-                                                <option value="6 - SÁBADO">Sábado</option>
-                                                <option value="7 - DOMINGO">Domingo</option>
+                                                <option value="1-LUNES">Lunes</option>
+                                                <option value="2-MARTES">Martes</option>
+                                                <option value="3-MIÉRCOLES">Miércoles</option>
+                                                <option value="4-JUEVES">Jueves</option>
+                                                <option value="5-VIERNES">Viernes</option>
+                                                <option value="6-SÁBADO">Sábado</option>
+                                                <option value="7-DOMINGO">Domingo</option>
                                             </select>
                                             <div class="valid-feedback"> </div>
                                             <div class="invalid-feedback">Complete el campo</div>
@@ -80,7 +88,7 @@
                                                 <option value="">Seleccione un platillo</option>
                                                 {% for p in platillos %}
                                                 <option value="{{p.data.0}}">{{p.data.1}}</option>
-                                                
+
                                                 {% endfor %}
                                             </select>
                                             <div class="valid-feedback"> </div>
@@ -90,11 +98,36 @@
                                     <div class="pieForm">
                                         <button class="btn botonEnviar" id="btn1" type="submit">Guardar</button>
                                     </div>
-                                    <a href="/menu/{{cliente.idcuenta}}" class="a-volver">Regresar al Menú Semanal</a>
+                                    <a href="{% url 'menu' user.id %}" class="a-volver">Regresar al Menú Semanal</a>
                                     <div class="row d-flex justify-content-center mt-5">
                                     </div>
                                 </div>
                         </form>
+                        <div class="row">
+                            <div class="table-responsive-md">
+                                <table class="table table-borderless table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Día</th>
+                                            <th scope="col">Platillo</th>
+                                            <th scope="col">Ingredientes</th>
+                                            <th scope="col">Valor Unitario</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for m in menu %}
+                                        <tr>
+                                            <th scope="row" id="rutTrabajador" value="{{ m.data.1 }}">{{ m.data.1}}</th>
+                                            <td>{{ m.data.4 }}</td>
+                                            <td>{{ m.data.5}}</td>
+                                            <td>{{ m.data.6 }}</td>                                     
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+
+                                </table>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
