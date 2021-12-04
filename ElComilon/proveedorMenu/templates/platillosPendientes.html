@@ -1,0 +1,68 @@
+{% extends "HeaderFooter/base.html"%}
+{% load static %}
+
+{% load crispy_forms_tags %}
+{% block content %}
+{% load humanize %}
+<link rel="stylesheet" href="{% static 'css/style-recepcionista-view.css' %}">
+<link rel="stylesheet" href="{% static 'css/style-registrop.css' %}">
+<div class="container bg-white shadow-lg mt-5">
+  <div class="row">
+    <div class="col m-2">
+      <div class="titulo">
+        <h1 class="text-center fs-1">Registrar Nuevo Platillo</h1>
+    </div>
+      <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <a class="nav-link text-danger " aria-current="page" href="{% url 'menuProveedor' user.id %}">Mis Datos</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-danger " aria-current="page" href="{% url 'SubirMisPlatillos'%}" >Subir Platillos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-danger" aria-current="page" href="{% url 'listarPlatilloProveedor'%}">ListarPlatillos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{% url 'PlatillosPendientes'%}">Platillos Pendientes</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" aria-current="page" href="#">Modificar Platillo</a>
+      </li>
+      </ul>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <table class="table table-borderless table-hover">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Estado</th>
+            <th scope="col">Acción</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for platos in platillos %}
+          <tr>
+            <td>{{platos.0}}</td>
+            <td>{{platos.1}}</td>
+            <td>{{platos.3}}</td>
+            <td>{{platos.3}}</td>
+          </tr> 
+          {% endfor %}
+        </tbody>
+      </table>
+      
+      
+      
+      
+      
+      <tbody>
+      </tbody>
+      
+      
+    </div>
+  </div>
+</div>
+{%endblock%}

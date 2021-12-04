@@ -50,7 +50,7 @@ class DetallePedido(models.Model):
     valortotal = models.IntegerField()
     idpedido = models.ForeignKey('Pedido', models.DO_NOTHING,related_name='re_idpedido',db_column='idpedido')
     idplatillo = models.ForeignKey('Platillo', models.DO_NOTHING,related_name='re_idplatillo', db_column='idplatillo')
-    idtiposervicio = models.ForeignKey('Pedido', models.DO_NOTHING,related_name='re_idtiposervicio',db_column='idtiposervicio')
+    idestadoPlatillo = models.ForeignKey('Pedido', models.DO_NOTHING,related_name='re_idtiposervicio',db_column='idtiposervicio')
     rutcliente = models.ForeignKey('Pedido', models.DO_NOTHING, related_name='re_rutcliente',db_column='rutcliente')
 
     class Meta:
@@ -126,9 +126,9 @@ class Platillo(models.Model):
     idplatillo = models.IntegerField(primary_key=True)
     nombre = models.CharField(max_length=30)
     ingredientes = models.CharField(max_length=50)
+    disponible = models.BooleanField(blank= True)
     valorunitario = models.IntegerField()
     foto = models.ImageField(blank=True, null=True)
-    disponible = models.BooleanField(blank= True)
     rutrestaurante = models.ForeignKey('Restaurante', models.DO_NOTHING, db_column='rutrestaurante')
 
     def __str__(self):

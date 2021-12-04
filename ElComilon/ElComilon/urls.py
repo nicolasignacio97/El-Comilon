@@ -4,9 +4,11 @@ from django.contrib import admin
 from django.urls import path, include
 from recepcionista.views import viewRecepcionista,asignarRepartidor, cambiarEstado,menuRecepcion,cambiarEstadoTienda
 from registroDeUsuarios.views import registroUsuario
+
+from proveedorMenu.views import menuProveedor,subirPlatilloProveedor,listarPlatilloProveedor,EliminarPlatilloProveedor,ModificarPlatilloProveedor,PlatillosPendientes
+
 from Home.views import inicio
 from RegisterPlatillo.views import registroPlatillo
-from proveedorMenu.views import menuProveedor,subirPlatilloProveedor,listarPlatilloProveedor
 from repartidor.views import viewPedido, viewRepartidor,PerfilRepartidor,MiVehiculo,cambiarEstadoTiendaRepartidor
 from reclamo.views import reclamo
 from Home.views import quienesSomos
@@ -33,6 +35,11 @@ urlpatterns = [
     path('menuProveedor/<id>', menuProveedor, name="menuProveedor"),
     path('SubirMisPlatillos', subirPlatilloProveedor, name="SubirMisPlatillos"),
     path('listarPlatilloProveedor', listarPlatilloProveedor, name="listarPlatilloProveedor"),
+    path('EliminarPlatilloProveedor/<id>', EliminarPlatilloProveedor, name="EliminarPlatilloProveedor"),
+    path('ModificarPlatilloProveedor/<id>', ModificarPlatilloProveedor, name="ModificarPlatilloProveedor"),
+    path('PlatillosPendientes', PlatillosPendientes, name="PlatillosPendientes"),
+
+    
 
     path('viewPedido/<id>', viewPedido,name="viewPedido"),
     path('FinalizarRepartidor/<id>', cambiarEstadoTiendaRepartidor,name="FinalizarRepartidor"),

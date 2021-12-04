@@ -9,7 +9,7 @@
 <div class="container bg-white shadow-lg mt-5">
     <div class="row">
         <div class="col m-2">
-            <h1 class=" text-center mt-4  mb-5" style="color: brown;">Lista Platillos</h1>
+            <h1 class=" text-center mt-4  mb-3" style="color: brown;">Lista Platillos de {{restaurante.nombrerestaurante | title}}</h1>
             <ul class="nav nav-tabs">
                 <li class="nav-item">
                     <a class="nav-link text-danger" aria-current="page" href="{% url 'menuProveedor' user.id %}">Mis
@@ -22,6 +22,12 @@
                 <li class="nav-item">
                     <a class="nav-link  active" aria-current="page" href="{% url 'listarPlatilloProveedor'%}">Subir
                         Platillos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link  text-danger" aria-current="page" href="{% url 'PlatillosPendientes'%}">Platillos Pendientes</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" aria-current="page" href="#">Modificar Platillo</a>
                 </li>
             </ul>
         </div>
@@ -41,7 +47,7 @@
                                             <input type="text" class="" placeholder="Buscar por Nombre"
                                                 name="nombrePlatillo" id="nombrePlatillo">
                                         </div>
-                                        <div class="col-lg-4 col-md-4">
+                                        <div class="col-lg-4 col-md-4 mb-5">
                                             <button class="btn botonEnviar" type="submit">Buscar</button>
                                         </div>
                                     </div>
@@ -60,30 +66,32 @@
                             <tbody>
                                 {% for p in entity %}
                                 <tr>
-                                    <td id="idPlatillo" name="idPlatillo" style="margin-right: 100px;">{{p.0 }}
+                                    <td id="idPlatillo" name="idPlatillo" style="margin-right: 100px;">{{p.idplatillo}}
                                     </td>
-                                    <td class="titulos">{{ p.1 | title }} </td>
-                                    <td class="titulos">{{ p.2 | title }} </td>
+                                    <td class="titulos">{{ p.nombre | title }} </td>
+                                    <td class="titulos">{{ p.ingredientes | title }} </td>
                                     <td>
-                                        {% if p.5 %}
-                                        <div class="form-check form-switch inputs check">
-                                            <input class="form-check-input" type="checkbox" name="Disponible"
-                                                role="switch" id="flexSwitchCheckDefault" checked disabled>
+                                        <div class="d-flex justify-content-center">
+                                            {% if p.disponible %}
+                                            <div class="form-check form-switch inputs">
+                                                <input class="form-check-input" type="checkbox" name="Disponible"
+                                                    role="switch" id="flexSwitchCheckDefault" checked disabled>
+                                            </div>
+                                            {% else %}
+                                            <div class="form-check form-switch inputsheck">
+                                                <input class="form-check-input" type="checkbox" name="Disponible"
+                                                    role="switch" id="flexSwitchCheckDefault" disabled>
+                                            </div>
+                                            {% endif %}
                                         </div>
-                                        {% else %}
-                                        <div class="form-check form-switch inputsheck check">
-                                            <input class="form-check-input" type="checkbox" name="Disponible"
-                                                role="switch" id="flexSwitchCheckDefault" disabled>
-                                        </div>
-                                        {% endif %}
                                     </td>
-                                    <td>${{ p.3 |intcomma }} </td>
+                                    <td>${{ p.valorunitario |intcomma }} </td>
                                     <td>
-                                        <div class="check">
-                                            <a href="modificarPlatillo/{{ p.0 }}"><i class="fas fa-user-edit"
+                                        <div class="d-flex justify-content-center">
+                                            <a href="ModificarPlatilloProveedor/{{ p.idplatillo}}"><i class="fas fa-user-edit m-1"
                                                     style="color:#02B37F; cursor: pointer;"></i></a>
-                                            <a href="#" onClick="comprobarEliminar('{{ p.0 }}')"><i
-                                                    class="fas fa-trash-alt" style="color: brown; cursor: pointer;">
+                                            <a href="#" onClick="comprobarEliminar('{{p.idplatillo}}')"><i
+                                                    class="fas fa-trash-alt m-1" style="color: brown; cursor: pointer;">
                                                 </i> </a>
                                         </div>
                                     </td>
@@ -100,4 +108,24 @@
         </div>
     </div>
 </div>
+<script>
+    function comprobarEliminar(id) {
+        Swal.fire({
+            "title": '¿Estás seguro?',
+            "text": '¿Estás seguro que deseas eliminar este platillo?',
+            "icon": 'question',
+            "confirmButtonText": 'Aceptar',
+            "showCancelButton": true,
+            "confirmButtonText": 'Si, Borrar platillo',
+            "cancelButtonText": 'No, cancelar!',
+            "reverseButtons": true,
+            "confirmButtonColor": "#9c3534"
+        })
+            .then(function (result) {
+                if (result.isConfirmed) {
+                    window.location.href = "EliminarPlatilloProveedor/" + id
+                }
+            })
+    }
+</script>
 {% endblock%}

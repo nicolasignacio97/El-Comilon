@@ -80,6 +80,7 @@ def registroProveedor (request):
         direccion = request.POST.get('direccion').upper()
         representante =  request.POST.get('rutRepre')
         tipo = 2    
+
         forumulario = FormularioUsuario(data=request.POST)
         if Restaurante.objects.filter(rutrestaurante=rutRest).exists():
                 mensaje = 'Ya existe un Restaurante con este RUT.'

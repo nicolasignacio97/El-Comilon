@@ -10,7 +10,7 @@
   <div class="row">
     <div class="col m-2">
       <div class="titulo">
-        <h1 class="text-center">Registrar Nuevo Platillo</h1>
+        <h1 class="text-center fs-1">Registrar Nuevo Platillo</h1>
     </div>
       <ul class="nav nav-tabs">
         <li class="nav-item">
@@ -20,9 +20,14 @@
             <a class="nav-link  active" aria-current="page" href="{% url 'SubirMisPlatillos'%}" >Subir Platillos</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-danger" aria-current="page" href="{% url 'listarPlatilloProveedor'%}">Subir
-            Platillos</a>
+          <a class="nav-link text-danger" aria-current="page" href="{% url 'listarPlatilloProveedor'%}">Listar Platillos</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link  text-danger" aria-current="page" href="{% url 'PlatillosPendientes'%}">Platillos Pendientes</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" aria-current="page" href="#">Modificar Platillo</a>
+      </li>
       </ul>
     </div>
   </div>
@@ -61,20 +66,7 @@
                             <div class="invalid-feedback">Complete los campos</div>                            
                         </div>
                     </div>
-                    <div class="inputs mb-4">
-                        <div class="form-floating">
-                            <select min="1" id="disabledSelect" name="restaurante" class="form-select inputfocus" required>
-                                <option disabled selected value="">Seleccionar</option>
-                                {% for c in Restaurante %}
-                                <option value="{{ c.0 }}">{{ c.1 }}</option>
-                                {% endfor %}
-                            </select>
-                            <label for="">Seleccione un Restaurante</label>
-                            <div class="valid-feedback"> </div>
-                            <div class="invalid-feedback">Seleccione un restaurante</div>
-                            {{ mensaje }}
-                        </div>
-                    </div>
+
                     <div class="inputs mb-4" id="divFileUpload">
                         <div class="input-group mb-3">
                             <input type="file" name="foto" id="file" accept="image/png,image/jpeg,image/bmp,image/gif" class="form-control inputfocus" required>
@@ -116,4 +108,9 @@
     </div>
   </div>
 </div>
+<script src="{% static 'app/foto.js'%}"></script>
+<script src="{% static 'app/validar-form.js'%}"></script>
+<script src="{% static 'app/vista-previa.js'%}"></script>
+
+
 {% endblock%}

@@ -4,7 +4,7 @@
 
 {% load crispy_forms_tags %}
 {% block content %}
-
+{% load humanize %}
 <link rel="stylesheet" href="{% static 'css/style-recepcionista-view.css' %}">
 <div class="container bg-white shadow-lg mt-5 mb-3">
   <div class="row">
@@ -68,7 +68,7 @@
                               <div class="card-body">
                                 <div class="total">                              
                                   <label for=""><span>Total: $</span></label>
-                                  <label for="">{{ pedidoSelect.valortotal }}</label>
+                                  <label for="">{{ pedidoSelect.valortotal | intcomma }}</label>
                                 </div>
                               </div>
                             </div>
