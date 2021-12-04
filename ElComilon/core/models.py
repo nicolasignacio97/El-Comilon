@@ -52,6 +52,7 @@ class DetallePedido(models.Model):
     idplatillo = models.ForeignKey('Platillo', models.DO_NOTHING,related_name='re_idplatillo', db_column='idplatillo')
     idestadoPlatillo = models.ForeignKey('Pedido', models.DO_NOTHING,related_name='re_idtiposervicio',db_column='idtiposervicio')
     rutcliente = models.ForeignKey('Pedido', models.DO_NOTHING, related_name='re_rutcliente',db_column='rutcliente')
+    ID_ESTADO_PLATILLO = models.IntegerField()
 
     class Meta:
         managed = False

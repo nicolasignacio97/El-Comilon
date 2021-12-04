@@ -80,15 +80,14 @@ def registroProveedor (request):
         direccion = request.POST.get('direccion').upper()
         representante =  request.POST.get('rutRepre')
         tipo = 2    
-
+        mensaje=''
+        mensaje2 ='' 
         forumulario = FormularioUsuario(data=request.POST)
         if Restaurante.objects.filter(rutrestaurante=rutRest).exists():
                 mensaje = 'Ya existe un Restaurante con este RUT.'
         if Representante.objects.filter(rutrepresentante=rutRepre).exists():
                 mensaje2 = 'Ya existe un Representante con este RUT.'
         else:
-            mensaje=''
-            mensaje2 ='' 
             if forumulario.is_valid():
                 user = forumulario.save()
                 group = Group.objects.get(name='Proveedor')

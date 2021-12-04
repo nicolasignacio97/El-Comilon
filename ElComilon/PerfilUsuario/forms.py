@@ -21,12 +21,18 @@ class EditarUsuario (UserChangeForm):
             'email': 'Correo Electrónico',
             'username': 'Nombre de Usuario'
         }
+    def clean_username(self):
+        username = self.cleaned_data.get("username")
+        if User.objects.filter(username=username).exists():
+            raise forms.ValidationError("Ya existe un usuario con este nombre.")
+        return username
 
 
 class EditarContrasena(PasswordChangeForm):
     class Meta:
         model = User
         fields = ('old_password','new_password1','new_password2')
+
     def clean_new_password1(self):
         data = self.cleaned_data['new_password1']
         if len(data) < 8 or len(data) > 64:

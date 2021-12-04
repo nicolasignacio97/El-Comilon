@@ -71,6 +71,7 @@ def menuRecepcion(request, id):
     trabajador = get_object_or_404(Trabajador, idcuenta=id)
     formCuenta = EditarUsuario(instance=usuario)
     formPersonal = EditarRecepcionista(instance=trabajador)
+    mensaje = ""
     data= {
         'usuario': usuario,
         'formCuenta': formCuenta,
@@ -80,24 +81,29 @@ def menuRecepcion(request, id):
     }
     if request.method == 'POST':
         formCuenta = EditarUsuario(request.POST, instance=request.user)
+        print(formCuenta)
         formPersonal = EditarRecepcionista(request.POST, instance=trabajador)
-    if formCuenta.is_valid():
-        if formPersonal.is_valid():
-            formCuenta.save()
-            formPersonal.save()
-            messages.success(request, " Modificado correctamente")
-            usuario = get_object_or_404(User, id=id)
-            trabajador = get_object_or_404(Trabajador, idcuenta=id)
-            formCuenta = EditarUsuario(instance=usuario)
-            formPersonal = EditarRecepcionista(instance=trabajador)
-            data2= {
-                'usuario': usuario,
-                'formCuenta': formCuenta,
-                'trabajador': trabajador,
-                'form': formPersonal,
-                'TotalPedidos':len(listado_pedidos_listos())
-            }
-            return render (request, 'menuRecepcionista.html',data2)
+        # if User.objects.filter(username= formCuenta.username).exists():
+        #     mensaje = 'Ya existe un Restaurante con este Nombre de usuario.'
+        # else:
+        if formCuenta.is_valid():
+            if formPersonal.is_valid():
+                    formCuenta.save()
+                    formPersonal.save()
+                    messages.success(request, " Modificado correctamente")
+                    usuario = get_object_or_404(User, id=id)
+                    trabajador = get_object_or_404(Trabajador, idcuenta=id)
+                    formCuenta = EditarUsuario(instance=usuario)
+                    formPersonal = EditarRecepcionista(instance=trabajador)
+                    data2= {
+                        'usuario': usuario,
+                        'formCuenta': formCuenta,
+                        'trabajador': trabajador,
+                        'form': formPersonal,
+                        'TotalPedidos':len(listado_pedidos_listos()),
+                        'mensaje':mensaje
+                    }
+                    return render (request, 'menuRecepcionista.html',data2)
 
     return render (request, 'menuRecepcionista.html',data)
 

@@ -5,7 +5,7 @@ from django.urls import path, include
 from recepcionista.views import viewRecepcionista,asignarRepartidor, cambiarEstado,menuRecepcion,cambiarEstadoTienda
 from registroDeUsuarios.views import registroUsuario
 
-from proveedorMenu.views import menuProveedor,subirPlatilloProveedor,listarPlatilloProveedor,EliminarPlatilloProveedor,ModificarPlatilloProveedor,PlatillosPendientes
+from proveedorMenu.views import menuProveedor,subirPlatilloProveedor,listarPlatilloProveedor,EliminarPlatilloProveedor,ModificarPlatilloProveedor,PlatillosPendientes,cambiarAPreparacion,cambiarAPendiente,cambiarAListo
 
 from Home.views import inicio
 from RegisterPlatillo.views import registroPlatillo
@@ -38,6 +38,10 @@ urlpatterns = [
     path('EliminarPlatilloProveedor/<id>', EliminarPlatilloProveedor, name="EliminarPlatilloProveedor"),
     path('ModificarPlatilloProveedor/<id>', ModificarPlatilloProveedor, name="ModificarPlatilloProveedor"),
     path('PlatillosPendientes', PlatillosPendientes, name="PlatillosPendientes"),
+    path('cambiarAPreparacion/<id>', cambiarAPreparacion, name="cambiarAPreparacion"),
+    path('cambiarAPendiente/<id>', cambiarAPendiente, name="cambiarAPendiente"),
+    path('cambiarAListo/<id>', cambiarAListo, name="cambiarAListo"),
+
 
     
 
