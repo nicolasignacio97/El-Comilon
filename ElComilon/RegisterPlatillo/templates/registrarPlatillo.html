@@ -107,30 +107,15 @@
     </main>
     <script src="{% static 'app/foto.js'%}"></script>
     <script src="{% static 'app/validar-form.js'%}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-W8fXfP3gkOKtndU4JGtKDvXbO53Wy8SZCQHczT5FMiiqmQfUpWbYdTil/SxwZgAN" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.min.js" integrity="sha384-skAcpIdS7UcVUC05LJ9Dxay8AXcDYfBJqt1CJ85S/CFujBsIzCIv+l9liuYLaMQ/" crossorigin="anonymous"></script>
     <script src="{% static 'app/vista-previa.js'%}"></script>
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="sweetalert2.all.min.js"></script>
-    <script src="alerta-exito"></script>
+
     <script>
         if ( window.history.replaceState ) {
             window.history.replaceState( null, null, window.location.href );
         }
     </script>
 
-    <script>
-        function validateFileType(){
-            var file = document.getElementById("file").value;
-            var idxDot = file.lastIndexOf(".") + 1;
-            var extFile = file.substr(idxDot, file.length).toLowerCase();
-            if (extFile=="jpg" || extFile=="jpeg" || extFile=="png"){
-                //TO DO
-            }else{
-                alert("Only jpg/jpeg and png files are allowed!");
-            }   
-        }
-    </script>
+    
 </body>
 
 </html>

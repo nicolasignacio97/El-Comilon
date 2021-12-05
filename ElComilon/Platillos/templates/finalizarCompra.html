@@ -44,14 +44,14 @@
                                 <input class="input-text" id="Direccion" name="Direccion" type="text" placeholder="Ingresa tu dirección" value="{{ cliente.direccion }}" disabled>
                             </div>
         
-                            <div class="campo">
+                            <div class="campo overflow-auto">
                                 <div class="title titulos-campo">
                                     <label>Detalles del pedido</label>
                                     <hr class="separador">
                                 </div>
                                 {% for key ,value in request.session.carrito.items %}
-                                <div class="platillo-completo">
-                                    <div class="platillos">
+                                <div class="platillo-completo ">
+                                    <div class="platillos ">
                                         <label >{{value.nombre | title}}</label>
                                         <div class="agregar-restar">
                                             <a href="{% url 'restar_producto_fin' value.idplatillo %}" class="badge btn btn-outline-danger fs-6">-</a>

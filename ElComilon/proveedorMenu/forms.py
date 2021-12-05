@@ -1,15 +1,14 @@
 from django.contrib.auth.forms import UserChangeForm, PasswordChangeForm
 from django.contrib.auth.models import User
 from django import forms
-from core.models import Cliente
+from core.models import Representante,Restaurante
 
 
 
-class EditarCliente(forms.ModelForm):
+class EditarRepresentante(forms.ModelForm):
     class Meta:
-        model = Cliente
-        fields = ('nombres', 'apellidos', 'direccion', 'telefono')
-
+        model = Representante
+        fields = ('nombres', 'apellidos', 'telefono')
 
 class EditarUsuario (UserChangeForm):
     password = None
@@ -21,18 +20,11 @@ class EditarUsuario (UserChangeForm):
             'email': 'Correo Electrónico',
             'username': 'Nombre de Usuario'
         }
-    def clean_username(self):
-        username = self.cleaned_data.get("username")
-        if User.objects.filter(username=username).exists():
-            raise forms.ValidationError("Ya existe un usuario con este nombre.")
-        return username
-
 
 class EditarContrasena(PasswordChangeForm):
     class Meta:
         model = User
         fields = ('old_password','new_password1','new_password2')
-
     def clean_new_password1(self):
         data = self.cleaned_data['new_password1']
         if len(data) < 8 or len(data) > 64:

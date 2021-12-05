@@ -100,11 +100,9 @@ def guardar(request):
         Carrito = carrito(request)
         carro = Carrito.caja()
         for p in carro:
-            agregar_detalle_pedido(p['cantidad'], p['valorunitario'], p['acumulado'], p['idplatillo'], cliente.rutcliente)
-
-        
+            agregar_detalle_pedido(p['cantidad'], p['valorunitario'], p['acumulado'], p['idplatillo'], cliente.rutcliente)       
         limpiar_carrito(request)
-    
+
     return redirect("platillos")
 
 def agregar_pedido(valorTotal, fecha, direccion, idTipoServ, rutCliente, idEstPed, hora):

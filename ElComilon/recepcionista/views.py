@@ -1,16 +1,16 @@
 from django.shortcuts import get_object_or_404, render, redirect
-
 from .forms import EditarUsuario, EditarRecepcionista
 from django.contrib.auth.models import User
 from django.contrib import messages
-from core.models import Trabajador,Pedido, DetallePedido, Cliente
+from core.models import Trabajador,Pedido, DetallePedido, Cliente,Repartidor
+
 from django.db import connection
 import cx_Oracle
 
 # Create your views here.
 def cambiarEstadoTienda(request, id):
     cambiar_estado(id, 5)
-    return redirect(to='recepcionista')
+    return redirect(to='/recepcionista')
 
 def viewRecepcionista(request):
     dataRep = {
@@ -55,15 +55,13 @@ def asignarRepartidor(request,id):
     }
 
     if request.method == 'POST':
-      
         idestpedido = 4
         rutrepartidor = request.POST.get('repartidor')
-        salida = asignar_repartidor(id, idestpedido, rutrepartidor)
-        
-        if salida == 1:
-            return redirect(to="recepcionista")
-        else:
-            dataMod['mensaje'] = 'UPS, NO SE HA PODIDO ASIGNAR UN REPARTIDOR EL PEDIDO'
+        repartidor = get_object_or_404(Repartidor, rutrepartidor = rutrepartidor )
+        asignar_repartidor(id, idestpedido, rutrepartidor)
+        messages.success(request,"Pedido Asignado A "+ repartidor.nombres)
+        return redirect(to="recepcionista")
+
     return render(request,'asignaRepartidor.html',dataMod)
 
 
@@ -73,6 +71,7 @@ def menuRecepcion(request, id):
     trabajador = get_object_or_404(Trabajador, idcuenta=id)
     formCuenta = EditarUsuario(instance=usuario)
     formPersonal = EditarRecepcionista(instance=trabajador)
+    mensaje = ""
     data= {
         'usuario': usuario,
         'formCuenta': formCuenta,
@@ -82,24 +81,29 @@ def menuRecepcion(request, id):
     }
     if request.method == 'POST':
         formCuenta = EditarUsuario(request.POST, instance=request.user)
+        print(formCuenta)
         formPersonal = EditarRecepcionista(request.POST, instance=trabajador)
-    if formCuenta.is_valid():
-        if formPersonal.is_valid():
-            formCuenta.save()
-            formPersonal.save()
-            messages.success(request, " Modificado correctamente")
-            usuario = get_object_or_404(User, id=id)
-            trabajador = get_object_or_404(Trabajador, idcuenta=id)
-            formCuenta = EditarUsuario(instance=usuario)
-            formPersonal = EditarRecepcionista(instance=trabajador)
-            data2= {
-                'usuario': usuario,
-                'formCuenta': formCuenta,
-                'trabajador': trabajador,
-                'form': formPersonal,
-                'TotalPedidos':len(listado_pedidos_listos())
-            }
-            return render (request, 'menuRecepcionista.html',data2)
+        # if User.objects.filter(username= formCuenta.username).exists():
+        #     mensaje = 'Ya existe un Restaurante con este Nombre de usuario.'
+        # else:
+        if formCuenta.is_valid():
+            if formPersonal.is_valid():
+                    formCuenta.save()
+                    formPersonal.save()
+                    messages.success(request, " Modificado correctamente")
+                    usuario = get_object_or_404(User, id=id)
+                    trabajador = get_object_or_404(Trabajador, idcuenta=id)
+                    formCuenta = EditarUsuario(instance=usuario)
+                    formPersonal = EditarRecepcionista(instance=trabajador)
+                    data2= {
+                        'usuario': usuario,
+                        'formCuenta': formCuenta,
+                        'trabajador': trabajador,
+                        'form': formPersonal,
+                        'TotalPedidos':len(listado_pedidos_listos()),
+                        'mensaje':mensaje
+                    }
+                    return render (request, 'menuRecepcionista.html',data2)
 
     return render (request, 'menuRecepcionista.html',data)
 

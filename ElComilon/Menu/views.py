@@ -1,14 +1,13 @@
-from django.http.response import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.db import connection
 import base64
-from core.models import Cliente,MenuSemanal
+from core.models import Cliente
 import cx_Oracle
 
 # Create your views here.
 
 
-def crearMenu (request,id):
+def crearMenu(request,id):
     cliente =  get_object_or_404(Cliente,idcuenta = id)
     
     data = {

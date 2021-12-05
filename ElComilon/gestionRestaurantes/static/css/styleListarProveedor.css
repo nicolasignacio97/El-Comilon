@@ -3,21 +3,7 @@
     justify-content:center;
     width:100%;
 }
-.botonEnviar{
-    align-items:center;
-    background-color:#9C3534;
-    color:#fff;
-    padding:.7rem;
-    width:50%;
-}
-.botonEnviar:hover{
-    background-color:#fff;
-    color:#9C3534;
-    border:1px solid #9C3534;
-}
-.titulo{
-    color:#9C3534;
-}
+
 
 .botonEnviar{
     align-items:center;
