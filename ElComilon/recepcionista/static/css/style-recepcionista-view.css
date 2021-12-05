@@ -1,4 +1,4 @@
-h2{
+.titulo{
     color: #9c3534;
 }
 
@@ -36,8 +36,10 @@ h2{
     background-color: #9c3534;  
     color: #fff;
 }
-
-.vl {
+.ancho{
+    width: 13rem;
+}
+.vl{
     border-left: 2px solid #9c36348e;
     height: auto;
 }

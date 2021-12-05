@@ -1,0 +1,139 @@
+{% extends "HeaderFooter/base.html"%}
+{% load static %}
+
+
+{% block content %}
+{% load humanize %}
+<link rel="stylesheet" href="{% static 'css/estiloActualizarP.css' %}">
+<div class="container bg-white shadow-lg mt-5">
+    <div class="row">
+        <div class="col m-2">
+            <div class="titulo">
+                <h1 class="text-center mt-1 mb-3 titulo">Actualizar Platillo</h1>
+            </div>
+
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a class="nav-link text-danger" aria-current="page" href="{% url 'menuProveedor' user.id %}">Mis
+                        Datos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-danger" aria-current="page" href="{% url 'SubirMisPlatillos'%}">Subir
+                        Platillos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-danger" aria-current="page" href="{% url 'listarPlatilloProveedor'%}">Listar Platillos</a>
+                </li>
+                <a class="nav-link text-danger  position-relative" href="{% url 'PlatillosPendientes'%}">Platillos Pendientes
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                       {{TotalPedidos}}
+                        <span class="visually-hidden">unread messages</span>
+                      </span>
+                  </a>
+                <li class="nav-item">
+                    <a class="nav-link disabled active" aria-current="page" href="#">Modificar Platillo</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            {% load humanize %}
+            <form action="" autocomplete="off" method="post" class="formulario needs-validation"
+                enctype=multipart/form-data validate novalidate>
+                {% csrf_token %}
+                <div class="itemsIzquierda mt-5">
+                    <div class="campos">
+                        <div class="inputs">
+                            <div class="form-floating">
+                                <input type="text" minlength="4" maxlength="30" id="Nombre" name="Nombre"
+                                    value="{{platillo.0.0}}" class="form-control inputfocus" placeholder=" " required>
+                                <label for="Nombre">Nombre del platillo</label>
+                                <div class="valid-feedback"> </div>
+                                <div class="invalid-feedback">Complete los campos</div>
+                            </div>
+                        </div>
+                        <div class="inputs">
+                            <div class="form-floating">
+                                <input type="text" minlength="4" maxlength="50" id="Ingredientes" name="Ingredientes"
+                                    value="{{platillo.0.1}}" class="form-control inputfocus" required placeholder=" ">
+                                <label for="">Ingredientes</label>
+                                <div class="valid-feedback"> </div>
+                                <div class="invalid-feedback">Complete los campos</div>
+                            </div>
+                        </div>
+                        <div class="inputs">
+                            <div class="form-floating">
+                                <input type="number" min="100" max="999999" id="Valor" name="Valor"
+                                    value="{{platillo.0.2}}" class="form-control inputfocus" required placeholder=" ">
+                                <label for="">Valor</label>
+                                <div class="valid-feedback"> </div>
+                                <div class="invalid-feedback">Complete los campos</div>
+                            </div>
+                        </div>
+
+                        <div class="inputs" id="divFileUpload">
+                            <div class="input-group mb-3">
+                                <input type="file" name="foto" class="form-control inputfocus" id="file"
+                                    accept="image/*">
+                                <div class="valid-feedback"> </div>
+                                <div class="invalid-feedback">Inserte una imagen</div>
+                            </div>
+                        </div>
+                        <div class="inputs">
+                            {% if platillo.0.4 %}
+                            <div class="form-check form-switch inputs check">
+                                <input class="form-check-input" type="checkbox" name="Disponible" role="switch"
+                                    id="flexSwitchCheckDefault" checked>
+                                <label class="form-check-label" for="flexSwitchCheckDefault">Disponible</label>
+                            </div>
+                            {% else %}
+                            <div class="form-check form-switch inputs check">
+                                <input class="form-check-input" type="checkbox" name="Disponible" role="switch"
+                                    id="flexSwitchCheckDefault">
+                                <label class="form-check-label" for="flexSwitchCheckDefault">Disponible</label>
+                            </div>
+                            {% endif %}
+                            <span> </span>
+                        </div>
+
+                    </div>
+
+                    <div class="imagen-botones">
+                        <h3 class="titlulo-vista-previa">Tu plato se verá así en el menú </h3>
+                        <div class="card platillo" style="width: 20rem; height: 20rem;">
+                            <div id="preview">
+                                <img src="data:imagen/png;base64, {{foto.0}}" alt="foto-platillo" name="foto-pre">
+                            </div>
+                            <div class="card-body d-flex flex-column text-center justify-content-center">
+                                <h5 id="previaNombre" class="card-title platillo__nombre">{{platillo.0.0}}</h5>
+                                <p id="previaIngredientes" value="{{seleccion.ingredientes}}"
+                                    class="card-text platillo__descripcion">{{platillo.0.1}}</p>
+                                <hr class="separacion">
+                                <div class="precio-signo">
+                                    <h6>$ </h6>
+                                    <h6 id="previaValor" class="card-subtitle mb-2  platillo__precio">{{platillo.0.2| intcomma}}</h6>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <img src="data:imagen/png;base64, {{foto.0}}" alt="asd"> -->
+
+                    </div>
+
+                </div>
+                <div class="botones">
+                    <button type="submit" class="btn btn-aceptar mb-5" onClick="alertaExito()">Actualizar datos</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+    <script src="{% static 'app/foto.js'%}"></script>
+    <script src="{% static 'app/validar-form.js'%}"></script>
+    <script src="{% static 'app/vista-previa.js'%}"></script>
+    <script>
+        if (window.history.replaceState) {
+            window.history.replaceState(null, null, window.location.href);
+        }
+    </script>
+    {% endblock%}

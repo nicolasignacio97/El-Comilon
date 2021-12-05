@@ -4,10 +4,12 @@ from django.contrib import admin
 from django.urls import path, include
 from recepcionista.views import viewRecepcionista,asignarRepartidor, cambiarEstado,menuRecepcion,cambiarEstadoTienda
 from registroDeUsuarios.views import registroUsuario
+
+from proveedorMenu.views import menuProveedor,subirPlatilloProveedor,listarPlatilloProveedor,EliminarPlatilloProveedor,ModificarPlatilloProveedor,PlatillosPendientes,cambiarAPreparacion,cambiarAPendiente,cambiarAListo
+
 from Home.views import inicio
 from RegisterPlatillo.views import registroPlatillo
-from proveedorMenu.views import menuProveedor
-from repartidor.views import viewPedido, viewRepartidor,PerfilRepartidor,MiVehiculo
+from repartidor.views import viewPedido, viewRepartidor,PerfilRepartidor,MiVehiculo,cambiarEstadoTiendaRepartidor
 from reclamo.views import reclamo
 from Home.views import quienesSomos
 from administracion.urls import url_patterns
@@ -29,9 +31,25 @@ urlpatterns = [
     path('pedido', pedido),
     path('platillos', platillos, name="platillos"),
     path('perfilMenu/<id>', perfilMenu, name="perfilMenu"),
-    path('menuProveedor/<id>', menuProveedor, name="menuProveedor"),
 
-    path('viewPedido/<id>', viewPedido),
+    path('menuProveedor/<id>', menuProveedor, name="menuProveedor"),
+    path('SubirMisPlatillos', subirPlatilloProveedor, name="SubirMisPlatillos"),
+    path('listarPlatilloProveedor', listarPlatilloProveedor, name="listarPlatilloProveedor"),
+    path('EliminarPlatilloProveedor/<id>', EliminarPlatilloProveedor, name="EliminarPlatilloProveedor"),
+    path('ModificarPlatilloProveedor/<id>', ModificarPlatilloProveedor, name="ModificarPlatilloProveedor"),
+    path('PlatillosPendientes', PlatillosPendientes, name="PlatillosPendientes"),
+    path('cambiarAPreparacion/<id>', cambiarAPreparacion, name="cambiarAPreparacion"),
+    path('cambiarAPendiente/<id>', cambiarAPendiente, name="cambiarAPendiente"),
+    path('cambiarAListo/<id>', cambiarAListo, name="cambiarAListo"),
+
+
+    
+
+    path('viewPedido/<id>', viewPedido,name="viewPedido"),
+    path('FinalizarRepartidor/<id>', cambiarEstadoTiendaRepartidor,name="FinalizarRepartidor"),
+
+
+
     path('estadoPedido/<id>', estadoPedido, name="estadoPedido"),
     path('repartidor', viewRepartidor, name="repartidor"),
     path('perfilRepartidor/<id>', PerfilRepartidor, name="perfilRepartidor"),

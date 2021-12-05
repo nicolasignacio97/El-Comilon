@@ -15,6 +15,7 @@ class FormularioUsuario (UserCreationForm):
         if User.objects.filter(username=username).exists():
             raise forms.ValidationError("Ya existe un usuario con este nombre.")
         return username
+        
     def clean_email(self):
         email = self.cleaned_data.get("email")
         if User.objects.filter(email=email).exists():

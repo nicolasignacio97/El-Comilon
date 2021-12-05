@@ -7,6 +7,10 @@ from django.contrib.auth.decorators import permission_required
 from django.db import connection
 import cx_Oracle
 
+def cambiarEstadoTiendaRepartidor(request, id):
+    modificar_estado_pedido(id, 5)
+    return redirect(to='repartidor')
+
 
 # Create your views here.
 @permission_required('core.view_pedido')
@@ -25,13 +29,6 @@ def viewPedido(request, id):
     dataMod = {
         'pedidoSelect': pedido 
     }
-    if request.method == 'POST':
-        idestpedido = 5
-        salida = modificar_estado_pedido(id, idestpedido)
-        if salida == 1:
-            return redirect(to="/repartidor")
-        else:
-            dataMod['mensaje'] = 'UPS, NO SE HA PODIDO FINALIZAR EL PEDIDO'
     return render(request, 'viewPedido.html', dataMod)
 
 
