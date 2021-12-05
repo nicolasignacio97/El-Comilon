@@ -266,3 +266,26 @@ body{
     display: flex;
     justify-content: flex-end;
 }
+
+.carro-vacio{
+    margin-top: 7rem;
+    max-width: 1740px;
+    flex-direction: column;
+    align-items: center;
+    display: flex;
+    gap: 2rem;
+}
+
+.label-carro-vacio{
+    font-size: 24px;
+    color: #7a7a7a;
+}
+
+.catalogo-ref{
+    color: #9c3534;
+}
+
+.hora-fecha{
+    display: flex;
+    gap: 2rem;
+}
