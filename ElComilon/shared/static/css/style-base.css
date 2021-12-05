@@ -354,3 +354,6 @@ a:hover{
   text-decoration: none;
 }
 
+.items-header{
+  display: flex;
+}

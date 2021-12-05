@@ -52,6 +52,7 @@
                                         <th scope="col">Id. Platillo</th>
                                         <th scope="col">Nombre Platillo</th>
                                         <th scope="col">Ingredientes</th>
+                                        <th scope="col">Restaurante</th>
                                         <th class="dispo" scope="col">Disponibilidad</th>
                                         <th scope="col">Precio</th>
                                         <th class="dispo" scope="col">Acción</th>
@@ -63,6 +64,7 @@
                                         </td>
                                         <td class="titulos">{{ p.1 | title }} </td>
                                         <td class="titulos">{{ p.2 | title }} </td>
+                                        <td class="titulos">{{ p.4 | title }} </td>
                                         <td>
                                             {% if p.5 %}
                                             <div class="form-check form-switch inputs check">

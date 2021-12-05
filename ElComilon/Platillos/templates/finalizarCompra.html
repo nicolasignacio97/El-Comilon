@@ -70,11 +70,17 @@
         
                             <div class="campo">
                                 <div class="title titulos-campo">
-                                    <label class="subtitle-small">Fecha de entrega</label>
+                                    <label class="subtitle-small">Fecha y hora de entrega</label>
                                     <hr class="separador">
                                 </div>
-                                <input class="input-text" id="fechaActual" name="Fecha" type="date" placeholder="Tu Email">
+                                <div class="hora-fecha">
+                                    <input class="input-text" id="fechaActual" name="Fecha" type="date" placeholder="Fecha Entrega">
+                                    <input class="input-text" id="fechaActual" name="Hora" type="time" placeholder="Hora Entrega">
+                                </div>                           
+                                
+                                
                             </div>
+
                             <div class="campo">
                                 <div class="title titulos-campo">
                                     <label>Resumen</label>
@@ -107,10 +113,17 @@
 
   
     {% else %}
+    <div class="carro-vacio">
+        <div>
+            <img src="{% static 'img/sad-cart.png' %}" alt="">
+        </div>
+        <div>
+            <label for="" class="label-carro-vacio">
+                UPS! No tienes platos en tu carrito. Te invitamos a revisar nuestro <a class="catalogo-ref" href="/platillos">catálogo.</a>
+            </label>
+        </div>
+    </div>
 
-        <td colspan="3">
-            <div class="alert alert-danger text-center"> Sin Productos</div>
-        
         {% endif %}
     </section>
     <script type="text/javascript">
