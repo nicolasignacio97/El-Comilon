@@ -78,7 +78,6 @@ def limpiar_carrito(request):
 
 def guardar(request):    
     cliente = get_object_or_404(Cliente, idcuenta = request.user.id)
-    print(cliente)
     Carrito = carrito(request)
     
 
@@ -94,9 +93,10 @@ def guardar(request):
             idTipoServ = 2
         rutcliente = cliente.rutcliente
         idEstPed = 1
-        agregar_pedido(total, fecha, direccion, idTipoServ, rutcliente, idEstPed)
+        hora = request.POST.get('Hora')
+        agregar_pedido(total, fecha, direccion, idTipoServ, rutcliente, idEstPed, hora)
 
-
+        #AGREGAR DETALLE PEDIDO
         Carrito = carrito(request)
         carro = Carrito.caja()
         for p in carro:
@@ -107,11 +107,11 @@ def guardar(request):
     
     return redirect("platillos")
 
-def agregar_pedido(valorTotal, fecha, direccion, idTipoServ, rutCliente, idEstPed):
+def agregar_pedido(valorTotal, fecha, direccion, idTipoServ, rutCliente, idEstPed, hora):
     django_cursor = connection.cursor()
     cursor = django_cursor.connection.cursor()
     salida = cursor.var(cx_Oracle.NUMBER)
-    cursor.callproc("SP_AGREGAR_PEDIDO", [valorTotal, fecha, direccion, idTipoServ, rutCliente, idEstPed, salida]) 
+    cursor.callproc("SP_AGREGAR_PEDIDO", [valorTotal, fecha, direccion, idTipoServ, rutCliente, idEstPed, hora, salida]) 
     return salida.getvalue()
 
 def agregar_detalle_pedido(cantidad, valorUnitario, valorTotal, idPlatillo, rutCliente):

@@ -11,7 +11,7 @@
   margin-top: auto;
   display: flex;
   justify-content: space-between;
-  margin-bottom: 20px;
+  margin-bottom: 100px;
 }
 
 @media (max-width: 768px) {
@@ -34,7 +34,7 @@
   content: "";
   border-bottom: 2px solid #ccc;
   width: 100%;
-  top: 20px;
+  top: 40px;
   left: -50%;
   z-index: 2;
 }
@@ -50,7 +50,7 @@
   content: "";
   border-bottom: 2px solid #ccc;
   width: 100%;
-  top: 20px;
+  top: 40px;
   left: 50%;
   z-index: 2;
 }
@@ -67,8 +67,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 40px;
-  height: 40px;
+  height: 5rem;
+  width: 5rem;
   border-radius: 50%;
   background: #ccc;
   margin-bottom: 6px;
@@ -79,8 +79,8 @@
   background-color: #ffffff; 
   border: solid 2px #9c3534;
   color: #717171;
-  width: 3.5rem;
-  height: 3.5rem;
+  height: 5rem;
+  width: 5rem;
 }
 
 .stepper-item.active .step-name{
@@ -96,7 +96,7 @@
   content: "";
   border-bottom: 2px solid #9c3534;
   width: 100%;
-  top: 20px;
+  top: 40px;
   left: 50%;
   z-index: 3;
 }
@@ -123,4 +123,12 @@
 .titulo-estado{
     text-align: center;
     margin-bottom: 5rem;
+}
+
+.gif-active{
+  height: 45px;
+}
+
+.id-pedido{
+  font-weight: bold;
 }
