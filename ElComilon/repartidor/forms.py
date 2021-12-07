@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserChangeForm
 from django.contrib.auth.models import User
+from django.forms.widgets import TextInput
 from core.models import Repartidor,Vehiculo
 
 
@@ -18,5 +19,5 @@ class EditarRepartidor(forms.ModelForm):
 class EditarVehiculo(forms.ModelForm):
     class Meta:
         model = Vehiculo
-        fields = ('patentevehiculo','modelo','anio','color')
+        fields = ('patentevehiculo','modelo','anio')
         

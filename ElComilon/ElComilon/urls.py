@@ -22,7 +22,7 @@ from administracion.views import pag_404
 
 urlpatterns = [
     path('', inicio, name="home"),
-    path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls, name="administracion"),
     path('administracion/', include(url_patterns)),
     path('registroPlatillo', registroPlatillo),
     path('reclamo', reclamo),

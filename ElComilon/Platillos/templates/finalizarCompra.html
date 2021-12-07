@@ -5,6 +5,7 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -16,24 +17,76 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/estiloPedido.css' %}">
     <title>Document</title>
+    <script>
+        function modificarEstado(e, id) {
+
+            e.preventDefault();
+            Swal.fire({
+                "title": "¿Desea Confirmar El Pedido?",
+                "icon": "question",
+                "showCancelButton": true,
+                "cancelButtonText": "No, Cancelar",
+                "confirmButtonText": "Si, Confirmar",
+                "confirmButtonColor": "#9C3534"
+            }).then(function (result) {
+                if (result.isConfirmed) {
+                    let timerInterval
+                    Swal.fire({
+                        title: 'Ingresando Su Pedido',
+                        html: 'Por Favor Espere...',
+                        timer: 1000,
+                        timerProgressBar: true,
+                        didOpen: () => {
+                            Swal.showLoading()
+                            const b = Swal.getHtmlContainer().querySelector('b')
+                            timerInterval = setInterval(() => {
+                                b.textContent = Swal.getTimerLeft()
+                            }, 100)
+                        },
+                        willClose: () => {
+                            clearInterval(timerInterval)
+                        }
+                    }).then((result) => {
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'success',
+                            title: 'Hemos Recibido Tu Pedido',
+                            showConfirmButton: false,
+                            timer: 1000
+                        })
+                        setTimeout(() => {
+                            if (result.dismiss === Swal.DismissReason.timer) {
+                                $('#formFinalizar').submit();
+                              
+                            }
+                        }, 1000);
+                    })
+
+                }
+            })
+        }
+    </script>
+
 </head>
+
 <body>
     {% load humanize %}
     <section>
-        {% if request.session.carrito.items %}        
-        <form method="POST" action="{% url 'guardar' %}" class="formularioPedido sombra">
+        {% if request.session.carrito.items %}
+        <form method="POST" action="{% url 'guardar' %}" id="formFinalizar" class="formularioPedido sombra">
             {% csrf_token %}
             <fieldset>
                 <div class="imagen-campos">
                     <div class="imagen">
                         <img src="{% static 'img/imagenPedido.png' %}" alt="">
                     </div>
-    
+
                     <div class="camposPedido">
                         <legend>Termina de armar tu pedido</legend>
                         <div class="contenedor-campos">
                             <div class="form-check form-switch inputs check campo titulos-campo">
-                                <input class="form-check-input" type="checkbox" name="Domicilio" role="switch" id="checkbox">
+                                <input class="form-check-input" type="checkbox" name="Domicilio" role="switch"
+                                    id="checkbox">
                                 <label class="form-check-label" for="flexSwitchCheckDefault">Entrega a domicilio</label>
                             </div>
                             <div class="campo titulos-campo">
@@ -41,9 +94,10 @@
                                     <label class="">Dirección</label>
                                     <hr class="separador">
                                 </div>
-                                <input class="input-text" id="Direccion" name="Direccion" type="text" placeholder="Ingresa tu dirección" value="{{ cliente.direccion }}" disabled>
+                                <input class="input-text" id="Direccion" name="Direccion" type="text"
+                                    placeholder="Ingresa tu dirección" value="{{ cliente.direccion }}" disabled>
                             </div>
-        
+
                             <div class="campo overflow-auto">
                                 <div class="title titulos-campo">
                                     <label>Detalles del pedido</label>
@@ -52,88 +106,94 @@
                                 {% for key ,value in request.session.carrito.items %}
                                 <div class="platillo-completo ">
                                     <div class="platillos ">
-                                        <label >{{value.nombre | title}}</label>
+                                        <label>{{value.nombre | title}}</label>
                                         <div class="agregar-restar">
-                                            <a href="{% url 'restar_producto_fin' value.idplatillo %}" class="badge btn btn-outline-danger fs-6">-</a>
+                                            <a href="{% url 'restar_producto_fin' value.idplatillo %}"
+                                                class="badge btn btn-outline-danger fs-6">-</a>
                                             {{ value.cantidad}}
-                                            <a href="{% url 'agregar_producto_fin' value.idplatillo %}" class="badge btn btn-outline-danger fs-6">+</a>                
+                                            <a href="{% url 'agregar_producto_fin' value.idplatillo %}"
+                                                class="badge btn btn-outline-danger fs-6">+</a>
                                         </div>
                                     </div>
                                     <div> <label class="ingredientes">{{value.ingredientes | title}}</label></div>
-                                   
+
                                     <div class="valor-unitario"><label for="">$ {{value.acumulado}}</label></div>
-                                    
-                                    
-                                </div>                                    
-                                    {% endfor %}                                
+
+
+                                </div>
+                                {% endfor %}
                             </div>
-        
+
                             <div class="campo">
                                 <div class="title titulos-campo">
                                     <label class="subtitle-small">Fecha y hora de entrega</label>
                                     <hr class="separador">
                                 </div>
                                 <div class="hora-fecha">
-                                    <input class="input-text" id="fechaActual" name="Fecha" type="date" placeholder="Fecha Entrega">
-                                    <input class="input-text" id="fechaActual" name="Hora" type="time" placeholder="Hora Entrega">
-                                </div>                           
-                                
-                                
+                                    <input class="input-text" id="fechaActual" name="Fecha" type="date"
+                                        placeholder="Fecha Entrega">
+                                    <input class="input-text" id="fechaActual" name="Hora" type="time"
+                                        placeholder="Hora Entrega">
+                                </div>
+
+
                             </div>
 
                             <div class="campo">
                                 <div class="title titulos-campo">
                                     <label>Resumen</label>
-                                    <hr class="separador">                                    
+                                    <hr class="separador">
                                 </div>
                                 <div class="subtotal">
                                     <div class="platillos">
                                         <label class="subtotal" for="">Subtotal:</label>
-                                        <label class="subtotal" for="">$ {{total_carrito | intcomma}}</label>  
+                                        <label class="subtotal" for="">$ {{total_carrito | intcomma}}</label>
                                     </div>
                                     <div class="platillos">
                                         <label class="subtotal" for="">Delivery:</label>
-                                        <label class="subtotal" for="">Gratis</label>  
+                                        <label class="subtotal" for="">Gratis</label>
                                     </div>
 
                                 </div>
-                                                              
+
                             </div>
                             <div class="campo btn-finalizar">
-                                <button type="submit" class="btn btn-color">Confirmar pedido</button>
-                                <!-- <a type="submit" id="enviar" class="btn btn-color" href="{% url 'guardar' %}">Confirmar pedido</a> -->
+                                <a href="" class="btn btn-color" onclick="modificarEstado(event,'{{id}}')"> Confirmar
+                                    pedido</a>
                             </div>
                         </div>
-        
+
                     </div>
                 </div>
 
             </fieldset>
         </form>
 
-  
-    {% else %}
-    <div class="carro-vacio">
-        <div>
-            <img src="{% static 'img/sad-cart.png' %}" alt="">
+
+        {% else %}
+        <div class="carro-vacio">
+            <div>
+                <img src="{% static 'img/sad-cart.png' %}" alt="">
+            </div>
+            <div>
+                <label for="" class="label-carro-vacio">
+                    UPS! No tienes platos en tu carrito. Te invitamos a revisar nuestro <a class="catalogo-ref"
+                        href="/platillos">catálogo.</a>
+                </label>
+            </div>
         </div>
-        <div>
-            <label for="" class="label-carro-vacio">
-                UPS! No tienes platos en tu carrito. Te invitamos a revisar nuestro <a class="catalogo-ref" href="/platillos">catálogo.</a>
-            </label>
-        </div>
-    </div>
 
         {% endif %}
     </section>
     <script type="text/javascript">
-        document.getElementById('checkbox').onchange = function() {
-    document.getElementById('Direccion').disabled = !this.checked;
-};
+        document.getElementById('checkbox').onchange = function () {
+            document.getElementById('Direccion').disabled = !this.checked;
+        };
     </script>
 
     <script src="{% static 'app/fecha.js' %}"></script>
-    
+
 </body>
+
 </html>
 {%endblock%}
