@@ -67,15 +67,25 @@
                 src="{% static 'img/nosotros.png' %}" alt=""> Sobre nosotros</a>
           </li>
         </ul>
-        <button class="BotonCarro position-relative" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
-          aria-controls="offcanvasRight"> <i class="fas fa-cart-arrow-down" style="padding: .2rem;"></i>
-        
+        {% if request.session.carrito.items %}
+        <button class="BotonCarro position-relative" type="button" data-bs-toggle="offcanvas"
+          data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"> <i class="fas fa-cart-arrow-down"
+            style="padding: .2rem;"></i>
           Carrito
           <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-            {{ request.session.carrito.items|length  }}
+            {{ request.session.carrito.items|length }}
             <span class="visually-hidden">unread messages</span>
           </span>
         </button>
+        {%else%}
+        <button class="BotonCarro position-relative" type="button" data-bs-toggle="offcanvas"
+          data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"> <i class="fas fa-cart-arrow-down"
+            style="padding: .2rem;"></i>
+          Carrito
+          </span>
+        </button>
+        {%endif%}
+
       </div>
       <div class="collapse navbar-collapse justify-content-center col-3" id="navbarNav">
         <ul class="navbar-nav">
@@ -131,14 +141,16 @@
           </li>
           {%endif%}
         </ul>
-        
+
       </div>
     </div>
   </nav>
 
   <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
     <div class="offcanvas-header">
-      <h5 id="offcanvasRightLabel" style="width: 100%;">Tu Carrito <hr></h5>
+      <h5 id="offcanvasRightLabel" style="width: 100%;">Tu Carrito
+        <hr>
+      </h5>
       <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body">
