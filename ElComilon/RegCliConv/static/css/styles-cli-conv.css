@@ -50,7 +50,6 @@ input[type=number] { -moz-appearance:textfield; }
     background-color:#9C3534;
     color:#fff;
     padding:.7rem;
-    width:100%;
 }
 .botonEnviar:hover{
     background-color:#fff;

@@ -281,7 +281,7 @@ a:hover{
 }
 .copy{
   display: flex;
-  background-color:#252525;
+  background-color:#202020;
   width: 100%;
   justify-content: center;
   margin-top: 1rem;
@@ -298,10 +298,6 @@ a:hover{
 .flote{
   position: absolute;
 }
-
-
-
-
 
 
 /*********OFFCANVAS*********/
@@ -356,4 +352,8 @@ a:hover{
 
 .items-header{
   display: flex;
+}
+
+.posicion-collapse{
+  position: absolute;
 }

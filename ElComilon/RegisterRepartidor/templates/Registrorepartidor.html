@@ -17,14 +17,6 @@
     <div class="container_login container">
 
         <div class="row ">
-            {% if messages %}
-            <ul class="messages">
-                {% for message in messages %}
-                <li {% if message.tags %} class=" alert alert-success {{ message.tags }}" {% endif %}
-                    style="list-style: none;">{{ message }}</li>
-                {% endfor %}
-            </ul>
-            {% endif %}
             <div class="card shadow-lg p3  mt-5 bg-white">
                 <h1 class="h1-reg-repartidor mt-3 text-center">
                     Registrar Repartidor
@@ -67,7 +59,7 @@
                                                 <input type="text" class="form-control " minlength="2"
                                                     name="NombresRepartido" placeholder="Nombres Repartidor" required>
                                                 {% endif %}
-                                                <label for="">Nombre Repartidor</label>
+                                                <label for="">Nombres Repartidor</label>
                                             </div>
 
                                         </div>
@@ -82,7 +74,7 @@
                                                     name="ApellidosRepartidor" placeholder="Apellidos Repartidor"
                                                     required>
                                                 {% endif %}
-                                                <label for="">Apellido Repartidor</label>
+                                                <label for="">Apellidos Repartidor</label>
                                             </div>
 
                                         </div>

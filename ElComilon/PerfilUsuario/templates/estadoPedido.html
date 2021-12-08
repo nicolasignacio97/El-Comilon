@@ -11,16 +11,16 @@
       <h1 class="text-center titulo mb-5">Mi Cuenta</h1>
       <ul class="nav nav-tabs">
         <li class="nav-item">
-          <a class="nav-link text-danger" aria-current="page" href="#">Mis Datos</a>
+          <a class="nav-link text-danger" aria-current="page" href="{% url 'perfilMenu' user.id %}" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ver y modificar mis datos">Mis Datos</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-danger" href="{% url 'historial' user.id %}">Mis pedidos</a>
+          <a class="nav-link text-danger" href="{% url 'historial' user.id %}" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ver todos mis pedidos">Mis pedidos</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-danger" href="{% url 'crearMenu' user.id %}">Menú Semanal</a>
+          <a class="nav-link text-danger" href="{% url 'crearMenu' user.id %}" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Crear y consultar menú semanal">Menú Semanal</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link active">Estado de mi pedido</a>
+            <a class="nav-link active" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ver estado actual de mi pedido">Estado de mi pedido</a>
           </li>
         <li class="nav-item">
           <a class="nav-link disabled">{{user.username.title}}</a>

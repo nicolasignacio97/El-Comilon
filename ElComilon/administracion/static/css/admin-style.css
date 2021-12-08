@@ -1,12 +1,15 @@
 h1{
     color: #9c3534;
     margin-top: 4rem;
-    font-weight: bold;  
-    text-decoration: underline;
+    font-weight: bold;
 }
 
 .imagen{
-    margin: 5rem 9.9rem;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40rem;
 }
 .container{
     max-width: 1320px;
