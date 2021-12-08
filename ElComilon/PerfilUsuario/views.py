@@ -5,7 +5,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.db import connection
-
+import cx_Oracle
 # Create your views here.
 
 
@@ -88,7 +88,22 @@ def listado_pedidos(rut):
     return lista
 
 def crearReclamo(request,id):
+    cliente = get_object_or_404(Cliente, idcuenta=request.user.id)
+
     data={
-        'id': id
+        'id': id,
     }
+    if request.method =='POST':
+        descripcion =  request.POST.get('desc')
+        registrarReclamo(descripcion,cliente.rutcliente)
+        messages.success(request,'Reclamo enviado')
+        return render(request,'crearReclamo.html',data)        
     return render(request,'crearReclamo.html',data)
+
+
+def registrarReclamo(descripcion,rut):
+    django_cursor = connection.cursor()
+    cursor = django_cursor.connection.cursor()
+    salidaPrve = cursor.var(cx_Oracle.NUMBER)
+    cursor.callproc("SP_AGREGAR_RECLAMO",[descripcion,rut, salidaPrve])
+    return salidaPrve.getvalue()

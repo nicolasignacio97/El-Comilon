@@ -132,3 +132,26 @@
 .id-pedido{
   font-weight: bold;
 }
+.botonEnviar{
+  align-items:center;
+  background-color:#9C3534;
+  color:#fff;
+  padding:.7rem;
+  width:50%;
+}
+.botonEnviar:hover{
+  background-color:#fff;
+  color:#9C3534;
+  border:1px solid #9C3534;
+}
+
+.botonEnviar:focus{
+  border: 1px solid #9C3534;
+  box-shadow: none;
+  background-color: #ffffff;
+}
+.form-control:focus{
+  border: 1px solid #9C3534;
+  box-shadow: none;
+  background-color: #ffffff;
+}

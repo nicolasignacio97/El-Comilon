@@ -36,16 +36,17 @@
             <div class="row d-flex justify-content-center mt-5">
                 <div class="col-10">
                     <form action="" method="post" class="mb-5">
-
+                        {% csrf_token %}
                         <div class="form-floating">
-                            <textarea class="form-control area" placeholder="Leave a comment here"
+                            <textarea class="form-control area" name="desc" placeholder="Leave a comment here"
                                 id="floatingTextarea2" style="height: 100px"></textarea>
-                            <label for="floatingTextarea2">Comments</label>
+                            <label for="floatingTextarea2">Escriba aquí su reclamo</label>
                         </div>
-
                         <dvi class="row d-flex justify-content-center">
                             <div class="col-8">
-                                <button type="submit"> Enviar </button>
+                                <div class="d-flex justify-content-center mb-3">
+                                    <input type="submit" class="btn botonEnviar mt-4" value="Enviar">
+                                </div>
                             </div>
                         </dvi>
                     </form>

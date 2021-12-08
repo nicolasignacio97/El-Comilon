@@ -16,17 +16,17 @@
     color:#9C3534;
     border:1px solid #9C3534;
 }
-.sangria ul{
-    list-style-type: none;
-    padding: 0;
-}
-
 
 .botonEnviar:focus{
     border: 1px solid #9C3534;
     box-shadow: none;
     background-color: #ffffff;
 }
+.sangria ul{
+    list-style-type: none;
+    padding: 0;
+}
+
 .titulo{
     color:#9C3534;
 }
