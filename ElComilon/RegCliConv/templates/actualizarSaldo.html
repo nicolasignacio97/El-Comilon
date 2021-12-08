@@ -1,0 +1,37 @@
+{% extends "HeaderFooter/base-sidebar.html"%}
+{% load static %}
+
+{% block content%}
+<link rel="stylesheet" href="{% static 'css/styles-cli-conv.css' %}">
+
+
+<div class="conatainer">
+    <div class="row mt-5 d-flex justify-content-center">
+        <div class="col-8 mt-5">
+            <div class="card card-shadow">
+                <h3 class="titulo text-center mt-4">Actualizar Saldo</h3>
+                <div class="form">
+                    <form method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="row mt-5 d-flex justify-content-center">
+                            <div class="col-8">
+                                <input type="file" class="form-control" name="arch" id="arch" onchange="checkfile(this);" required id="floatingInput" placeholder=" "> 
+                            </div>
+                        </div>
+                        <div class="row mt-5 d-flex justify-content-center">
+                            <div class="col-4 mb-3">
+                                <button class="btn botonEnviar" id="btn1" type="submit">Actualizar</button>
+                            </div>
+                        </div>
+                    
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="{% static 'app/formatoArchivo.js'%}"></script>
+{% endblock %}
+<!-- <input type="file" name="foto" id="file" accept="image/png,image/jpeg,image/bmp,image/gif" class="form-control inputfocus" required>
+<div class="valid-feedback"> </div>
+<div class="invalid-feedback">Inserte una imagen</div> -->

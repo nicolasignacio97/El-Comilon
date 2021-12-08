@@ -86,3 +86,4 @@ def listado_pedidos(rut):
     for fila in out_cur:
         lista.append(fila)
     return lista
+

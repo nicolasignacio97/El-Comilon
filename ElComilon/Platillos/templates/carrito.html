@@ -12,7 +12,7 @@
 
         <thead>
             <tr>
-
+            
             </tr>
         </thead>
         <tbody class="elementos">
@@ -24,7 +24,7 @@
                 <td class="agregar-restar">
                     <a href="{% url 'restar_producto' value.idplatillo %}" class="badge btn btn-outline-danger">-</a>
                     {{ value.cantidad}}
-                    <a href="{% url 'agregarProducto' value.idplatillo %}" class="badge btn btn-outline-danger">+</a>
+                    <a href="#" class="badge btn btn-outline-danger">+</a>
                 </td>
 
             </tr>
@@ -42,7 +42,6 @@
         </tbody>
     </table>
     <div class="row text-center botones-carro">
-
 
         <div class="col-6"> <a href="{% url 'limpiar_carrito' %}" class="btn btn-danger"><img
                     src="{% static 'img/icons8-cesta-de-compra-eliminar-24.png' %}" alt=""> Limpiar</a></div>

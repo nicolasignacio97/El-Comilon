@@ -1,0 +1,47 @@
+{% extends "HeaderFooter/base.html"%}
+{% load static %}
+{% block content%}
+<link rel="stylesheet" href="{% static 'css/estiloRegistro.css' %}">
+
+<div class="container">
+    <div class="row d-flex mt-5 justify-content-center">
+        <div class="col-8 mt-5">
+            <div class="card">
+                <div class="shadow">
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        <div class="row d-flex mt-4 justify-content-center">
+                            <div class="col-8">
+                                <h3 class="titulo text-center mb-4">Escriba la nueva contraseña</h3>
+                                <div class="alert alert-dark" role="alert">
+                                    Por favor, introduzca su contraseña nueva dos veces para verificar que la ha escrito
+                                    correctamente.
+                                </div>
+                                {% for field in form %}
+                                {{form.password2.errors}}
+                                <div class="form-floating mb-3">
+                                    <input type="password" name="{{field.html_name}}" class="form-control"
+                                        id="floatingInput" required placeholder="{{field.html_name}}">
+                                    <label for="{{field.id_for_label}}">{{field.label}}</label>
+                                </div>
+                                <small class="form-text text-muted sangria">{{field.help_text}}</small>
+                               
+                                {% if field.errors%}
+                                <small class="text-danger fs-6 sangria"> {{field.errors}}</small>
+                                {%endif%}
+                                {%endfor%}
+
+                            </div>
+                        </div>
+                        <div class="row justify-content-center">
+                            <div class="col-6 mb-4">
+                                <button type="submit" class="btn botonEnviar mt-4" style="width: 100%;"> Enviar</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{%endblock%}

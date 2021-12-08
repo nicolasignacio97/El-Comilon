@@ -9,7 +9,7 @@ from RegisterPlatillo.views import registroPlatillo
 from listarPlatillos.views import listarPlatillos, eliminarPlatillo, platilloNombre
 from actualizarPlatillo.views import modificarPlatillo
 from django.contrib.auth.decorators import login_required
-from RegCliConv.views import RegistroCliConvenio,cleanRutcliente, listarCliConv, modificarCliConv, eliminarCliConv, cliConvRut
+from RegCliConv.views import RegistroCliConvenio,cleanRutcliente, listarCliConv, modificarCliConv, eliminarCliConv, cliConvRut,actualizarSaldo
 
 from registroTrabajador.views import listaTrabajador
 from RegEmpConv.views import listaEmpresa
@@ -36,6 +36,10 @@ url_patterns = [
     path('valrutcliente', cleanRutcliente, name='valrutcliente'),
     path('listarCliConv', listarCliConv, name='listarCliConv'),
     path('cliConvRut', cliConvRut, name='cliConvRut'),
+    path('actualizarSaldo', actualizarSaldo, name='actualizarSaldo'),
+
+
+
     path('modCliConv/<id>', modificarCliConv, name='modCliConv'),
     path('eliminar/<rutcliente>/<id>', eliminarCliConv, name='eliminarCliente'),
     path('listaTrabajador', listaTrabajador, name='listaTrabajador'),

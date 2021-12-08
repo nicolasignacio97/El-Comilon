@@ -1,0 +1,26 @@
+
+
+
+{% extends "HeaderFooter/base.html"%}
+{% load static %}
+{% block content%}
+<link rel="stylesheet" href="{% static 'css/estiloRegistro.css' %}">
+
+<div class="container">
+    <div class="row d-flex mt-5 justify-content-center">
+        <div class="col-8 mt-5">
+            <div class="card">
+                <div class="shadow">
+                    <h2 class="text-center titulo mb-5 mt-5">Restablecimiento de contraseña completado</h2>
+                    <div class="row d-flex justify-content-center">
+                        <div class="alert alert-success w-75 mb-5 text-center" role="alert">
+                            Su contraseña ha sido establecida. Ahora puede continuar e <a href="{% url 'login'%}">iniciar sesión</a>.
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{%endblock%}
