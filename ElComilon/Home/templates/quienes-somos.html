@@ -1,18 +1,6 @@
 {% extends "HeaderFooter/base.html"%} 
 {% load static%}
 
-
-{% block L-izquierda %}
-<a href="/" class="nav-item-a">Inicio</a>
-<a href="quienesSomos" class="nav-item-a">Sobre nosotros</a>
-{% endblock%}
-
-
-{% block L-derecha %}
-<a href="platillos">Catálogo</a>
-<a href="/login">Iniciar sesión</a>
-{% endblock%}
-
 {% block content%}
 <!DOCTYPE html>
 <html lang="en">
@@ -29,7 +17,9 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
         
-        <link rel="stylesheet" href={% static "css/estiloQS.css" %}>
+        <link rel="stylesheet" href="{% static 'css/estiloQS.css' %}">
+        
+
     <title>El Comilón</title>
 </head>
 

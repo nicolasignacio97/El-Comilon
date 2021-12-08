@@ -17,6 +17,7 @@
         </thead>
         <tbody class="elementos">
             {% if request.session.carrito.items %}
+           
             {% for key ,value in request.session.carrito.items %}
             <tr>
                 <td>{{value.nombre | title}}</td>

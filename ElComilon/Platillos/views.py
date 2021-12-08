@@ -11,7 +11,6 @@ import base64
 
 # Create your views here.
 
-
 def FinalizarCompra(request):
     #AGREGAR DETALLES PEDIDO
     cliente = get_object_or_404(Cliente, idcuenta = request.user.id)
@@ -88,7 +87,6 @@ def guardar(request):
         #ruta
         id = request.user.id
         url = 'estadoPedido/'+str(id)
-
         #AGREGAR PEDIDO
         total = total_carrito(request)['total_carrito']
         fecha = request.POST.get('Fecha')
