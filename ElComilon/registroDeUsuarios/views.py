@@ -46,3 +46,4 @@ def agregar_cliente(rutcliente, idtipocliente):
     salida = cursor.var(cx_Oracle.NUMBER)
     cursor.callproc('SP_AGREGAR_CLIENTE',[rutcliente, idtipocliente, salida])
     return salida.getvalue()
+

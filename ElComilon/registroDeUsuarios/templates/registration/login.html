@@ -29,7 +29,11 @@
                             <input type="submit" class="btn botonEnviar mt-4" value="Iniciar Sesión">
                         </div>
                         <div class="row">
-                            <p class="text-center">¿No tienes cuenta?<a href="{% url 'registro' %}"> Regístrate Aquí</a>
+                            <p class="text-center">¿No tienes cuenta?<a href="{% url 'registro' %}"> Regístrate aquí</a>
+                            </p>
+                        </div>
+                        <div class="row">
+                            <p class="text-center">¿Olvidaste tu contraseña? <a href="{% url 'password_reset' %}"> Recuperala aquí</a>
                             </p>
                         </div>
                     </form>

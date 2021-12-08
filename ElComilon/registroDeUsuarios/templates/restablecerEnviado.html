@@ -1,0 +1,25 @@
+{% extends "HeaderFooter/base.html"%}
+{% load static %}
+{% block content%}
+<link rel="stylesheet" href="{% static 'css/estiloRegistro.css' %}">
+
+<div class="container">
+    <div class="row d-flex mt-5 justify-content-center">
+        <div class="col-8 mt-5">
+            <div class="card">
+                <div class="shadow">
+                    <h2 class="text-center titulo mb-5 mt-5">Restablecimiento de contraseña enviado</h2>
+                    <div class="row d-flex justify-content-center">
+                        <div class="alert alert-success w-75 mb-5" role="alert">
+                            Le enviamos instrucciones por correo electrónico para configurar su contraseña, si existe una cuenta
+                            con el correo electrónico que ingresó. Debería recibirlos en breve.
+                            Si no recibe un correo electrónico, asegúrese de haber ingresado la dirección con la que se registró
+                            y verifique su carpeta de correo no deseado.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{%endblock%}

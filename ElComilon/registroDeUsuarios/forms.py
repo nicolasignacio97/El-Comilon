@@ -3,6 +3,7 @@ from django.contrib.auth import models
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.forms.forms import Form
+from django.forms.widgets import TextInput
 
 class FormularioUsuario (UserCreationForm):
 
@@ -25,3 +26,9 @@ class FormularioUsuario (UserCreationForm):
 
         # email = forms.EmailField(label=("Correo electrónico"),widget=forms.EmailInput(
         #  attrs={"minlength": "2","pattern": "[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}"}))
+
+class recuperarContrasena(forms.Form):
+    username = forms.CharField(widget=forms.TextInput(attrs={
+        'placehoder': 'Ingrese su nombre de usuario',
+        'autocomplete': 'off'
+    }))

@@ -4,28 +4,16 @@ from django import forms
 from core.models import Cliente
 
 
+class EditarUsuario (UserChangeForm):
+    password = None
+    class Meta:
+        model=User
+        fields=['email','username']
 
 class EditarCliente(forms.ModelForm):
     class Meta:
         model = Cliente
         fields = ('nombres', 'apellidos', 'direccion', 'telefono')
-
-
-class EditarUsuario (UserChangeForm):
-    password = None
-
-    class Meta:
-        model = User
-        fields = ['email', 'username']
-        labels = {
-            'email': 'Correo Electrónico',
-            'username': 'Nombre de Usuario'
-        }
-    def clean_username(self):
-        username = self.cleaned_data.get("username")
-        if User.objects.filter(username=username).exists():
-            raise forms.ValidationError("Ya existe un usuario con este nombre.")
-        return username
 
 
 class EditarContrasena(PasswordChangeForm):
