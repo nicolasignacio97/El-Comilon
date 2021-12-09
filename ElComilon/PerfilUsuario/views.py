@@ -13,9 +13,13 @@ def PerfilUsuario(request, id):
     # historial
     usuario = get_object_or_404(Cliente, idcuenta=id)
     pedido = Pedido.objects.filter(rutcliente=usuario.rutcliente).order_by('-fechapedido')
+    cliente = get_object_or_404(Cliente, idcuenta=id)
+
     data = {
         'usuario': usuario,
         'pedidos': pedido,
+        'cliente':cliente
+
     }
     return render(request, 'historialPedidos.html', data)
 
@@ -29,7 +33,8 @@ def perfilMenu(request, id):
     data = {
         'usuario': usuario,
         'formCuenta': formCuenta,
-        'form': formPersonal
+        'form': formPersonal,
+        'cliente':cliente
     }
     if request.method == 'POST':
         formCuenta = EditarUsuario(request.POST, instance=request.user)
@@ -72,7 +77,9 @@ def estadoPedido(request, id):
     cliente = get_object_or_404(Cliente, idcuenta = id)
     rut = cliente.rutcliente
     data= {
-        'pedidos':listado_pedidos(rut)
+        'pedidos':listado_pedidos(rut),
+        'cliente':cliente
+
     }
     return render(request, 'estadoPedido.html', data)
 

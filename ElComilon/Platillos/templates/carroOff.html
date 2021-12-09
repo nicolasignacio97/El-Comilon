@@ -1,15 +1,11 @@
 {% load humanize %}
 {% load static %}
-<link rel="stylesheet" href="{% static 'css/estiloPedido.css' %}">
+
 
 
 <div class="d-flex flex-column h-100" role="alert" style="padding: 10px;">
-    <table class="table table-borderless table-hover h-100" style="text-align: center;">
-        <thead>
-            <tr>
-            </tr>
-        </thead>
-        <tbody class="elementos">
+    <div class="h-100" style="text-align: center;">
+        <div class="elementos">
             {% if request.session.carrito.items %}
             {% for key ,value in request.session.carrito.items %}
             <div class=" mb-3" style="max-width: 540px;">
@@ -23,16 +19,15 @@
                         <button type="button" class=" btn btn-outline-danger">{{value.cantidad}}</button>
                         <a href="#" type="button" class=" btn btn-outline-danger">+</a>
                       </div>
-                      <!-- <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> -->
+
                     </div>
                   </div>
                 </div>
               </div>
               {% endfor %}
             {% endif %}
-
-        </tbody>
-    </table>
+            </div>
+      </div>
     <hr>
     <div class="row mb-4">
         <div class="col-8">

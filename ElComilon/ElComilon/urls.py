@@ -14,7 +14,6 @@ from reclamo.views import reclamo
 from Home.views import quienesSomos
 from administracion.urls import url_patterns
 from PerfilUsuario.views import PerfilUsuario, perfilMenu, CambiarContra, estadoPedido,crearReclamo
-from Pedido.views import pedido
 from Platillos.views import platillos, agregar_producto, eliminar_producto, restar_producto, limpiar_carrito, guardar, FinalizarCompra, agregar_producto_fin, restar_producto_fin
 from detallePedido.views import detallePedido
 from Menu.views import crearMenu
@@ -31,7 +30,6 @@ urlpatterns = [
     path('quienesSomos', quienesSomos, name='quienesSomos'),
     # despues id en la ruta para filtro
     path('Historial/<id>', PerfilUsuario, name="historial"),
-    path('pedido', pedido),
     path('platillos', platillos, name="platillos"),
     path('perfilMenu/<id>', perfilMenu, name="perfilMenu"),
     path('menuProveedor/<id>', menuProveedor, name="menuProveedor"),

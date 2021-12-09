@@ -53,7 +53,6 @@ INSTALLED_APPS = [
     'RegEmpConv',
     'reclamo',
     'RegisterRepartidor',
-    'Pedido',
     'Platillos',
     'detallePedido',
     'listarPlatillos',

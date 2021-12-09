@@ -4,62 +4,69 @@
 {% block content %}
 {% load humanize %}
 <div class="container bg-white shadow-lg mt-5">
-    <div class="row">
-        <div class="col m-2">
-            <h1 class="text-center titulo mb-5">Historial</h1>
-            <ul class="nav nav-tabs">
-                <li class="nav-item">
-                  <a class="nav-link text-danger" href="{% url 'perfilMenu' user.id %}" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ver y modificar mis datos">Mis Datos</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link active" aria-current="page" href="#" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ver todos mis pedidos">Mis pedidos</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link text-danger" href="{% url 'crearMenu' user.id %}" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Crear y consultar menú semanal">Menú Semanal</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-danger" href="{% url 'estadoPedido' user.id %} " data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ver estado actual de mi pedido">Estado de mi pedido</a>
-                  </li>
-                <li class="nav-item">
-                  <a class="nav-link disabled">{{user.username.title}}</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link disabled ">Reclamo</a>
-                </li>
-            </ul>
-            <table class="table table-borderless table-hover">
-                <thead>
-                    <tr>
-                        <th scope="col"># ID</th>
-                        <th scope="col">Valor Total</th>
-                        <th scope="col">Fecha</th>
-                        <th scope="col">Dirección</th>
-                        <th scope="col">Servicio</th>
-                        <th scope="col">Estado</th>
-                        <th class="d-flex justify-content-center" scope="col">Ver detalle</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for pedido in pedidos %}
-                    <tr>
-                        <td># {{pedido.idpedido}}</td>
-                        <td><strong><span class="text-danger">${{pedido.valortotal | intcomma}}</span></strong></td>
-                        <td>{{pedido.fechapedido}}</td>
-                        <td>{{pedido.direccionpedido}}</td>
-                        <td>{{pedido.idtiposervicio}}</td>
-                        <td><strong><span class="text-danger">{{pedido.idestpedido}}</span></strong></td>
-                        <td class="d-flex justify-content-center"> <a href="/detallePedido/{{pedido.idpedido}}/{{user.id}}"><i class="fas fa-eye" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ver detalles del pedido"
-
-                                    style="color:#02B37F; cursor: pointer;"></i></a>
-                                    <a href="{% url 'crearReclamo' pedido.idpedido %}"><i class="fas fa-angry"
-                                      style="color:#b30202; cursor: pointer;"></i></a>
-                        </td>
-                    </tr>
-                    {%endfor%}
-                </tbody>
-            </table>
-            {% include 'HeaderFooter/paginator.html'%}
-        </div>
+  <div class="row">
+    <div class="col m-2">
+      {% if cliente.saldocli %}
+      <h5 class="text-end m-0 text-muted">Saldo: ${{cliente.saldocli | intcomma}}</h5>
+      {% endif %}
+      <h1 class="text-center titulo mb-5">Historial</h1>
+      <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <a class="nav-link text-danger" href="{% url 'perfilMenu' user.id %}" data-bs-toggle="tooltip"
+            data-bs-placement="bottom" title="Ver y modificar mis datos">Mis Datos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#" data-bs-toggle="tooltip" data-bs-placement="bottom"
+            title="Ver todos mis pedidos">Mis pedidos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-danger" href="{% url 'crearMenu' user.id %}" data-bs-toggle="tooltip"
+            data-bs-placement="bottom" title="Crear y consultar menú semanal">Menú Semanal</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-danger" href="{% url 'estadoPedido' user.id %} " data-bs-toggle="tooltip"
+            data-bs-placement="bottom" title="Ver estado actual de mi pedido">Estado de mi pedido</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled">{{user.username.title}}</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled ">Reclamo</a>
+        </li>
+      </ul>
+      <table class="table table-borderless table-hover">
+        <thead>
+          <tr>
+            <th scope="col"># ID</th>
+            <th scope="col">Valor Total</th>
+            <th scope="col">Fecha</th>
+            <th scope="col">Dirección</th>
+            <th scope="col">Servicio</th>
+            <th scope="col">Estado</th>
+            <th class="d-flex justify-content-center" scope="col">Ver detalle</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for pedido in pedidos %}
+          <tr>
+            <td># {{pedido.idpedido}}</td>
+            <td><strong><span class="text-danger">${{pedido.valortotal | intcomma}}</span></strong></td>
+            <td>{{pedido.fechapedido}}</td>
+            <td>{{pedido.direccionpedido}}</td>
+            <td>{{pedido.idtiposervicio}}</td>
+            <td><strong><span class="text-danger">{{pedido.idestpedido}}</span></strong></td>
+            <td class="d-flex justify-content-center"> <a href="/detallePedido/{{pedido.idpedido}}/{{user.id}}"><i
+                  class="fas fa-eye" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ver detalles del pedido"
+                  style="color:#02B37F; cursor: pointer;"></i></a>
+              <a href="{% url 'crearReclamo' pedido.idpedido %}"><i class="fas fa-angry"
+                  style="color:#b30202; cursor: pointer;"></i></a>
+            </td>
+          </tr>
+          {%endfor%}
+        </tbody>
+      </table>
+      {% include 'HeaderFooter/paginator.html'%}
     </div>
+  </div>
 </div>
 {% endblock%}
