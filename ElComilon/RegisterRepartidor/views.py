@@ -15,8 +15,7 @@ contexto = {}
 
 def pruebaform(request):
     form = registerRepartidor(request.POST or None)
-    if request.method == 'POST' and form.is_valid():
-        print("que vello dia")
+    
     return render(request, "regrepartidor.html", {'form':form})
 
 def registroVeh(request):
@@ -41,7 +40,7 @@ def Registrorep(request):
         apellido = request.POST.get('ApellidosRepartidor')
         fechacontrato = request.POST.get('Fechacontrato')
         # user = nombres[:2] + "." + apellido[0:]
-        rutrestaurante = '99.365.349-8'
+        rutrestaurante = '77.684.154-9'
         
         #Vehiculo
         vehiculorut = request.POST.get('RutRepartidor')
