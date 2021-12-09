@@ -1,5 +1,5 @@
 from django.contrib import messages
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.db import connection
 from django.contrib.auth.decorators import permission_required
 import cx_Oracle
@@ -22,7 +22,8 @@ def registroPlatillo (request):
         else:
             disponible = 0
         registrarPlatillo(nombrePlatillo, ingredientes, valor, foto, rutRestaurante, disponible)
-        messages.success(request, "Se ha creado correctamente el platillo ")
+        messages.success(request, "Se ha creado correctamente el platillo "+nombrePlatillo)
+        return redirect(to="/administracion/listarPlatillos")
     return render(request,'registrarPlatillo.html', data)
 
 

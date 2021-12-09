@@ -6,75 +6,122 @@
 
 <head>
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <link rel="stylesheet" href="{% static 'css/estiloIndex.css'%}">
-    <title>El Comilón</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'css/estiloIndex.css'%}">
+  <title>El Comilón</title>
 </head>
 <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
-    <div class="carousel-indicators">
-      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
-      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
-    </div>
-    <div class="carousel-inner">
-      <div class="carousel-item active">
-        <img src="{%static 'img/Cazuela.jpg' %}" class="d-block w-100 imagenescarru" alt="">
-        <div class="carousel-caption d-none d-md-block fondoOpa">
-          <h5 class="text-light fs-3">First slide label</h5>
-          <p class="text-light">Some representative placeholder content for the first slide.</p>
-        </div>
-      </div>
-      <div class="carousel-item">
-        <img  src="{%static 'img/pastel.jpg' %}" class="d-block w-100 imagenescarru" alt="">
-        <div class="carousel-caption d-none d-md-block fondoOpa">
-          <h5 class="text-light fs-3">Second slide label</h5>
-          <p class="text-light">Some representative placeholder content for the second slide.</p>
-        </div>
-      </div>
-      <div class="carousel-item">
-        <img src="{%static 'img/porotos.jpg' %}" class="d-block w-100 imagenescarru" alt="">
-        <div class="carousel-caption d-none d-md-block fondoOpa">
-          <h5 class="text-light fs-3">Third slide label</h5>
-          <p class="text-light">Some representative placeholder content for the third slide.</p>
-        </div>
-      </div>
-    </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Next</span>
-    </button>
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
+      aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
   </div>
-<body class="body-bg">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12" style="margin: auto;">
-                <h2>Nuestra Carta</h2>
-                <div class="container-fluid small-border"></div>
-            </div>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="{%static 'img/Cazuela.jpg' %}" class="d-block w-100 imagenescarru" alt="">
+      <div class="carousel-caption d-none d-md-block fondoOpa">
+        <h5 class="text-light fs-2">Bienvenid@ a El Comilón</h5>
+        <p class="text-light fs-3">Te invitamos a disfrutar de la mayor variedad de platillos con despacho inmediato</p>
+      </div>
+    </div>
+
+    <div class="carousel-item">
+      <a href="{% url 'registro' %}">
+        <img src="{%static 'img/registrate.jpg' %}" class="d-block w-100 imagenescarru" alt="">
+        <div class="carousel-caption d-none d-md-block fondoOpa">
+          <h5 class="text-light fs-2">¿Tienes cuenta en El Comilón?</h5>
+          <p class="text-light fs-3">¡Regístrate para poder acceder a la comida más rica de Santiago!</p>
         </div>
+      </a>
     </div>
-    <div class="container">
-        <div class="row container-cards mb-1">
-            {% for p in platillos %}
-            <div class="col-lg-4 col-sm-12 mb-3" style="padding: 1rem 1rem; align-items: center;">
-                <div >
-                    <img src="data:imagen/png;base64, {{ p.imagen }} "  alt="" class="card-img-top w-100 "style=" max-height:200px; box-shadow: 10px 10px 20px -8px rgb(0 0 0 / 30%); "
-                    style=" max-height: 150px;">
-                </div>
-                <div class="card-body card-body-main">
-                    <h5 class="card-title tittle-card" >{{ p.data.1 }}</h5>
-                    <span class="span-home" style=" margin-top: 10px;"> Descripcion:{{ p.data.2 }} </span>
-                    <span class="span-home" style="text-align: center; margin-top: 10px; color: brown; font-size: 22px;" > ${{ p.data.3  }} </span>
-                    <a  href="{% url 'agregarProducto' p.data.0 %} "  class="btn btn-danger "  style="width: 100%; margin-top: 5px; font-size: 18px;"><img src="{% static 'img/icons8-agregar-a-carrito-de-compras-24.png' %}" alt=""> Agregar al Carro</a>
-                </div>
-            </div>
-            {% endfor %}
+    <div class="carousel-item">
+      <a href="{% url 'platillos' %}">
+        <img src="{%static 'img/pastel.jpg' %}" class="d-block w-100 imagenescarru" alt="">
+        <div class="carousel-caption d-none d-md-block fondoOpa">
+          <h5 class="text-light fs-2">¿Comida casera? ¿Comida rápida? Lo que se te antoje lo encuentras en el comilón
+          </h5>
+          <p class="text-light fs-3">Todos nuestros platos son preparados en el instante con ingredientes frescos y de
+            calidad</p>
+        </div>
+      </a>
     </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+
+<body class="body-bg">
+  {% load humanize %}
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12" style="margin: auto;">
+        <h2>Últimos Agregados</h2>
+        <div class="container-fluid small-border"></div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row container-cards mb-1">
+      {% for p in platillos %}
+      <div class="col-lg-4 col-sm-12 mb-3" style="padding: 1rem 1rem; align-items: center;">
+        <div>
+          <img src="data:imagen/png;base64, {{ p.imagen }} " alt="" class="card-img-top w-100 "
+            style=" max-height:200px; box-shadow: 10px 10px 20px -8px rgb(0 0 0 / 30%); " style=" max-height: 150px;">
+        </div>
+        <div class="card-body card-body-main">
+          <h5 class="card-title tittle-card">{{ p.data.1 | title }}</h5>
+          <span class="span-home" style=" margin-top: 10px;"> {{ p.data.2 | title }} </span>
+          <span class="span-home platillo__precio"
+            style="text-align: center; margin-top: 10px; color: #9c3534; font-size: 22px;"> ${{ p.data.3 | intcomma }}
+          </span>
+          <a href="{% url 'agregarProducto' p.data.0 %} " class="btn btn-danger botonComprar"
+            style="width: 100%; margin-top: 5px; font-size: 18px;"><img
+              src="{% static 'img/icons8-agregar-a-carrito-de-compras-24.png' %}" alt=""> Agregar al Carro</a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12" style="margin: auto;">
+        <h2>Complementa tu pedido</h2>
+        <div class="container-fluid small-border"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row container-cards mb-1">
+      {% for c in complementos %}
+      <div class="col-lg-4 col-sm-12 mb-3" style="padding: 1rem 1rem; align-items: center;">
+        <div>
+          <img src="data:imagen/png;base64, {{ c.imagen }} " alt="" class="card-img-top w-100 "
+            style=" max-height:200px; box-shadow: 10px 10px 20px -8px rgb(0 0 0 / 30%); " style=" max-height: 150px;">
+        </div>
+        <div class="card-body card-body-main">
+          <h5 class="card-title tittle-card">{{ c.data.1 | title }}</h5>
+          <span class="span-home" style=" margin-top: 10px;"> {{ c.data.2 | title }} </span>
+          <span class="span-home platillo__precio"
+            style="text-align: center; margin-top: 10px; color: #9c3534; font-size: 22px;"> ${{ c.data.3 | intcomma }}
+          </span>
+          <a href="{% url 'agregarProducto' c.data.0 %} " class="btn btn-danger botonComprar"
+            style="width: 100%; margin-top: 5px; font-size: 18px;"><img
+              src="{% static 'img/icons8-agregar-a-carrito-de-compras-24.png' %}" alt=""> Agregar al Carro</a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
 </body>
 
 </html>

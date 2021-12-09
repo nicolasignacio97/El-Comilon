@@ -10,6 +10,7 @@ import base64
 def inicio(request):
     data = {
         'platillos': listarPlatillos(),
+        'complementos': listarComplementos(),
         'numero':100
     }
     return render(request, 'Home/index.html', data)
@@ -24,7 +25,26 @@ def listarPlatillos():
     cursor = django_cursor.connection.cursor()
     out_cur = django_cursor.connection.cursor()
 
-    cursor.callproc("SP_LISTAR_PLATILLOS", [out_cur])
+    cursor.callproc("SP_LISTAR_PLATILLOS_INDEX", [out_cur])
+    lista = []
+
+    for i in out_cur:
+        if i != None:
+            data = {
+                'data': i,
+                'imagen': str(base64.b64encode(i[4].read()), 'utf-8')
+            }
+        lista.append(data)
+
+    return lista
+
+
+def listarComplementos():
+    django_cursor = connection.cursor()
+    cursor = django_cursor.connection.cursor()
+    out_cur = django_cursor.connection.cursor()
+
+    cursor.callproc("SP_LISTAR_COMPLEMENTOS_INDEX", [out_cur])
     lista = []
 
     for i in out_cur:

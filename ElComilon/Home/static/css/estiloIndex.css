@@ -47,7 +47,7 @@
 
 .small-border {
     height: 3px;
-    width: 80px;
+    width: 240px;
     margin: 15px 0;
     background: #9C3534;
     margin-left: auto;
@@ -93,6 +93,7 @@
     background-color:#9C3534;
     color:#fff;
     width:75%;
+    border: none;
     margin: auto;
 }
 .botonComprar:hover{
