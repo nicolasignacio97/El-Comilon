@@ -1,11 +1,11 @@
+from django.contrib.auth.models import User
+from core.models import Cliente, Pedido
+from .forms import EditarCliente, EditarUsuario,EditarContrasena
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth.decorators import login_required
-from django.db import connection
-from django.contrib.auth.models import User
-from .forms import EditarUsuario, EditarCliente,EditarContrasena
-from core.models import Cliente, Pedido
 from django.contrib import messages
-
+from django.db import connection
+import cx_Oracle
 # Create your views here.
 
 
@@ -34,21 +34,21 @@ def perfilMenu(request, id):
     if request.method == 'POST':
         formCuenta = EditarUsuario(request.POST, instance=request.user)
         formPersonal = EditarCliente(request.POST, instance=cliente)
-        if formCuenta.is_valid():
-            if formPersonal.is_valid():
-                formCuenta.save()
-                formPersonal.save()
-                messages.success(request, " Modificado correctamente")
-                usuario = get_object_or_404(User, id=id)
-                cliente = get_object_or_404(Cliente, idcuenta=id)
-                formCuenta = EditarUsuario(instance=usuario)
-                formPersonal = EditarCliente(instance=cliente)
-                data2 = {
+    if formCuenta.is_valid():
+        if formPersonal.is_valid():
+            formCuenta.save()
+            formPersonal.save()
+            messages.success(request, "Modificado correctamente")
+            usuario = get_object_or_404(User, id=id)
+            cliente = get_object_or_404(Cliente, idcuenta=id)
+            formCuenta = EditarUsuario(instance=usuario)
+            formPersonal = EditarCliente(instance=cliente)
+            data = {
                     'usuario': usuario,
                     'formCuenta': formCuenta,
                     'form': formPersonal
-                }
-                return render(request, 'perfilMenu.html', data2)
+            }
+            return render(request, 'perfilMenu.html', data)
     return render(request, 'perfilMenu.html', data)
 
 
@@ -86,3 +86,24 @@ def listado_pedidos(rut):
     for fila in out_cur:
         lista.append(fila)
     return lista
+
+def crearReclamo(request,id):
+    cliente = get_object_or_404(Cliente, idcuenta=request.user.id)
+
+    data={
+        'id': id,
+    }
+    if request.method =='POST':
+        descripcion =  request.POST.get('desc')
+        registrarReclamo(descripcion,cliente.rutcliente)
+        messages.success(request,'Reclamo enviado')
+        return render(request,'crearReclamo.html',data)        
+    return render(request,'crearReclamo.html',data)
+
+
+def registrarReclamo(descripcion,rut):
+    django_cursor = connection.cursor()
+    cursor = django_cursor.connection.cursor()
+    salidaPrve = cursor.var(cx_Oracle.NUMBER)
+    cursor.callproc("SP_AGREGAR_RECLAMO",[descripcion,rut, salidaPrve])
+    return salidaPrve.getvalue()

@@ -156,3 +156,17 @@ a:hover{
     flex-direction: column;
 }
 
+.color{
+  color:#9c3534;
+}
+.btn-carro {
+    background-color:#9c3534;
+    color: #fff;
+}
+
+.btn-carro:hover {
+    color: #9c3534;
+    background-color: #fff;
+    border: 1px solid #9c3534 ;
+}
+

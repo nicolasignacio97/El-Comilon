@@ -1,4 +1,5 @@
 from django.db.utils import DatabaseError
+from django.http.response import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from .context_processors import total_carrito
 from django.db import connection
@@ -7,14 +8,16 @@ from Platillos.carrito import carrito
 from core.models import Platillo, Cliente
 import base64
 
-# Create your views here.
 
+# Create your views here.
 
 def FinalizarCompra(request):
     #AGREGAR DETALLES PEDIDO
     cliente = get_object_or_404(Cliente, idcuenta = request.user.id)
+    
     dataCli = {
-        'cliente' : cliente
+        'cliente' : cliente,
+        # 'id': request.user.id
     }
     
     return render(request,'finalizarCompra.html', dataCli)
@@ -79,9 +82,11 @@ def limpiar_carrito(request):
 def guardar(request):    
     cliente = get_object_or_404(Cliente, idcuenta = request.user.id)
     Carrito = carrito(request)
-    
-
+     
     if request.method == 'POST':
+        #ruta
+        id = request.user.id
+        url = 'estadoPedido/'+str(id)
         #AGREGAR PEDIDO
         total = total_carrito(request)['total_carrito']
         fecha = request.POST.get('Fecha')
@@ -100,10 +105,10 @@ def guardar(request):
         Carrito = carrito(request)
         carro = Carrito.caja()
         for p in carro:
-            agregar_detalle_pedido(p['cantidad'], p['valorunitario'], p['acumulado'], p['idplatillo'], cliente.rutcliente)       
-        limpiar_carrito(request)
+            agregar_detalle_pedido(p['cantidad'], p['valorunitario'], p['acumulado'], p['idplatillo'], cliente.rutcliente)      
 
-    return redirect("platillos")
+        limpiar_carrito(request)
+        return redirect(url) 
 
 def agregar_pedido(valorTotal, fecha, direccion, idTipoServ, rutCliente, idEstPed, hora):
     django_cursor = connection.cursor()

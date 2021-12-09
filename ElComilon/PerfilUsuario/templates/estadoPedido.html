@@ -12,6 +12,7 @@
       <ul class="nav nav-tabs">
         <li class="nav-item">
           <a class="nav-link text-danger" aria-current="page" href="{% url 'perfilMenu' user.id %}" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ver y modificar mis datos">Mis Datos</a>
+
         </li>
         <li class="nav-item">
           <a class="nav-link text-danger" href="{% url 'historial' user.id %}" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ver todos mis pedidos">Mis pedidos</a>
@@ -24,6 +25,9 @@
           </li>
         <li class="nav-item">
           <a class="nav-link disabled">{{user.username.title}}</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled ">Reclamo</a>
         </li>
       </ul>
     </div>

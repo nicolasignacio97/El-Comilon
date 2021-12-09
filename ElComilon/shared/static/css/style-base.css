@@ -70,7 +70,6 @@ body{
 .menu a:hover{
   font-size: 20px;
   transition: all .5s;
-
 }
 
 a:hover{
@@ -330,24 +329,35 @@ a:hover{
 
 .nom-user h3{
   margin: 1rem;
+=======
+.BotonCarro{
+  border:none;
+  background-color: #9C3534;
+  color:#Fff;
+  height: 3rem;
+  width: 7rem;
 }
 
-.nom-user img{
-  width: 20%;
+.BotonCarro:hover{
+  font-size: 20px;
+  transition: all .5s;
+  background-color: rgba(0, 0, 0, 0.3)  !important;
+  transition: none;
+  border-radius: 6px;
 }
 
-.nav-canvas{
-  margin-top: 2rem;
+.color{
+  color:#9c3534;
+}
+.btn-carro {
+    background-color:#9c3534;
+    color: #fff;
 }
 
-
-.nav-canvas button{
-  padding-top: 5rem;
-}
-
-.nav-canvas a{
-  color: #202020;
-  text-decoration: none;
+.btn-carro:hover {
+    color: #9c3534;
+    background-color: #fff;
+    border: 1px solid #9c3534 ;
 }
 
 .items-header{

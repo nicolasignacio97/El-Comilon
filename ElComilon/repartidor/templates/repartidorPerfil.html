@@ -15,7 +15,7 @@
             <a class="nav-link text-danger" href="{% url 'MiVehiculo' user.id %}">Vehículo</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link  text-danger  btn btn-primary position-relative" href="{% url 'repartidor' %}">Lista de Pedidos ss
+            <a class="nav-link  text-danger  btn btn-primary position-relative" href="{% url 'repartidor' %}">Lista de Pedidos
                 <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                    {{TotalPedidos}}
                     <span class="visually-hidden">unread messages</span>
@@ -35,11 +35,30 @@
                 <div class="row d-flex justify-content-center">
                   <div class="row">
                     <div class="col-lg-6 col-sm-12">
-                      {{formCuenta}}
-                        <a href="/cambioContrasena" class="btn btn-danger">Cambiar contraseña</a>
+                      {% for field in formCuenta %}
+                      <div class="form-floating mb-3">
+                        <input type="{{field.html_name}}" value="{{field.value}}"  name="{{field.html_name}}" class="form-control" id="floatingInput" placeholder="{{field.html_name}}">
+                        <label for="{{field.id_for_label}}">{{field.label}}</label>
+                      </div>                      
+                      {% endfor %}
+                      <a href="/cambioContrasena" class="btn btn-danger">Cambiar contraseña</a>
                     </div>
                     <div class="col-lg-6 col-sm-12">
-                      {{form}}
+                      {% for field in form %}
+                      {%if field.value %}
+                      <div class="form-floating mb-3">
+                        <input type="{{field.html_name}}" value="{{field.value}}"  name="{{field.html_name}}" class="form-control" id="floatingInput" placeholder="{{field.html_name}}">
+                        <label for="{{field.id_for_label}}">{{field.label}}</label>
+                        <small>{{field.errors}}</small>
+                      </div>
+                      {%else%}
+                      <div class="form-floating mb-3">
+                        <input type="{{field.html_name}}"  name="{{field.html_name}}" class="form-control" id="floatingInput" placeholder="{{field.html_name}}">
+                        <label for="{{field.id_for_label}}">{{field.label}}</label>
+                        <small>{{field.errors}}</small>
+                      </div>
+                      {%endif%}
+                      {% endfor %}
                     </div>
                   </div>
                 </div>
