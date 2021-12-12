@@ -145,7 +145,7 @@ class Reclamo(models.Model):
     descreclamo = models.CharField(max_length=1000)
     rutcliente = models.ForeignKey(Cliente, models.DO_NOTHING, db_column='rutcliente')
     idestreclamo = models.ForeignKey(EstadoReclamo, models.DO_NOTHING, db_column='idestreclamo')
-
+   
     class Meta:
         managed = False
         db_table = 'reclamo'

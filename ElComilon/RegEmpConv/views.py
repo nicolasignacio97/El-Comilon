@@ -1,5 +1,5 @@
 from django.http.response import JsonResponse
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, redirect, render
 from django.db import connection
 from django.contrib import messages
 from core.models import EmpresaConvenio
@@ -136,3 +136,9 @@ def listarEmpresa():
         lista.append(fila)
 
     return lista
+
+def EliminarEmpresa(request, id):
+    empresa = get_object_or_404(EmpresaConvenio, rutempresaconvenio=id)
+    empresa.delete()
+    messages.success(request, "Eliminado correctamente")
+    return redirect(to="listaEmpresa")

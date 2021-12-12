@@ -9,26 +9,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
-        crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script src="{% static 'app/jquery.rut.chileno.js' %}"></script>
     <link rel="stylesheet" href="{% static 'css/style-lista.css' %}">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
-        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-    <script type="text/javascript">
-        jQuery(document).ready(function ($) {
-            $('.input_rut').rut();
-        });
-    </script>
+
   
     {%block js%}
     <script>
-        function eliminarRepresentante(id) {
+        function eliminarEmpresa(id) {
             Swal.fire({
                 "title": "¿Estás Seguro?",
                 "text": "Esta acción no se puede deshacer",
@@ -39,7 +25,7 @@
                 "confirmButtonColor": "#9C3534"
             }).then(function (result) {
                 if (result.isConfirmed) {
-                    window.location.href = "eliminarRepresentante/"+id
+                    window.location.href = "eliminarEmpresa/"+id
                 }
             })
         }
@@ -86,7 +72,7 @@
                                         <th scope="row" id="rutEmpresa" value="{{ t.0 }}">{{ t.0 }}</th>
                                         <td>{{ t.1 }}</td>
                                         <td>{{ t.2 }}</td>
-                                        <td>{{ t.3 }}</td>
+                                        <td>{{ t.3|date:"d M , Y"  }}</td>
                                         <td class="td-btn">
                                             <div class="row">
                                                 <form class="form-icon" action="actualizarEmpresa" method="POST">{% csrf_token %}
@@ -94,10 +80,10 @@
                                                             class="fas fa-user-edit"
                                                             style="color:#02B37F;  cursor: pointer;"></i></button>
                                                 </form>
-                                                <form class="form-icon" action="eliminarEmpresa" method="POST">{% csrf_token %}
-                                                    <button class="btn" name="btnEliminar" value="{{ t.0 }}"><i
+                                                <form class="form-icon" action="eliminarEmpresa">
+                                                    <a href="#" onClick="eliminarEmpresa('{{ t.0 }}')" class="btn" name="btnEliminar" value=""><i
                                                             class="fas fa-trash-alt"
-                                                            style="color: brown; cursor: pointer;"></i></button>
+                                                            style="color: brown; cursor: pointer;"></i></a>
                                                 </form>
                                             </div>
 

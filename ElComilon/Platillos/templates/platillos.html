@@ -1,6 +1,8 @@
 {% extends "HeaderFooter/base.html"%} 
 {% load static %}
-
+{% block titulo %}
+Catálogo
+{% endblock %}
 {% block content%}
 
 <!DOCTYPE html>
@@ -29,10 +31,7 @@
                     <div >
                         <img src="data:imagen/png;base64, {{ p.imagen }} "  alt="" class="card-img-top w-100 "style=" max-height:200px; box-shadow: 10px 10px 20px -8px rgb(0 0 0 / 30%); "
                         style=" max-height: 150px;">
-                    </div>
-                   
-    
-                    
+                    </div>                    
                     <div class="card-body card-body-main">
                         <h5 class="card-title tittle-card" >{{ p.data.1 }}</h5>
                         <span class="span-home" style=" margin-top: 10px; display: block;"> Descripcion:{{ p.data.2 }} </span>

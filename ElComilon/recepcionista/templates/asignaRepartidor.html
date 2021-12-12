@@ -1,6 +1,8 @@
 {% extends "HeaderFooter/base.html"%}
 {% load static %}
-
+{% block titulo %}
+({{ totalTotal }}) Asignar Repartidor
+{% endblock %}
 {% block content %}
 {% load humanize %}
 <link rel="stylesheet" href="{% static 'css/style-recepcionista-view.css' %}">
@@ -24,10 +26,21 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link text-danger position-relative" href="{% url 'verReclamos' %}">Ver reclamos
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                            {{totalReclamos}}
+                            <span class="visually-hidden">unread messages</span>
+                        </span>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link  disabled" aria-current="page" href="#">Cambiar Estado</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link active disabled" aria-current="page" href="#">Asignar Repartidor</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link  disabled" aria-current="page" href="#">Detalle del Recamo</a>
                 </li>
             </ul>
         </div>
@@ -111,17 +124,3 @@
 </div>
 {% endblock%}
 
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
-    integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
-    crossorigin="anonymous"></script>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script src="{% static 'app/jquery.rut.chileno.js' %}"></script>

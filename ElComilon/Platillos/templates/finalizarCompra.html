@@ -1,6 +1,8 @@
 {% extends "HeaderFooter/base.html"%}
 {% load static %}
-
+{% block titulo %}
+Finalizar Compra
+{% endblock %}
 {% block content%}
 
 <!DOCTYPE html>
@@ -57,7 +59,6 @@
                         setTimeout(() => {
                             if (result.dismiss === Swal.DismissReason.timer) {
                                 $('#formFinalizar').submit();
-                              
                             }
                         }, 1000);
                     })
@@ -83,10 +84,14 @@
 
                     <div class="camposPedido">
                         <legend>Termina de armar tu pedido</legend>
+                        {% if mensaje%}
+                        {{mensaje}}
+                        {%endif%}
                         <div class="contenedor-campos">
                             <div class="form-check form-switch inputs check campo titulos-campo">
                                 <label class="form-check-label" for="flexSwitchCheckDefault">Retiro en local</label>
-                                <input class="form-check-input" type="checkbox" name="Domicilio" role="switch" id="checkbox">
+                                <input class="form-check-input" type="checkbox" name="Domicilio" role="switch"
+                                    id="checkbox">
                                 <label class="form-check-label" for="flexSwitchCheckDefault">Entrega a domicilio</label>
                             </div>
                             <div class="campo titulos-campo">
@@ -97,7 +102,7 @@
                                 <input class="input-text" id="Direccion" name="Direccion" type="text"
                                     placeholder="Ingresa tu dirección" value="{{ cliente.direccion }}" disabled>
                             </div>
-        
+
                             <div class="campo">
 
                                 <div class="title titulos-campo">
@@ -109,9 +114,11 @@
                                     <div class="platillos ">
                                         <label>{{value.nombre | title}}</label>
                                         <div class="agregar-restar">
-                                            <a href="{% url 'restar_producto_fin' value.idplatillo %}" class=""> <img src="{% static 'img/restar.png' %}" alt=""> </a>
+                                            <a href="{% url 'restar_producto_fin' value.idplatillo %}" class=""> <img
+                                                    src="{% static 'img/restar.png' %}" alt=""> </a>
                                             {{ value.cantidad}}
-                                            <a href="{% url 'agregar_producto_fin' value.idplatillo %}" class=""> <img src="{% static 'img/agregar.png' %}" alt=""> </a>                
+                                            <a href="{% url 'agregar_producto_fin' value.idplatillo %}" class=""> <img
+                                                    src="{% static 'img/agregar.png' %}" alt=""> </a>
 
                                         </div>
                                     </div>
@@ -159,6 +166,13 @@
 
                             </div>
                             <div class="campo btn-finalizar">
+                                {%if cliente.saldocli %}
+                                <div class="form-check form-switch inputs check  titulos-campo p-0">
+                                    <input class="form-check-input" type="checkbox" name="saldo" role="switch"
+                                        id="checkbox">
+                                    <label class="form-check-label" for="flexSwitchCheckDefault">Pagar con saldo</label>
+                                </div>
+                                {% endif %}
                                 <a href="" class="btn btn-color" onclick="modificarEstado(event,'{{id}}')"> Confirmar
                                     pedido</a>
                             </div>
@@ -193,7 +207,16 @@
     </script>
 
     <script src="{% static 'app/fecha.js' %}"></script>
-
+    {% if mensaje %}
+    <script>
+        Swal.fire({
+            icon: 'error',
+            title: 'Uups...',
+            text: '{{mensaje}}',
+            footer: 'Su saldo es: ${{saldo | intcomma}}'
+        })
+    </script>
+    {%endif%}
 </body>
 
 </html>

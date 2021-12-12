@@ -33,8 +33,11 @@
   <link rel="stylesheet" href="{% static 'css/bootstrap5/bootstrap.min.css'%}">
 
   <link rel="stylesheet" href="{% static 'css/style-base.css' %}">
-
-  <title>Home</title>
+  
+  <title>
+    {% block titulo %}
+    {% endblock %}
+  </title>
 </head>
 
 <body>
@@ -43,7 +46,7 @@
     <div class="container-fluid">
       <div class=" row  col-3" style="justify-content: center;">
 
-        <a href="/" class="navbar-brand" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ir al inicio"><img class="logo-img" src="{% static 'img/logo.png' %}" alt=""
+        <a href="/" class="navbar-brand"><img class="logo-img" src="{% static 'img/logo.png' %}" alt=""
             style="max-width: 200px; max-height: 80px;"></a>
 
       </div>
@@ -113,9 +116,7 @@
           {% ifequal user.groups.all.0.name "Recepcionista" %}
           <li class="nav-item">
             <a href="{% url 'menuRecepcion' user.id %}"
-              class="nav-link nav-item-a text-light"
-              data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ir a perfil de recepcionista">
-              <img src="{% static 'img/recepcionista.png' %}" alt=""> {{user.username.title}}</a>
+              class="nav-link nav-item-a text-light">{{user.username.title}}</a>
           </li>
           {%else%}
           {% ifequal user.groups.all.0.name "Proveedor" %}

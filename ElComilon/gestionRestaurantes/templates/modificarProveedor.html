@@ -25,7 +25,7 @@
                 <div class="card shadow-lg p3 mb-5 mt-5 bg-white">
                     <h3 class="titulo  mt-5 text-center">Modificar Proveedor</h3>
                     <div class="card-body">
-                        <form action="" class=" d-flex flex-column  justify-content-center needs-validation" method="POST" novalidate>
+                        <form action="" class=" d-flex flex-column  justify-content-center" method="POST" >
                             {% csrf_token %}
                             <div class="form-row">
                                 <div class="row mt-2">
@@ -33,10 +33,9 @@
                                         <div class="form-floating mb-3">
                                             <input type="text" name="rutRestaurante"
                                                 value="{{seleccion.rutrestaurante}}" class="form-control input_rut"
-                                                id="Rut" required>
+                                                id="Rut" required readonly>
                                             <label for="rut">Rut Restaurante</label>
-                                            <div class="valid-feedback"> </div>
-                                            <div class="invalid-feedback">Complete el campo</div>
+                                            
                                         </div>
                                     </div>
                                     <div class="col-lg-6 mb-4">
@@ -44,8 +43,7 @@
                                             <input type="text" name="nombre" class="form-control" id="nombre"
                                                 minlength="2" value="{{seleccion.nombrerestaurante}}" required>
                                             <label for="nombre">Nombre Restaurante</label>
-                                            <div class="valid-feedback"> </div>
-                                            <div class="invalid-feedback">Complete el campo</div>
+                                            
                                         </div>
                                     </div>
                                 </div>
@@ -55,8 +53,7 @@
                                             <input type="text" name="direccion" class="form-control" id="direccion"
                                                 minlength="2" value="{{seleccion.direccionrestaurante}}" required>
                                             <label for="direccion">Dirección</label>
-                                            <div class="valid-feedback"> </div>
-                                            <div class="invalid-feedback">Complete el campo</div>
+                                            
                                         </div>
                                     </div>
                                 </div>
@@ -66,10 +63,8 @@
                                     <div class="col-lg-6 mb-4">
                                         <div class="form-floating mb-3">
                                             <input type="text" name="representante" class="form-control input_rut"
-                                                id="Rut" value="{{representante.rutrepresentante}}" required>
+                                                id="Rut" value="{{representante.rutrepresentante}}" required readonly>
                                             <label for="Rut">Rut Representante</label>
-                                            <div class="valid-feedback"> </div>
-                                            <div class="invalid-feedback">Complete el campo</div>
                                         </div>
                                     </div>
                                     <div class="col-lg-6 mb-4">
@@ -78,8 +73,6 @@
                                                 minlength="2" id="nombresRepresentante"
                                                 value="{{representante.nombres}}" required>
                                             <label for="nombresRepresentante">Nombre Representante</label>
-                                            <div class="valid-feedback"> </div>
-                                            <div class="invalid-feedback">Complete el campo</div>
                                         </div>
                                     </div>
                                 </div>
@@ -88,23 +81,21 @@
                                         <div class="form-floating mb-3">
                                             <input type="tel" name="telefono" class="form-control" id="teléfono"
                                                 value="{{representante.telefono}}" pattern="[0-9]{9}" required>
-                                            <label for="teléfono">Telefóno</label>
-                                            <div class="valid-feedback"> </div>
-                                            <div class="invalid-feedback">Complete el campo</div>
+                                            <label for="teléfono">Telefóno</label> 
                                         </div>
                                     </div>
                                     <div class="col-lg-6 mb-4">
                                         <div class="form-floating mb-3">
                                             <input type="text" name="apellidos" class="form-control" minlength="2"
                                                 id="apellidos" value="{{representante.apellidos}}" required>
-                                            <label for="apellidos">Apellidos</label>
-                                            <div class="valid-feedback"> </div>
-                                            <div class="invalid-feedback">Complete el campo</div>
+                                            <label for="apellidos">Apellidos</label>                                            
                                         </div>
                                     </div>
                                 </div>
                                 <div class="pieForm">
-                                    <button class="btn botonEnviar" id="btn1" type="submit">Modificar</button>
+                                    <div class="row">                                       
+                                        <button class="btn botonEnviar" id="btn1" type="submit">Modificar</button>                                      
+                                    </div>
                                 </div>
                             </div>
                         </form>

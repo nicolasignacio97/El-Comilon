@@ -188,7 +188,8 @@ def actualizarSaldo(request):
     if request.method == 'POST':
         archivo = request.FILES['arch'];
         datos = leerArchivo(archivo)
-        modificar_saldo_cliente(datos[0][0],datos[0][1])
+        for campos in datos:
+            modificar_saldo_cliente(campos[0],campos[1])
 
     return render(request, 'actualizarSaldo.html')
 
@@ -197,10 +198,8 @@ def leerArchivo(archivo):
     dataset = Dataset()
     nuevoSaldo = archivo
     importar = dataset.load(nuevoSaldo.read(),format='xlsx')
-    for data in importar:
-        lista = []
-        lista.append(data)
-        return lista
+
+    return importar
 
 
 def modificar_saldo_cliente(rutempcli,saldocli):

@@ -1,7 +1,6 @@
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
 from django.db import connection, reset_queries
 from django.contrib.auth.decorators import permission_required
-from django.http import request
 from django.contrib.auth.models import User,Group
 from django.http.response import JsonResponse
 from core.models import Trabajador
@@ -46,9 +45,7 @@ def registroTrabajador(request):
     
 def clean_rut_trabajador(request):
     ruttrabajador = request.POST.get('rut')
-    print(ruttrabajador)
     if Trabajador.objects.filter(ruttrabajador=ruttrabajador).exists():
-        print("Trabajador existente")
         return JsonResponse({'valid': 0})
     return JsonResponse({'valid': 1 })
     
@@ -119,32 +116,27 @@ def listarTrabajadorRut(rut):
     return lista
     
 @permission_required('core')
-def actualizarTrabajador(request):
+def actualizarTrabajador(request,id):
 
-    if request.method == 'POST':
+    trabajador = get_object_or_404(Trabajador,ruttrabajador = id)
 
-        rut = request.POST.get('btnActualizar')
-
-        data = {
-        'trabajador': listarTrabajadorRut(rut),
+    data = {
+        'trabajador':trabajador,
         'cargo': listar()
-        }
-
- 
-    return render(request, 'actualizarTrabajador.html', data)
-    
-@permission_required('core')
-def actTrabajador(request):
+    }
     if request.method =='POST':
-        rutTrabajador = request.POST.get('rutTrabajador').upper()
-        nombres = request.POST.get('nombres').upper()
-        apellidos = request.POST.get('apellidos').upper()
+        rutTrabajador = request.POST.get('rutTrabajador')
+        nombres = request.POST.get('nombres')
+        apellidos = request.POST.get('apellidos')
         usuario = request.POST.get('nombreU')
         idCargo = request.POST.get('cargo')
 
         actualizar(rutTrabajador, nombres, apellidos, usuario, idCargo)
+        messages.success(request, nombres + " Actualizado correctamente")
 
-    return listaTrabajador(request)
+        return redirect(to='listaTrabajador')
+    return render(request, 'actualizarTrabajador.html', data)
+    
 
 def actualizar(rutTrabajador, nombres, apellidos, usuario, idCargo):
     django_cursor = connection.cursor()
@@ -153,20 +145,18 @@ def actualizar(rutTrabajador, nombres, apellidos, usuario, idCargo):
 
     return 0
 
-def eliminarTrabajador(request,ruttrabajador, id):
-    u = User.objects.get(pk=id)
-    u.delete()
-    trabajadores = Trabajador.objects.get(ruttrabajador = ruttrabajador)
-    trabajadores.delete()
-    messages.success(request, messages.SUCCESS , 'Eliminado con exito')
 
+
+
+def eliminarTrabajador(request,rut):
+    trabajadores = Trabajador.objects.get(ruttrabajador = rut)
+    trabajadores.delete()
+    messages.success(request, 'Eliminado con exito')
     return listaTrabajador(request)
 
 
 def eliminar(rut):
     django_cursor = connection.cursor()
     cursor = django_cursor.connection.cursor()
-
     cursor.callproc("SP_ELIMINAR_TRABAJADOR", [rut])
-
     return 0
