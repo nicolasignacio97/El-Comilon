@@ -5,9 +5,9 @@ from .context_processors import total_carrito
 from django.db import connection
 import cx_Oracle
 from Platillos.carrito import carrito
-from core.models import Platillo, Cliente
+from core.models import Platillo, Cliente, Restaurante
 import base64
-
+import datetime
 
 # Create your views here.
 
@@ -23,6 +23,8 @@ def FinalizarCompra(request):
     return render(request,'finalizarCompra.html', dataCli)
 
 def platillos(request):
+    restaurante = object.all(Restaurante)
+    print(restaurante)
     data = {
         'platillos':listado_platillos()
     }

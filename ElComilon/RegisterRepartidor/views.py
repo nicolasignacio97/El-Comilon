@@ -135,6 +135,7 @@ def editRepartidor(request,rutrepartidor):
         messages.success(request,'Modificado con exitos')
         return redirect(to="/administracion/listarep")
     return render(request,"updaterepartidor.html",dataMod)
+    
 def deleterepartidor(request,rutrepartidor, id):
     u = User.objects.get(pk=id)
     u.delete()

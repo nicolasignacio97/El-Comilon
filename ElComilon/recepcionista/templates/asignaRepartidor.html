@@ -8,7 +8,7 @@
 <div class="container bg-white shadow-lg mt-5 mb-3">
     <div class="row">
         <div class="col m-2">
-            <h1 class="text-center mt-1 mb-5 titulo">Asignar Repartidor</h1>
+            <h1 class="text-center mt-1 mb-5 titulo">Asignar repartidor al pedido <span class="titulo"> #{{ pedidoSelect.idpedido }}</span></h1>
             <ul class="nav nav-tabs">
                 <li class="nav-item">
                     <a class="nav-link   text-danger" aria-current="page" href="{% url 'menuRecepcion' user.id %}">Mis
@@ -32,49 +32,82 @@
             </ul>
         </div>
     </div>
-    <div class="row mt-2">
-        <div class=" text-center ">
-            <form action="" method="POST">
-                {% csrf_token %}
-                <p name='idPedido' class="mt-3">Pedido N° {{ pedidoSelect.idpedido }}</p>
-                <div class="card-body">
-                    <h3 class="card-title">Asignar repartidor al pedido</h3>
-                    <div>
-                        <label for=""><span>Fecha:</span></label>
-                        <label for="">{{ pedidoSelect.fechapedido }}</label>
-                    </div>
-                    <div>
-                        <label for=""><span>Rut Cliente: $</span></label>
-                        <label for="">{{ pedidoSelect.rutcliente }}</label>
-                    </div>
-                    <div>
-                        <label for=""><span>Dirección:</span></label>
-                        <label for="">{{ pedidoSelect.direccionpedido }}</label>
-                    </div>
+    <div class="col mt-2">
+        <section class="container contenido-pedidovich ">         
+            <section class="container contenido-pedidovich">
+                <div class="text-center ">
+                    <form action="" method="POST">
+                        {% csrf_token %}
+                        <div class="card-body info-botones m-0 w-100">
+                            <div class="info d-flex justify-content-center">
+                            <div class="card" style="width: 22rem;">
+                                <div class="card-body">
+                                <h5 class="card-title">Detalles del pedido</h5>
+                                <p class="card-text"><div>
+                                    <label for=""><span>Dirección:</span></label>
+                                    <label for="">{{ pedidoSelect.direccionpedido | title }}</label>
+                                </div>
+                                <div>
+                                    <label for=""><span>Fecha:</span></label>
+                                    <label for="">{{ pedidoSelect.fechapedido }}</label>
+                                </div>
+                                <div>
+                                    <label for=""><span>Hora:</span></label>
+                                    <label for="">{{ pedidoSelect.horapedido }}</label>
+                                </div>
+                                <div>
+                                    <label for=""><span>Rut Cliente:</span></label>
+                                    <label for="">{{ pedidoSelect.rutcliente }}</label>
+                                </div>
+                                <div>
+                                <label for=""><span>Telefono:</span></label>
+                                <label for="">{{ cliente.telefono }}</label>
+                            </div></p>
+                                </div>
+                                <ul class="list-group list-group-flush">
+                                {% for det in detallePedido %}
+                                {% if det.ID_ESTADO_PLATILLO %}
+                                {% if det.ID_ESTADO_PLATILLO == 1 %}
+                                <li class="list-group-item">{{ det.idplatillo | title }} <span class="por-cantidad">x {{det.cantidad}}</span>  <span class="text-danger fs-5">Pendiente</span> </li>
+                                {%endif%}
+                                {% if det.ID_ESTADO_PLATILLO == 2 %}
+                                <li class="list-group-item">{{ det.idplatillo | title }} <span class="por-cantidad">x {{det.cantidad}}</span> <span class="text-warning fs-5">En Preparación</span> </li>
+                                {%endif%}
+                                {% if det.ID_ESTADO_PLATILLO == 3 %}
+                                <li class="list-group-item">{{ det.idplatillo | title }} <span class="por-cantidad">x {{det.cantidad}}</span> <span class=" text-success fs-5">Listo</span> </li>
+                                {%endif%}
 
-                    <div>
-                        <label for=""><span>Total: $</span></label>
-                        <label for="">{{ pedidoSelect.valortotal }}</label>
-                    </div>
-                    <hr>
-                    <p class="card-text">Seleccione un repartidor disponible para efectuar la entrega a domicilio.</p>
-                    <select class="form-select" aria-label="Default select example" name="repartidor">w
-                        <option selected disabled>Seleccionar repartidor</option>
-                        {% for repa in repartidores %}
-                        <option value="{{repa.0}}">{{repa.1}} {{repa.2}}</option>
-                        {% endfor %}
-                    </select>
-                    <button class="btn botonEnviar bloque-abajo mt-4" id="btn1" type="submit">Asignar
-                        repartidor</button>
-                    {{mensaje}}
+                                {%else%}
+                                <li class="list-group-item">{{ det.idplatillo | title }} <span class="por-cantidad">x {{det.cantidad}}</span>   </li>
+                                {%endif%}
+                                {% endfor %}
+                                </ul>
+                                <div class="card-body">
+                                <div class="total">                              
+                                    <label for=""><span>Total: $</span></label>
+                                    <label for="">{{ pedidoSelect.valortotal | intcomma }}</label>
+                                </div>
+                                </div>
+                            </div>
+                            </div>
+                            <div class="vl"></div>
+                            <div class="info">
+                            <h2 class="text-dark">Estado Actual <span class="titulo">{{pedidoSelect.idestpedido | title}}</span></h2>
+                            <p class="card-text">Seleccione un repartidor disponible para efectuar la entrega a domicilio.</p>
+                            <select class="form-select" aria-label="Default select example" name="repartidor">w
+                                <option selected disabled>Seleccionar repartidor</option>
+                                {% for repa in repartidores %}
+                                <option value="{{repa.0}}">{{repa.1}} {{repa.2}}</option>
+                                {% endfor %}
+                            </select>
+                            <button class="btn botonEnviar bloque-abajo mt-4" id="btn1" type="submit">Asignar
+                                repartidor</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
-
-                <p class="m-2">{{ pedidoSelect.fechapedido }}</p>
-
-            </form>
-        </div>
-
-    </div>
+            </section>
+    
 </div>
 {% endblock%}
 

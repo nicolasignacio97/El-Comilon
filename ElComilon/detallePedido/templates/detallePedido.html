@@ -30,7 +30,7 @@
             <h1 class="num-pedido">Pedido #<span>{{pedido.0.0}}</span></h1>
         
         <div class="fecha-estado">
-            <p>Tu pedido se realizó el <span>{{pedido.0.1}}</span> y se encuentra <span class="estado">{{pedido.0.2 | title}}</span> </p>
+            <p>Tu pedido se realizó el <span>{{pedido.0.1|date:"l d"}} de {{pedido.0.1|date:"F"}} del {{pedido.0.1|date:"Y"}} a las {{pedido.0.13}}</span> y se encuentra <span class="estado">{{pedido.0.2 | title}}</span> </p>
         </div>
         
         <div class="cuadrado">

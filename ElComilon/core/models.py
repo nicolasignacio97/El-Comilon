@@ -111,6 +111,7 @@ class Pedido(models.Model):
     idtiposervicio = models.ForeignKey('TipoServicio', models.DO_NOTHING, db_column='idtiposervicio')
     rutcliente = models.ForeignKey(Cliente, models.DO_NOTHING, db_column='rutcliente')
     idestpedido = models.ForeignKey(EstadoPedido, models.DO_NOTHING, db_column='idestpedido')
+    horapedido = models.CharField(max_length=30, blank=True, null=True)
 
     def __str__(self):
         return self.rutcliente

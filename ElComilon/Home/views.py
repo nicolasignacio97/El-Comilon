@@ -4,10 +4,12 @@ import cx_Oracle
 from django.core.files.base import ContentFile
 import base64
 
+
 # Create your views here.
 
 
 def inicio(request):
+    
     data = {
         'platillos': listarPlatillos(),
         'complementos': listarComplementos(),
