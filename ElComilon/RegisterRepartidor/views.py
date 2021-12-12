@@ -13,18 +13,6 @@ from core.models import *
 
 contexto = {}
 
-def pruebaform(request):
-    form = registerRepartidor(request.POST or None)
-    
-    return render(request, "regrepartidor.html", {'form':form})
-
-def registroVeh(request):
-
-    data = {
-          'categoria':listar_categoria(), 
-          
-          }
-    return render(request, 'Registrorepartidor.html', data)  
  
 def Registrorep(request):
 
@@ -32,16 +20,16 @@ def Registrorep(request):
           'categoria':listar_categoria(),
           'restaurante':listar_restaurantes(),
           'form' :FormularioUsuario()
-          }
+    }
     if request.method == 'POST':
         #Repartidor
         rutrepartidor = request.POST.get('RutRepartidor')
         nombres = request.POST.get('NombresRepartido')
         apellido = request.POST.get('ApellidosRepartidor')
         fechacontrato = request.POST.get('Fechacontrato')
-        # user = nombres[:2] + "." + apellido[0:]
-        rutrestaurante = '77.684.154-9'
-        
+    
+        rutrestaurante = '99.365.349-8'
+    
         #Vehiculo
         vehiculorut = request.POST.get('RutRepartidor')
         patente = request.POST.get('Patente')
@@ -78,6 +66,7 @@ def clean_rut(request):
         dic['val_patente'] = False
         print("patente existente")
     return JsonResponse(dic)
+
 #Clean_patente
 def clean_patente(request):
     patente = request.POST.get('patente')
@@ -85,7 +74,6 @@ def clean_patente(request):
     print(patente)
     print(patentenew)
     dic = {}
-    # return JsonResponse({'valid': 0})
     if patente == patentenew:
         dic['val_patenteiguales'] = False
         return JsonResponse(dic)
@@ -93,15 +81,13 @@ def clean_patente(request):
          dic['val_patente'] = False
          print("patente existente")
     return JsonResponse(dic)
+
 #Modificar
 def editRepartidor(request,rutrepartidor):
     repartidor = get_object_or_404(Repartidor,rutrepartidor=rutrepartidor)
     vehiculo = get_object_or_404(Vehiculo,rutrepartidor=rutrepartidor)
     repartidores = Repartidor.objects.all()
-    print('entrando al metodo')
-    print(vehiculo.idtipovehiculo)
-    print()
-    
+   
     dataMod = {
        'selection' : repartidor,
        'repartidores':repartidores,
@@ -113,7 +99,7 @@ def editRepartidor(request,rutrepartidor):
         nombres = request.POST.get('NombresRepartido')
         apellido = request.POST.get('ApellidosRepartidor')
         fechacontrato = request.POST.get('Fechacontrato')   
-        # user = nombres[:2] + "." + apellido[0:]
+        
         rutrestaurante = request.POST.get('rutempresa')
         #vehiculo
         patente= request.POST.get('Patentenew').upper()
@@ -123,32 +109,21 @@ def editRepartidor(request,rutrepartidor):
         color = request.POST.get('Color') 
         tipovehiculo = request.POST.get('tipovehiculo') 
         idvehhiculo = request.POST.get('idvehiculo') 
-        print(patente)
-        print(modelo)
-        print(ano)
-        print(color)
-        print(rutrepveh)
-        print(tipovehiculo)
-        print(idvehhiculo)
         modificar_vehiculo(patente , modelo, ano, color,rutrepveh,tipovehiculo,idvehhiculo)
         modificar_repartidor(rutrepartidor,nombres, apellido, fechacontrato ,rutrestaurante) 
-        messages.success(request,'Modificado con exitos')
+        messages.success(request,'Modificado con exito')
         return redirect(to="/administracion/listarep")
     return render(request,"updaterepartidor.html",dataMod)
-def deleterepartidor(request,rutrepartidor, id):
-    u = User.objects.get(pk=id)
-    u.delete()
-    repartidores = Repartidor.objects.all()
-    vehiculos = Vehiculo.objects.all()
-    vehiculo = Vehiculo.objects.get(rutrepartidor = rutrepartidor)
+
+
+def deleterepartidor(request,rutrepartidor):
+    repartidor = get_object_or_404(Repartidor, rutrepartidor = rutrepartidor)
+    vehiculo = get_object_or_404(Vehiculo, rutrepartidor = rutrepartidor)
     vehiculo.delete()
-    repartidor = Repartidor.objects.get(rutrepartidor=rutrepartidor)
     repartidor.delete()
     messages.success(request,  ' Repartidor ' + repartidor.nombres + ' Eliminado con exito')
-    contexto = {
-         'repartidor':repartidores
-    }
-    return render(request,"listadorepartidores.html",contexto)
+    return redirect(to='listarep')
+
 
 #Listar
 def listarRep(request):

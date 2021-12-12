@@ -9,23 +9,26 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
-        crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script src="{% static 'app/jquery.rut.chileno.js' %}"></script>
     <link rel="stylesheet" href="{% static 'css/style-lista.css' %}">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
-        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-    <script type="text/javascript">
-        jQuery(document).ready(function ($) {
-            $('.input_rut').rut();
-        });
-    </script>
+
     <title>trabajador</title>
+    <script>
+        function eliminarTrabajador(id) {
+            Swal.fire({
+                "title": "¿Estás Seguro?",
+                "text": "Esta acción no se puede deshacer",
+                "icon": "question",
+                "showCancelButton": true,
+                "cancelButtonText": "No, Cancelar",
+                "confirmButtonText": "Si, Eliminar",
+                "confirmButtonColor": "#9C3534"
+            }).then(function (result) {
+                if (result.isConfirmed) {
+                    window.location.href = "eliminarTrabajador/"+id
+                }
+            })
+        }
+    </script>
 </head>
 
 <body>
@@ -68,13 +71,14 @@
                                         <td>{{ t.1 }}</td>
                                         <td>{{ t.2 }}</td>
                                         <td>{{ t.3 }}</td>
-                                        <td>{{ t.5 }} </td>
-                                        <td> <a href=""><i class="fas fa-user-edit"
+                                        <td>{{ t.6 | title }}</td>                                        
+                                        <td>
+                                            <a href="{% url 'actualizarTrabajador' t.0 %}"><i class="fas fa-user-edit"
                                                     style="color:#02B37F; cursor: pointer;"></i></a>
-                                            <a href="{% url 'eliminarTrabajador' t.0 t.5  %}"><i
+
+                                            <a onClick="eliminarTrabajador('{{t.0}}')"  href="#"><i
                                                     class="fas fa-trash-alt" style="color: brown; cursor: pointer;">
                                                 </i> </a>
-
                                         </td>
                                     </tr>
                                     {% endfor %}

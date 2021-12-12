@@ -1,0 +1,83 @@
+{% extends "HeaderFooter/base.html"%}
+{% load static %}
+
+{% block titulo %}
+Ver Reclamos
+{% endblock %}
+{% block content %}
+{% load humanize %}
+<link rel="stylesheet" href="{% static 'css/style-recepcionista-view.css' %}">
+
+<div class="container bg-white shadow-lg mt-5 mb-3">
+    <div class="row">
+        <div class="col m-2">
+            <h1 class="text-center mt-1 mb-5 titulo">Asignar Repartidor</h1>
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a class="nav-link   text-danger" aria-current="page" href="{% url 'menuRecepcion' user.id %}">Mis
+                        Datos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-danger position-relative" href="{% url 'recepcionista' %}">Lista de Pedidos
+                        Pendientes
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                            {{TotalPedidos}}
+                            <span class="visually-hidden">unread messages</span>
+                        </span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link  active  text-danger" aria-current="page" href="{% url 'verReclamos' %}">Ver
+                        reclamos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link  disabled" aria-current="page" href="#">Cambiar Estado</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link  disabled" aria-current="page" href="#">Asignar Repartidor</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link  disabled" aria-current="page" href="#">Detalle del Recamo</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="row mt-2">
+        <div class=" text-center ">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Fecha</th>
+                        <th scope="col">Rut Cliente</th>
+                        <th scope="col">Estado</th>
+                        <th scope="col">Acción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {%for reclamo in reclamos%}
+                    <tr>
+                        <th scope="row">{{reclamo.0}}</th>
+                        <td>{{reclamo.1}}</td>
+                        <td>{{reclamo.3}}</td>
+                        {% if reclamo.4 == 1 %}
+                        <td>Abierto</td>
+                        {%else%}
+                        <td>Cerrado</td>
+                        {%endif%}
+                        <td class="d-flex justify-content-center"> <a href="{% url 'detalleReclamo' reclamo.0 %}"><i class="fas fa-eye"
+                                    data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ver detalles del pedido"
+                                    style="color:#02B37F; cursor: pointer;"></i></a>
+                        </td>
+                    </tr>
+                    {%endfor%}
+                </tbody>
+            </table>
+            <br>
+
+
+        </div>
+
+    </div>
+</div>
+{% endblock%}

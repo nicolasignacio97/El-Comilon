@@ -12,17 +12,17 @@
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="{% static 'css/stylesrepartidor.css' %}">
     <title>Document</title>
+
 </head>
-{% load crispy_forms_tags %}
 
 <body>
     <div class="row mt-5">
         <div class=" col-md-10 m-auto ">
             <div class="card">
                 <div class="card-body">
-                    <h1 class="mb-4" style="color: brown; text-align: center;">Repartidor</h1>
+                    <h1 class="mb-4" style="color: brown; text-align: center;">Modificar Repartidor</h1>
 
-                    <form method="POST"  id="post-form" class="needs-validation" novalidate>
+                    <form method="POST"  id="post-form">
                         {% csrf_token %}
                         <div class="row">
                             <div class="col-lg-6">
@@ -30,8 +30,6 @@
                                     <input type="text" name="RutRepartidor" value="{{selection.rutrepartidor}}"
                                         class="form-control input_rut input-repartidor" id="" required readonly>
                                     <label for="">Rut Repartidor</label>
-                                    <div class="valid-feedback"> </div>
-                                    <div class="invalid-feedback">Complete el campo</div>
                                 </div>
                             </div>
                             <div class="col-lg-6">
@@ -39,8 +37,6 @@
                                     <input type="text" name="NombresRepartido" value="{{selection.nombres}}"
                                         class=" form-control  input-repartidor" id="" required>
                                     <label for="">Nombres Repartidor</label>
-                                    <div class="valid-feedback"> </div>
-                                    <div class="invalid-feedback">Complete el campo</div>
                                 </div>
                             </div>
                         </div>
@@ -50,8 +46,6 @@
                                     <input type="text" name="ApellidosRepartidor" value="{{selection.apellidos}}"
                                         class=" form-control  input-repartidor" id="" required>
                                     <label for="">Apellidos Repartidor</label>
-                                    <div class="valid-feedback"> </div>
-                                    <div class="invalid-feedback">Complete el campo</div>
                                 </div>
                             </div>
                             <div class="col-lg-6">
@@ -60,8 +54,6 @@
                                         value="{{selection.fechacontrato|date:'Y-m-d'}}"
                                         class=" form-control  input-repartidor" id="datefield" required>
                                     <label for="">Fecha contrato</label>
-                                    <div class="valid-feedback"> </div>
-                                    <div class="invalid-feedback">Complete el campo</div>
                                 </div>
                             </div>
                         </div>
@@ -71,15 +63,13 @@
                                     <input type="text" name="rutempresa" value="{{selection.rutrestaurante}}"
                                         class="  form-control  input-repartidor" id="Rut" required readonly>
                                     <label for="">Rut Restaurante</label>
-                                    <div class="valid-feedback"> </div>
-                                    <div class="invalid-feedback">Complete el campo</div>
                                 </div>
                             </div>
 
 
                         </div>
                         <div class="row">
-                            <h1 style="color: brown; text-align: center;" class="mb-4">Vehiculo</h1>
+                            <h1 style="color: brown; text-align: center;" class="mb-4">Modificar Vehículo</h1>
                         </div>
                         <div class="row">
                             <div class="col-lg-6">
@@ -88,9 +78,8 @@
                                         class=" form-control  input-repartidor" id="txt-patente"
                                         pattern="^[A-z]{4}[0-9]{2}$" required readonly>
                                     <label for="">Patente vehiculo</label>
-                                    <div class="valid-feedback"> </div>
-                                    <div class="invalid-feedback">Complete el campo</div>
                                 </div>
+                                <small id="Msg" class="text-danger fs-6"> </small>
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-floating mb-3">
@@ -98,7 +87,7 @@
                                         pattern="^[A-z]{4}[0-9]{2}$" class=" input-repartidor form-control"
                                         id="txt-patentenew">
                                     <label for="">Nueva patente vehiculo</label>
-                                    <div class="valid-feedback"> </div>
+                                    
                                     <div class="invalid-feedback " id="div-patente">Complete el campo</div>
                                 </div>
                             </div>
@@ -111,8 +100,6 @@
                                         pattern="[a-zA-Z ]{3,8}*[ 0-9]" class=" form-control  input-repartidor" id="Rut"
                                         required>
                                     <label for="">Vehiculo Modelo</label>
-                                    <div class="valid-feedback"> </div>
-                                    <div class="invalid-feedback">Complete el campo</div>
                                 </div>
                             </div>
                             <div class="col-lg-4">
@@ -120,8 +107,6 @@
                                     <input type="text" name="Ano" value="{{vehiculos.anio}}"
                                         class=" form-control  input-repartidor" id="Rut" pattern="[0-9]{4}$" required>
                                     <label for="">Año Vehiculo</label>
-                                    <div class="valid-feedback"> </div>
-                                    <div class="invalid-feedback">Complete el campo</div>
                                 </div>
                             </div>
                             <div class="col-lg-4">
@@ -129,7 +114,7 @@
                                     <input type="text" name="Color" value="{{vehiculos.color}}"
                                         class=" form-control  input-repartidor" pattern="[a-zA-Z]{3,8}" required>
                                     <label for="">Color Vehiculo</label>
-                                    <div class="valid-feedback"> </div>
+                                    
                                     <div class="invalid-feedback" id="invalid-feedback">Complete el campo</div>
                                 </div>
                             </div>
@@ -140,25 +125,20 @@
                                     <select name="tipovehiculo" id="tipovehiculo"
                                         class="combobox-tipovehiculo  form-select">
                                         <option value="{{vehiculos.idtipovehiculo}}">{{vehiculos.idtipovehiculo.descripcion}}
-                                        </option> -->
-                                        <option value="">----</option>
+                                        </option>
                                         {% for v in categoria %}
                                         <option value="{{v.0}}">{{v.1}}</option>
                                         {% endfor %}
                                     </select>
                                     <label for="">Tipo vehiculo</label>
-                                    <div class="valid-feedback"> </div>
-                                    <div class="invalid-feedback">Complete el campo</div>
                                 </div>
                             </div>
 
                             <div class="col-lg-6 d-none">
                                 <div class="form-floating mb-3">
                                     <input type="text" name="idvehiculo" value="{{vehiculos.idvehiculo}}"
-                                        class=" form-control  input-repartidor" id="Rut" required>
+                                        class=" form-control  input-repartidor" id="idvehiculo" required>
                                     <label for="">Idvehiculo</label>
-                                    <div class="valid-feedback"> </div>
-                                    <div class="invalid-feedback">Complete el campo</div>
                                 </div>
                             </div>
                             <div class="col-lg-4 d-none">
@@ -166,20 +146,11 @@
                                     <input type="text" name="rutveh" value="{{vehiculos.rutrepartidor}}"
                                         class=" form-control  input-repartidor" id="Rut" required>
                                     <label for="">Rut repartidor</label>
-                                    <div class="valid-feedback"> </div>
-                                    <div class="invalid-feedback">Complete el campo</div>
                                 </div>
                             </div>
                         </div>
 
-                        <br>
-                        <hr>
-                        <div class="d-flex justify-content-end">
-                            <a href="{% url 'listarep'%}">
-                                <input type="button" value="Cancelar" class="btn btn-secondary">
-                            </a>
-
-                            &nbsp;
+                        <div class="mt-5 d-flex justify-content-center">
                             <button type="submit" id="BTNENVIAR" class="btn "
                                 style="background-color: brown; color: #ffffff;">Modificar Repartidor</button>
                         </div>
@@ -253,14 +224,10 @@
                             form.submit()
                         }
                         else if (data.val_patente === false) {
-                            console.log('patente no disponible')
-                            divpatente.classList.add('inputype')
-                            form.classList.add('.was-validated')
-                            txtpatente.classList.add('d-block')
-                            txtpatente.innerHTML = 'Patente ya utilizada'
+               
+                            document.getElementById("Msg").innerHTML ="Patente ya utilizada";                            
                         }
                         else {
-                            console.log('patente valida ')
                             form.submit();
                         }
                     });
@@ -276,7 +243,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
-    <script src="{% static 'app/'%}"></script>
 </body>
 
 </html>

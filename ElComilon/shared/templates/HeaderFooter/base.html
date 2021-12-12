@@ -33,8 +33,11 @@
   <link rel="stylesheet" href="{% static 'css/bootstrap5/bootstrap.min.css'%}">
 
   <link rel="stylesheet" href="{% static 'css/style-base.css' %}">
-
-  <title>Home</title>
+  
+  <title>
+    {% block titulo %}
+    {% endblock %}
+  </title>
 </head>
 
 <body>

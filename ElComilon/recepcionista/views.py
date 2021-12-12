@@ -1,9 +1,12 @@
+from django.conf import settings
 from django.shortcuts import get_object_or_404, render, redirect
+
 from .forms import EditarUsuario, EditarRecepcionista
 from django.contrib.auth.models import User
 from django.contrib import messages
-from core.models import Trabajador,Pedido, DetallePedido, Cliente,Repartidor
-
+from core.models import Trabajador,Pedido, DetallePedido, Cliente,Repartidor, Reclamo
+from django.core.mail import send_mail
+from django.conf import settings
 from django.db import connection
 import cx_Oracle
 
@@ -107,6 +110,52 @@ def menuRecepcion(request, id):
 
     return render (request, 'menuRecepcionista.html',data)
 
+
+def verReclamos(request):
+   
+    data={
+        'reclamos':listado_reclamos(),
+        'TotalPedidos':len(listado_pedidos_listos()),
+    }
+    return render(request,'verReclamos.html',data)
+    
+
+
+
+def detalleReclamo(request, id):
+    reclamo = get_object_or_404(Reclamo, idreclamo = id)
+    clientes = get_object_or_404(Cliente, rutcliente = reclamo.rutcliente)
+    cliente = listado_clientes(clientes.rutcliente)
+    user = get_object_or_404 (User, id= cliente[0][11])
+
+    if request.method=="POST":
+        subjet = "Estado de su Reclamo"
+        message = request.POST["Mensaje"]
+        email_from = settings.EMAIL_HOST_USER
+        recipient_list=[user.email]
+        send_mail(subjet,message,email_from,recipient_list)
+    data={
+        'reclamo' : reclamo,
+        'correo': user.email,
+        'clientes':clientes,
+        'TotalPedidos':len(listado_pedidos_listos()),
+    }
+    return render(request,'detalleReclamo.html',data)
+
+
+
+def listado_clientes(rut):
+    django_cursor = connection.cursor()
+    cursor = django_cursor.connection.cursor()
+    out_cur = django_cursor.connection.cursor()
+
+    cursor.callproc("SP_LISTAR_CLIENTES", [rut, out_cur])
+    lista = []
+    for fila in out_cur:
+        lista.append(fila)
+
+    return lista
+
 def listado_pedidos_listos():
     django_cursor = connection.cursor()
     cursor = django_cursor.connection.cursor()
@@ -156,3 +205,17 @@ def asignar_repartidor(id, idestpedido,rutrepartidor):
     salida = cursor.var(cx_Oracle.NUMBER)
     cursor.callproc('SP_MODIFICAR_ASIGNAR_REPARTIDOR',[id, idestpedido,rutrepartidor ,salida])
     return salida.getvalue()
+
+def listado_reclamos():
+    django_cursor = connection.cursor()
+    cursor = django_cursor.connection.cursor()
+    out_cur = django_cursor.connection.cursor()
+
+    cursor.callproc("SP_LISTAR_reclamos", [out_cur])
+
+    lista = []
+    for fila in out_cur:
+        lista.append(fila)
+    return lista
+
+
