@@ -13,10 +13,9 @@ from repartidor.views import viewPedido, viewRepartidor, PerfilRepartidor, MiVeh
 from reclamo.views import reclamo
 from Home.views import quienesSomos
 from administracion.urls import url_patterns
-from PerfilUsuario.views import PerfilUsuario, perfilMenu, CambiarContra, estadoPedido,crearReclamo
-from Platillos.views import platillos, agregar_producto, eliminar_producto, restar_producto, limpiar_carrito, guardar, FinalizarCompra, agregar_producto_fin, restar_producto_fin
+from PerfilUsuario.views import PerfilUsuario, perfilMenu, CambiarContra, estadoPedido,crearReclamo,crearMenu, cancelarPedido
+from Platillos.views import platillos, agregar_producto, eliminar_producto, restar_producto, limpiar_carrito, guardar, FinalizarCompra, agregar_producto_fin, restar_producto_fin,agregar_producto_menu
 from detallePedido.views import detallePedido
-from Menu.views import crearMenu
 from administracion.views import pag_404
 
 
@@ -58,6 +57,9 @@ urlpatterns = [
     path('registroUsuarios', registroUsuario, name='registro'),
     path('cambioContrasena', CambiarContra, name="cambioContrasena"),
     path('crearMenu/<id>', crearMenu, name="crearMenu"),
+    path('cancelarPedido/<id>', cancelarPedido, name="cancelarPedido"),
+
+    
     path('accounts/', include('django.contrib.auth.urls')),
     path('viewPedido/<id>', viewPedido),
     path('recepcionista', viewRecepcionista, name='recepcionista'),
@@ -67,6 +69,8 @@ urlpatterns = [
     path('cambiarEstadoTienda/<id>', cambiarEstadoTienda, name='cambiarEstadoTienda'),
     # carro
     path('agregar/<id>', agregar_producto, name="agregarProducto"),
+    path('agregarmenu/<id>', agregar_producto_menu, name="agregarmenu"),
+
     path('agregarFin/<id>', agregar_producto_fin, name="agregar_producto_fin"),
     path('eliminar/<id>', eliminar_producto, name="eliminar"),
     path('restar/<id>', restar_producto, name="restar_producto"),

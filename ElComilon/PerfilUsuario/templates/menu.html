@@ -1,5 +1,8 @@
 {% extends "HeaderFooter/base.html"%}
 {% load static%}
+{% block titulo %}
+Manú semanal
+{% endblock %}
 {% block content%}
 {% load humanize %}
 
@@ -111,11 +114,8 @@
                                             <div class="invalid-feedback">Complete el campo</div>
                                         </div>
                                     </div>
-                                    <div class="pieForm">
+                                    <div class="pieForm mb-4">
                                         <button class="btn botonEnviar" id="btn1" type="submit">Guardar</button>
-                                    </div>
-                                    <a href="#" class="a-volver">Regresar al Menú Semanal</a>
-                                    <div class="row d-flex justify-content-center mt-5">
                                     </div>
                                 </div>
                         </form>
@@ -128,15 +128,19 @@
                                             <th scope="col">Platillo</th>
                                             <th scope="col">Ingredientes</th>
                                             <th scope="col">Valor Unitario</th>
+                                            <th scope="col">Acción</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         {% for m in menu %}
                                         <tr>
-                                            <th scope="row" id="rutTrabajador" value="{{ m.data.1 }}">{{ m.data.1}}</th>
+                                            <th scope="row"  value="{{ m.data.1 }}">{{ m.data.1}}</th>
                                             <td>{{ m.data.4 }}</td>
                                             <td>{{ m.data.5}}</td>
-                                            <td>{{ m.data.6 }}</td>
+                                            <td>${{ m.data.6 | intcomma }}</td>
+                                            <td>
+                                                <a  href="{% url 'agregarmenu' m.data.2 %} "  class="btn botonEnviar "  style="width: 100%; margin-top: 5px; font-size: 15px;"><img src="{% static 'img/icons8-agregar-a-carrito-de-compras-24.png' %}" alt="">Pedir Ahora</a>
+                                            </td>
                                         </tr>
                                         {% endfor %}
                                     </tbody>

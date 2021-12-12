@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block titulo %}
-Ver Reclamos
+({{ totalTotal }}) Ver Reclamos
 {% endblock %}
 {% block content %}
 {% load humanize %}
@@ -11,7 +11,7 @@ Ver Reclamos
 <div class="container bg-white shadow-lg mt-5 mb-3">
     <div class="row">
         <div class="col m-2">
-            <h1 class="text-center mt-1 mb-5 titulo">Asignar Repartidor</h1>
+            <h1 class="text-center mt-1 mb-5 titulo">Ver Reclamos</h1>
             <ul class="nav nav-tabs">
                 <li class="nav-item">
                     <a class="nav-link   text-danger" aria-current="page" href="{% url 'menuRecepcion' user.id %}">Mis
@@ -27,8 +27,12 @@ Ver Reclamos
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link  active  text-danger" aria-current="page" href="{% url 'verReclamos' %}">Ver
-                        reclamos</a>
+                    <a class="nav-link text-danger active position-relative" href="{% url 'verReclamos' %}"">Ver reclamos
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                            {{totalReclamos}}
+                            <span class="visually-hidden">unread messages</span>
+                        </span>
+                    </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link  disabled" aria-current="page" href="#">Cambiar Estado</a>
@@ -44,7 +48,7 @@ Ver Reclamos
     </div>
     <div class="row mt-2">
         <div class=" text-center ">
-            <table class="table">
+            <table class="table table-borderless table-hover">
                 <thead>
                     <tr>
                         <th scope="col">ID</th>
@@ -62,8 +66,6 @@ Ver Reclamos
                         <td>{{reclamo.3}}</td>
                         {% if reclamo.4 == 1 %}
                         <td>Abierto</td>
-                        {%else%}
-                        <td>Cerrado</td>
                         {%endif%}
                         <td class="d-flex justify-content-center"> <a href="{% url 'detalleReclamo' reclamo.0 %}"><i class="fas fa-eye"
                                     data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ver detalles del pedido"
@@ -74,10 +76,8 @@ Ver Reclamos
                 </tbody>
             </table>
             <br>
-
-
         </div>
-
     </div>
+
 </div>
 {% endblock%}

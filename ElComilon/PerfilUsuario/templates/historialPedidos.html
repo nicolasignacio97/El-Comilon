@@ -1,6 +1,8 @@
 {% extends "HeaderFooter/base.html"%}
 {% load static %}
-
+{% block titulo %}
+Historial de pedidos
+{% endblock %}
 {% block content %}
 {% load humanize %}
 <div class="container bg-white shadow-lg mt-5">
@@ -55,10 +57,10 @@
             <td>{{pedido.direccionpedido}}</td>
             <td>{{pedido.idtiposervicio}}</td>
             <td><strong><span class="text-danger">{{pedido.idestpedido}}</span></strong></td>
-            <td class="d-flex justify-content-center"> <a href="/detallePedido/{{pedido.idpedido}}/{{user.id}}"><i
+            <td class="d-flex justify-content-center"> <a class="p-1" href="/detallePedido/{{pedido.idpedido}}/{{user.id}}"><i
                   class="fas fa-eye" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ver detalles del pedido"
                   style="color:#02B37F; cursor: pointer;"></i></a>
-              <a href="{% url 'crearReclamo' pedido.idpedido %}"><i class="fas fa-angry"
+              <a class="p-1" href="{% url 'crearReclamo' pedido.idpedido %}"><i class="fas fa-angry"
                   style="color:#b30202; cursor: pointer;"></i></a>
             </td>
           </tr>

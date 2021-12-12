@@ -1,6 +1,8 @@
 {% extends "HeaderFooter/base.html"%}
 {% load static %}
-
+{% block titulo %}
+Estado de mi Pedido
+{% endblock %}
 
 {% block content %}
 <link rel="stylesheet" href="{% static 'css/estilocambio.css' %}">
@@ -11,7 +13,6 @@
       {% if cliente.saldocli %}
       <h5 class="text-end m-0 text-muted">Saldo: ${{cliente.saldocli | intcomma}}</h5>
       {% endif %}
-
       <h1 class="text-center titulo mb-5">Estado de mi pedido</h1>
       <ul class="nav nav-tabs">
         <li class="nav-item">
@@ -49,6 +50,7 @@
           {% if p.6 == 1 %}
           <h2 class="titulo-estado">Tu Pedido <span class="id-pedido"> #{{p.0}} </span>se encuentra <span
               class="estado">Pendiente</span> </h2>
+         
           <div class="stepper-wrapper">
             <div class="stepper-item active">
               <div class="step-counter">
@@ -81,7 +83,12 @@
               <div class="step-name">Finalizado</div>
             </div>
           </div>
-
+          <div class="row">
+         
+            <div class="col w-25 d-flex mb-5  justify-content-center">
+              <a href="{%url 'cancelarPedido' p.0 %}" class="btn botonEnviar">Cancelar Pedido #{{p.0}} </a>
+            </div>
+          </div>
 
           {% elif p.6 == 2 %}
           <h2 class="titulo-estado">Tu Pedido <span class="id-pedido"> #{{p.0}} </span> se encuentra <span

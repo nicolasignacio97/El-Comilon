@@ -1,7 +1,9 @@
 {% extends "HeaderFooter/base.html"%}
 {% load static %}
 
-
+{% block titulo %}
+({{ totalTotal }}) Mi Cuenta  
+{% endblock %}
 {% block content %}
 {% load humanize %}
 <link rel="stylesheet" href="{% static 'css/style-recepcionista-view.css' %}">
@@ -20,7 +22,12 @@
               </span>
           </a>
           <li class="nav-item">
-            <a class="nav-link   text-danger" aria-current="page" href="{% url 'verReclamos' %}">Ver reclamos</a>
+            <a class="nav-link text-danger position-relative" href="{% url 'verReclamos' %}">Ver reclamos
+                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                    {{totalReclamos}}
+                    <span class="visually-hidden">unread messages</span>
+                </span>
+            </a>
         </li>
           <li class="nav-item">
             <a class="nav-link  disabled" aria-current="page" href="#">Cambiar Estado</a>

@@ -54,6 +54,12 @@ def agregar_producto(request, id):
     Carrito.agregar(producto)
     return redirect("platillos")
 
+def agregar_producto_menu(request, id):
+    Carrito = carrito(request)
+    producto = Platillo.objects.get(idplatillo=id)
+    Carrito.agregar(producto)
+    return redirect("FinalizarCompra")
+
 
 def agregar_producto_fin(request, id):
     Carrito = carrito(request)
