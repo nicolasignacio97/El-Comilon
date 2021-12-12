@@ -1,9 +1,12 @@
+from django.conf import settings
 from django.shortcuts import get_object_or_404, render, redirect
+
 from .forms import EditarUsuario, EditarRecepcionista
 from django.contrib.auth.models import User
 from django.contrib import messages
-from core.models import Trabajador,Pedido, DetallePedido, Cliente,Repartidor
-
+from core.models import Trabajador,Pedido, DetallePedido, Cliente,Repartidor, Reclamo
+from django.core.mail import send_mail
+from django.conf import settings
 from django.db import connection
 import cx_Oracle
 
@@ -15,7 +18,9 @@ def cambiarEstadoTienda(request, id):
 def viewRecepcionista(request):
     dataRep = {
         'listos':listado_pedidos_listos(),
-        'TotalPedidos':len(listado_pedidos_listos())
+        'totalReclamos':len(listado_reclamos()),
+        'TotalPedidos':len(listado_pedidos_listos()),
+        'totalTotal':len(listado_reclamos())+len(listado_pedidos_listos())
     }
     return render(request,'viewRecepcionista.html',dataRep)
 
@@ -29,8 +34,10 @@ def cambiarEstado(request,id):
        'detallePedido' : detallePedido, 
        'pedidoSelect' : pedido,
        'cliente' : cliente,
+       'totalReclamos':len(listado_reclamos()),
        'estados': listado_estados_pedido(), 
-       'TotalPedidos':len(listado_pedidos_listos())
+       'TotalPedidos':len(listado_pedidos_listos()),
+       'totalTotal':len(listado_reclamos())+len(listado_pedidos_listos())
     }
 
     if request.method == 'POST':
@@ -51,7 +58,9 @@ def asignarRepartidor(request,id):
     dataMod = {
        'pedidoSelect' : pedido,
        'repartidores': listado_repartidores_dispo(),
-       'TotalPedidos':len(listado_pedidos_listos())
+       'totalReclamos':len(listado_reclamos()),
+       'TotalPedidos':len(listado_pedidos_listos()),
+       'totalTotal':len(listado_reclamos())+len(listado_pedidos_listos())
     }
 
     if request.method == 'POST':
@@ -77,7 +86,9 @@ def menuRecepcion(request, id):
         'formCuenta': formCuenta,
         'trabajador': trabajador,
         'form': formPersonal,
-        'TotalPedidos':len(listado_pedidos_listos())
+        'totalReclamos':len(listado_reclamos()),
+        'TotalPedidos':len(listado_pedidos_listos()),
+        'totalTotal':len(listado_reclamos())+len(listado_pedidos_listos())
     }
     if request.method == 'POST':
         formCuenta = EditarUsuario(request.POST, instance=request.user)
@@ -106,6 +117,59 @@ def menuRecepcion(request, id):
                     return render (request, 'menuRecepcionista.html',data2)
 
     return render (request, 'menuRecepcionista.html',data)
+
+
+def verReclamos(request):
+   
+    data={
+        'reclamos':listado_reclamos(),
+        'totalReclamos':len(listado_reclamos()),
+        'TotalPedidos':len(listado_pedidos_listos()),
+        'totalTotal':len(listado_reclamos())+len(listado_pedidos_listos())
+    }
+    return render(request,'verReclamos.html',data)
+    
+
+
+
+def detalleReclamo(request, id):
+    reclamo = get_object_or_404(Reclamo, idreclamo = id)
+    clientes = get_object_or_404(Cliente, rutcliente = reclamo.rutcliente)
+    cliente = listado_clientes(clientes.rutcliente)
+    user = get_object_or_404 (User, id= cliente[0][11])
+    data={
+        'reclamo' : reclamo,
+        'correo': user.email,
+        'totalReclamos':len(listado_reclamos()),
+        'clientes':clientes,
+        'TotalPedidos':len(listado_pedidos_listos()),
+        'totalTotal':len(listado_reclamos())+len(listado_pedidos_listos())
+    }
+    if request.method=="POST":
+        subjet = "Estado de su Reclamo"
+        message = request.POST["Mensaje"]
+        email_from = settings.EMAIL_HOST_USER
+        recipient_list=[user.email]
+        send_mail(subjet,message,email_from,recipient_list)
+        cambiar_estado_reclamo(id, 2)
+        messages.success(request,'Mensaje enviado exitosamente')
+        return redirect(to='verReclamos')
+ 
+    return render(request,'detalleReclamo.html',data)
+
+
+
+def listado_clientes(rut):
+    django_cursor = connection.cursor()
+    cursor = django_cursor.connection.cursor()
+    out_cur = django_cursor.connection.cursor()
+
+    cursor.callproc("SP_LISTAR_CLIENTES", [rut, out_cur])
+    lista = []
+    for fila in out_cur:
+        lista.append(fila)
+
+    return lista
 
 def listado_pedidos_listos():
     django_cursor = connection.cursor()
@@ -150,9 +214,30 @@ def cambiar_estado(idpedido, idestpedido):
     cursor.callproc('SP_MODIFICAR_ESTADO_PEDIDO',[idpedido, idestpedido,salida])
     return salida.getvalue()
     
+def cambiar_estado_reclamo(idReclamo, idestReclamo):
+    django_cursor = connection.cursor()
+    cursor = django_cursor.connection.cursor()
+    salida = cursor.var(cx_Oracle.NUMBER)
+    cursor.callproc('SP_MODIFICAR_ESTADO_RECLAMO',[idReclamo, idestReclamo,salida])
+    return salida.getvalue()
+
 def asignar_repartidor(id, idestpedido,rutrepartidor):
     django_cursor = connection.cursor()
     cursor = django_cursor.connection.cursor()
     salida = cursor.var(cx_Oracle.NUMBER)
     cursor.callproc('SP_MODIFICAR_ASIGNAR_REPARTIDOR',[id, idestpedido,rutrepartidor ,salida])
     return salida.getvalue()
+
+def listado_reclamos():
+    django_cursor = connection.cursor()
+    cursor = django_cursor.connection.cursor()
+    out_cur = django_cursor.connection.cursor()
+
+    cursor.callproc("SP_LISTAR_RECLAMOS", [out_cur])
+
+    lista = []
+    for fila in out_cur:
+        lista.append(fila)
+    return lista
+
+

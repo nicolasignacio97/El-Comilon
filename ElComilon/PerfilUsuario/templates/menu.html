@@ -1,6 +1,11 @@
 {% extends "HeaderFooter/base.html"%}
 {% load static%}
+{% block titulo %}
+Manú semanal
+{% endblock %}
 {% block content%}
+{% load humanize %}
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,7 +21,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
 
     <script>
-        function eliminarMenu(id,id2) {
+        function eliminarMenu(id, id2) {
             Swal.fire({
                 "title": "¿Estás Seguro?",
                 "text": "Esta acción no se puede deshacer",
@@ -27,7 +32,7 @@
                 "confirmButtonColor": "#9C3534"
             }).then(function (result) {
                 if (result.isConfirmed) {
-                    window.location.href = "eliminarMenu/"+id
+                    window.location.href = "eliminarMenu/" + id
                 }
             })
         }
@@ -41,27 +46,38 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="card shadow-lg p3 mb-5 mt-5 bg-white">
+                    {% if cliente.saldocli %}
+                    <h5 class="text-end m-0 p-2 text-muted">Saldo: ${{cliente.saldocli | intcomma}}</h5>
+                    {% endif %}
                     <h1 class="text-center mt-1 mb-5">Menú Semanal</h1>
                     <ul class="nav nav-tabs">
                         <li class="nav-item">
-                            <a class="nav-link text-danger" href="{% url 'perfilMenu' user.id %}" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ver y modificar mis datos">Mis Datos</a>
+                            <a class="nav-link text-danger" href="{% url 'perfilMenu' user.id %}"
+                                data-bs-toggle="tooltip" data-bs-placement="bottom"
+                                title="Ver y modificar mis datos">Mis Datos</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-danger" href="{% url 'historial' user.id %}" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ver todos mis pedidos">Mis pedidos</a>
+                            <a class="nav-link text-danger" href="{% url 'historial' user.id %}"
+                                data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ver todos mis pedidos">Mis
+                                pedidos</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="{% url 'crearMenu' user.id %}" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Crear y consultar menú semanal">Menú
+                            <a class="nav-link active" aria-current="page" href="{% url 'crearMenu' user.id %}"
+                                data-bs-toggle="tooltip" data-bs-placement="bottom"
+                                title="Crear y consultar menú semanal">Menú
                                 Semanal</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-danger" href="{% url 'estadoPedido' user.id %} " data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ver estado actual de mi pedido">Estado de mi pedido</a>
-                          </li>
+                            <a class="nav-link text-danger" href="{% url 'estadoPedido' user.id %} "
+                                data-bs-toggle="tooltip" data-bs-placement="bottom"
+                                title="Ver estado actual de mi pedido">Estado de mi pedido</a>
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link disabled">{{user.username.title}}</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link disabled ">Reclamo</a>
-                          </li>
+                        </li>
                     </ul>
                     <div class="card-body">
                         <form action="" autocomplete="off"
@@ -98,11 +114,8 @@
                                             <div class="invalid-feedback">Complete el campo</div>
                                         </div>
                                     </div>
-                                    <div class="pieForm">
+                                    <div class="pieForm mb-4">
                                         <button class="btn botonEnviar" id="btn1" type="submit">Guardar</button>
-                                    </div>
-                                    <a href="#" class="a-volver">Regresar al Menú Semanal</a>
-                                    <div class="row d-flex justify-content-center mt-5">
                                     </div>
                                 </div>
                         </form>
@@ -115,15 +128,19 @@
                                             <th scope="col">Platillo</th>
                                             <th scope="col">Ingredientes</th>
                                             <th scope="col">Valor Unitario</th>
+                                            <th scope="col">Acción</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         {% for m in menu %}
                                         <tr>
-                                            <th scope="row" id="rutTrabajador" value="{{ m.data.1 }}">{{ m.data.1}}</th>
+                                            <th scope="row"  value="{{ m.data.1 }}">{{ m.data.1}}</th>
                                             <td>{{ m.data.4 }}</td>
                                             <td>{{ m.data.5}}</td>
-                                            <td>{{ m.data.6 }}</td>                                     
+                                            <td>${{ m.data.6 | intcomma }}</td>
+                                            <td>
+                                                <a  href="{% url 'agregarmenu' m.data.2 %} "  class="btn botonEnviar "  style="width: 100%; margin-top: 5px; font-size: 15px;"><img src="{% static 'img/icons8-agregar-a-carrito-de-compras-24.png' %}" alt="">Pedir Ahora</a>
+                                            </td>
                                         </tr>
                                         {% endfor %}
                                     </tbody>

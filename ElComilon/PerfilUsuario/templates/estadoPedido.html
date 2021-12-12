@@ -1,6 +1,8 @@
 {% extends "HeaderFooter/base.html"%}
 {% load static %}
-
+{% block titulo %}
+Estado de mi Pedido
+{% endblock %}
 
 {% block content %}
 <link rel="stylesheet" href="{% static 'css/estilocambio.css' %}">
@@ -8,21 +10,28 @@
 <div class="container bg-white shadow-lg mt-5">
   <div class="row">
     <div class="col m-2">
-      <h1 class="text-center titulo mb-5">Mi Cuenta</h1>
+      {% if cliente.saldocli %}
+      <h5 class="text-end m-0 text-muted">Saldo: ${{cliente.saldocli | intcomma}}</h5>
+      {% endif %}
+      <h1 class="text-center titulo mb-5">Estado de mi pedido</h1>
       <ul class="nav nav-tabs">
         <li class="nav-item">
-          <a class="nav-link text-danger" aria-current="page" href="{% url 'perfilMenu' user.id %}" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ver y modificar mis datos">Mis Datos</a>
+          <a class="nav-link text-danger" aria-current="page" href="{% url 'perfilMenu' user.id %}"
+            data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ver y modificar mis datos">Mis Datos</a>
 
         </li>
         <li class="nav-item">
-          <a class="nav-link text-danger" href="{% url 'historial' user.id %}" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ver todos mis pedidos">Mis pedidos</a>
+          <a class="nav-link text-danger" href="{% url 'historial' user.id %}" data-bs-toggle="tooltip"
+            data-bs-placement="bottom" title="Ver todos mis pedidos">Mis pedidos</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-danger" href="{% url 'crearMenu' user.id %}" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Crear y consultar menú semanal">Menú Semanal</a>
+          <a class="nav-link text-danger" href="{% url 'crearMenu' user.id %}" data-bs-toggle="tooltip"
+            data-bs-placement="bottom" title="Crear y consultar menú semanal">Menú Semanal</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link active" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ver estado actual de mi pedido">Estado de mi pedido</a>
-          </li>
+          <a class="nav-link active" data-bs-toggle="tooltip" data-bs-placement="bottom"
+            title="Ver estado actual de mi pedido">Estado de mi pedido</a>
+        </li>
         <li class="nav-item">
           <a class="nav-link disabled">{{user.username.title}}</a>
         </li>
@@ -36,196 +45,204 @@
     <div class="col">
       <div class="row d-flex justify-content-center mt-5">
         <div class="col-10">
-            {% if pedidos %}
-            {% for p in pedidos %}   
-            {% if p.6 == 1 %}
-            <h2 class="titulo-estado">Tu Pedido <span class="id-pedido"> #{{p.0}} </span>se encuentra <span class="estado" >Pendiente</span> </h2>
-            <div class="stepper-wrapper">
-              <div class="stepper-item active">
-                <div class="step-counter">
-                  <img class="gif-active" src="{% static 'img/pendiente-active.gif' %}" alt="">
-                </div>
-                <div class="step-name">Pendiente</div>
+          {% if pedidos %}
+          {% for p in pedidos %}
+          {% if p.6 == 1 %}
+          <h2 class="titulo-estado">Tu Pedido <span class="id-pedido"> #{{p.0}} </span>se encuentra <span
+              class="estado">Pendiente</span> </h2>
+         
+          <div class="stepper-wrapper">
+            <div class="stepper-item active">
+              <div class="step-counter">
+                <img class="gif-active" src="{% static 'img/pendiente-active.gif' %}" alt="">
               </div>
-              <div class="stepper-item">
-                <div class="step-counter">
-                  <img src="{% static 'img/en-preparacion.png' %}" alt="">
-                </div>
-                <div class="step-name">En Preparación</div>
-              </div>
-              <div class="stepper-item">
-                <div class="step-counter">
-                  <img src="{% static 'img/listo.png' %}" alt="">
-                </div>
-                <div class="step-name">Listo</div>
-              </div>
-              <div class="stepper-item">
-                <div class="step-counter">
-                  <img src="{% static 'img/en-reparto.png' %}" alt="">
-                </div>
-                <div class="step-name">En Reparto</div>
-              </div>
-              <div class="stepper-item">
-                <div class="step-counter">
-                  <img src="{% static 'img/finalizado.png' %}" alt="">
-                </div>
-                <div class="step-name">Finalizado</div>
-              </div>
+              <div class="step-name">Pendiente</div>
             </div>
-            
+            <div class="stepper-item">
+              <div class="step-counter">
+                <img src="{% static 'img/en-preparacion.png' %}" alt="">
+              </div>
+              <div class="step-name">En Preparación</div>
+            </div>
+            <div class="stepper-item">
+              <div class="step-counter">
+                <img src="{% static 'img/listo.png' %}" alt="">
+              </div>
+              <div class="step-name">Listo</div>
+            </div>
+            <div class="stepper-item">
+              <div class="step-counter">
+                <img src="{% static 'img/en-reparto.png' %}" alt="">
+              </div>
+              <div class="step-name">En Reparto</div>
+            </div>
+            <div class="stepper-item">
+              <div class="step-counter">
+                <img src="{% static 'img/finalizado.png' %}" alt="">
+              </div>
+              <div class="step-name">Finalizado</div>
+            </div>
+          </div>
+          <div class="row">
+         
+            <div class="col w-25 d-flex mb-5  justify-content-center">
+              <a href="{%url 'cancelarPedido' p.0 %}" class="btn botonEnviar">Cancelar Pedido #{{p.0}} </a>
+            </div>
+          </div>
 
-            {% elif p.6 == 2 %}
-            <h2 class="titulo-estado">Tu Pedido <span class="id-pedido"> #{{p.0}} </span> se encuentra <span class="estado" >En Preparación</span> </h2>
-            <div class="stepper-wrapper">
-              <div class="stepper-item completed">
-                <div class="step-counter">
-                  <img src="{% static 'img/pendiente.png' %}" alt="">
-                </div>
-                <div class="step-name">Pendiente</div>
+          {% elif p.6 == 2 %}
+          <h2 class="titulo-estado">Tu Pedido <span class="id-pedido"> #{{p.0}} </span> se encuentra <span
+              class="estado">En Preparación</span> </h2>
+          <div class="stepper-wrapper">
+            <div class="stepper-item completed">
+              <div class="step-counter">
+                <img src="{% static 'img/pendiente.png' %}" alt="">
               </div>
-              <div class="stepper-item active">
-                <div class="step-counter">
-                  <img class="gif-active" src="{% static 'img/en-preparacion-active.gif' %}" alt="">
-                </div>
-                <div class="step-name">En Preparación</div>
-              </div>
-              <div class="stepper-item">
-                <div class="step-counter">
-                  <img src="{% static 'img/listo.png' %}" alt="">
-                </div>
-                <div class="step-name">Listo</div>
-              </div>
-              <div class="stepper-item">
-                <div class="step-counter">
-                  <img src="{% static 'img/en-reparto.png' %}" alt="">
-                </div>
-                <div class="step-name">En Reparto</div>
-              </div>
-              <div class="stepper-item">
-                <div class="step-counter">
-                  <img src="{% static 'img/finalizado.png' %}" alt="">
-                </div>
-                <div class="step-name">Finalizado</div>
-              </div>
+              <div class="step-name">Pendiente</div>
             </div>
+            <div class="stepper-item active">
+              <div class="step-counter">
+                <img class="gif-active" src="{% static 'img/en-preparacion-active.gif' %}" alt="">
+              </div>
+              <div class="step-name">En Preparación</div>
+            </div>
+            <div class="stepper-item">
+              <div class="step-counter">
+                <img src="{% static 'img/listo.png' %}" alt="">
+              </div>
+              <div class="step-name">Listo</div>
+            </div>
+            <div class="stepper-item">
+              <div class="step-counter">
+                <img src="{% static 'img/en-reparto.png' %}" alt="">
+              </div>
+              <div class="step-name">En Reparto</div>
+            </div>
+            <div class="stepper-item">
+              <div class="step-counter">
+                <img src="{% static 'img/finalizado.png' %}" alt="">
+              </div>
+              <div class="step-name">Finalizado</div>
+            </div>
+          </div>
 
-            {% elif p.6 == 3 %}
-            <h2 class="titulo-estado">Tu Pedido <span class="id-pedido"> #{{p.0}} </span>se encuentra <span class="estado">Listo</span> </h2>
-            <div class="stepper-wrapper">
-              <div class="stepper-item completed">
-                <div class="step-counter">
-                  <img src="{% static 'img/pendiente.png' %}" alt="">
-                </div>
-                <div class="step-name">Pendiente</div>
+          {% elif p.6 == 3 %}
+          <h2 class="titulo-estado">Tu Pedido <span class="id-pedido"> #{{p.0}} </span>se encuentra <span
+              class="estado">Listo</span> </h2>
+          <div class="stepper-wrapper">
+            <div class="stepper-item completed">
+              <div class="step-counter">
+                <img src="{% static 'img/pendiente.png' %}" alt="">
               </div>
-              <div class="stepper-item completed">
-                <div class="step-counter">
-                  <img src="{% static 'img/en-preparacion.png' %}" alt="">
-                </div>
-                <div class="step-name">En Preparación</div>
-              </div>
-              <div class="stepper-item active">
-                <div class="step-counter">
-                  <img class="gif-active" src="{% static 'img/listo-active.gif' %}" alt="">
-                </div>
-                <div class="step-name">Listo</div>
-              </div>
-              <div class="stepper-item">
-                <div class="step-counter">
-                  <img src="{% static 'img/en-reparto.png' %}" alt="">
-                </div>
-                <div class="step-name">En Reparto</div>
-              </div>
-              <div class="stepper-item">
-                <div class="step-counter">
-                  <img src="{% static 'img/finalizado.png' %}" alt="">
-                </div>
-                <div class="step-name">Finalizado</div>
-              </div>
+              <div class="step-name">Pendiente</div>
             </div>
+            <div class="stepper-item completed">
+              <div class="step-counter">
+                <img src="{% static 'img/en-preparacion.png' %}" alt="">
+              </div>
+              <div class="step-name">En Preparación</div>
+            </div>
+            <div class="stepper-item active">
+              <div class="step-counter">
+                <img class="gif-active" src="{% static 'img/listo-active.gif' %}" alt="">
+              </div>
+              <div class="step-name">Listo</div>
+            </div>
+            <div class="stepper-item">
+              <div class="step-counter">
+                <img src="{% static 'img/en-reparto.png' %}" alt="">
+              </div>
+              <div class="step-name">En Reparto</div>
+            </div>
+            <div class="stepper-item">
+              <div class="step-counter">
+                <img src="{% static 'img/finalizado.png' %}" alt="">
+              </div>
+              <div class="step-name">Finalizado</div>
+            </div>
+          </div>
 
-            {% elif p.6 == 4 %}
-            <h2 class="titulo-estado">Tu Pedido <span class="id-pedido"> #{{p.0}} </span>se encuentra <span class="estado">En Reparto</span> </h2>
-            <div class="stepper-wrapper">
-              <div class="stepper-item completed">
-                <div class="step-counter">
-                  <img src="{% static 'img/pendiente.png' %}" alt="">
-                </div>
-                <div class="step-name">Pendiente</div>
+          {% elif p.6 == 4 %}
+          <h2 class="titulo-estado">Tu Pedido <span class="id-pedido"> #{{p.0}} </span>se encuentra <span
+              class="estado">En Reparto</span> </h2>
+          <div class="stepper-wrapper">
+            <div class="stepper-item completed">
+              <div class="step-counter">
+                <img src="{% static 'img/pendiente.png' %}" alt="">
               </div>
-              <div class="stepper-item completed">
-                <div class="step-counter">
-                  <img src="{% static 'img/en-preparacion.png' %}" alt="">
-                </div>
-                <div class="step-name">En Preparación</div>
-              </div>
-              <div class="stepper-item completed">
-                <div class="step-counter">
-                  <img src="{% static 'img/listo.png' %}" alt="">
-                </div>
-                <div class="step-name">Listo</div>
-              </div>
-              <div class="stepper-item active">
-                <div class="step-counter">
-                  <img class="gif-active" src="{% static 'img/en-reparto-active.gif' %}" alt="">
-                </div>
-                <div class="step-name">En Reparto</div>
-              </div>
-              <div class="stepper-item">
-                <div class="step-counter">
-                  <img src="{% static 'img/finalizado.png' %}" alt="">
-                </div>
-                <div class="step-name">Finalizado</div>
-              </div>
+              <div class="step-name">Pendiente</div>
             </div>
+            <div class="stepper-item completed">
+              <div class="step-counter">
+                <img src="{% static 'img/en-preparacion.png' %}" alt="">
+              </div>
+              <div class="step-name">En Preparación</div>
+            </div>
+            <div class="stepper-item completed">
+              <div class="step-counter">
+                <img src="{% static 'img/listo.png' %}" alt="">
+              </div>
+              <div class="step-name">Listo</div>
+            </div>
+            <div class="stepper-item active">
+              <div class="step-counter">
+                <img class="gif-active" src="{% static 'img/en-reparto-active.gif' %}" alt="">
+              </div>
+              <div class="step-name">En Reparto</div>
+            </div>
+            <div class="stepper-item">
+              <div class="step-counter">
+                <img src="{% static 'img/finalizado.png' %}" alt="">
+              </div>
+              <div class="step-name">Finalizado</div>
+            </div>
+          </div>
 
-            {% elif p.6 == 5 %}
-            <h2 class="titulo-estado">Tu Pedido <span class="id-pedido"> #{{p.0}} </span>se encuentra <span class="estado">Finalizado</span> </h2>
-            <div class="stepper-wrapper">
-              <div class="stepper-item completed">
-                <div class="step-counter">
-                  <img src="{% static 'img/pendiente.png' %}" alt="">
-                </div>
-                <div class="step-name">Pendiente</div>
+          {% elif p.6 == 5 %}
+          <h2 class="titulo-estado">Tu Pedido <span class="id-pedido"> #{{p.0}} </span>se encuentra <span
+              class="estado">Finalizado</span> </h2>
+          <div class="stepper-wrapper">
+            <div class="stepper-item completed">
+              <div class="step-counter">
+                <img src="{% static 'img/pendiente.png' %}" alt="">
               </div>
-              <div class="stepper-item completed">
-                <div class="step-counter">
-                  <img src="{% static 'img/en-preparacion.png' %}" alt="">
-                </div>
-                <div class="step-name">En Preparación</div>
-              </div>
-              <div class="stepper-item completed">
-                <div class="step-counter">
-                  <img src="{% static 'img/listo.png' %}" alt="">
-                </div>
-                <div class="step-name">Listo</div>
-              </div>
-              <div class="stepper-item completed">
-                <div class="step-counter">
-                  <img src="{% static 'img/en-reparto.png' %}" alt="">
-                </div>
-                <div class="step-name">En Reparto</div>
-              </div>
-              <div class="stepper-item active">
-                <div class="step-counter">
-                  <img src="{% static 'img/finalizado.png' %}" alt="">
-                </div>
-                <div class="step-name">Finalizado</div>
-              </div>
+              <div class="step-name">Pendiente</div>
             </div>
-            {% endif %}
-            {% endfor %}
-            {% else %}
-            <div class="alert alert-danger text-center" role="alert">
-                Aún no tienes pedidos
+            <div class="stepper-item completed">
+              <div class="step-counter">
+                <img src="{% static 'img/en-preparacion.png' %}" alt="">
+              </div>
+              <div class="step-name">En Preparación</div>
             </div>
-            {% endif %}
+            <div class="stepper-item completed">
+              <div class="step-counter">
+                <img src="{% static 'img/listo.png' %}" alt="">
+              </div>
+              <div class="step-name">Listo</div>
+            </div>
+            <div class="stepper-item completed">
+              <div class="step-counter">
+                <img src="{% static 'img/en-reparto.png' %}" alt="">
+              </div>
+              <div class="step-name">En Reparto</div>
+            </div>
+            <div class="stepper-item active">
+              <div class="step-counter">
+                <img src="{% static 'img/finalizado.png' %}" alt="">
+              </div>
+              <div class="step-name">Finalizado</div>
+            </div>
+          </div>
+          {% endif %}
+          {% endfor %}
+          {% else %}
+          <div class="alert alert-danger text-center" role="alert">
+            Aún no tienes pedidos
+          </div>
+          {% endif %}
         </div>
       </div>
     </div>
   </div>
 </div>
 {% endblock%}
-  
-
-    

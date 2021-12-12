@@ -1,6 +1,8 @@
 {% extends "HeaderFooter/base.html"%}
 {% load static %}
-
+{% block titulo %}
+({{ totalTotal }}) Lista de Pedidos
+{% endblock %}
 
 {% block content %}
 {% load humanize %}
@@ -55,7 +57,7 @@
 <div class="container bg-white shadow-lg mt-5">
   <div class="row">
     <div class="col m-2">
-      <h1 class="text-center mt-1 mb-2">Lista de Pedidos Pendientes</h1>
+      <h1 class="text-center titulo mt-1 mb-5">Lista de Pedidos Pendientes</h1>
       <ul class="nav nav-tabs">
         <li class="nav-item">
           <a class="nav-link   text-danger" aria-current="page" href="{% url 'menuRecepcion' user.id %}">Mis Datos</a>
@@ -70,11 +72,22 @@
           </a>
         </li>
         <li class="nav-item">
+          <a class="nav-link text-danger position-relative" href="{% url 'verReclamos' %}">Ver reclamos
+              <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                  {{totalReclamos}}
+                  <span class="visually-hidden">unread messages</span>
+              </span>
+          </a>
+      </li>
+        <li class="nav-item">
           <a class="nav-link  disabled" aria-current="page" href="#">Cambiar Estado</a>
         </li>
         <li class="nav-item">
           <a class="nav-link  disabled" aria-current="page" href="#">Asignar Repartidor</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link  disabled" aria-current="page" href="#">Detalle del Recamo</a>
+      </li>
       </ul>
     </div>
   </div>
