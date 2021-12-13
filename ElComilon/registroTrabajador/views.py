@@ -128,20 +128,19 @@ def actualizarTrabajador(request,id):
         rutTrabajador = request.POST.get('rutTrabajador')
         nombres = request.POST.get('nombres')
         apellidos = request.POST.get('apellidos')
-        usuario = request.POST.get('nombreU')
         idCargo = request.POST.get('cargo')
 
-        actualizar(rutTrabajador, nombres, apellidos, usuario, idCargo)
+        actualizar(rutTrabajador, nombres, apellidos, idCargo)
         messages.success(request, nombres + " Actualizado correctamente")
 
         return redirect(to='listaTrabajador')
     return render(request, 'actualizarTrabajador.html', data)
     
 
-def actualizar(rutTrabajador, nombres, apellidos, usuario, idCargo):
+def actualizar(rutTrabajador, nombres, apellidos, idCargo):
     django_cursor = connection.cursor()
     cursor = django_cursor.connection.cursor()
-    cursor.callproc("SP_ACT_TRABAJADOR", [rutTrabajador, nombres, apellidos, usuario, idCargo])
+    cursor.callproc("SP_ACT_TRABAJADOR", [rutTrabajador, nombres, apellidos, idCargo])
 
     return 0
 

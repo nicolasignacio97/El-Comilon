@@ -54,6 +54,7 @@
                                         <th scope="col">Ingredientes</th>
                                         <th scope="col">Restaurante</th>
                                         <th class="dispo" scope="col">Disponibilidad</th>
+                                        <th class="dispo" scope="col">Stock Crítico</th>
                                         <th scope="col">Precio</th>
                                         <th class="dispo" scope="col">Acción</th>
                                 </thead>
@@ -73,6 +74,17 @@
                                             {% else %}
                                             <div class="form-check form-switch inputsheck check">
                                                 <input class="form-check-input" type="checkbox" name="Disponible" role="switch" id="flexSwitchCheckDefault" disabled>
+                                            </div>
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            {% if p.6 %}
+                                            <div class="form-check form-switch inputs check">
+                                                <input class="form-check-input" type="checkbox" name="Stock" role="switch" id="flexSwitchCheckDefault" checked disabled>
+                                            </div>
+                                            {% else %}
+                                            <div class="form-check form-switch inputsheck check">
+                                                <input class="form-check-input" type="checkbox" name="Stock" role="switch" id="flexSwitchCheckDefault" disabled>
                                             </div>
                                             {% endif %}
                                         </td>

@@ -10,10 +10,10 @@
             <div class=" mb-3" style="max-width: 540px;">
                 <div class="row " style="width: 100%;">
                   <div class="col">
-                    <div class="d-flex justify-content-between">
+                    <div class="d-flex justify-content-between ">
                       
                       <span class="">{{value.nombre | title}}</span>
-                      <span class="">{{value.valorunitario | intcomma}}</span>
+                      <span class="">${{value.valorunitario | intcomma}}</span>
                       <div class="btn-group" role="group" aria-label="Basic outlined example">
                         <a href="{% url 'restar_producto' value.idplatillo %}"type="button" class=" btn btn-outline-danger">-</a>
                         <button type="button" class=" btn btn-outline-danger disabledcss" disabled>{{value.cantidad}}</button>

@@ -144,6 +144,7 @@ def guardar(request):
             carro = Carrito.caja()
             agregar_pedido(total, fecha, direccion, idTipoServ,rutcliente, idEstPed, hora)
             for p in carro:
+                print(p['idplatillo'])
                 agregar_detalle_pedido(p['cantidad'], p['valorunitario'], p['acumulado'], p['idplatillo'], cliente.rutcliente)
             limpiar_carrito(request)
             return redirect(url)

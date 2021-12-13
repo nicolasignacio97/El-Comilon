@@ -18,18 +18,24 @@ def modificarPlatillo(request, id):
         nombrePlatillo = request.POST.get('Nombre').upper()
         ingredientes = request.POST.get('Ingredientes').upper()
         valor = request.POST.get('Valor')
-        check1 = request.POST.get('Disponible')
-        if check1:
+        checkDisponible = request.POST.get('Disponible')
+        checkStock = request.POST.get('Stock')
+        if checkDisponible:
             disponible = 1
         else:
             disponible = 0
+
+        if checkStock:
+            stock = 1
+        else:
+            stock = 0
         if 'foto' in request.POST:
          foto = False
-         ModificarPlatilloSinFoto(id,nombrePlatillo, ingredientes, valor,disponible)
+         ModificarPlatilloSinFoto(id,nombrePlatillo, ingredientes, valor,disponible, stock)
         else:
          foto = True
          foto = request.FILES['foto'].read()
-         ModificarPlatillo(id,nombrePlatillo, ingredientes, valor, foto,disponible)
+         ModificarPlatillo(id,nombrePlatillo, ingredientes, valor, foto,disponible, stock)
         messages.success(request, "Se ha modificado correctamente el platillo "+ platillo.nombre)
         return redirect(to="/administracion/listarPlatillos")
     return render(request, 'actualizarPlatillo.html', dataMod)
@@ -73,17 +79,17 @@ def listarRestaurante():
 
     return lista
 
-def ModificarPlatillo(idPlatillo, nomPlatillo, ingPlatillo,valPlatillo, fotPlatillo, disponible):
+def ModificarPlatillo(idPlatillo, nomPlatillo, ingPlatillo,valPlatillo, fotPlatillo, disponible, stock):
     django_cursor = connection.cursor()
     cursor = django_cursor.connection.cursor()
     salida = cursor.var(cx_Oracle.NUMBER)
-    cursor.callproc("ACTUALIZAR_PLATILLO", [idPlatillo, nomPlatillo,ingPlatillo, valPlatillo, fotPlatillo, disponible,salida])
+    cursor.callproc("ACTUALIZAR_PLATILLO", [idPlatillo, nomPlatillo,ingPlatillo, valPlatillo, fotPlatillo, disponible, stock,salida])
     return salida.getvalue()
 
-def ModificarPlatilloSinFoto(idPlatillo, nomPlatillo, ingPlatillo,valPlatillo, disponible):
+def ModificarPlatilloSinFoto(idPlatillo, nomPlatillo, ingPlatillo,valPlatillo, disponible, stock):
     django_cursor = connection.cursor()
     cursor = django_cursor.connection.cursor()
     salida = cursor.var(cx_Oracle.NUMBER)
-    cursor.callproc("ACTUALIZAR_PLATILLO_SIN_FOTO", [idPlatillo, nomPlatillo,ingPlatillo, valPlatillo, disponible, salida])
+    cursor.callproc("ACTUALIZAR_PLATILLO_SIN_FOTO", [idPlatillo, nomPlatillo,ingPlatillo, valPlatillo, disponible, stock, salida])
 
     return salida.getvalue()

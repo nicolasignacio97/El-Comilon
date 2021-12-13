@@ -130,6 +130,7 @@ class Platillo(models.Model):
     valorunitario = models.IntegerField()
     foto = models.ImageField(blank=True, null=True)
     rutrestaurante = models.ForeignKey('Restaurante', models.DO_NOTHING, db_column='rutrestaurante')
+    stockcritico = models.BooleanField(blank= True)
 
     def __str__(self):
         return self.nombre

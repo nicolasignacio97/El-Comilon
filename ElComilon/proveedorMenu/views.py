@@ -121,18 +121,24 @@ def ModificarPlatilloProveedor(request, id):
         nombrePlatillo = request.POST.get('Nombre').upper()
         ingredientes = request.POST.get('Ingredientes').upper()
         valor = request.POST.get('Valor')
-        check1 = request.POST.get('Disponible')
-        if check1:
+        checkDisponible = request.POST.get('Disponible')
+        checkStock = request.POST.get('Stock')
+        if checkDisponible:
             disponible = 1
         else:
             disponible = 0
+
+        if checkStock:
+            stock = 1
+        else:
+            stock = 0
         if 'foto' in request.POST:
          foto = False
-         ModificarPlatilloSinFoto(id,nombrePlatillo, ingredientes, valor,disponible)
+         ModificarPlatilloSinFoto(id,nombrePlatillo, ingredientes, valor,disponible, stock)
         else:
          foto = True
          foto = request.FILES['foto'].read()
-         modificarPlatillo(id,nombrePlatillo, ingredientes, valor, foto,disponible)
+         modificarPlatillo(id,nombrePlatillo, ingredientes, valor, foto,disponible, stock)
         messages.success(request, "Se ha modificado correctamente el platillo "+ platillo.nombre)
         return redirect(to="/listarPlatilloProveedor")
     return render (request,'modificarPlatilloProveedor.html',dataMod)
