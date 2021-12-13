@@ -15,18 +15,17 @@ import datetime
 def FinalizarCompra(request):
     # AGREGAR DETALLES PEDIDO
     cliente = get_object_or_404(Cliente, idcuenta=request.user.id)
+    hora = datetime.datetime.now().strftime('%H:%M')
 
     dataCli = {
+        'horaactual': hora,
         'cliente': cliente,
-        # 'id': request.user.id
     }
 
     return render(request, 'finalizarCompra.html', dataCli)
 
 
 def platillos(request):
-    restaurante = object.all(Restaurante)
-    print(restaurante)
     data = {
         'platillos': listado_platillos()
     }

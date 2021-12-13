@@ -17,7 +17,7 @@
                       <div class="btn-group" role="group" aria-label="Basic outlined example">
                         <a href="{% url 'restar_producto' value.idplatillo %}"type="button" class=" btn btn-outline-danger">-</a>
                         <button type="button" class=" btn btn-outline-danger">{{value.cantidad}}</button>
-                        <a href="#" type="button" class=" btn btn-outline-danger">+</a>
+                        <a href="{% url 'agregarProducto' value.idplatillo %}" type="button" class=" btn btn-outline-danger">+</a>
                       </div>
 
                     </div>
