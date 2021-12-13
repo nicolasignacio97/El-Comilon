@@ -33,15 +33,13 @@
   <link rel="stylesheet" href="{% static 'css/bootstrap5/bootstrap.min.css'%}">
 
   <link rel="stylesheet" href="{% static 'css/style-base.css' %}">
-  
+
   <title>
     {% block titulo %}
     {% endblock %}
   </title>
 </head>
-
 <body>
-
   <nav class="navbar navbar-expand-lg  p-0 " style="background-color:#9C3534;">
     <div class="container-fluid">
       <div class=" row  col-3" style="justify-content: center;">
@@ -179,9 +177,11 @@
     </div>
   </div>
   <section class="body-contenido">
-    {% block content%}
-    <!-- Cambia según página donde se implemente esta plantilla -->
-    {% endblock%}
+    <div class="">
+      {% block content%}
+      <!-- Cambia según página donde se implemente esta plantilla -->
+      {% endblock%}
+    </div>
   </section>
   <footer class="footer-contenido">
     <div class="info1">

@@ -23,9 +23,9 @@ Catálogo
 
     </div>
     
-    <div class="container-fluid " >
-        <div class="row container-cards mb-1">
-            <div class="col-sm-12  col-lg-8 d-flex flex-wrap  mt-5 mr-5" style="background-color: #fff; margin-right: 25px;">
+    <div class="container-fluid ">
+        <div class="row container-cards mb-1 marginTop">
+            <div class="col-sm-12  col-lg-8 d-flex flex-wrap   mr-5" style="background-color: #fff; margin-right: 25px;">
                 {% for p in platillos %}
                 <div class="col-lg-4 col-sm-12 mb-3" style="padding: 1rem 1rem; align-items: center;">
                     <div >
@@ -42,9 +42,12 @@ Catálogo
                 {% endfor %}                   
             </div>
             <div class="col-lg-3 mt-2  d-none d-lg-block ">
-                <div class=" mt-5 colum-detalle-pedido">
+                <div class="mt-5 colum-detalle-pedido">
                     {% if user.is_authenticated %}
-                    {% include "carrito.html" %}
+                    <div class="card p-4">
+                        Tu Carrito <hr>                    
+                        {% include "carroOff.html" %}
+                    </div>
                     {%endif%}
                 </div>
             </div>
