@@ -170,3 +170,9 @@ a:hover{
     border: 1px solid #9c3534 ;
 }
 
+.item-restaurante{
+    text-decoration: none;
+}
+.color-principal{
+    color:#9c3534;
+}

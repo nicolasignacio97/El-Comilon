@@ -29,13 +29,10 @@ Catálogo
 
                 {% for r in restaurantes %}
                 <ul class="list-group">
-                    <a href="">
-                        <li class="list-group-item">{{r.1}}</li>
-
-                    </a>
+                    <li class="list-group-item">{{r.1}}</li>
                   </ul>
                 {% endfor %}
-                {% for p in platillos %}
+                <!-- {% for p in platillos %}
                 <div class="col-lg-4 col-sm-12 mb-3" style="padding: 1rem 1rem; align-items: center;">
                     <div >
                         <img src="data:imagen/png;base64, {{ p.imagen }} "  alt="" class="card-img-top w-100 "style=" max-height:200px; box-shadow: 10px 10px 20px -8px rgb(0 0 0 / 30%); "
@@ -48,7 +45,7 @@ Catálogo
                         <a  href="{% url 'agregarProducto' p.data.0 %} "  class="btn btn-danger "  style="width: 100%; margin-top: 5px; font-size: 18px;"><img src="{% static 'img/icons8-agregar-a-carrito-de-compras-24.png' %}" alt=""> Agregar al Carro</a>
                     </div>
                 </div>
-                {% endfor %}  
+                {% endfor %}                    -->
             </div>
             <div class="col-lg-3 mt-2  d-none d-lg-block ">
                 <div class=" mt-5 colum-detalle-pedido">

@@ -37,6 +37,7 @@ Historial de pedidos
         </li>
       </ul>
       <table class="table table-borderless table-hover">
+        {% if pedidos %}
         <thead>
           <tr>
             <th scope="col"># ID</th>
@@ -66,6 +67,11 @@ Historial de pedidos
           </tr>
           {%endfor%}
         </tbody>
+        {% else %}
+        <div class="alert alert-danger text-center mt-5" role="alert">
+          Aún no tienes pedidos 😢. Te invitamos a hacer tu <a href="/platillos">primer pedido.</a>
+        </div>
+        {% endif %}
       </table>
       {% include 'HeaderFooter/paginator.html'%}
     </div>

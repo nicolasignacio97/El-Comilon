@@ -27,7 +27,8 @@ def FinalizarCompra(request):
 
 def platillos(request):
     data = {
-        'platillos': listado_platillos()
+        'platillos': listado_platillos(),
+        'restaurantes':listado_restaurantes()
     }
     return render(request, 'platillos.html', data)
 
@@ -173,3 +174,15 @@ def actualizarSaldo(rutCliente, saldoNuevo):
     cursor.callproc("SP_ACTUALIZAR_SALDO_COMPRA", [
                     rutCliente, saldoNuevo, salida])
     return salida.getvalue()
+
+def listado_restaurantes():
+    django_cursor = connection.cursor()
+    cursor = django_cursor.connection.cursor()
+    out_cur = django_cursor.connection.cursor()
+
+    cursor.callproc("LISTAR_RESTAURANTE", [out_cur])
+
+    lista = []
+    for fila in out_cur:
+        lista.append(fila)
+    return lista
