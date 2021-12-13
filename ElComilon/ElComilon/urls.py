@@ -57,6 +57,8 @@ urlpatterns = [
     path('registroUsuarios', registroUsuario, name='registro'),
     path('cambioContrasena', CambiarContra, name="cambioContrasena"),
     path('crearMenu/<id>', crearMenu, name="crearMenu"),
+
+    
     path('cancelarPedido/<id>', cancelarPedido, name="cancelarPedido"),
 
     
