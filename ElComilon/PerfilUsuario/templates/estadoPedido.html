@@ -5,6 +5,23 @@ Estado de mi Pedido
 {% endblock %}
 
 {% block content %}
+<script>
+  function CancelarPedido(id) {
+    Swal.fire({
+        "title": "¿Estás Seguro?",
+        "text": "Esta acción no se puede deshacer",
+        "icon": "question",
+        "showCancelButton": true,
+        "cancelButtonText": "No, Cancelar",
+        "confirmButtonText": "Si, Cancelar Pedido",
+        "confirmButtonColor": "#9C3534"
+    }).then(function (result) {
+      if (result.isConfirmed) {
+          window.location.href = "/cancelarPedido/"+id
+      }
+    })
+  }
+</script>
 <link rel="stylesheet" href="{% static 'css/estilocambio.css' %}">
 {% load humanize %}
 <div class="container bg-white shadow-lg mt-5">
@@ -84,9 +101,8 @@ Estado de mi Pedido
             </div>
           </div>
           <div class="row">
-         
             <div class="col w-25 d-flex mb-5  justify-content-center">
-              <a href="{%url 'cancelarPedido' p.0 %}" class="btn botonEnviar">Cancelar Pedido #{{p.0}} </a>
+              <a href="#" onClick="CancelarPedido('{{p.0}}')"  class="btn botonEnviar">Cancelar Pedido #{{p.0}} </a>
             </div>
           </div>
 
