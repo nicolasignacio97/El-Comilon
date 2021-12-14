@@ -187,3 +187,34 @@ def listado_restaurantes():
     for fila in out_cur:
         lista.append(fila)
     return lista
+
+
+def platilloRut(request):
+    global data
+    if request.method == 'POST':
+
+        rut = request.POST.get('Restaurante')
+        print(rut)
+
+        data = {
+        'platillos': listarPlatilloRut(rut),
+        'restaurantes':listado_restaurantes()
+        }
+    return render(request, 'platillos.html', data)
+
+
+def listarPlatilloRut(rut):
+    django_cursor = connection.cursor()
+    cursor = django_cursor.connection.cursor()
+    out_cur = django_cursor.connection.cursor()
+
+    cursor.callproc("SP_LISTAR_PLATILLOS_RUT", [rut, out_cur])
+
+    lista = []
+    for fila in out_cur:
+        data = {
+            'data': fila,
+            'imagen': str(base64.b64encode(fila[4].read()), 'utf-8')
+        }
+        lista.append(data)
+    return lista

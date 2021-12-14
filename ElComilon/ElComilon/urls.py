@@ -14,7 +14,7 @@ from reclamo.views import reclamo
 from Home.views import quienesSomos
 from administracion.urls import url_patterns
 from PerfilUsuario.views import PerfilUsuario, perfilMenu, CambiarContra, estadoPedido,crearReclamo,crearMenu, cancelarPedido
-from Platillos.views import platillos, agregar_producto, eliminar_producto, restar_producto, limpiar_carrito, guardar, FinalizarCompra, agregar_producto_fin, restar_producto_fin,agregar_producto_menu
+from Platillos.views import platillos, agregar_producto, eliminar_producto, restar_producto, limpiar_carrito, guardar, FinalizarCompra, agregar_producto_fin, restar_producto_fin,agregar_producto_menu, platilloRut
 from detallePedido.views import detallePedido
 from administracion.views import pag_404
 
@@ -30,6 +30,7 @@ urlpatterns = [
     # despues id en la ruta para filtro
     path('Historial/<id>', PerfilUsuario, name="historial"),
     path('platillos', platillos, name="platillos"),
+    path('platilloRut', platilloRut, name="platilloRut"),
     path('perfilMenu/<id>', perfilMenu, name="perfilMenu"),
     path('menuProveedor/<id>', menuProveedor, name="menuProveedor"),
     path('SubirMisPlatillos', subirPlatilloProveedor, name="SubirMisPlatillos"),

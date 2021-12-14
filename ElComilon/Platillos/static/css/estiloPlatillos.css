@@ -76,7 +76,6 @@ a:hover{
 
 .platillo__precio{
     color:#9c3534;
-    font-size: 20px;
     font-weight: bold;
 }
 
@@ -98,9 +97,23 @@ a:hover{
     display: inline-block;
 }
     
-.btn-outline-danger:hover{
-    background-color: #9c3534;
-    border: 1px solid #9c3534;
+.botonComprar{
+    align-items:center;
+    background-color:#9C3534;
+    color:#fff;
+    width:75%;
+    border: none;
+    margin: auto;
+}
+.botonComprar:hover{
+    background-color:#fff;
+    color:#9C3534;
+    border:1px solid #9C3534;
+}
+.btn-comprar{
+    text-align: center; 
+    padding: 0;
+    margin-top: 7%;
 }
 
 .btn-outline-danger-rest{
@@ -175,4 +188,22 @@ a:hover{
 }
 .color-principal{
     color:#9c3534;
+}
+
+.span-home{
+    color: #7d7d7d;
+    font-size: inherit;
+    line-height: inherit;
+    display: block;
+}
+.btn-outline-primary{
+    color:#9c3534;
+    font-weight: bold;
+    border-color: #9c3534;
+}
+
+.btn-outline-primary:hover{
+    color:#ffffff;
+    border-color: #9c3534;
+    background-color: #9c3534;
 }
