@@ -114,7 +114,8 @@
           {% ifequal user.groups.all.0.name "Recepcionista" %}
           <li class="nav-item">
             <a href="{% url 'menuRecepcion' user.id %}"
-              class="nav-link nav-item-a text-light">{{user.username.title}}</a>
+              class="nav-link nav-item-a text-light">
+              <img src="{% static 'img/recepcionista.png' %}" alt="">  {{user.username.title}}</a>
           </li>
           {%else%}
           {% ifequal user.groups.all.0.name "Proveedor" %}
