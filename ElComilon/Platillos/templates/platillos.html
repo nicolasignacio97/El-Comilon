@@ -24,10 +24,11 @@ Catálogo
     
     <div class="container-fluid " >
         <div class="row container-cards mb-1">   
+            <h1 class="color-principal mt-5 text-center fs-2">¡Selecciona cualquiera de nuestros restaurantes para ver sus platos!</h1>
             <div class="container">
                 <form action="platilloRut" method="POST">
                     {% csrf_token %}
-                    <div class="d-flex gap-1 mt-5 justify-content-center">
+                    <div class="d-flex gap-1 mt-4 justify-content-center">
                         {% for r in restaurantes %}  
                         <div class="btn-group" role="group" aria-label="Basic outlined example">
                           <button name="Restaurante" type="submit" value="{{r.0}}" class="btn btn-outline-primary"> <img src="{% static 'img/restaurante-catalogo.png' %}" alt=""> {{r.1 | title}}</button>
@@ -61,8 +62,9 @@ Catálogo
             <div class="col-lg-3 d-none d-lg-block ">
                 <div class="mt-5 colum-detalle-pedido">
                     {% if user.is_authenticated %}
-                    <div class="card p-4">
-                        Tu Carrito <hr>                    
+                    <div class="card p-4 d-flex">
+                        <label class="fw-bold" for="">Tu Carrito</label>
+                         <hr>                    
                         {% include "carroOff.html" %}
                     </div>
                     {%endif%}

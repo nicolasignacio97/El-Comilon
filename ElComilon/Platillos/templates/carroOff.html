@@ -25,8 +25,12 @@
               </div>
               {% endfor %}
               {% else %}
-              <div class="alert alert-danger" role="alert">
-                No tienes platos en tu carrito
+              <div class="d-flex flex-column" >
+                <div>
+                  <img src="{% static 'img/ic_cart_empty.1de2c93e.svg' %}" alt="">  
+                  <label class="text-muted mt-3" for="">No tienes platos en tu carrito</label>
+
+                </div>
               </div>
             {% endif %}
             </div>
