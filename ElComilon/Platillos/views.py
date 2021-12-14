@@ -4,6 +4,8 @@ from django.http.response import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from .context_processors import total_carrito
 from django.db import connection
+from django.conf import settings
+from django.core.mail import send_mail
 import cx_Oracle
 from Platillos.carrito import carrito
 from core.models import Platillo, Cliente, Restaurante
@@ -146,6 +148,11 @@ def guardar(request):
             for p in carro:
                 print(p['idplatillo'])
                 agregar_detalle_pedido(p['cantidad'], p['valorunitario'], p['acumulado'], p['idplatillo'], cliente.rutcliente)
+            subjet = "Pedido"
+            message = "Hola"
+            email_from = settings.EMAIL_HOST_USER
+            recipient_list=[request.user.email]
+            send_mail(subjet,message,email_from,recipient_list)
             limpiar_carrito(request)
             return redirect(url)
 

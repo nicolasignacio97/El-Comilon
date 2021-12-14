@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import permission_required
 from django.core.paginator import Paginator
 from django.http.response import Http404
 from django.db import connection
@@ -5,7 +6,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib import messages
 import cx_Oracle
 
-from actualizarPlatillo.views import listado_platillos,listado_fotos, ModificarPlatilloSinFoto, modificarPlatillo
+from RegisterPlatillo.views import listado_platillos,listado_fotos, ModificarPlatilloSinFoto, modificarPlatillo
 
 from .forms import EditarUsuario, EditarRepresentante
 from django.contrib.auth.models import User
@@ -13,6 +14,7 @@ from core.models import Representante, Restaurante,Platillo, DetallePedido
 from RegisterPlatillo.views import registrarPlatillo
 # Create your views here.
 
+@permission_required('core.add_platillo')
 
 def menuProveedor(request, id):
     usuario = get_object_or_404(User, id=id)
@@ -52,6 +54,7 @@ def menuProveedor(request, id):
                 return render(request, 'menuProveedor.html', data2)
     return render(request, 'menuProveedor.html', data)
 
+@permission_required('core.add_platillo')
 
 def subirPlatilloProveedor(request):
     representante = get_object_or_404 (Representante,idcuenta = request.user.id)
@@ -75,6 +78,7 @@ def subirPlatilloProveedor(request):
         messages.success(request, "Se ha creado correctamente el platillo ")
     return render (request,'subirPlatilloProveedor.html',data)
 
+@permission_required('core.add_platillo')
     
 def listarPlatilloProveedor(request):
     global data
@@ -100,6 +104,7 @@ def listarPlatilloProveedor(request):
 
     return render (request,'listarPlatillosProveedor.html',data)
 
+@permission_required('core.add_platillo')
 
 def EliminarPlatilloProveedor(request, id):
     platillo = get_object_or_404(Platillo, idplatillo=id)
@@ -107,6 +112,7 @@ def EliminarPlatilloProveedor(request, id):
     messages.success(request, "Se ha eliminado correctamente el platillo "+ platillo.nombre)
     return redirect(to="/listarPlatilloProveedor")
 
+@permission_required('core.add_platillo')
 
 def ModificarPlatilloProveedor(request, id):
     platillo = get_object_or_404(Platillo, idplatillo=id)
@@ -142,6 +148,7 @@ def ModificarPlatilloProveedor(request, id):
         messages.success(request, "Se ha modificado correctamente el platillo "+ platillo.nombre)
         return redirect(to="/listarPlatilloProveedor")
     return render (request,'modificarPlatilloProveedor.html',dataMod)
+@permission_required('core.add_platillo')
 
 def PlatillosPendientes(request):
     representante = get_object_or_404 (Representante,idcuenta = request.user.id)

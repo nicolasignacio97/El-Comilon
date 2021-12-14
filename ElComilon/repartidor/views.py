@@ -31,7 +31,7 @@ def viewPedido(request, id):
     }
     return render(request, 'viewPedido.html', dataMod)
 
-
+@permission_required('core.view_pedido')
 def PerfilRepartidor(request, id):
     usuario = get_object_or_404(User, id=id)
     repartidor = get_object_or_404(Repartidor, idcuenta=id)
@@ -67,7 +67,7 @@ def PerfilRepartidor(request, id):
             return render(request, 'repartidorPerfil.html', data2)
     return render(request, 'repartidorPerfil.html', data)
 
-
+@permission_required('core.view_pedido')
 def MiVehiculo(request, id):
     repartidor = get_object_or_404(Repartidor, idcuenta=id)
     vehiculo = get_object_or_404(Vehiculo, rutrepartidor=repartidor.rutrepartidor)

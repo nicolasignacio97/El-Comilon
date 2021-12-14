@@ -55,8 +55,6 @@ INSTALLED_APPS = [
     'RegisterRepartidor',
     'Platillos',
     'detallePedido',
-    'listarPlatillos',
-    'actualizarPlatillo',
     'RegCliConv',
     'PerfilUsuario',
     'repartidor',

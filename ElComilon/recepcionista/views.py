@@ -1,4 +1,3 @@
-from django.conf import settings
 from django.shortcuts import get_object_or_404, render, redirect
 
 from .forms import EditarUsuario, EditarRecepcionista
@@ -8,6 +7,7 @@ from core.models import Trabajador,Pedido, DetallePedido, Cliente,Repartidor, Re
 from django.core.mail import send_mail
 from django.conf import settings
 from django.db import connection
+from django.contrib.auth.decorators import permission_required
 import cx_Oracle
 
 # Create your views here.
@@ -15,6 +15,7 @@ def cambiarEstadoTienda(request, id):
     cambiar_estado(id, 5)
     return redirect(to='/recepcionista')
 
+@permission_required('core.view_reclamo')    
 def viewRecepcionista(request):
     dataRep = {
         'listos':listado_pedidos_listos(),
@@ -24,12 +25,18 @@ def viewRecepcionista(request):
     }
     return render(request,'viewRecepcionista.html',dataRep)
 
+def cancelarPedidoRecepcionista(request, id):
+    cambiar_estado(id, 6)
+    url='recepcionista'
+    return redirect(to=url)
+
 #CAMBIAR ESTADO DE PEDIDOS
+@permission_required('core.view_reclamo')    
 def cambiarEstado(request,id):
     pedido = get_object_or_404(Pedido,idpedido=id)
     detallePedido = DetallePedido.objects.filter(idpedido=pedido.idpedido)
     cliente = get_object_or_404(Cliente, rutcliente=pedido.rutcliente)
-    print(cliente.telefono)
+    print(pedido.idestpedido)
     dataMod = {
        'detallePedido' : detallePedido, 
        'pedidoSelect' : pedido,
@@ -53,6 +60,8 @@ def cambiarEstado(request,id):
 
 
 #ASIGNAR REPARTIDOR A PEDIDO
+@permission_required('core.view_reclamo')    
+
 def asignarRepartidor(request,id):
     pedido = get_object_or_404(Pedido,idpedido=id)
     dataMod = {
@@ -73,8 +82,7 @@ def asignarRepartidor(request,id):
 
     return render(request,'asignaRepartidor.html',dataMod)
 
-
-
+@permission_required('core.view_reclamo')    
 def menuRecepcion(request, id):
     usuario = get_object_or_404(User, id=id)
     trabajador = get_object_or_404(Trabajador, idcuenta=id)
@@ -118,6 +126,7 @@ def menuRecepcion(request, id):
 
     return render (request, 'menuRecepcionista.html',data)
 
+@permission_required('core.view_reclamo')    
 
 def verReclamos(request):
    
@@ -131,6 +140,7 @@ def verReclamos(request):
     
 
 
+@permission_required('core.view_reclamo')    
 
 def detalleReclamo(request, id):
     reclamo = get_object_or_404(Reclamo, idreclamo = id)

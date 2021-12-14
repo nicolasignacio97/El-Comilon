@@ -3,7 +3,7 @@ from django.contrib.auth import views as auth_views
 
 from django.contrib import admin
 from django.urls import path, include
-from recepcionista.views import viewRecepcionista, asignarRepartidor, cambiarEstado, menuRecepcion, cambiarEstadoTienda,verReclamos,detalleReclamo
+from recepcionista.views import viewRecepcionista, asignarRepartidor, cambiarEstado, menuRecepcion, cambiarEstadoTienda,verReclamos,detalleReclamo,cancelarPedidoRecepcionista
 
 from registroDeUsuarios.views import registroUsuario
 from proveedorMenu.views import menuProveedor, subirPlatilloProveedor, listarPlatilloProveedor, EliminarPlatilloProveedor, ModificarPlatilloProveedor, PlatillosPendientes, cambiarAPreparacion, cambiarAPendiente, cambiarAListo
@@ -47,6 +47,7 @@ urlpatterns = [
     path('crearReclamo/<id>', crearReclamo, name="crearReclamo"),
     path('verReclamos', verReclamos, name="verReclamos"),
     path('detalleReclamo/<id>', detalleReclamo, name="detalleReclamo"),
+    path('cancelarPedidoRecepcionista/<id>', cancelarPedidoRecepcionista, name="cancelarPedidoRecepcionista"),
 
 
     

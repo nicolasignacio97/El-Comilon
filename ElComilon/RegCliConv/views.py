@@ -15,7 +15,7 @@ dataClientes = {}
 
 # AGREGAR CLIENTES CONVENIO
 
-
+@permission_required('core')
 def RegistroCliConvenio(request):
     data = {
         'form': FormularioUsuario(),
@@ -72,7 +72,7 @@ def eliminarCliConv(request, rutcliente, id):
 
 # LISTAR CLIENTES CONVENIO
 
-
+@permission_required('core')
 def listarCliConv(request):
     global dataClientes
     dataClientes = {
@@ -83,7 +83,7 @@ def listarCliConv(request):
 
 # MODIFICAR CLIENTE CONVENIO
 
-
+@permission_required('core')
 def modificarCliConv(request, id):
     cliente = get_object_or_404(Cliente, rutcliente=id)
     dataMod = {
@@ -130,8 +130,6 @@ def modificar_cliente_convenio(rutcliente, nombres, apellidos, direccion, saldoc
     return salida.getvalue()
 
 # FUNCION LISTAR CLIENTE
-
-
 def listar_clientes_conv():
     django_cursor = connection.cursor()
     cursor = django_cursor.connection.cursor()
@@ -183,7 +181,7 @@ def listarCliConvRut(rut):
 
     return lista
 
-
+@permission_required('core')
 def actualizarSaldo(request):
     if request.method == 'POST':
         archivo = request.FILES['arch'];
