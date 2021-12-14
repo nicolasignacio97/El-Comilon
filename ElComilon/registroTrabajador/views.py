@@ -11,7 +11,7 @@ import cx_Oracle
 # Create your views here.
 
 data = {}
-
+@permission_required('core')
 def registroTrabajador(request):
     data = {
         'form': FormularioUsuario(),
@@ -42,13 +42,14 @@ def registroTrabajador(request):
      
     return render(request, 'registroTrabajador.html', data)
 
-    
+@permission_required('core')
 def clean_rut_trabajador(request):
     ruttrabajador = request.POST.get('rut')
     if Trabajador.objects.filter(ruttrabajador=ruttrabajador).exists():
         return JsonResponse({'valid': 0})
     return JsonResponse({'valid': 1 })
-    
+
+@permission_required('core')   
 def listar():
     django_cursor = connection.cursor()
     cursor = django_cursor.connection.cursor()
@@ -61,7 +62,7 @@ def listar():
 
     return lista
 
-
+@permission_required('core')
 def REGISTRAR_TRABAJADOR(RUTTRABAJADOR, NOMBRES, APELLIDOS, FECHACONTRATO, RUTRESTAURANTE, IDCARGO):
     django_cursor = connection.cursor()
     cursor = django_cursor.connection.cursor()
@@ -69,7 +70,7 @@ def REGISTRAR_TRABAJADOR(RUTTRABAJADOR, NOMBRES, APELLIDOS, FECHACONTRATO, RUTRE
     cursor.callproc("REGISTRAR_TRABAJADOR", [RUTTRABAJADOR, NOMBRES, APELLIDOS,FECHACONTRATO, RUTRESTAURANTE, IDCARGO, salidaPrve])
     return salidaPrve.getvalue()
 
-
+@permission_required('core')
 def listaTrabajador(request):
     global data
     data = {
@@ -77,7 +78,7 @@ def listaTrabajador(request):
     }
     return render(request, 'listarTrabajador.html', data)
 
-
+@permission_required('core')
 def listarTrabajador():
     django_cursor = connection.cursor()
     cursor = django_cursor.connection.cursor()
@@ -102,7 +103,7 @@ def trabajadorRut(request):
         }
     return render(request, 'listarTrabajador.html', data)
 
-
+@permission_required('core')
 def listarTrabajadorRut(rut):
     django_cursor = connection.cursor()
     cursor = django_cursor.connection.cursor()
@@ -136,7 +137,7 @@ def actualizarTrabajador(request,id):
         return redirect(to='listaTrabajador')
     return render(request, 'actualizarTrabajador.html', data)
     
-
+@permission_required('core')
 def actualizar(rutTrabajador, nombres, apellidos, idCargo):
     django_cursor = connection.cursor()
     cursor = django_cursor.connection.cursor()
@@ -146,14 +147,14 @@ def actualizar(rutTrabajador, nombres, apellidos, idCargo):
 
 
 
-
+@permission_required('core')
 def eliminarTrabajador(request,rut):
     trabajadores = Trabajador.objects.get(ruttrabajador = rut)
     trabajadores.delete()
     messages.success(request, 'Eliminado con exito')
     return listaTrabajador(request)
 
-
+@permission_required('core')
 def eliminar(rut):
     django_cursor = connection.cursor()
     cursor = django_cursor.connection.cursor()
