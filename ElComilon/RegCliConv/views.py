@@ -1,7 +1,8 @@
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth.decorators import permission_required
-from django.http.response import JsonResponse
+from django.http.response import Http404, JsonResponse
 from django.contrib import messages
+from django.core.paginator import Paginator
 from core.models import Cliente
 from django.contrib.auth.models import User
 from registroDeUsuarios.forms import FormularioUsuario
@@ -30,15 +31,14 @@ def RegistroCliConvenio(request):
         saldocli = request.POST.get('saldoCli')
         idtipoCliente = 1
         rutempcli = request.POST.get('rutEmpConv')
-        forumulario = FormularioUsuario(data=request.POST)
-        if forumulario.is_valid():
-            forumulario.save()
-            agregar_cliente_convenio(
-                rutcliente, nombres, apellidos, direccion, idtipoCliente, rutempcli, saldocli)
-            messages.success(request, "Usuario Creado")
+        formulario = FormularioUsuario(data=request.POST)
+        if formulario.is_valid():
+            formulario.save()
+            agregar_cliente_convenio(rutcliente, nombres, apellidos, direccion, idtipoCliente, rutempcli, saldocli)
+            messages.success(request, "Usuario de " + nombres +" creado")
             return render(request, 'regCliConv.html', data)
         data = {
-            'form': forumulario,
+            'form': formulario,
             'campos': [rutcliente, nombres, apellidos, direccion, rutempcli, saldocli, rutempcli],
             'Seleccion': listar_EmpConvenio()
         }
@@ -75,8 +75,17 @@ def eliminarCliConv(request, rutcliente, id):
 @permission_required('core')
 def listarCliConv(request):
     global dataClientes
+    page = request.GET.get('page',1)
+    Lista =  listar_clientes_conv()
+    try:
+        paginator = Paginator(Lista, 10)
+        Lista = paginator.page(page)
+    except :
+        raise Http404
+
     dataClientes = {
-        'clientesConv': listar_clientes_conv()
+        'entity': Lista,
+        'paginator' : paginator,
     }
 
     return render(request, 'listarCliConv.html', dataClientes)

@@ -10,10 +10,10 @@
             <div class=" mb-3" style="max-width: 540px;">
                 <div class="row " style="width: 100%;">
                   <div class="col">
-                    <div class="d-flex justify-content-between ">
+                    <div class="d-flex justify-content-between align-items-center carro-celu">
                       
                       <span class="">{{value.nombre | title}}</span>
-                      <span class="">${{value.valorunitario | intcomma}}</span>
+                      <span class="">${{value.acumulado | intcomma}}</span>
                       <div class="btn-group" role="group" aria-label="Basic outlined example">
                         <a href="{% url 'restar_producto' value.idplatillo %}"type="button" class=" btn btn-outline-danger">-</a>
                         <button type="button" class=" btn btn-outline-danger disabledcss" disabled>{{value.cantidad}}</button>
@@ -48,7 +48,14 @@
     <div class="row text-center botones-carro">
         <!-- <div class="col-6"> <a href="{% url 'limpiar_carrito' %}" class="btn btn-danger"><img
                     src="{% static 'img/icons8-cesta-de-compra-eliminar-24.png' %}" alt=""> Limpiar</a></div> -->
+        {% if total_carrito < 3500 %}
+        <div class="alert alert-danger" role="alert">
+          Debes pedir como mínimo $3.500 para finalizar tu compra
+        </div>
+        {% else %}
         <div class="col"> <a href="{% url 'FinalizarCompra'%}" class="btn btn-carro w-100"> <img
                     src="{% static 'img/icons8-comprar-24.png' %}" alt="">Finalizar Pedido</a></div>
+
+        {% endif %}
     </div>
 </div>

@@ -28,7 +28,7 @@ def Registrorep(request):
         apellido = request.POST.get('ApellidosRepartidor')
         fechacontrato = request.POST.get('Fechacontrato')
     
-        rutrestaurante = '99.365.349-8'
+        rutrestaurante = '77.684.154-9'
     
         #Vehiculo
         vehiculorut = request.POST.get('RutRepartidor')

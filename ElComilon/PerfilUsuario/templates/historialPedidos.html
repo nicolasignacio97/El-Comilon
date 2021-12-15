@@ -8,7 +8,7 @@ Historial de pedidos
 <div class="container bg-white shadow-lg mt-5">
   <div class="row">
     <div class="col m-2">
-      {% if cliente.saldocli %}
+      {% if cliente.saldocli >= 0 %}
       <h5 class="text-end m-0 text-muted">Saldo: ${{cliente.saldocli | intcomma}}</h5>
       {% endif %}
       <h1 class="text-center titulo mb-5">Historial</h1>

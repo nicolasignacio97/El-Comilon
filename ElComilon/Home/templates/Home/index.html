@@ -83,8 +83,11 @@ Inicio
           <h5 class="card-title tittle-card">{{ p.data.1 | title }}</h5>
           <span class="span-home" style=" margin-top: 10px;"> {{ p.data.2 | title }} </span>
           <span class="span-home" style=" margin-top: 8px; color: #c4c4c4;"> <img src="{% static 'img/restaurante.png' %}" alt=""> {{ p.data.5 | title }} </span>
+          {% if p.data.7 %}
+          <span class="span-home text-end text-danger" style=" margin-top: 8px; position: absolute;">*Pocas unidades</span>
+          {% endif %}
           <span class="span-home platillo__precio"
-            style="text-align: center; margin-top: 10px; color: #9c3534; font-size: 22px;"> ${{ p.data.3 | intcomma }}
+            style="text-align: center; color: #9c3534; font-size: 22px;"> ${{ p.data.3 | intcomma }}
           </span>
           <a href="{% url 'agregarProducto' p.data.0 %} " class="btn btn-danger botonComprar"
             style="width: 100%; margin-top: 5px; font-size: 18px;"><img

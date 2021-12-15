@@ -8,7 +8,6 @@ from django.db import connection
 import base64
 import cx_Oracle
 
-@permission_required('core')
 def registroPlatillo (request):
     data = {
     'Restaurante':listarRestaurante()
@@ -51,13 +50,10 @@ def registrarPlatillo(nomPlatillo, ingPlatillo, valPlatillo, fotPlatillo, rutRes
     return salida.getvalue()
 
 
-# Create your views here.
-
-@permission_required('core')
 def modificarPlatillo(request, id):
     platillo = get_object_or_404(Platillo, idplatillo=id)
     dataMod = {
-        'platillo':listado_platillos(id),
+        'platillo':listado_platillos_mod(id),
         'foto':listado_fotos(id)
     }
     if request.method == 'POST':
@@ -86,7 +82,7 @@ def modificarPlatillo(request, id):
         return redirect(to="/administracion/listarPlatillos")
     return render(request, 'actualizarPlatillo.html', dataMod)
 
-def listado_platillos(id):
+def listado_platillos_mod(id):
     django_cursor = connection.cursor()
     cursor = django_cursor.connection.cursor()
     out_cur = django_cursor.connection.cursor()
@@ -149,7 +145,7 @@ def listarPlatillos(request):
     page = request.GET.get('page',1)
     Lista = listado_platillos()
     try:
-        paginator = Paginator(Lista, 10)
+        paginator = Paginator(Lista, 8)
         Lista = paginator.page(page)
     except :
         raise Http404

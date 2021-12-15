@@ -207,3 +207,16 @@ a:hover{
     border-color: #9c3534;
     background-color: #9c3534;
 }
+
+.platillo__precio{
+    margin-top: 20px;
+}
+
+@media (max-width: 768px) {
+    .lista-resto{
+        flex-direction: column;
+    }
+    .platillo__precio{
+        margin-top: 40px;
+    }
+}

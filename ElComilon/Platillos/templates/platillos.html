@@ -28,7 +28,7 @@ Catálogo
             <div class="container">
                 <form action="platilloRut" method="POST">
                     {% csrf_token %}
-                    <div class="d-flex gap-1 mt-4 justify-content-center">
+                    <div class="d-flex gap-1 mt-4 justify-content-center lista-resto">
                         {% for r in restaurantes %}  
                         <div class="btn-group" role="group" aria-label="Basic outlined example">
                           <button name="Restaurante" type="submit" value="{{r.0}}" class="btn btn-outline-primary"> <img src="{% static 'img/restaurante-catalogo.png' %}" alt=""> {{r.1 | title}}</button>
@@ -39,6 +39,7 @@ Catálogo
             </div>
                    
             <div class="col-sm-12  col-lg-8 d-flex flex-wrap  mt-5 mr-5" style="background-color: #fff; margin-right: 25px;">
+                {% if platillos %}
                 {% for p in platillos %}
                 <div class="col-lg-4 col-sm-12 mb-3" style="padding: 1rem 1rem; align-items: center;">
                     <div>
@@ -49,8 +50,11 @@ Catálogo
                     <h5 class="card-title tittle-card">{{ p.data.1 | title }}</h5>
                     <span class="span-home" style=" margin-top: 10px;"> {{ p.data.2 | title }} </span>
                     <span class="span-home" style=" margin-top: 8px; color: #c4c4c4;"> <img src="{% static 'img/restaurante.png' %}" alt=""> {{ p.data.5 | title }} </span>
+                    {% if p.data.7 %}
+                    <span class="span-home text-end text-danger" style=" margin-top: 8px; position: absolute;">*Pocas unidades</span>
+                    {% endif %}
                     <span class="span-home platillo__precio"
-                        style="text-align: center; margin-top: 10px; color: #9c3534; font-size: 22px;"> ${{ p.data.3 | intcomma }}
+                        style="text-align: center; color: #9c3534; font-size: 22px;"> ${{ p.data.3 | intcomma }}
                     </span>
                     <a href="{% url 'agregarProducto' p.data.0 %} " class="btn btn-danger botonComprar"
                         style="width: 100%; margin-top: 5px; font-size: 18px;"><img
@@ -58,6 +62,15 @@ Catálogo
                     </div>
                 </div>
                 {% endfor %}
+                {% else %}
+                <div class="row d-flex justify-content-center w-100" >
+                    <div class="col">
+                        <div  class="alert alert-danger" role="alert">
+                            <span class="text-center">Este restaurante aún no ha subido o actualizado el stock de sus platillos 😢.</span> 
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
             </div>
             <div class="col-lg-3 d-none d-lg-block ">
                 <div class="mt-5 colum-detalle-pedido">

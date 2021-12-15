@@ -122,8 +122,10 @@ def guardar(request):
 
         if check1:
             idTipoServ = 1
+            tipoEntrega = "Recuerda pagar $"+str(total)+ " a tu repartidor cuando llegue a la dirección: "+ direccion 
         else:
             idTipoServ = 2
+            tipoEntrega = "Recuerda pagar $"+str(total)+ " cuando llegues al local a buscar tu pedido. Estamos ubicados en: Bascuñán Guerrero 329, Santiago Centro" 
 
         if checkSaldo:
             if saldo < total:
@@ -148,8 +150,8 @@ def guardar(request):
             for p in carro:
                 print(p['idplatillo'])
                 agregar_detalle_pedido(p['cantidad'], p['valorunitario'], p['acumulado'], p['idplatillo'], cliente.rutcliente)
-            subjet = "Pedido"
-            message = "Hola"
+            subjet = "¡Hemos recibido tu pedido en El Comilón!"
+            message = "Hola " + cliente.nombres+".\nHemos recibido tu pedido y lo estamos procesando.\nTu pedido será procesado el "+str(fecha) + " a las: "+str(hora) + ". Recuerda que si pediste entrega inmediata, tus platos tardarán entre 30 a 45 minutos en prepararse.\n" + tipoEntrega + "\n\nEl Comilón. Bascuñán Guerrero 329, Santiago Centro"
             email_from = settings.EMAIL_HOST_USER
             recipient_list=[request.user.email]
             send_mail(subjet,message,email_from,recipient_list)

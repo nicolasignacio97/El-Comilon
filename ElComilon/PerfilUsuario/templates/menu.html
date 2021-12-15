@@ -46,7 +46,7 @@ Manú semanal
         <div class="row">
             <div class="col-lg-12">
                 <div class="card shadow-lg p3 mb-5 mt-5 bg-white">
-                    {% if cliente.saldocli %}
+                    {% if cliente.saldocli >= 0 %}
                     <h5 class="text-end m-0 p-2 text-muted">Saldo: ${{cliente.saldocli | intcomma}}</h5>
                     {% endif %}
                     <h1 class="text-center mt-1 mb-5">Menú Semanal</h1>

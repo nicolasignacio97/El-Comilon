@@ -15,7 +15,7 @@ data = {}
 def listarRestaurantes(request):
     global data
     page = request.GET.get('page',1)
-    Lista = listado_restaurantes();
+    Lista = listado_restaurantes()
     try:
         paginator = Paginator(Lista, 10)
         Lista = paginator.page(page)

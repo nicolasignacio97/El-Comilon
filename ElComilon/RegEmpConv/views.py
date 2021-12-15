@@ -50,7 +50,7 @@ def empresaRut(request):
     return render(request, 'listaEmpConv.html', data)
 
 
-@permission_required('core')
+
 def eliminarEmpresa(request):
     if request.method == 'POST':
         rut = request.POST.get('btnEliminar')
@@ -71,7 +71,7 @@ def actualizarEmpresa(request):
         }
     
     return render(request, 'actEmpConv.html', data)
-@permission_required('core')
+
 def actEmpresa(request):
     if request.method =='POST':
         rutEmpresa = request.POST.get('rutEmpresa')
@@ -83,7 +83,7 @@ def actEmpresa(request):
 
     return listaEmpresa(request)
 
-@permission_required('core')
+
 def eliminar(rut):
     django_cursor = connection.cursor()
     cursor = django_cursor.connection.cursor()
@@ -92,7 +92,7 @@ def eliminar(rut):
 
     return 0
 
-@permission_required('core')
+
 def registrarEmpresa(rutEmpresa, nombre, razonSocial,FECHACONVENIO):
     django_cursor = connection.cursor()
     cursor = django_cursor.connection.cursor()
@@ -102,13 +102,11 @@ def registrarEmpresa(rutEmpresa, nombre, razonSocial,FECHACONVENIO):
 
     return salida.getvalue()
 
-@permission_required('core')
 def actualizar(rutEmpresa, nombre, razonSocial,FECHACONVENIO):
     django_cursor = connection.cursor()
     cursor = django_cursor.connection.cursor()
     cursor.callproc("SP_ACT_EMPRESA", [rutEmpresa, nombre, razonSocial,FECHACONVENIO])
 
-@permission_required('core')
 def listar_restaurantes():
     django_cursor = connection.cursor() 
     cursor = django_cursor.connection.cursor()
@@ -119,7 +117,7 @@ def listar_restaurantes():
         lista.append(fila)
     return lista
 
-@permission_required('core')
+
 def listarEmpresaRut(rut):
     django_cursor = connection.cursor()
     cursor = django_cursor.connection.cursor()
@@ -132,7 +130,6 @@ def listarEmpresaRut(rut):
 
     return lista
 
-@permission_required('core')
 def listarEmpresa():
     django_cursor = connection.cursor()
     cursor = django_cursor.connection.cursor()
@@ -145,7 +142,7 @@ def listarEmpresa():
 
     return lista
 
-@permission_required('core')
+
 def EliminarEmpresa(request, id):
     empresa = get_object_or_404(EmpresaConvenio, rutempresaconvenio=id)
     empresa.delete()

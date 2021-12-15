@@ -192,6 +192,7 @@ class Representante(models.Model):
     apellidos = models.CharField(max_length=20)
     telefono = models.IntegerField()
     idcuenta = models.ForeignKey(User,models.DO_NOTHING , db_column='idcuenta')
+    on_delete = models.CASCADE
 
     class Meta:
         managed = False
@@ -204,6 +205,7 @@ class Restaurante(models.Model):
     direccionrestaurante = models.CharField(max_length=30)
     rutrepresentante = models.ForeignKey(Representante, models.DO_NOTHING, db_column='rutrepresentante')
     idtiporest = models.ForeignKey('TipoRestaurante', models.DO_NOTHING, db_column='idtiporest')
+    on_delete = models.CASCADE
     
     def __str__(self):
         return self.rutrestaurante

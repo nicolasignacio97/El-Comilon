@@ -169,9 +169,17 @@ p{
 }
 
 .platillo__precio{
+    margin-top: 20px;
     color:#9c3534;
     font-weight: bold;
 }
+
+@media (max-width: 768px) {    
+    .platillo__precio{
+        margin-top: 40px;
+    }
+}
+
 
 .platillo__nombre{
     margin-top: 2%;
@@ -233,6 +241,7 @@ p{
         display: block;
         margin: auto;
     }
+    
 
 }
 
