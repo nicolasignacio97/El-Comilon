@@ -64,6 +64,9 @@ def cambiarEstado(request,id):
 
 def asignarRepartidor(request,id):
     pedido = get_object_or_404(Pedido,idpedido=id)
+    clientes = get_object_or_404(Cliente, rutcliente = pedido.rutcliente)
+    cliente = listado_clientes(clientes.rutcliente)
+    user = get_object_or_404 (User, id= cliente[0][11])
     dataMod = {
        'pedidoSelect' : pedido,
        'repartidores': listado_repartidores_dispo(),
@@ -77,6 +80,11 @@ def asignarRepartidor(request,id):
         rutrepartidor = request.POST.get('repartidor')
         repartidor = get_object_or_404(Repartidor, rutrepartidor = rutrepartidor )
         asignar_repartidor(id, idestpedido, rutrepartidor)
+        subjet = "¡Tu pedido va en camino!"
+        message = "Tu pedido ha sido asignado al repartidor " + repartidor.nombres+ ' '+ repartidor.apellidos+".\nLo recibirás muy pronto, así que atento a cuando llegue a tu dirección."
+        email_from = settings.EMAIL_HOST_USER
+        recipient_list=[user.email]
+        send_mail(subjet,message,email_from,recipient_list)
         messages.success(request,"Pedido Asignado A "+ repartidor.nombres)
         return redirect(to="recepcionista")
 

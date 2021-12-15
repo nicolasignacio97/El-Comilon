@@ -86,6 +86,11 @@ Catálogo
                          <hr>                    
                         {% include "carroOff.html" %}
                     </div>
+                    {% else %}
+                    <div class="card p-4 d-flex">
+                        <label class="fw-bold text-center" for=""><a href="{% url 'login' %}">Inicia sesión</a> o <a href="{% url 'registro' %}">Regístrate</a> en El Comilón para probar la comida más rica</label>
+                         <hr>
+                    </div>
                     {%endif%}
                 </div>
             </div>

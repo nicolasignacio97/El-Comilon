@@ -73,13 +73,14 @@
             <img src="{% static 'img/nosotros.png' %}" alt=""> Sobre nosotros</a>
           </li>
         </ul>
+        {% if user.is_authenticated %}
         {% if request.session.carrito.items %}
         <button class="BotonCarro position-relative" type="button" data-bs-toggle="offcanvas"
           data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"> <i class="fas fa-cart-arrow-down"
             style="padding: .2rem;"></i>
           Carrito
           <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-            {{ request.session.carrito.items|length }}
+            {{total_cantidad}}
             <span class="visually-hidden">unread messages</span>
           </span>
         </button>
@@ -93,6 +94,7 @@
           </span>
         </button>
         {%endif%}
+        {% endif %}
       </div>
       <div class="collapse navbar-collapse justify-content-center col-3" id="navbarNav">
         <ul class="navbar-nav">

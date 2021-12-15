@@ -60,7 +60,7 @@ def cleanRutcliente(request):
 def eliminarCliConv(request, rutcliente):
     cliente = Cliente.objects.get(rutcliente=rutcliente)
     cliente.delete()
-    messages.success(request, 'Eliminado con exito')
+    messages.success(request, 'Cliente ' + cliente.nombres + ' '+cliente.apellidos + ' eliminado con exito')
     return redirect(to="/administracion/listarCliConv")
 
 # LISTAR CLIENTES CONVENIO
@@ -100,7 +100,6 @@ def modificarCliConv(request, id):
         direccion = request.POST.get('direcCliConv')
         saldocli = request.POST.get('saldoCli')
         rutempcli = request.POST.get('rutEmpConv')
-        idtipo = 1
 
         modificar_cliente_convenio(
             rutclienteConv, nombres, apellidos, direccion, saldocli, rutempcli)
@@ -187,10 +186,11 @@ def listarCliConvRut(rut):
 @permission_required('core')
 def actualizarSaldo(request):
     if request.method == 'POST':
-        archivo = request.FILES['arch'];
+        archivo = request.FILES['arch']
         datos = leerArchivo(archivo)
         for campos in datos:
             modificar_saldo_cliente(campos[0],campos[1])
+        messages.success(request, 'Se han asignado los saldos a los trabajadores correctamente')
 
     return render(request, 'actualizarSaldo.html')
 

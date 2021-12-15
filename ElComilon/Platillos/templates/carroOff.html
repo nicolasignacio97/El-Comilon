@@ -16,7 +16,7 @@
                       <span class="">${{value.acumulado | intcomma}}</span>
                       <div class="btn-group" role="group" aria-label="Basic outlined example">
                         <a href="{% url 'restar_producto' value.idplatillo %}"type="button" class=" btn btn-outline-danger">-</a>
-                        <button type="button" class=" btn btn-outline-danger disabledcss" disabled>{{value.cantidad}}</button>
+                        <button type="button" class=" btn btn-outline-dark" disabled>{{value.cantidad}}</button>
                         <a href="{% url 'agregarProducto' value.idplatillo %}" type="button" class=" btn btn-outline-danger">+</a>
                       </div>
                     </div>

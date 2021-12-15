@@ -19,8 +19,8 @@ def registroTrabajador(request):
     }
     if request.method == 'POST':
         rutTrabajador = request.POST.get('rutTrabajador')
-        nombres = request.POST.get('nombres')
-        apellidos = request.POST.get('apellidos')
+        nombres = request.POST.get('nombres').upper()
+        apellidos = request.POST.get('apellidos').upper()
         fechaContrato = request.POST.get('fecha')
        
         rutRestaurante = '77.684.154-9' #CAMBIAR ESTO SEGUN SU BASE DE DATOS
@@ -29,14 +29,16 @@ def registroTrabajador(request):
         forumulario = FormularioUsuario(data=request.POST)
         if forumulario.is_valid():
             user = forumulario.save()
-            groupAdministrador = Group.objects.get(name='Administrador')
             groupRecepcionista = Group.objects.get(name='Recepcionista')
             if idCargo == '1':
-                user.groups.add(groupAdministrador)
+                user.is_staff = True
+                user.is_superuser = True
+                user.save()
+                
             if idCargo == '2':
                 user.groups.add(groupRecepcionista)
             REGISTRAR_TRABAJADOR(rutTrabajador, nombres, apellidos, fechaContrato, rutRestaurante, idCargo) 
-            messages.success(request, 'Trabajador Registrado con exito')
+            messages.success(request, 'Trabajador '+ nombres + ' '+ apellidos+ ' registrado con exito')
             return render(request, 'registroTrabajador.html', data)
         data = {'form':forumulario,'campos':[rutTrabajador,nombres,apellidos,fechaContrato,rutRestaurante,idCargo],'cargo': listar()}
      

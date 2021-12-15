@@ -44,6 +44,7 @@
 </head>
 
 <body>
+    {% load humanize %}
     <section class="container">
         <div class="row">
             <div class="col-lg-12">
@@ -85,8 +86,8 @@
                                         <td>{{ cliente.1 }}</td>
                                         <td>{{ cliente.2 | title }}</td>
                                         <td>{{ cliente.3 | title }}</td>
-                                        <td>{{ cliente.4 }}</td>
-                                        <td>{{ cliente.5 }}</td>
+                                        <td>${{ cliente.4 | intcomma }}</td>
+                                        <td>{{ cliente.5 | title }}</td>
                                  
                                         <td>
                                             <a href="modCliConv/{{cliente.0}}"><i class="fas fa-user-edit"
