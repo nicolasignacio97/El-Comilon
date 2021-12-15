@@ -39,8 +39,8 @@ Catálogo
             </div>
                    
             <div class="col-sm-12  col-lg-8 d-flex flex-wrap  mt-5 mr-5" style="background-color: #fff; margin-right: 25px;">
-                {% if platillos %}
-                {% for p in platillos %}
+                {% if entity %}
+                {% for p in entity %}
                 <div class="col-lg-4 col-sm-12 mb-3" style="padding: 1rem 1rem; align-items: center;">
                     <div>
                     <img src="data:imagen/png;base64, {{ p.imagen }} " alt="" class="card-img-top w-100 "
@@ -71,7 +71,13 @@ Catálogo
                     </div>
                 </div>
                 {% endif %}
+                <div class="row d-flex justify-content-center w-100">
+                    <div class="col">
+                        {% include 'HeaderFooter/paginator.html'%}
+                    </div>
+                </div>
             </div>
+            
             <div class="col-lg-3 d-none d-lg-block ">
                 <div class="mt-5 colum-detalle-pedido">
                     {% if user.is_authenticated %}

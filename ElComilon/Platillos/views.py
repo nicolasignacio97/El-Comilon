@@ -1,6 +1,8 @@
 from django.contrib import messages
 from django.db.utils import DatabaseError
 from django.http.response import HttpResponse
+from django.core.paginator import Paginator
+from django.http.response import Http404
 from django.shortcuts import get_object_or_404, redirect, render
 from .context_processors import total_carrito
 from django.db import connection
@@ -28,9 +30,18 @@ def FinalizarCompra(request):
 
 
 def platillos(request):
+    global data
+    page = request.GET.get('page',1)
+    Lista = listado_platillos()
+    try:
+        paginator = Paginator(Lista, 9)
+        Lista = paginator.page(page)
+    except :
+        raise Http404
     data = {
-        'platillos': listado_platillos(),
-        'restaurantes':listado_restaurantes()
+        'restaurantes':listado_restaurantes(),
+        'entity': Lista,
+        'paginator' : paginator,
     }
     return render(request, 'platillos.html', data)
 
@@ -206,7 +217,7 @@ def platilloRut(request):
         print(rut)
 
         data = {
-        'platillos': listarPlatilloRut(rut),
+        'entity': listarPlatilloRut(rut),
         'restaurantes':listado_restaurantes()
         }
     return render(request, 'platillos.html', data)

@@ -37,7 +37,7 @@ Historial de pedidos
         </li>
       </ul>
       <table class="table table-borderless table-hover">
-        {% if pedidos %}
+        {% if entity %}
         <thead>
           <tr>
             <th scope="col"># ID</th>
@@ -50,7 +50,7 @@ Historial de pedidos
           </tr>
         </thead>
         <tbody>
-          {% for pedido in pedidos %}
+          {% for pedido in entity %}
           <tr>
             <td># {{pedido.idpedido}}</td>
             <td><strong><span class="text-danger">${{pedido.valortotal | intcomma}}</span></strong></td>
