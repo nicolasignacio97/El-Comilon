@@ -57,18 +57,11 @@ def cleanRutcliente(request):
 
 
 # ELIMINAR CLIENTE CONVENIO
-def eliminarCliConv(request, rutcliente, id):
-    u = User.objects.get(pk=id)
-    u.delete()
-    clientes = Cliente.objects.all()
+def eliminarCliConv(request, rutcliente):
     cliente = Cliente.objects.get(rutcliente=rutcliente)
     cliente.delete()
-    messages.success(request, messages.SUCCESS, 'Eliminado con exito')
-    contexto = {
-         'cliente': clientes
-    }
-    return listarCliConv(request)
-    # return redirect(to="/administracion/listarCliConv")
+    messages.success(request, 'Eliminado con exito')
+    return redirect(to="/administracion/listarCliConv")
 
 # LISTAR CLIENTES CONVENIO
 

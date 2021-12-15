@@ -6,6 +6,8 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.db import connection
+from django.core.paginator import Paginator
+from django.http.response import Http404
 from recepcionista.views import cambiar_estado
 import base64
 import cx_Oracle
@@ -14,12 +16,18 @@ import cx_Oracle
 def PerfilUsuario(request, id):
     # historial
     usuario = get_object_or_404(Cliente, idcuenta=id)
-    pedido = Pedido.objects.filter(rutcliente=usuario.rutcliente).order_by('-fechapedido')
+    page = request.GET.get('page',1)
+    Lista = Pedido.objects.filter(rutcliente=usuario.rutcliente).order_by('-fechapedido')
     cliente = get_object_or_404(Cliente, idcuenta=id)
-
+    try:
+        paginator = Paginator(Lista, 9)
+        Lista = paginator.page(page)
+    except :
+        raise Http404
     data = {
+        'entity': Lista,
+        'paginator' : paginator,
         'usuario': usuario,
-        'pedidos': pedido,
         'cliente':cliente
 
     }

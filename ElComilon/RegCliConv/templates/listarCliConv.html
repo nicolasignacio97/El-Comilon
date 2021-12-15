@@ -24,6 +24,23 @@
     <link rel="stylesheet" href="{% static 'css/styles-cli-conv.css' %}">
 
     <title>Lista de Clientes Convenio</title>
+    <script>
+        function eliminarClienteConvenio(id) {
+            Swal.fire({
+                "title": "¿Estás Seguro?",
+                "text": "Esta acción no se puede deshacer",
+                "icon": "question",
+                "showCancelButton": true,
+                "cancelButtonText": "No, Cancelar",
+                "confirmButtonText": "Si, Eliminar",
+                "confirmButtonColor": "#9C3534"
+            }).then(function (result) {
+                if (result.isConfirmed) {
+                    window.location.href = "eliminarCliente/"+id
+                }
+            })
+        }
+    </script>
 </head>
 
 <body>
@@ -74,7 +91,7 @@
                                         <td>
                                             <a href="modCliConv/{{cliente.0}}"><i class="fas fa-user-edit"
                                                     style="color:#02B37F; cursor: pointer;"></i></a>
-                                            <a href="{% url 'eliminarCliente' cliente.0 cliente.9  %}"><i
+                                            <a onclick="eliminarClienteConvenio('{{cliente.0}}')" href="#"><i
                                                     class="fas fa-trash-alt" style="color: brown; cursor: pointer;">
                                                 </i> </a>
                                     </tr>
