@@ -1,3 +1,4 @@
+from django.conf.urls import url
 from django.shortcuts import get_object_or_404, render, redirect
 
 from .forms import EditarUsuario, EditarRecepcionista
@@ -41,6 +42,7 @@ def cambiarEstado(request,id):
        'detallePedido' : detallePedido, 
        'pedidoSelect' : pedido,
        'cliente' : cliente,
+        'platillos':listado_platillos_comilon('99.365.349-8',id),
        'totalReclamos':len(listado_reclamos()),
        'estados': listado_estados_pedido(), 
        'TotalPedidos':len(listado_pedidos_listos()),
@@ -58,6 +60,42 @@ def cambiarEstado(request,id):
 
     return render(request, 'cambioEstado.html',dataMod)
 
+
+def cambiarAPreparacionRecepcion(request ,id,id2):
+    url= '/estado/'+id2
+    cambiar_estado_platillo(id,2)
+    return redirect(to=url)
+
+def cambiarAPendienteRecepcion(request ,id,id2):
+    url= '/estado/'+id2
+    cambiar_estado_platillo(id,1)
+    return redirect(to=url)
+
+def cambiarAListoRecepcion(request ,id,id2):
+    url= '/estado/'+id2
+    cambiar_estado_platillo(id,3)
+    return redirect(to=url)
+
+
+def listado_platillos_comilon(rut,pedido):
+    django_cursor = connection.cursor()
+    cursor = django_cursor.connection.cursor()
+    out_cur = django_cursor.connection.cursor()
+
+    cursor.callproc("SP_LISTAR_PLATILLOS_COMILON", [rut,pedido,out_cur])
+    lista = []
+    for fila in out_cur:
+        lista.append(fila)
+    return lista
+
+
+
+def cambiar_estado_platillo(iddetalle, idEstado):
+    django_cursor = connection.cursor()
+    cursor = django_cursor.connection.cursor()
+    salida = cursor.var(cx_Oracle.NUMBER)
+    cursor.callproc('SP_MODIFICAR_ESTADO_PLATILLO',[iddetalle, idEstado,salida])
+    return salida.getvalue()
 
 #ASIGNAR REPARTIDOR A PEDIDO
 @permission_required('core.view_reclamo')    
