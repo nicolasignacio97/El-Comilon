@@ -57,18 +57,11 @@ def cleanRutcliente(request):
 
 
 # ELIMINAR CLIENTE CONVENIO
-def eliminarCliConv(request, rutcliente, id):
-    u = User.objects.get(pk=id)
-    u.delete()
-    clientes = Cliente.objects.all()
+def eliminarCliConv(request, rutcliente):
     cliente = Cliente.objects.get(rutcliente=rutcliente)
     cliente.delete()
-    messages.success(request, messages.SUCCESS, 'Eliminado con exito')
-    contexto = {
-         'cliente': clientes
-    }
-    return listarCliConv(request)
-    # return redirect(to="/administracion/listarCliConv")
+    messages.success(request, 'Eliminado con exito')
+    return redirect(to="/administracion/listarCliConv")
 
 # LISTAR CLIENTES CONVENIO
 
@@ -110,8 +103,8 @@ def modificarCliConv(request, id):
         idtipo = 1
 
         modificar_cliente_convenio(
-            rutclienteConv, nombres, apellidos, direccion, saldocli, idtipo, rutempcli)
-        messages.success(request, 'Modificado con exito')
+            rutclienteConv, nombres, apellidos, direccion, saldocli, rutempcli)
+        messages.success(request, 'Cliente '+nombres +' '+ apellidos+' modificado con exito')
         return redirect(to="listarCliConv")
 
     return render(request, 'modCliConv.html', dataMod)
@@ -130,12 +123,12 @@ def agregar_cliente_convenio(rutcliente, nombres, apellidos, direccion, idtipoCl
 
 
 # FUNCIÓN MODIFICAR CLIENTE CONVENIO
-def modificar_cliente_convenio(rutcliente, nombres, apellidos, direccion, saldocli, idtipocliente, rutempcli):
+def modificar_cliente_convenio(rutcliente, nombres, apellidos, direccion, saldocli, rutempcli):
     django_cursor = connection.cursor()
     cursor = django_cursor.connection.cursor()
     salida = cursor.var(cx_Oracle.NUMBER)
     cursor.callproc('SP_MODIFICAR_CLIENTE_CONVENIO', [
-                    rutcliente, nombres, apellidos, direccion, saldocli, idtipocliente, rutempcli, salida])
+                    rutcliente, nombres, apellidos, direccion, saldocli, rutempcli, salida])
     return salida.getvalue()
 
 # FUNCION LISTAR CLIENTE
@@ -168,12 +161,13 @@ def listar_EmpConvenio():
 @permission_required('core')
 def cliConvRut(request):
     global dataClientes
+    
     if request.method == 'POST':
 
         rut = request.POST.get('cliConvRut')
 
         dataClientes = {
-        'clientesConv': listarCliConvRut(rut)
+        'entity': listarCliConvRut(rut)
     }
     return render(request, 'listarCliConv.html', dataClientes)
 

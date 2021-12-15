@@ -75,6 +75,7 @@ a:hover{
 }
 
 .platillo__precio{
+    margin-top: 25px;
     color:#9c3534;
     font-weight: bold;
 }
@@ -206,10 +207,6 @@ a:hover{
     color:#ffffff;
     border-color: #9c3534;
     background-color: #9c3534;
-}
-
-.platillo__precio{
-    margin-top: 20px;
 }
 
 @media (max-width: 768px) {

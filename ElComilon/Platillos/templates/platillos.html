@@ -48,7 +48,7 @@ Catálogo
                     </div>
                     <div class="card-body card-body-main">
                     <h5 class="card-title tittle-card">{{ p.data.1 | title }}</h5>
-                    <span class="span-home" style=" margin-top: 10px;"> {{ p.data.2 | title }} </span>
+                    <span class="span-home" style=" margin-top: 10px;"> {{ p.data.2 | capfirst }} </span>
                     <span class="span-home" style=" margin-top: 8px; color: #c4c4c4;"> <img src="{% static 'img/restaurante.png' %}" alt=""> {{ p.data.5 | title }} </span>
                     {% if p.data.7 %}
                     <span class="span-home text-end text-danger" style=" margin-top: 8px; position: absolute;">*Pocas unidades</span>
