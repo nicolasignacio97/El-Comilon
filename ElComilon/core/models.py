@@ -111,6 +111,7 @@ class Pedido(models.Model):
     idtiposervicio = models.ForeignKey('TipoServicio', models.DO_NOTHING, db_column='idtiposervicio')
     rutcliente = models.ForeignKey(Cliente, models.DO_NOTHING, db_column='rutcliente')
     idestpedido = models.ForeignKey(EstadoPedido, models.DO_NOTHING, db_column='idestpedido')
+    horapedido = models.CharField(max_length=30, blank=True, null=True)
 
     def __str__(self):
         return self.rutcliente
@@ -129,6 +130,7 @@ class Platillo(models.Model):
     valorunitario = models.IntegerField()
     foto = models.ImageField(blank=True, null=True)
     rutrestaurante = models.ForeignKey('Restaurante', models.DO_NOTHING, db_column='rutrestaurante')
+    stockcritico = models.BooleanField(blank= True)
 
     def __str__(self):
         return self.nombre
@@ -190,6 +192,7 @@ class Representante(models.Model):
     apellidos = models.CharField(max_length=20)
     telefono = models.IntegerField()
     idcuenta = models.ForeignKey(User,models.DO_NOTHING , db_column='idcuenta')
+    on_delete = models.CASCADE
 
     class Meta:
         managed = False
@@ -202,6 +205,7 @@ class Restaurante(models.Model):
     direccionrestaurante = models.CharField(max_length=30)
     rutrepresentante = models.ForeignKey(Representante, models.DO_NOTHING, db_column='rutrepresentante')
     idtiporest = models.ForeignKey('TipoRestaurante', models.DO_NOTHING, db_column='idtiporest')
+    on_delete = models.CASCADE
     
     def __str__(self):
         return self.rutrestaurante

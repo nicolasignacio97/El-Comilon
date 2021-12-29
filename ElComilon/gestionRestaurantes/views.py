@@ -15,7 +15,7 @@ data = {}
 def listarRestaurantes(request):
     global data
     page = request.GET.get('page',1)
-    Lista = listado_restaurantes();
+    Lista = listado_restaurantes()
     try:
         paginator = Paginator(Lista, 10)
         Lista = paginator.page(page)
@@ -28,6 +28,7 @@ def listarRestaurantes(request):
     }
     return render(request, 'listarRestau_Repre.html', data)
 
+@permission_required('core')
 def modificarRepreResta(request, id,id2):
     restaurante = get_object_or_404(Restaurante, rutrestaurante=id)
     representante = get_object_or_404(Representante, rutrepresentante=id2)

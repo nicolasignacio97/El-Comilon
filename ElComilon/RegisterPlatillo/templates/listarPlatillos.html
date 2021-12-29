@@ -30,7 +30,7 @@
             <div class="col-m-2">
                     <h3 class=" text-center mt-4  mb-5" style="color: brown;">Lista Platillos</h3>
 
-                            <table class="table   table-hover">
+                            <table class="table table-hover">
 
                                 <div class="container">
                                     <form action="platilloNombre" method="POST">
@@ -54,6 +54,7 @@
                                         <th scope="col">Ingredientes</th>
                                         <th scope="col">Restaurante</th>
                                         <th class="dispo" scope="col">Disponibilidad</th>
+                                        <th class="dispo" scope="col">Stock Crítico</th>
                                         <th scope="col">Precio</th>
                                         <th class="dispo" scope="col">Acción</th>
                                 </thead>
@@ -76,10 +77,21 @@
                                             </div>
                                             {% endif %}
                                         </td>
+                                        <td>
+                                            {% if p.6 %}
+                                            <div class="form-check form-switch inputs check">
+                                                <input class="form-check-input" type="checkbox" name="Stock" role="switch" id="flexSwitchCheckDefault" checked disabled>
+                                            </div>
+                                            {% else %}
+                                            <div class="form-check form-switch inputsheck check">
+                                                <input class="form-check-input" type="checkbox" name="Stock" role="switch" id="flexSwitchCheckDefault" disabled>
+                                            </div>
+                                            {% endif %}
+                                        </td>
                                         <td>${{ p.3 |intcomma }} </td>
                                         <td>
                                             <div class="check">
-                                                <a href="modificarPlatillo/{{ p.0 }}"><i class="fas fa-user-edit"
+                                                <a href="{% url 'modificarPlatillo' p.0 %}"><i class="fas fa-user-edit"
                                                         style="color:#02B37F; cursor: pointer;"></i></a>
                                                 <a href="#" onClick="comprobarEliminar('{{ p.0 }}')"><i
                                                         class="fas fa-trash-alt" style="color: brown; cursor: pointer;">

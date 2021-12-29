@@ -1,4 +1,4 @@
-from django.conf import settings
+from django.conf.urls import url
 from django.shortcuts import get_object_or_404, render, redirect
 
 from .forms import EditarUsuario, EditarRecepcionista
@@ -8,6 +8,7 @@ from core.models import Trabajador,Pedido, DetallePedido, Cliente,Repartidor, Re
 from django.core.mail import send_mail
 from django.conf import settings
 from django.db import connection
+from django.contrib.auth.decorators import permission_required
 import cx_Oracle
 
 # Create your views here.
@@ -15,6 +16,7 @@ def cambiarEstadoTienda(request, id):
     cambiar_estado(id, 5)
     return redirect(to='/recepcionista')
 
+@permission_required('core.view_reclamo')    
 def viewRecepcionista(request):
     dataRep = {
         'listos':listado_pedidos_listos(),
@@ -24,16 +26,23 @@ def viewRecepcionista(request):
     }
     return render(request,'viewRecepcionista.html',dataRep)
 
+def cancelarPedidoRecepcionista(request, id):
+    cambiar_estado(id, 6)
+    url='recepcionista'
+    return redirect(to=url)
+
 #CAMBIAR ESTADO DE PEDIDOS
+@permission_required('core.view_reclamo')    
 def cambiarEstado(request,id):
     pedido = get_object_or_404(Pedido,idpedido=id)
     detallePedido = DetallePedido.objects.filter(idpedido=pedido.idpedido)
     cliente = get_object_or_404(Cliente, rutcliente=pedido.rutcliente)
-    print(cliente.telefono)
+    print(pedido.idestpedido)
     dataMod = {
        'detallePedido' : detallePedido, 
        'pedidoSelect' : pedido,
        'cliente' : cliente,
+        'platillos':listado_platillos_comilon('99.365.349-8',id),
        'totalReclamos':len(listado_reclamos()),
        'estados': listado_estados_pedido(), 
        'TotalPedidos':len(listado_pedidos_listos()),
@@ -52,9 +61,50 @@ def cambiarEstado(request,id):
     return render(request, 'cambioEstado.html',dataMod)
 
 
+def cambiarAPreparacionRecepcion(request ,id,id2):
+    url= '/estado/'+id2
+    cambiar_estado_platillo(id,2)
+    return redirect(to=url)
+
+def cambiarAPendienteRecepcion(request ,id,id2):
+    url= '/estado/'+id2
+    cambiar_estado_platillo(id,1)
+    return redirect(to=url)
+
+def cambiarAListoRecepcion(request ,id,id2):
+    url= '/estado/'+id2
+    cambiar_estado_platillo(id,3)
+    return redirect(to=url)
+
+
+def listado_platillos_comilon(rut,pedido):
+    django_cursor = connection.cursor()
+    cursor = django_cursor.connection.cursor()
+    out_cur = django_cursor.connection.cursor()
+
+    cursor.callproc("SP_LISTAR_PLATILLOS_COMILON", [rut,pedido,out_cur])
+    lista = []
+    for fila in out_cur:
+        lista.append(fila)
+    return lista
+
+
+
+def cambiar_estado_platillo(iddetalle, idEstado):
+    django_cursor = connection.cursor()
+    cursor = django_cursor.connection.cursor()
+    salida = cursor.var(cx_Oracle.NUMBER)
+    cursor.callproc('SP_MODIFICAR_ESTADO_PLATILLO',[iddetalle, idEstado,salida])
+    return salida.getvalue()
+
 #ASIGNAR REPARTIDOR A PEDIDO
+@permission_required('core.view_reclamo')    
+
 def asignarRepartidor(request,id):
     pedido = get_object_or_404(Pedido,idpedido=id)
+    clientes = get_object_or_404(Cliente, rutcliente = pedido.rutcliente)
+    cliente = listado_clientes(clientes.rutcliente)
+    user = get_object_or_404 (User, id= cliente[0][11])
     dataMod = {
        'pedidoSelect' : pedido,
        'repartidores': listado_repartidores_dispo(),
@@ -68,13 +118,17 @@ def asignarRepartidor(request,id):
         rutrepartidor = request.POST.get('repartidor')
         repartidor = get_object_or_404(Repartidor, rutrepartidor = rutrepartidor )
         asignar_repartidor(id, idestpedido, rutrepartidor)
+        subjet = "¡Tu pedido va en camino!"
+        message = "Tu pedido ha sido asignado al repartidor " + repartidor.nombres+ ' '+ repartidor.apellidos+".\nLo recibirás muy pronto, así que atento a cuando llegue a tu dirección."
+        email_from = settings.EMAIL_HOST_USER
+        recipient_list=[user.email]
+        send_mail(subjet,message,email_from,recipient_list)
         messages.success(request,"Pedido Asignado A "+ repartidor.nombres)
         return redirect(to="recepcionista")
 
     return render(request,'asignaRepartidor.html',dataMod)
 
-
-
+@permission_required('core.view_reclamo')    
 def menuRecepcion(request, id):
     usuario = get_object_or_404(User, id=id)
     trabajador = get_object_or_404(Trabajador, idcuenta=id)
@@ -118,6 +172,7 @@ def menuRecepcion(request, id):
 
     return render (request, 'menuRecepcionista.html',data)
 
+@permission_required('core.view_reclamo')    
 
 def verReclamos(request):
    
@@ -131,6 +186,7 @@ def verReclamos(request):
     
 
 
+@permission_required('core.view_reclamo')    
 
 def detalleReclamo(request, id):
     reclamo = get_object_or_404(Reclamo, idreclamo = id)

@@ -28,6 +28,9 @@ body{
     .imagen-campos .camposPedido{
         width: 85%;
     }
+    .imagen-campos{
+        width: 93%; 
+    }
     
 }
 
@@ -128,6 +131,11 @@ body{
     font-weight: bold;
     width: 210px;
 }
+.btn-color:hover{
+    background-color:#fff;
+    color:#9C3534;
+    border:1px solid #9C3534;
+}
 
 .alinear-derecha{
     justify-content: flex-end;
@@ -195,6 +203,12 @@ body{
     margin-bottom: .3rem;
     display: flex;
     justify-content: space-between;
+}
+
+@media (max-width: 768px) {
+    .platillos{
+        width: 90%;
+    }
 }
 
 .form-check-input:checked{

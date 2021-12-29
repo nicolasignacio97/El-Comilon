@@ -24,9 +24,27 @@
     <link rel="stylesheet" href="{% static 'css/styles-cli-conv.css' %}">
 
     <title>Lista de Clientes Convenio</title>
+    <script>
+        function eliminarClienteConvenio(id) {
+            Swal.fire({
+                "title": "¿Estás Seguro?",
+                "text": "Esta acción no se puede deshacer",
+                "icon": "question",
+                "showCancelButton": true,
+                "cancelButtonText": "No, Cancelar",
+                "confirmButtonText": "Si, Eliminar",
+                "confirmButtonColor": "#9C3534"
+            }).then(function (result) {
+                if (result.isConfirmed) {
+                    window.location.href = "eliminarCliente/"+id
+                }
+            })
+        }
+    </script>
 </head>
 
 <body>
+    {% load humanize %}
     <section class="container">
         <div class="row">
             <div class="col-lg-12">
@@ -57,24 +75,24 @@
                                         <th scope="col">Apellidos</th>
                                         <th scope="col">Dirección</th>
                                         <th scope="col">Saldo</th>
-                                        <th scope="col">Rut Empresa</th>
+                                        <th scope="col">Empresa</th>
                                         <th scope="col">Acción</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {% for cliente in clientesConv %}
+                                    {% for cliente in entity %}
                                     <tr>
                                         <th scope="row" id="rutTrabajador" value="{{ cliente.0 }}">{{ cliente.0 }}</th>
-                                        <td>{{ cliente.2 }}</td>
-                                        <td>{{ cliente.3 }}</td>
-                                        <td>{{ cliente.4 }}</td>
-                                        <td>{{ cliente.8 }}</td>
-                                        <td>{{ cliente.10 }}</td>
+                                        <td>{{ cliente.1 }}</td>
+                                        <td>{{ cliente.2 | title }}</td>
+                                        <td>{{ cliente.3 | title }}</td>
+                                        <td>${{ cliente.4 | intcomma }}</td>
+                                        <td>{{ cliente.5 | title }}</td>
                                  
                                         <td>
                                             <a href="modCliConv/{{cliente.0}}"><i class="fas fa-user-edit"
                                                     style="color:#02B37F; cursor: pointer;"></i></a>
-                                            <a href="{% url 'eliminarCliente' cliente.0 cliente.9  %}"><i
+                                            <a onclick="eliminarClienteConvenio('{{cliente.0}}')" href="#"><i
                                                     class="fas fa-trash-alt" style="color: brown; cursor: pointer;">
                                                 </i> </a>
                                     </tr>
@@ -82,6 +100,7 @@
                                 </tbody>
 
                             </table>
+                            {% include 'HeaderFooter/paginator.html'%}
                         </div>
 
                     </div>

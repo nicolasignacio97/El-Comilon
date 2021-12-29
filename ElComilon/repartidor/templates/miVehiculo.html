@@ -1,12 +1,16 @@
 {% extends "HeaderFooter/base.html"%}
 {% load static %}
-
+{% block titulo %}
+Mi Vehículo
+{% endblock %}
 {% block content %}
 {% load humanize %}
+
+<link rel="stylesheet" href="{% static 'css/style-view-reparto.css' %}">
 <div class="container bg-white shadow-lg mt-5">
     <div class="row">
         <div class="col m-2">
-            <h1 class="text-center titulo mb-5">Mi Cuenta</h1>
+            <h1 class="text-center titulo mb-5">Mi Vehículo</h1>
             <ul class="nav nav-tabs">
                 <li class="nav-item">
                     <a class="nav-link text-danger " aria-current="page" href="{% url 'perfilRepartidor' user.id %}">Mis Datos</a>
@@ -15,7 +19,7 @@
                     <a class="nav-link  active" href="{% url 'MiVehiculo' user.id %}">Vehículo</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link  text-danger  btn btn-primary position-relative" href="{% url 'repartidor' %}">Lista de Pedidos ss
+                    <a class="nav-link  text-danger  btn btn-primary position-relative" href="{% url 'repartidor' %}">Lista de Pedidos
                         <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                            {{TotalPedidos}}
                             <span class="visually-hidden">unread messages</span>

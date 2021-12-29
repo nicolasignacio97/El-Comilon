@@ -1,0 +1,9 @@
+.disabledcss:disabled{
+    color: #9c3534;
+}
+
+@media (max-width: 768px) {
+    .carro-celu{
+        width:112%;
+    }    
+}

@@ -1,7 +1,8 @@
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth.decorators import permission_required
-from django.http.response import JsonResponse
+from django.http.response import Http404, JsonResponse
 from django.contrib import messages
+from django.core.paginator import Paginator
 from core.models import Cliente
 from django.contrib.auth.models import User
 from registroDeUsuarios.forms import FormularioUsuario
@@ -15,7 +16,7 @@ dataClientes = {}
 
 # AGREGAR CLIENTES CONVENIO
 
-
+@permission_required('core')
 def RegistroCliConvenio(request):
     data = {
         'form': FormularioUsuario(),
@@ -30,15 +31,14 @@ def RegistroCliConvenio(request):
         saldocli = request.POST.get('saldoCli')
         idtipoCliente = 1
         rutempcli = request.POST.get('rutEmpConv')
-        forumulario = FormularioUsuario(data=request.POST)
-        if forumulario.is_valid():
-            forumulario.save()
-            agregar_cliente_convenio(
-                rutcliente, nombres, apellidos, direccion, idtipoCliente, rutempcli, saldocli)
-            messages.success(request, "Usuario Creado")
+        formulario = FormularioUsuario(data=request.POST)
+        if formulario.is_valid():
+            formulario.save()
+            agregar_cliente_convenio(rutcliente, nombres, apellidos, direccion, idtipoCliente, rutempcli, saldocli)
+            messages.success(request, "Usuario de " + nombres +" creado")
             return render(request, 'regCliConv.html', data)
         data = {
-            'form': forumulario,
+            'form': formulario,
             'campos': [rutcliente, nombres, apellidos, direccion, rutempcli, saldocli, rutempcli],
             'Seleccion': listar_EmpConvenio()
         }
@@ -57,33 +57,35 @@ def cleanRutcliente(request):
 
 
 # ELIMINAR CLIENTE CONVENIO
-def eliminarCliConv(request, rutcliente, id):
-    u = User.objects.get(pk=id)
-    u.delete()
-    clientes = Cliente.objects.all()
+def eliminarCliConv(request, rutcliente):
     cliente = Cliente.objects.get(rutcliente=rutcliente)
     cliente.delete()
-    messages.success(request, messages.SUCCESS, 'Eliminado con exito')
-    contexto = {
-         'cliente': clientes
-    }
-    return listarCliConv(request)
-    # return redirect(to="/administracion/listarCliConv")
+    messages.success(request, 'Cliente ' + cliente.nombres + ' '+cliente.apellidos + ' eliminado con exito')
+    return redirect(to="/administracion/listarCliConv")
 
 # LISTAR CLIENTES CONVENIO
 
-
+@permission_required('core')
 def listarCliConv(request):
     global dataClientes
+    page = request.GET.get('page',1)
+    Lista =  listar_clientes_conv()
+    try:
+        paginator = Paginator(Lista, 10)
+        Lista = paginator.page(page)
+    except :
+        raise Http404
+
     dataClientes = {
-        'clientesConv': listar_clientes_conv()
+        'entity': Lista,
+        'paginator' : paginator,
     }
 
     return render(request, 'listarCliConv.html', dataClientes)
 
 # MODIFICAR CLIENTE CONVENIO
 
-
+@permission_required('core')
 def modificarCliConv(request, id):
     cliente = get_object_or_404(Cliente, rutcliente=id)
     dataMod = {
@@ -98,11 +100,10 @@ def modificarCliConv(request, id):
         direccion = request.POST.get('direcCliConv')
         saldocli = request.POST.get('saldoCli')
         rutempcli = request.POST.get('rutEmpConv')
-        idtipo = 1
 
         modificar_cliente_convenio(
-            rutclienteConv, nombres, apellidos, direccion, saldocli, idtipo, rutempcli)
-        messages.success(request, 'Modificado con exito')
+            rutclienteConv, nombres, apellidos, direccion, saldocli, rutempcli)
+        messages.success(request, 'Cliente '+nombres +' '+ apellidos+' modificado con exito')
         return redirect(to="listarCliConv")
 
     return render(request, 'modCliConv.html', dataMod)
@@ -121,17 +122,15 @@ def agregar_cliente_convenio(rutcliente, nombres, apellidos, direccion, idtipoCl
 
 
 # FUNCIÓN MODIFICAR CLIENTE CONVENIO
-def modificar_cliente_convenio(rutcliente, nombres, apellidos, direccion, saldocli, idtipocliente, rutempcli):
+def modificar_cliente_convenio(rutcliente, nombres, apellidos, direccion, saldocli, rutempcli):
     django_cursor = connection.cursor()
     cursor = django_cursor.connection.cursor()
     salida = cursor.var(cx_Oracle.NUMBER)
     cursor.callproc('SP_MODIFICAR_CLIENTE_CONVENIO', [
-                    rutcliente, nombres, apellidos, direccion, saldocli, idtipocliente, rutempcli, salida])
+                    rutcliente, nombres, apellidos, direccion, saldocli, rutempcli, salida])
     return salida.getvalue()
 
 # FUNCION LISTAR CLIENTE
-
-
 def listar_clientes_conv():
     django_cursor = connection.cursor()
     cursor = django_cursor.connection.cursor()
@@ -161,12 +160,13 @@ def listar_EmpConvenio():
 @permission_required('core')
 def cliConvRut(request):
     global dataClientes
+    
     if request.method == 'POST':
 
         rut = request.POST.get('cliConvRut')
 
         dataClientes = {
-        'clientesConv': listarCliConvRut(rut)
+        'entity': listarCliConvRut(rut)
     }
     return render(request, 'listarCliConv.html', dataClientes)
 
@@ -183,13 +183,14 @@ def listarCliConvRut(rut):
 
     return lista
 
-
+@permission_required('core')
 def actualizarSaldo(request):
     if request.method == 'POST':
-        archivo = request.FILES['arch'];
+        archivo = request.FILES['arch']
         datos = leerArchivo(archivo)
         for campos in datos:
             modificar_saldo_cliente(campos[0],campos[1])
+        messages.success(request, 'Se han asignado los saldos a los trabajadores correctamente')
 
     return render(request, 'actualizarSaldo.html')
 

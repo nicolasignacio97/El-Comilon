@@ -8,7 +8,7 @@ Historial de pedidos
 <div class="container bg-white shadow-lg mt-5">
   <div class="row">
     <div class="col m-2">
-      {% if cliente.saldocli %}
+      {% if cliente.saldocli >= 0 %}
       <h5 class="text-end m-0 text-muted">Saldo: ${{cliente.saldocli | intcomma}}</h5>
       {% endif %}
       <h1 class="text-center titulo mb-5">Historial</h1>
@@ -37,6 +37,7 @@ Historial de pedidos
         </li>
       </ul>
       <table class="table table-borderless table-hover">
+        {% if entity %}
         <thead>
           <tr>
             <th scope="col"># ID</th>
@@ -49,7 +50,7 @@ Historial de pedidos
           </tr>
         </thead>
         <tbody>
-          {% for pedido in pedidos %}
+          {% for pedido in entity %}
           <tr>
             <td># {{pedido.idpedido}}</td>
             <td><strong><span class="text-danger">${{pedido.valortotal | intcomma}}</span></strong></td>
@@ -61,11 +62,17 @@ Historial de pedidos
                   class="fas fa-eye" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ver detalles del pedido"
                   style="color:#02B37F; cursor: pointer;"></i></a>
               <a class="p-1" href="{% url 'crearReclamo' pedido.idpedido %}"><i class="fas fa-angry"
+                data-bs-toggle="tooltip" data-bs-placement="bottom" title="Realizar reclamo"
                   style="color:#b30202; cursor: pointer;"></i></a>
             </td>
           </tr>
           {%endfor%}
         </tbody>
+        {% else %}
+        <div class="alert alert-danger text-center mt-5" role="alert">
+          Aún no tienes pedidos 😢. Te invitamos a hacer tu <a href="/platillos">primer pedido.</a>
+        </div>
+        {% endif %}
       </table>
       {% include 'HeaderFooter/paginator.html'%}
     </div>

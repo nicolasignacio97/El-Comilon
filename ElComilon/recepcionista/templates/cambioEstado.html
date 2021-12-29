@@ -7,6 +7,69 @@
 {% endblock %}
 {% block content %}
 {% load humanize %}
+<script>
+  function CancelarPedido(id) {
+    Swal.fire({
+        "title": "¿Estás Seguro?",
+        "text": "Esta acción no se puede deshacer",
+        "icon": "question",
+        "showCancelButton": true,
+        "cancelButtonText": "No, Cancelar",
+        "confirmButtonText": "Si, Cancelar Pedido",
+        "confirmButtonColor": "#9C3534"
+    }).then(function (result) {
+      if (result.isConfirmed) {
+          window.location.href = "/cancelarPedidoRecepcionista/"+id
+      }
+    })
+  }
+</script>
+<script>
+  function modificarEstado(id,id2) {
+    Swal.fire({
+      "title": "¿Desea Terminar El Platillo?",
+      "icon": "question",
+      "showCancelButton": true,
+      "cancelButtonText": "No, Cancelar",
+      "confirmButtonText": "Si, Terminar",
+      "confirmButtonColor": "#9C3534"
+    }).then(function (result) {
+      if (result.isConfirmed) {
+        let timerInterval
+        Swal.fire({
+          title: 'Terminando Platillo',
+          html: 'Por Favor Espere...',
+          timer: 1000,
+          timerProgressBar: true,
+          didOpen: () => {
+            Swal.showLoading()
+            const b = Swal.getHtmlContainer().querySelector('b')
+            timerInterval = setInterval(() => {
+              b.textContent = Swal.getTimerLeft()
+            }, 100)
+          },
+          willClose: () => {
+            clearInterval(timerInterval)
+          }
+        }).then((result) => {
+          Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Platillo Terminado',
+            showConfirmButton: false,
+            timer: 1000
+          })
+          setTimeout(() => {
+            if (result.dismiss === Swal.DismissReason.timer) {
+              window.location.href = "/cambiarAListoRecepcion/"+ id+"/"+id2
+            }
+          }, 1000);
+        })
+
+      }
+    })
+  }
+</script>
 <link rel="stylesheet" href="{% static 'css/style-recepcionista-view.css' %}">
 <div class="container bg-white shadow-lg mt-5 mb-3">
   <div class="row">
@@ -65,6 +128,10 @@
                                   <label for="">{{ pedidoSelect.fechapedido }}</label>
                               </div>
                               <div>
+                                <label for=""><span>Hora:</span></label>
+                                <label for="">{{ pedidoSelect.horapedido }}</label>
+                            </div>
+                              <div>
                                   <label for=""><span>Rut Cliente:</span></label>
                                   <label for="">{{ pedidoSelect.rutcliente }}</label>
                               </div>
@@ -112,12 +179,63 @@
                               <label for="floatingSelect">Seleccione un estado del pedido</label>
                             </div>
                             <button class="btn botonEnviar bloque-abajo mt-5" id="btn1" type="submit">Cambiar estado</button>
-                            {{mensaje}}
+                            <div class="row">
+                              <div class="col w-25 d-flex mb-5 mt-5 justify-content-center">
+                                <a href="#" onClick="CancelarPedido('{{pedidoSelect.idpedido}}')"  class="btn botonEnviar">Cancelar Pedido</a>
+                              </div>
+                            </div>
                           </div>
                         </div>
                     </form>
                 </div>
             </section>
+        </div>
+        <div class="row mt-5">
+          <div class="col-12">
+            <table class="table table-responsive table-borderless table-hover table-responsive">
+              <thead>
+                <tr>
+                  <th scope="col">Nombre</th>
+                  <th scope="col p-0">Cantidad</th>
+                  <th scope="col">Estado</th>
+                  <th scope="col">Acción</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for platos in platillos %}
+                <tr>
+                  <td>{{platos.1}}</td>
+                  <td>{{platos.2}}</td>
+                  {%if platos.3 == 1 %}
+                  <td>Pendientes</td>
+                  {% endif %}
+                  {%if platos.3 == 2 %}
+                  <td>En Preparación</td>
+                  {% endif %}
+                  {%if platos.3 == 3 %}
+                  <td>Listo</td>
+                  {% endif %}
+                  <td>
+                    <div class="btn-group" role="group">
+                      <button id="btnGroupDrop1" type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                        Estado
+                      </button>
+                      <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                        <li><a class="dropdown-item" href="{% url 'cambiarAPendienteRecepcion' platos.4 pedidoSelect.idpedido %}">Pendiente</a></li>
+                        <li><a class="dropdown-item" href="{% url 'cambiarAPreparacionRecepcion' platos.4  pedidoSelect.idpedido %}">En Preparación</a></li>
+                        {% if  platos.3 == 2 %}
+                        <li><a class="dropdown-item" onclick="modificarEstado('{{platos.4}}','{{pedidoSelect.idpedido}}')" href="#">Listo</a></li>
+                        {% endif %}
+                      </ul>
+                    </div>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+            <tbody>
+            </tbody>
+          </div>
         </div>
     </section>
   </div>

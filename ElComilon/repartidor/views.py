@@ -1,14 +1,25 @@
 from django.contrib import messages
-from core.models import Repartidor, Pedido, Vehiculo
+from core.models import Repartidor, Pedido, Vehiculo, Cliente
 from django.contrib.auth.models import User
 from .forms import EditarRepartidor, EditarUsuario, EditarVehiculo
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth.decorators import permission_required
+from django.core.mail import send_mail
+from django.conf import settings
 from django.db import connection
 import cx_Oracle
 
 def cambiarEstadoTiendaRepartidor(request, id):
+    pedido = get_object_or_404(Pedido,idpedido=id)
+    clientes = get_object_or_404(Cliente, rutcliente = pedido.rutcliente)
+    cliente = listado_clientes(clientes.rutcliente)
+    user = get_object_or_404 (User, id= cliente[0][11])
     modificar_estado_pedido(id, 5)
+    subjet = "¡Tu pedido ha sido entregado!"
+    message = "Tu repartidor ha confirmado la entrega de tu pedido en la dirección: " + pedido.direccionpedido + "\n¡Que lo disfrutes!"
+    email_from = settings.EMAIL_HOST_USER
+    recipient_list=[user.email]
+    send_mail(subjet,message,email_from,recipient_list)
     return redirect(to='repartidor')
 
 
@@ -31,7 +42,7 @@ def viewPedido(request, id):
     }
     return render(request, 'viewPedido.html', dataMod)
 
-
+@permission_required('core.view_pedido')
 def PerfilRepartidor(request, id):
     usuario = get_object_or_404(User, id=id)
     repartidor = get_object_or_404(Repartidor, idcuenta=id)
@@ -67,7 +78,7 @@ def PerfilRepartidor(request, id):
             return render(request, 'repartidorPerfil.html', data2)
     return render(request, 'repartidorPerfil.html', data)
 
-
+@permission_required('core.view_pedido')
 def MiVehiculo(request, id):
     repartidor = get_object_or_404(Repartidor, idcuenta=id)
     vehiculo = get_object_or_404(Vehiculo, rutrepartidor=repartidor.rutrepartidor)
@@ -112,6 +123,17 @@ def modificar_estado_pedido(idpedido, idestpedido):
     django_cursor = connection.cursor()
     cursor = django_cursor.connection.cursor()
     salida = cursor.var(cx_Oracle.NUMBER)
-    cursor.callproc('SP_MODIFICAR_ESTADO_REPARTO', [
-                    idpedido, idestpedido, salida])
+    cursor.callproc('SP_MODIFICAR_ESTADO_REPARTO', [idpedido, idestpedido, salida])
     return salida.getvalue()
+
+def listado_clientes(rut):
+    django_cursor = connection.cursor()
+    cursor = django_cursor.connection.cursor()
+    out_cur = django_cursor.connection.cursor()
+
+    cursor.callproc("SP_LISTAR_CLIENTES", [rut, out_cur])
+    lista = []
+    for fila in out_cur:
+        lista.append(fila)
+
+    return lista

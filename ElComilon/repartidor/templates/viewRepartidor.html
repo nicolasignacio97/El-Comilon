@@ -1,6 +1,8 @@
 {% extends "HeaderFooter/base.html"%}
 {% load static %}
-
+{% block titulo %}
+Repartos
+{% endblock %}
 {% block content%}
 <!DOCTYPE html>
 <html lang="en">
@@ -21,7 +23,7 @@
         <div class="container bg-white shadow-lg mt-5">
             <div class="row">
               <div class="col m-2">
-                <h1 class="text-center titulo mb-5 titulo">Mi Cuenta</h1>
+                <h1 class="text-center titulo mb-5 titulo">Repartos</h1>
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <a class="nav-link text-danger" aria-current="page" href="{% url 'perfilRepartidor' user.id %}">Mis Datos</a>
@@ -30,7 +32,7 @@
                         <a class="nav-link text-danger" href="{% url 'MiVehiculo' user.id %}">Vehículo</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link  active  btn btn-primary position-relative" href="{% url 'repartidor' %}">Lista de Pedidos ss
+                        <a class="nav-link  active  btn btn-primary position-relative" href="{% url 'repartidor' %}">Lista de Pedidos
                             <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                                {{TotalPedidos}}
                                 <span class="visually-hidden">unread messages</span>
@@ -44,7 +46,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class=" p3 mb-5 mt-5 bg-white">
-                            <h3 class="titulo text-center mt-5 mb-5">Repartos</h3>
+                   
                                 <div class="table-responsive-md">
                                     <table class="table table-borderless table-hover">
                                         <thead>

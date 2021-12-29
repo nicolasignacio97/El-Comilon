@@ -1,9 +1,8 @@
 {% load humanize %}
 {% load static %}
+<link rel="stylesheet" href="{% static 'css/carrito.css'%}">
 
-
-
-<div class="d-flex flex-column h-100" role="alert" style="padding: 10px;">
+<div class="d-flex flex-column h-100"  role="alert" style="padding: 10px;">
     <div class="h-100" style="text-align: center;">
         <div class="elementos">
             {% if request.session.carrito.items %}
@@ -11,27 +10,35 @@
             <div class=" mb-3" style="max-width: 540px;">
                 <div class="row " style="width: 100%;">
                   <div class="col">
-                    <div class="d-flex justify-content-between">
+                    <div class="d-flex justify-content-between align-items-center carro-celu">
+                      
                       <span class="">{{value.nombre | title}}</span>
-                      <span class="">{{value.valorunitario | intcomma}}</span>
+                      <span class="">${{value.acumulado | intcomma}}</span>
                       <div class="btn-group" role="group" aria-label="Basic outlined example">
                         <a href="{% url 'restar_producto' value.idplatillo %}"type="button" class=" btn btn-outline-danger">-</a>
-                        <button type="button" class=" btn btn-outline-danger">{{value.cantidad}}</button>
-                        <a href="#" type="button" class=" btn btn-outline-danger">+</a>
+                        <button type="button" class=" btn btn-outline-dark" disabled>{{value.cantidad}}</button>
+                        <a href="{% url 'agregarProducto' value.idplatillo %}" type="button" class=" btn btn-outline-danger">+</a>
                       </div>
-
                     </div>
                   </div>
                 </div>
               </div>
               {% endfor %}
+              {% else %}
+              <div class="d-flex flex-column" >
+                <div>
+                  <img src="{% static 'img/ic_cart_empty.1de2c93e.svg' %}" alt="">  
+                  <label class="text-muted mt-3" for="">No tienes platos en tu carrito</label>
+
+                </div>
+              </div>
             {% endif %}
             </div>
       </div>
     <hr>
     <div class="row mb-4">
         <div class="col-8">
-            <h4 class=""> Subtotal: </h4>
+            <h4 class="fs-5"> Subtotal: </h4>
         </div>
         <div class="col-4  d-flex justify-content-end">
            <h5 class="color"> ${{total_carrito | intcomma}}</h5> 
@@ -41,7 +48,14 @@
     <div class="row text-center botones-carro">
         <!-- <div class="col-6"> <a href="{% url 'limpiar_carrito' %}" class="btn btn-danger"><img
                     src="{% static 'img/icons8-cesta-de-compra-eliminar-24.png' %}" alt=""> Limpiar</a></div> -->
+        {% if total_carrito < 3500 %}
+        <div class="alert alert-danger" role="alert">
+          Debes pedir como mínimo $3.500 para finalizar tu compra
+        </div>
+        {% else %}
         <div class="col"> <a href="{% url 'FinalizarCompra'%}" class="btn btn-carro w-100"> <img
                     src="{% static 'img/icons8-comprar-24.png' %}" alt="">Finalizar Pedido</a></div>
+
+        {% endif %}
     </div>
 </div>

@@ -139,8 +139,9 @@ Finalizar Compra
                                 <div class="hora-fecha">
                                     <input class="input-text" id="fechaActual" name="Fecha" type="date"
                                         placeholder="Fecha Entrega">
-                                    <input class="input-text" id="fechaActual" name="Hora" type="time"
-                                        placeholder="Hora Entrega">
+
+                                    <input class="input-text" id="horaActual" name="Hora" type="time"
+                                        min="07:00" max="23:00" placeholder="Hora Entrega">
                                 </div>
 
 
@@ -165,6 +166,7 @@ Finalizar Compra
 
                             </div>
                             <div class="campo btn-finalizar">
+                                {% if horaactual > "10:00" and horaactual < "20:00" %}
                                 {%if cliente.saldocli %}
                                 <div class="form-check form-switch inputs check  titulos-campo p-0">
                                     <input class="form-check-input" type="checkbox" name="saldo" role="switch"
@@ -172,8 +174,23 @@ Finalizar Compra
                                     <label class="form-check-label" for="flexSwitchCheckDefault">Pagar con saldo</label>
                                 </div>
                                 {% endif %}
+                                    
                                 <a href="" class="btn btn-color" onclick="modificarEstado(event,'{{id}}')"> Confirmar
                                     pedido</a>
+                                    {% else %}
+                                    <script>
+                                        Swal.fire({
+                                        icon: 'error',
+                                        title: 'Local cerrado',
+                                        text: 'Nuestro horario de atención es de 10:00 a 20:00'
+                                        })
+                                    </script>
+                                    <div class="row d-flex justify-content-center">
+                                        <div class="col-12">
+                                            <label class="alert-danger p-2" for="">Estamos fuera de nuestro horario de atención</label>
+                                        </div>
+                                    </div>
+                                    {% endif %}
                             </div>
                         </div>
 

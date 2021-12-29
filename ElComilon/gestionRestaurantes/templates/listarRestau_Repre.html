@@ -76,8 +76,8 @@
                     {% for rest in entity %}
                     <tr>
                         <th scope="row">{{rest.0}}</th>
-                        <td>{{rest.1}}</td>
-                        <td>{{rest.2}}</td>
+                        <td>{{rest.1 | title}}</td>
+                        <td>{{rest.2 | title}}</td>
                         {%  if rest.4 == 1%}
                             <td>Principal</td>
                             {% else %}
@@ -85,8 +85,8 @@
                         {%endif%}
                         
                         <td>{{rest.5}}</td>
-                        <td>{{rest.6}}</td>
-                        <td>{{rest.7}}</td>
+                        <td>{{rest.6 | title}}</td>
+                        <td>{{rest.7 | title}}</td>
                         <td>{{rest.8}}</td>
                         <td> <a href="modificarProveedor/{{rest.0}}/{{rest.5}}"><i class="fas fa-user-edit"
                                     style="color:#02B37F; cursor: pointer;"></i></a>

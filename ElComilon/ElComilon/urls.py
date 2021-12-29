@@ -3,7 +3,7 @@ from django.contrib.auth import views as auth_views
 
 from django.contrib import admin
 from django.urls import path, include
-from recepcionista.views import viewRecepcionista, asignarRepartidor, cambiarEstado, menuRecepcion, cambiarEstadoTienda,verReclamos,detalleReclamo
+from recepcionista.views import viewRecepcionista, asignarRepartidor, cambiarEstado, menuRecepcion, cambiarEstadoTienda,verReclamos,detalleReclamo,cancelarPedidoRecepcionista,cambiarAPreparacionRecepcion,cambiarAPendienteRecepcion,cambiarAListoRecepcion
 
 from registroDeUsuarios.views import registroUsuario
 from proveedorMenu.views import menuProveedor, subirPlatilloProveedor, listarPlatilloProveedor, EliminarPlatilloProveedor, ModificarPlatilloProveedor, PlatillosPendientes, cambiarAPreparacion, cambiarAPendiente, cambiarAListo
@@ -14,7 +14,7 @@ from reclamo.views import reclamo
 from Home.views import quienesSomos
 from administracion.urls import url_patterns
 from PerfilUsuario.views import PerfilUsuario, perfilMenu, CambiarContra, estadoPedido,crearReclamo,crearMenu, cancelarPedido
-from Platillos.views import platillos, agregar_producto, eliminar_producto, restar_producto, limpiar_carrito, guardar, FinalizarCompra, agregar_producto_fin, restar_producto_fin,agregar_producto_menu
+from Platillos.views import platillos, agregar_producto, eliminar_producto, restar_producto, limpiar_carrito, guardar, FinalizarCompra, agregar_producto_fin, restar_producto_fin,agregar_producto_menu, platilloRut
 from detallePedido.views import detallePedido
 from administracion.views import pag_404
 
@@ -30,6 +30,7 @@ urlpatterns = [
     # despues id en la ruta para filtro
     path('Historial/<id>', PerfilUsuario, name="historial"),
     path('platillos', platillos, name="platillos"),
+    path('platilloRut', platilloRut, name="platilloRut"),
     path('perfilMenu/<id>', perfilMenu, name="perfilMenu"),
     path('menuProveedor/<id>', menuProveedor, name="menuProveedor"),
     path('SubirMisPlatillos', subirPlatilloProveedor, name="SubirMisPlatillos"),
@@ -46,6 +47,11 @@ urlpatterns = [
     path('crearReclamo/<id>', crearReclamo, name="crearReclamo"),
     path('verReclamos', verReclamos, name="verReclamos"),
     path('detalleReclamo/<id>', detalleReclamo, name="detalleReclamo"),
+    path('cancelarPedidoRecepcionista/<id>', cancelarPedidoRecepcionista, name="cancelarPedidoRecepcionista"),
+    
+    path('cambiarAPreparacionRecepcion/<id>/<id2>', cambiarAPreparacionRecepcion, name="cambiarAPreparacionRecepcion"),
+    path('cambiarAPendienteRecepcion/<id>/<id2>', cambiarAPendienteRecepcion, name="cambiarAPendienteRecepcion"),
+    path('cambiarAListoRecepcion/<id>/<id2>', cambiarAListoRecepcion, name="cambiarAListoRecepcion"),
 
 
     
@@ -57,6 +63,8 @@ urlpatterns = [
     path('registroUsuarios', registroUsuario, name='registro'),
     path('cambioContrasena', CambiarContra, name="cambioContrasena"),
     path('crearMenu/<id>', crearMenu, name="crearMenu"),
+
+    
     path('cancelarPedido/<id>', cancelarPedido, name="cancelarPedido"),
 
     

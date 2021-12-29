@@ -13,7 +13,7 @@ from core.models import *
 
 contexto = {}
 
- 
+@permission_required('core')
 def Registrorep(request):
 
     data = {
@@ -28,7 +28,7 @@ def Registrorep(request):
         apellido = request.POST.get('ApellidosRepartidor')
         fechacontrato = request.POST.get('Fechacontrato')
     
-        rutrestaurante = '99.365.349-8'
+        rutrestaurante = '77.684.154-9'
     
         #Vehiculo
         vehiculorut = request.POST.get('RutRepartidor')
@@ -115,7 +115,7 @@ def editRepartidor(request,rutrepartidor):
         return redirect(to="/administracion/listarep")
     return render(request,"updaterepartidor.html",dataMod)
 
-
+@permission_required('core')
 def deleterepartidor(request,rutrepartidor):
     repartidor = get_object_or_404(Repartidor, rutrepartidor = rutrepartidor)
     vehiculo = get_object_or_404(Vehiculo, rutrepartidor = rutrepartidor)
@@ -126,6 +126,7 @@ def deleterepartidor(request,rutrepartidor):
 
 
 #Listar
+@permission_required('core')
 def listarRep(request):
     global contexto
     Vehiculos = Vehiculo.objects.all()

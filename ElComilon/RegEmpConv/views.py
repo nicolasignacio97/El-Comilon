@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import permission_required
 from django.http.response import JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.db import connection
@@ -8,7 +9,7 @@ import cx_Oracle
 # Create your views here.
 
 data = {}
-
+@permission_required('core')
 def registroEmpresa(request):
     data = {
     'restaurante':listar_restaurantes()
@@ -28,7 +29,7 @@ def clean_rut_emp_convenio(request):
         return JsonResponse({'valid': 0})
     return JsonResponse({'valid': 1 })
 
-
+@permission_required('core')
 def listaEmpresa(request):
     global data
     data = {
@@ -37,7 +38,7 @@ def listaEmpresa(request):
     return render(request, 'listaEmpConv.html', data)
 
 
-
+@permission_required('core')
 def empresaRut(request):
     global data
     if request.method == 'POST':
@@ -58,7 +59,7 @@ def eliminarEmpresa(request):
         messages.success(request,'Empresa Eliminada')
     return listaEmpresa(request)
 
-
+@permission_required('core')
 def actualizarEmpresa(request):
 
     if request.method == 'POST':
@@ -90,6 +91,8 @@ def eliminar(rut):
     cursor.callproc("SP_ELIMINAR_EMPRESA", [rut])
 
     return 0
+
+
 def registrarEmpresa(rutEmpresa, nombre, razonSocial,FECHACONVENIO):
     django_cursor = connection.cursor()
     cursor = django_cursor.connection.cursor()
@@ -103,6 +106,7 @@ def actualizar(rutEmpresa, nombre, razonSocial,FECHACONVENIO):
     django_cursor = connection.cursor()
     cursor = django_cursor.connection.cursor()
     cursor.callproc("SP_ACT_EMPRESA", [rutEmpresa, nombre, razonSocial,FECHACONVENIO])
+
 def listar_restaurantes():
     django_cursor = connection.cursor() 
     cursor = django_cursor.connection.cursor()
@@ -112,6 +116,7 @@ def listar_restaurantes():
     for fila in out_cur:
         lista.append(fila)
     return lista
+
 
 def listarEmpresaRut(rut):
     django_cursor = connection.cursor()
@@ -136,6 +141,7 @@ def listarEmpresa():
         lista.append(fila)
 
     return lista
+
 
 def EliminarEmpresa(request, id):
     empresa = get_object_or_404(EmpresaConvenio, rutempresaconvenio=id)

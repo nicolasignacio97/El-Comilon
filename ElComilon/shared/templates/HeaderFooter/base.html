@@ -33,16 +33,14 @@
   <link rel="stylesheet" href="{% static 'css/bootstrap5/bootstrap.min.css'%}">
 
   <link rel="stylesheet" href="{% static 'css/style-base.css' %}">
-  
+
   <title>
     {% block titulo %}
     {% endblock %}
   </title>
 </head>
-
 <body>
-
-  <nav class="navbar navbar-expand-lg  p-0  " style="background-color:#9C3534;">
+  <nav class="navbar navbar-expand-lg  p-0 " style="background-color:#9C3534;">
     <div class="container-fluid">
       <div class=" row  col-3" style="justify-content: center;">
 
@@ -58,37 +56,45 @@
       <div class="collapse navbar-collapse justify-content-center col-6" id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a href="/" class="nav-link nav-item-a items-header  text-light"> <img src="{% static 'img/home.png' %}"
+            <a href="/" class="nav-link nav-item-a items-header  text-light"
+            data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ir al inicio"> <img src="{% static 'img/home.png' %}"
                 alt=""> Inicio</a>
           </li>
           <li class="nav-item">
-            <a href="/platillos" class="nav-link nav-item-a text-light"> <img src="{% static 'img/catalogo.png' %}"
+            <a href="/platillos" class="nav-link nav-item-a text-light"
+            data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ver el catálogo de platillos"
+            > <img src="{% static 'img/catalogo.png' %}"
                 alt=""> Catálogo</a>
           </li>
           <li class="nav-item">
-            <a href="{% url 'quienesSomos' %}" class="nav-link nav-item-a  text-light"> <img
-                src="{% static 'img/nosotros.png' %}" alt=""> Sobre nosotros</a>
+            <a href="{% url 'quienesSomos' %}" class="nav-link nav-item-a  text-light"
+            data-bs-toggle="tooltip" 
+            data-bs-placement="bottom" title="Información acerca de nosotros"> 
+            <img src="{% static 'img/nosotros.png' %}" alt=""> Sobre nosotros</a>
           </li>
         </ul>
+        {% if user.is_authenticated %}
         {% if request.session.carrito.items %}
         <button class="BotonCarro position-relative" type="button" data-bs-toggle="offcanvas"
           data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"> <i class="fas fa-cart-arrow-down"
             style="padding: .2rem;"></i>
           Carrito
           <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-            {{ request.session.carrito.items|length }}
+            {{total_cantidad}}
             <span class="visually-hidden">unread messages</span>
           </span>
         </button>
         {%else%}
         <button class="BotonCarro position-relative" type="button" data-bs-toggle="offcanvas"
-          data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"> <i class="fas fa-cart-arrow-down"
+          data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"
+          data-bs-toggle="tooltip" 
+            data-bs-placement="bottom" title="Ver platos que hay en mi carrito"> <i class="fas fa-cart-arrow-down"
             style="padding: .2rem;"></i>
           Carrito
           </span>
         </button>
         {%endif%}
-
+        {% endif %}
       </div>
       <div class="collapse navbar-collapse justify-content-center col-3" id="navbarNav">
         <ul class="navbar-nav">
@@ -96,27 +102,35 @@
           {% ifequal user.groups.all.0.name "Repartidor" %}
           <li class="nav-item">
             <a href="{% url 'perfilRepartidor' user.id %}"
-              class="nav-link nav-item-a text-light">{{user.username.title}}</a>
+              class="nav-link nav-item-a text-light"
+              data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ir a perfil de repartidor">
+              <img src="{% static 'img/repartidor.png' %}" alt=""> {{user.username.title}}</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link nav-item-a text-light" href="{% url 'repartidor' %}">Lista de Pedidos</a>
+            <a class="nav-link nav-item-a text-light" href="{% url 'repartidor' %}"
+            data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ver pedidos en curso">
+            <img src="{% static 'img/lista-pedidos.png' %}" alt=""> Lista de Pedidos</a>
           </li>
           {%else%}
           {% ifequal user.groups.all.0.name "Recepcionista" %}
           <li class="nav-item">
             <a href="{% url 'menuRecepcion' user.id %}"
-              class="nav-link nav-item-a text-light">{{user.username.title}}</a>
+              class="nav-link nav-item-a text-light">
+              <img src="{% static 'img/recepcionista.png' %}" alt="">  {{user.username.title}}</a>
           </li>
           {%else%}
           {% ifequal user.groups.all.0.name "Proveedor" %}
           <li class="nav-item">
             <a href="{% url 'menuProveedor' user.id %}"
-              class="nav-link nav-item-a text-light">{{user.username.title}}</a>
+              class="nav-link nav-item-a text-light"
+              data-bs-toggle="tooltip" data-bs-placement="bottom" title="Administrar platillos">
+              <img src="{% static 'img/proveedor.png' %}" alt=""> {{user.username.title}}</a>
           </li>
           {%else%}
           {% if user.is_superuser %}
           <li class="nav-item">
-            <a href="/administracion" class="nav-link nav-item-a text-light"> <img src="{% static 'img/admin.png' %}"
+            <a href="/administracion" class="nav-link nav-item-a text-light"
+            data-bs-toggle="tooltip" data-bs-placement="bottom" title="Menú de administración"> <img src="{% static 'img/admin.png' %}"
                 alt=""> Administración</a>
           </li>
           {%else%}
@@ -130,17 +144,20 @@
           {% endifequal %}
           {% endifequal %}
           <li class="nav-item">
-            <a href="{% url 'logout'%}" class="nav-link nav-item-a text-light"> <img src="{% static 'img/logout.png' %}"
+            <a href="{% url 'logout'%}" class="nav-link nav-item-a text-light"
+            data-bs-toggle="tooltip" data-bs-placement="bottom" title="Cerrar la sesión actual"> <img src="{% static 'img/logout.png' %}"
                 alt=""> Cerrar sesión</a>
           </li>
           {% else %}
           <li class="nav-item">
-            <a href="{% url 'login' %}" class="nav-link nav-item-a text-light"> <img src="{% static 'img/user.png' %}"
+            <a href="{% url 'login' %}" class="nav-link nav-item-a text-light"
+            data-bs-toggle="tooltip" data-bs-placement="bottom" title="Iniciar Sesión"> <img src="{% static 'img/user.png' %}"
                 alt=""> Iniciar sesión</a>
           </li>
           <li class="nav-item">
-            <a href="/registroUsuarios" class="nav-link nav-item-a text-light"> <img
-                src="{% static 'img/nuevo-usuario.png' %}" alt=""> Registro</a>
+            <a href="/registroUsuarios" class="nav-link nav-item-a text-light"
+            data-bs-toggle="tooltip" data-bs-placement="bottom" title="Registrarse">
+             <img src="{% static 'img/nuevo-usuario.png' %}" alt=""> Registro</a>
           </li>
           {%endif%}
         </ul>
@@ -161,10 +178,15 @@
       {% include "carroOff.html" %}
     </div>
   </div>
+
+
+  
   <section class="body-contenido">
-    {% block content%}
-    <!-- Cambia según página donde se implemente esta plantilla -->
-    {% endblock%}
+    <div class="">
+      {% block content%}
+      <!-- Cambia según página donde se implemente esta plantilla -->
+      {% endblock%}
+    </div>
   </section>
   <footer class="footer-contenido">
     <div class="info1">

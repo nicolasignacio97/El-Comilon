@@ -154,6 +154,7 @@ body{
 .menuprueba{
      display: flex;
      justify-content: center;
+     width: 90%;
  }
 .hamburguesa img{
     width:100%;
@@ -251,5 +252,5 @@ body{
 }
 
 .logo-side{
-    width: 14rem;
+    width: 100%;
 }

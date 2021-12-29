@@ -1,32 +1,47 @@
 from django.contrib import messages
 from django.db.utils import DatabaseError
 from django.http.response import HttpResponse
+from django.core.paginator import Paginator
+from django.http.response import Http404
 from django.shortcuts import get_object_or_404, redirect, render
 from .context_processors import total_carrito
 from django.db import connection
+from django.conf import settings
+from django.core.mail import send_mail
 import cx_Oracle
 from Platillos.carrito import carrito
-from core.models import Platillo, Cliente
+from core.models import Platillo, Cliente, Restaurante
 import base64
-
+import datetime
 
 # Create your views here.
 
 def FinalizarCompra(request):
     # AGREGAR DETALLES PEDIDO
     cliente = get_object_or_404(Cliente, idcuenta=request.user.id)
+    hora = datetime.datetime.now().strftime('%H:%M')
 
     dataCli = {
+        'horaactual': hora,
         'cliente': cliente,
-        # 'id': request.user.id
     }
 
     return render(request, 'finalizarCompra.html', dataCli)
 
 
 def platillos(request):
+    global data
+    page = request.GET.get('page',1)
+    Lista = listado_platillos()
+    try:
+        paginator = Paginator(Lista, 9)
+        Lista = paginator.page(page)
+    except :
+        raise Http404
     data = {
-        'platillos': listado_platillos()
+        'restaurantes':listado_restaurantes(),
+        'entity': Lista,
+        'paginator' : paginator,
     }
     return render(request, 'platillos.html', data)
 
@@ -118,8 +133,10 @@ def guardar(request):
 
         if check1:
             idTipoServ = 1
+            tipoEntrega = "Recuerda pagar $"+str(total)+ " a tu repartidor cuando llegue a la dirección: "+ direccion 
         else:
             idTipoServ = 2
+            tipoEntrega = "Recuerda pagar $"+str(total)+ " cuando llegues al local a buscar tu pedido. Estamos ubicados en: Bascuñán Guerrero 329, Santiago Centro" 
 
         if checkSaldo:
             if saldo < total:
@@ -142,7 +159,13 @@ def guardar(request):
             carro = Carrito.caja()
             agregar_pedido(total, fecha, direccion, idTipoServ,rutcliente, idEstPed, hora)
             for p in carro:
+                print(p['idplatillo'])
                 agregar_detalle_pedido(p['cantidad'], p['valorunitario'], p['acumulado'], p['idplatillo'], cliente.rutcliente)
+            subjet = "¡Hemos recibido tu pedido en El Comilón!"
+            message = "Hola " + cliente.nombres+".\nHemos recibido tu pedido y lo estamos procesando.\nTu pedido será procesado el "+str(fecha) + " a las: "+str(hora) + ". Recuerda que si pediste entrega inmediata, tus platos tardarán entre 30 a 45 minutos en prepararse.\n" + tipoEntrega + "\n\nEl Comilón. Bascuñán Guerrero 329, Santiago Centro"
+            email_from = settings.EMAIL_HOST_USER
+            recipient_list=[request.user.email]
+            send_mail(subjet,message,email_from,recipient_list)
             limpiar_carrito(request)
             return redirect(url)
 
@@ -172,3 +195,46 @@ def actualizarSaldo(rutCliente, saldoNuevo):
     cursor.callproc("SP_ACTUALIZAR_SALDO_COMPRA", [
                     rutCliente, saldoNuevo, salida])
     return salida.getvalue()
+
+def listado_restaurantes():
+    django_cursor = connection.cursor()
+    cursor = django_cursor.connection.cursor()
+    out_cur = django_cursor.connection.cursor()
+
+    cursor.callproc("LISTAR_RESTAURANTE", [out_cur])
+
+    lista = []
+    for fila in out_cur:
+        lista.append(fila)
+    return lista
+
+
+def platilloRut(request):
+    global data
+    if request.method == 'POST':
+
+        rut = request.POST.get('Restaurante')
+        print(rut)
+
+        data = {
+        'entity': listarPlatilloRut(rut),
+        'restaurantes':listado_restaurantes()
+        }
+    return render(request, 'platillos.html', data)
+
+
+def listarPlatilloRut(rut):
+    django_cursor = connection.cursor()
+    cursor = django_cursor.connection.cursor()
+    out_cur = django_cursor.connection.cursor()
+
+    cursor.callproc("SP_LISTAR_PLATILLOS_RUT", [rut, out_cur])
+
+    lista = []
+    for fila in out_cur:
+        data = {
+            'data': fila,
+            'imagen': str(base64.b64encode(fila[4].read()), 'utf-8')
+        }
+        lista.append(data)
+    return lista

@@ -11,7 +11,7 @@ import cx_Oracle
 # Create your views here.
 
 data = {}
-
+@permission_required('core')
 def registroTrabajador(request):
     data = {
         'form': FormularioUsuario(),
@@ -19,36 +19,38 @@ def registroTrabajador(request):
     }
     if request.method == 'POST':
         rutTrabajador = request.POST.get('rutTrabajador')
-        nombres = request.POST.get('nombres')
-        apellidos = request.POST.get('apellidos')
+        nombres = request.POST.get('nombres').upper()
+        apellidos = request.POST.get('apellidos').upper()
         fechaContrato = request.POST.get('fecha')
        
-        rutRestaurante = '99.365.349-8' #CAMBIAR ESTO SEGUN SU BASE DE DATOS
+        rutRestaurante = '77.684.154-9' #CAMBIAR ESTO SEGUN SU BASE DE DATOS
 
         idCargo = request.POST.get('cargo')
         forumulario = FormularioUsuario(data=request.POST)
         if forumulario.is_valid():
             user = forumulario.save()
-            groupAdministrador = Group.objects.get(name='Administrador')
             groupRecepcionista = Group.objects.get(name='Recepcionista')
             if idCargo == '1':
-                user.groups.add(groupAdministrador)
+                user.is_staff = True
+                user.is_superuser = True
+                user.save()
+                
             if idCargo == '2':
                 user.groups.add(groupRecepcionista)
             REGISTRAR_TRABAJADOR(rutTrabajador, nombres, apellidos, fechaContrato, rutRestaurante, idCargo) 
-            messages.success(request, 'Trabajador Registrado con exito')
+            messages.success(request, 'Trabajador '+ nombres + ' '+ apellidos+ ' registrado con exito')
             return render(request, 'registroTrabajador.html', data)
         data = {'form':forumulario,'campos':[rutTrabajador,nombres,apellidos,fechaContrato,rutRestaurante,idCargo],'cargo': listar()}
      
     return render(request, 'registroTrabajador.html', data)
 
-    
 def clean_rut_trabajador(request):
     ruttrabajador = request.POST.get('rut')
     if Trabajador.objects.filter(ruttrabajador=ruttrabajador).exists():
         return JsonResponse({'valid': 0})
     return JsonResponse({'valid': 1 })
-    
+
+
 def listar():
     django_cursor = connection.cursor()
     cursor = django_cursor.connection.cursor()
@@ -61,15 +63,13 @@ def listar():
 
     return lista
 
-
 def REGISTRAR_TRABAJADOR(RUTTRABAJADOR, NOMBRES, APELLIDOS, FECHACONTRATO, RUTRESTAURANTE, IDCARGO):
     django_cursor = connection.cursor()
     cursor = django_cursor.connection.cursor()
     salidaPrve = cursor.var(cx_Oracle.NUMBER)
     cursor.callproc("REGISTRAR_TRABAJADOR", [RUTTRABAJADOR, NOMBRES, APELLIDOS,FECHACONTRATO, RUTRESTAURANTE, IDCARGO, salidaPrve])
     return salidaPrve.getvalue()
-
-
+@permission_required('core')
 def listaTrabajador(request):
     global data
     data = {
@@ -128,20 +128,19 @@ def actualizarTrabajador(request,id):
         rutTrabajador = request.POST.get('rutTrabajador')
         nombres = request.POST.get('nombres')
         apellidos = request.POST.get('apellidos')
-        usuario = request.POST.get('nombreU')
         idCargo = request.POST.get('cargo')
 
-        actualizar(rutTrabajador, nombres, apellidos, usuario, idCargo)
+        actualizar(rutTrabajador, nombres, apellidos, idCargo)
         messages.success(request, nombres + " Actualizado correctamente")
 
         return redirect(to='listaTrabajador')
     return render(request, 'actualizarTrabajador.html', data)
     
 
-def actualizar(rutTrabajador, nombres, apellidos, usuario, idCargo):
+def actualizar(rutTrabajador, nombres, apellidos, idCargo):
     django_cursor = connection.cursor()
     cursor = django_cursor.connection.cursor()
-    cursor.callproc("SP_ACT_TRABAJADOR", [rutTrabajador, nombres, apellidos, usuario, idCargo])
+    cursor.callproc("SP_ACT_TRABAJADOR", [rutTrabajador, nombres, apellidos, idCargo])
 
     return 0
 
